@@ -1,0 +1,162 @@
+.line {
+    display: block;
+}
+
+.col {
+    display: inline-block;
+    min-height: 1px;
+}
+
+.shadowed-container {
+    -webkit-box-shadow: 0 0 15px #000000;
+    -moz-box-shadow: 0 0 15px #000000;
+    box-shadow: 0 0 15px #000000;
+}
+
+body{
+    background-color: #f3f3f3;
+    font-family: helvetica,tahoma,sans-serif;
+    font-size: 12px;
+}
+
+.container{
+    background-color: #ffffff;
+    min-width: 940px !important;
+}
+
+.header-container {
+    background-color: #bad33c;
+    height: 100px;
+    min-width: 940px !important;
+}
+
+.header-logo {
+
+    background-image: url("../images/ticbox/TicBoxLogo.png");
+    width: 313px;
+    height: 53px;
+    margin-top: 40px;
+    margin-left: 20px;
+
+}
+
+.header-nav {
+    margin-right: 20px;
+}
+
+.header-nav .main-nav{
+    margin-top: 40px;
+}
+
+.header-nav .main-nav li div{
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.header-nav .main-nav li div:hover{
+    background: url("../images/ticbox/Tick.png") no-repeat center;
+}
+
+.header-nav .main-nav li div{
+    height: 55px;
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.header-nav .main-nav .nav-separator{
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 16px;
+    height: 46px;
+    background: url("../images/ticbox/white-box-2x2.png") no-repeat bottom;
+}
+
+.body-container {
+    margin-top: 120px;
+}
+
+ul.login-nav {
+    display: block;
+    list-style: none;
+    top: 10px;
+    right: 30px;
+    margin: 0;
+    position: absolute;
+    height: 25px;
+}
+
+ul.login-nav li {
+    float: left;
+    padding: 5px 10px;
+    color: #ffffff;
+    height: inherit;
+}
+
+ul.login-nav li.help {
+
+}
+ul.login-nav li.sign-up {
+    border: 1px solid #7f9b09;
+    background: #97b11a;
+}
+ul.login-nav li.log-in {
+    border: 1px solid #7f9b09;
+    background: #97b11a;
+}
+
+ul.sign-up-icons {
+    height: 25px;
+    text-align: center;
+    margin: 0;
+}
+
+ul.sign-up-icons li {
+    display:inline-block;
+    *display:inline; /*IE7*/
+    *zoom:1; /*IE7*/
+    background: transparent url("../images/ticbox/FB_TW_LI_logo.png") no-repeat;
+    width: 23px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+ul.sign-up-icons li.fb{
+    background-position: 0 0;
+}
+
+ul.sign-up-icons li.tw{
+    background-position: -24px 0;
+}
+
+ul.sign-up-icons li.li{
+    background-position: -48px 0;
+}
+
+.bottom-nav {
+    font-size: 11px;
+}
+
+.bottom-nav ul {
+    list-style: none;
+}
+
+.page-footer ul {
+    width:100%;
+    text-align:center;
+    margin: 0;
+}
+
+.page-footer ul li {
+    display:inline-block;
+    *display:inline; /*IE7*/
+    *zoom:1; /*IE7*/
+    color:#000000;
+    margin: 0 10px;
+}
+
+.security-logo {
+    background: url("../images/ticbox/SecurityLogoForMockUp.jpg");
+    width: 489px;
+    height: 67px;
+}
