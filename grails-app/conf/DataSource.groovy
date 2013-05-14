@@ -45,7 +45,7 @@ environments {
 development {
     grails {
         mongo {
-            host = "linus.mongohq.com"
+            host = "localhost"
             port = 27017 //10058
             username = "" //"heroku"
             password = "" //"409080f194cf85bc92b994f3a2ae45f6"

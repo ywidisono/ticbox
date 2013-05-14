@@ -1,7 +1,6 @@
 package ticbox
 
 class RespondentService {
-
     def serviceMethod() {
 
     }
