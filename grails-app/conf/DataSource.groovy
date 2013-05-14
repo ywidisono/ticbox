@@ -46,9 +46,9 @@ development {
     grails {
         mongo {
             host = "localhost"
-            port = 27017 //10058
-            username = "" //"heroku"
-            password = "" //"409080f194cf85bc92b994f3a2ae45f6"
+            port = 27017
+            username = ""
+            password = ""
             databaseName = "ticbox"
         }
     }
@@ -59,10 +59,10 @@ production {
     grails {
         mongo {
             host = "linus.mongohq.com"
-            port = 10058
+            port = 10012
             username = "heroku"
-            password = "409080f194cf85bc92b994f3a2ae45f6"
-            databaseName = "app12767848"
+            password = "927091a2861674b3a1438b3905499f68"
+            databaseName = "app15680173"
         }
     }
 }
