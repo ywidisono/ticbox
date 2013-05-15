@@ -18,7 +18,7 @@ environments {
                 host = "linus.mongohq.com"
                 port = 10058
                 username = "heroku"
-                password = "927091a2861674b3a1438b3905499f68"
+                password = "ticbox"
                 databaseName = "app15680173"
             }
         }
