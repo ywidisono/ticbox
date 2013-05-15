@@ -1,17 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" name="Default" comment="" />
+    <list default="true" id="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" name="Default" comment="">
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ApplicationResources$_run_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ApplicationResources$_run_closure1_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ApplicationResources.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BootStrap$_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BootStrap$_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BootStrap.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BuildConfig$_run_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BuildConfig$_run_closure1_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BuildConfig$_run_closure1_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BuildConfig$_run_closure1_closure4.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BuildConfig$_run_closure1_closure5.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\BuildConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure3_closure5.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure3_closure5_closure6.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure3_closure5_closure6_closure7.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure3_closure5_closure6_closure8.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure3_closure5_closure6_closure9.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure4.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure4_closure10.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure4_closure10_closure11.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure4_closure10_closure11_closure12.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure4_closure10_closure11_closure13.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure1_closure4_closure10_closure11_closure14.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config$_run_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\Config.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure1_closure4.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure1_closure4_closure5.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure3_closure6.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource$_run_closure3_closure6_closure7.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\DataSource.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\UrlMappings$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\UrlMappings$__clinit__closure1_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\UrlMappings$__clinit__closure1_closure2_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\UrlMappings.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\application.properties" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\resources$_run_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\resources.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure4.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure5.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure6.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure7.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure8.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController$_closure9.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\AuthController.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\BootstrapService.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\Customer$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\Customer.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\CustomerProfileItem$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\CustomerProfileItem.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_hasAllRoles_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_hasAllRoles_closure2_closure6.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_hasRole_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_hasRole_closure1_closure5.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_isPermitted_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_isPermitted_closure4.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm$_isPermitted_closure4_closure7.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\DbRealm.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\LookupMaster$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\LookupMaster.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\ProfileItem$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\ProfileItem.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\RespondentController.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\RespondentProfile$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\RespondentProfile.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\RespondentService$_getProfileItems_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\RespondentService.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\Role$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\Role.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SecurityFilters$_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SecurityFilters$_closure1_closure2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SecurityFilters$_closure1_closure2_closure3.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SecurityFilters.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\Survey$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\Survey.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyController.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyFilterItem$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyFilterItem.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyItem$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyItem.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyPage$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyPage.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyService$_getProfileItemsForRespondentFilter_closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\SurveyService.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\TicboxUtilController.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\User$__clinit__closure1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\classes\ticbox\User.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\target\test-classes\SpockGrailsPlugin.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/ticbox/LookupMaster.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/ticbox/LookupMaster.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ticbox-grailsPlugins.iml" afterPath="$PROJECT_DIR$/ticbox-grailsPlugins.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ticbox.iml" afterPath="$PROJECT_DIR$/ticbox.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="ticbox.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME$/.grails/" />
-    <file path="/a.dummy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368549148043" ignored="false" />
-    <file path="/BootstrapService.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368553053031" ignored="false" />
+    <file path="/a.dummy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368631686116" ignored="false" />
+    <file path="/BootstrapService.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368560463609" ignored="false" />
     <file path="/SurveyService.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368550071856" ignored="false" />
     <file path="/RespondentService.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368550079097" ignored="false" />
-    <file path="/BuildConfig.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368551775841" ignored="false" />
-    <file path="$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368551369628" ignored="false" />
-    <file path="$PROJECT_DIR$/grails-app/domain/ticbox/Survey.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368554046655" ignored="false" />
+    <file path="/BuildConfig.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368630170458" ignored="false" />
+    <file path="/Dummy.txt" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1368631691077" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,10 +173,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BuildConfig.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BuildConfig.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="0" selection-start="2446" selection-end="2446" vertical-scroll-proportion="0.0">
+            <state line="63" column="29" selection-start="2337" selection-end="2337" vertical-scroll-proportion="1.3832753">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BootstrapService.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="19" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LookupMaster.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/ticbox/LookupMaster.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="0" selection-start="152" selection-end="152" vertical-scroll-proportion="-4.25">
               <folding />
             </state>
           </provider>
@@ -88,59 +212,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataSource.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataSource.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="25" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.22934233">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BootstrapService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="15" selection-start="273" selection-end="273" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LookupMaster.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/ticbox/LookupMaster.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="42" selection-start="119" selection-end="119" vertical-scroll-proportion="-3.5416667">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SurveyService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RespondentService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/RespondentService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="50" column="25" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,16 +230,24 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/ticbox/RespondentService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/application.properties" />
-        <option value="$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/ticbox/LookupMaster.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/ticbox/LookupMaster.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
       </list>
     </option>
   </component>
@@ -171,7 +257,7 @@
     <option name="width" value="1296" />
     <option name="height" value="776" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -185,7 +271,7 @@
     <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -196,11 +282,26 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
@@ -329,20 +430,20 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.490625" sideWeight="0.49756888" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3395462" sideWeight="0.34375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.65625" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3395462" sideWeight="0.509375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24230146" sideWeight="0.309375" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.490625" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.490625" sideWeight="0.49675852" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39375" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.65625" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -408,30 +509,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_04/src.zip!/java/util/concurrent/FutureTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="333" column="0" selection-start="10660" selection-end="10660" vertical-scroll-proportion="4.5283017" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/ticbox/SecurityFilters.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="6" selection-start="138" selection-end="138" vertical-scroll-proportion="0.18111753" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/spring/resources.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -439,12 +516,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/realms/ticbox/DbRealm.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="6" selection-start="288" selection-end="288" vertical-scroll-proportion="-3.4683795" />
+        <state line="8" column="6" selection-start="288" selection-end="288" vertical-scroll-proportion="-3.4683795">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+        <state line="3" column="0" selection-start="38" selection-end="38" vertical-scroll-proportion="0.087628864">
           <folding />
         </state>
       </provider>
@@ -458,14 +537,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/RespondentService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
+        <state line="3" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.087628864">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0">
+        <state line="6" column="0" selection-start="133" selection-end="133" vertical-scroll-proportion="0.52577317">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Grails/grails-2.2.2/lib/javax.servlet/javax.servlet-api/jars/javax.servlet-api-3.0.1.jar!/javax/servlet/ServletContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="160" selection-end="160" vertical-scroll-proportion="-2.344144" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/ticbox/User.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="22" selection-end="22" vertical-scroll-proportion="0.6875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Grails/grails-2.2.1/src/grails-bootstrap-2.2.1-sources.jar!/grails/util/Environment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="307" column="0" selection-start="9387" selection-end="9387" vertical-scroll-proportion="0.35714287">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/ticbox/Customer.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="53" selection-end="81" vertical-scroll-proportion="0.4047619">
           <folding />
         </state>
       </provider>
@@ -477,21 +588,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files (x86)/Grails/grails-2.2.2/lib/javax.servlet/javax.servlet-api/jars/javax.servlet-api-3.0.1.jar!/javax/servlet/ServletContext.class">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="160" selection-end="160" vertical-scroll-proportion="-2.344144" />
+        <state line="50" column="25" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+    <entry file="jar://$USER_HOME$/.grails/ivy-cache/javax.servlet/servlet-api/jars/servlet-api-2.5.jar!/javax/servlet/ServletContext.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="0" selection-start="2446" selection-end="2446" vertical-scroll-proportion="0.0">
+        <state line="6" column="17" selection-start="160" selection-end="160" vertical-scroll-proportion="0.14964789">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/BootstrapService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="15" selection-start="273" selection-end="273" vertical-scroll-proportion="0.0">
+        <state line="20" column="19" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -501,14 +616,14 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="42" selection-start="119" selection-end="119" vertical-scroll-proportion="-3.5416667">
+        <state line="12" column="0" selection-start="152" selection-end="152" vertical-scroll-proportion="-4.25">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="25" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.22934233">
+        <state line="63" column="29" selection-start="2337" selection-end="2337" vertical-scroll-proportion="1.3832753">
           <folding />
         </state>
       </provider>
@@ -521,13 +636,13 @@
           <value>
             <GrailsSettings>
               <option name="buildConfigCrc" value="-1836776499" />
-              <option name="pluginDependenciesCrc" value="-50819369" />
+              <option name="pluginDependenciesCrc" value="-967678110" />
               <option name="properties">
                 <map>
-                  <entry key="grails.global.plugins.dir" value="C:\Users\Yohanes\.grails\2.2.2\global-plugins" />
-                  <entry key="grails.project.plugins.dir" value="C:\Users\Yohanes\.grails\2.2.2\projects\ticbox\plugins" />
-                  <entry key="grails.project.work.dir" value="C:\Users\Yohanes\.grails\2.2.2\projects\ticbox" />
-                  <entry key="grails.work.dir" value="C:\Users\Yohanes\.grails\2.2.2" />
+                  <entry key="grails.global.plugins.dir" value="C:\Users\Yohanes\.grails\2.2.0\global-plugins" />
+                  <entry key="grails.project.plugins.dir" value="C:\Users\Yohanes\.grails\2.2.0\projects\ticbox\plugins" />
+                  <entry key="grails.project.work.dir" value="C:\Users\Yohanes\.grails\2.2.0\projects\ticbox" />
+                  <entry key="grails.work.dir" value="C:\Users\Yohanes\.grails\2.2.0" />
                 </map>
               </option>
             </GrailsSettings>
@@ -557,7 +672,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Hibernate (ticbox)|Hibernate</last-edited>
+          <last-edited>GrailsWeb (ticbox-grailsPlugins)|Web</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -593,7 +708,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring|ticbox</last-edited>
+          <last-edited>GrailsWeb|ticbox-grailsPlugins</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

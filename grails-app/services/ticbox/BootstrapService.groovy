@@ -1,8 +1,7 @@
 package ticbox
 
-import com.gmongo.GMongo
-
 class BootstrapService {
+
     def servletContext
     def serviceMethod() {
 

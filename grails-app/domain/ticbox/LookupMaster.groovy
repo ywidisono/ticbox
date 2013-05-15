@@ -7,4 +7,6 @@ class LookupMaster {
     String label
     Map<String, String> values
 
+    static constraints = {
+    }
 }
