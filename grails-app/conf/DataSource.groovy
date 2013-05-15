@@ -16,7 +16,7 @@ environments {
         grails {
             mongo {
                 host = "linus.mongohq.com"
-                port = 10058
+                port = 10012
                 username = "heroku"
                 password = "ticbox"
                 databaseName = "app15680173"
