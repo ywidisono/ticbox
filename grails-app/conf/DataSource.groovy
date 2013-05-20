@@ -4,8 +4,8 @@ environments {
             mongo {
                 host = "localhost"
                 port = 27017
-                username = "ticbox"
-                password = "ticbox"
+                username = ""
+                password = ""
                 databaseName = "ticbox"
             }
         }

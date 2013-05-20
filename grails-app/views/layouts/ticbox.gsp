@@ -1,3 +1,4 @@
+<%@ page import="org.apache.shiro.SecurityUtils" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -35,15 +36,22 @@
 
                 <ul class="login-nav">
                     <li class="help">Help</li>
-                    <li class="sign-up">Sign Up</li>
-                    <li class="log-in">
-                        <ul class="sign-up-icons">
-                            <li style="background: none; width: auto; margin-right: 10px;">Log In</li>
-                            <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
-                            <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
-                            <oauth:connect provider="linkedin"><li class="li"> </li></oauth:connect>
-                        </ul>
-                    </li>
+                    <shiro:notAuthenticated>
+                        <li class="sign-up">Sign Up</li>
+                        <li class="log-in">
+                            <ul class="sign-up-icons">
+                                <li style="background: none; width: auto; margin-right: 10px;">Log In</li>
+                                <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
+                                <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
+                                <oauth:connect provider="linkedin"><li class="li"> </li></oauth:connect>
+                            </ul>
+                        </li>
+                    </shiro:notAuthenticated>
+                    <shiro:authenticated>
+                        <li class="log-in">
+                            Hello, ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
+                        </li>
+                    </shiro:authenticated>
                 </ul>
 
                 <div class="header-logo pull-left"></div>

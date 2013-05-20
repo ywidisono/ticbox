@@ -93,6 +93,12 @@
 </head>
 <body>
 
+<g:if test="${flash.message}">
+    <div class="row-fluid">
+        <div class="span12"><p class="text-error">${flash.message}</p></div>
+    </div>
+</g:if>
+
 <div class="landing-container line">
 
     <div class="landing-main col">
