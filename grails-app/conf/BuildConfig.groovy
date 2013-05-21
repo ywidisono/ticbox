@@ -60,8 +60,8 @@ grails.project.dependency.resolution = {
         //compile ':cache:1.0.1' //removed
 
         //App plugins
+        runtime ":mongodb:1.2.0" // User runtime to solve exception
         compile ":webxml:1.4.1" // Heroku deployment requirement
-        compile ":mongodb:1.2.0"
         compile ":oauth:2.1.0"
         compile ":shiro:1.1.4"
         compile ":shiro-oauth:0.2"
