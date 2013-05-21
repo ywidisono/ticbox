@@ -15,6 +15,7 @@ import uk.co.desirableobjects.oauth.scribe.OauthService
 
 class AuthController {
     def shiroSecurityManager
+    def respondentService
     OauthService oauthService
 
     def index = { redirect(action: "login", params: params) }
@@ -134,7 +135,10 @@ class AuthController {
 
     def registerSurveyor = {}
 
-    def registerRespondent = {}
+    def registerRespondent = {
+        def profileItemList = respondentService.getProfileItems()
+        [profileItemList : profileItemList]
+    }
 
     def register = {
         def newUser
