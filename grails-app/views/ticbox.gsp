@@ -122,7 +122,7 @@
             <ul class="sign-up-icons">
                 <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
                 <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
-                <oauth:connect provider="linkedin"><li class="li"> </li></oauth:connect>
+                <oauth:connect provider="google"><li class="li"></li></oauth:connect>
             </ul>
         </div>
         <div class="center">

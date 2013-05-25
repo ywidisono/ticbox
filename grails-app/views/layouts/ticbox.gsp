@@ -40,7 +40,7 @@
                         <li class="sign-up">Sign Up</li>
                         <li class="log-in">
                             <ul class="sign-up-icons">
-                                <li style="background: none; width: auto; margin-right: 10px;">Log In</li>
+                                <li style="background: none; width: auto; margin-right: 10px;"><g:link controller="auth" action="login">Login</g:link></li>
                                 <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
                                 <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
                                 <oauth:connect provider="linkedin"><li class="li"> </li></oauth:connect>

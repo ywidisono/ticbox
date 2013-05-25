@@ -30,7 +30,11 @@
         </tr>
         <tr>
           <td />
-          <td><oauth:connect provider="facebook"><g:img file="ticbox/facebook.png"/></oauth:connect></td>
+          <td>
+              <oauth:connect provider="facebook"><g:img file="ticbox/facebook.png"/></oauth:connect>
+              <oauth:connect provider="twitter"><g:img file="ticbox/twitter.png"/></oauth:connect>
+              <oauth:connect provider="goggle"><g:img file="ticbox/google.png"/></oauth:connect>
+          </td>
         </tr>
       </tbody>
     </table>

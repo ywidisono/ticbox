@@ -10,9 +10,11 @@ class BootStrap {
 
         if(Role.count <= 0) {
             def adminRole = new Role(name: "Surveyor")
-            adminRole.addToPermissions("*:*").save()
+            adminRole.addToPermissions("survey:*")
+            adminRole.save()
             def respondentRole = new Role(name: "Respondent")
-            respondentRole.addToPermissions("*:*").save()
+            respondentRole.addToPermissions("respondent:*")
+            respondentRole.save()
             def defaultUser = new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
             defaultUser.addToRoles(adminRole).save()
         }

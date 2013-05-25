@@ -53,14 +53,14 @@
                         <g:if test="${profileItem.items}">
                             <g:each in="${profileItem.items}" var="item">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="${profileItem.code}" value="${item}" <g:if test="${item.equals(respondent?.respondentProfile?.profileItems[profileItem.code])}">checked</g:if> /> ${"$item"}
+                                    <input type="checkbox" name="${profileItem.code}" value="${item}" <g:if test="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.contains(item)}">checked</g:if> /> ${"$item"}
                                 </label>
                             </g:each>
                         </g:if>
                         <g:elseif test="${profileItem.lookupFrom}">
                             <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="${profileItem.code}" value="${item.key}" <g:if test="${item.key.equals(respondent?.respondentProfile?.profileItems[profileItem.code])}">checked</g:if> /> ${"$item.value"}
+                                    <input type="checkbox" name="${profileItem.code}" value="${item.key}" <g:if test="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.contains(item.key)}">checked</g:if> /> ${"$item.value"}
                                 </label>
                             </g:each>
                         </g:elseif>
@@ -69,7 +69,7 @@
                     <g:elseif test="${profileItem.componentType == ticbox.ProfileItem.COMPONENT_TYPES.SELECT}">
                         <g:if test="${profileItem.items}">
                             <g:if test="${profileItem.multiple}">
-                                <g:select name="${profileItem.code}" from="${profileItem.items}"  multiple="true"  value="${respondent?.respondentProfile?.profileItems[profileItem.code]}" />
+                                <g:select name="${profileItem.code}" from="${profileItem.items}"  multiple="true"  value="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.toList()}" />
                             </g:if>
                             <g:else> %{--this is stupid!!!!--}%
                                 <g:select name="${profileItem.code}" from="${profileItem.items}" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}" />
@@ -77,7 +77,7 @@
                         </g:if>
                         <g:elseif test="${profileItem.lookupFrom}">
                             <g:if test="${profileItem.multiple}">
-                                <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" multiple="true" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}"/>
+                                <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" multiple="true" value="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.toList()}"/>
                             </g:if>
                             <g:else> %{--this is stupid!!!!--}%
                                 <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}"/>
