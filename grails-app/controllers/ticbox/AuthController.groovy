@@ -14,7 +14,6 @@ import org.scribe.model.Token
 import uk.co.desirableobjects.oauth.scribe.OauthService
 
 class AuthController {
-    def shiroSecurityManager
     def respondentService
     OauthService oauthService
 
@@ -151,11 +150,8 @@ class AuthController {
                 newUser.addToRoles(surveyorRole).save()
             } else if ("respondent".equalsIgnoreCase(params.userType)) {
                 errorAction = "registerRespondent"
-                def dob = (params.dob) ? new Date().parse("dd/MM/yyyy", params.dob) : null;
-                def monthlyIncome = (params.monthlyIncome) ? new Double(params.monthlyIncome) : null;
-                def children = (params.children) ? new Integer(params.children) : null
                 def respondentRole = Role.findByName("Respondent")
-                def respondentProfile = new RespondentProfile(country: params.country, state: params.state, city: params.city, gender: params.gender, dob: dob, monthlyIncome: monthlyIncome, lastEducation: params.lastEducation, job: params.job, maritalStatus: params.maritalStatus, children: children)
+                def respondentProfile = respondentService.getRespondentProfileFromParams(params)
                 newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company, respondentProfile: respondentProfile)
                 newUser.addToRoles(respondentRole).save()
             }

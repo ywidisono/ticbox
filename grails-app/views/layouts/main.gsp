@@ -20,7 +20,9 @@
         <script type="text/javascript" src="${resource(dir: 'frameworks/jquery-ui-1.10.2/js', file: 'jquery-ui-1.10.2.custom.min.js')}"/></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                $('.datePicker').datepicker();
+                $('.datePicker').datepicker({
+                    dateFormat: 'dd/mm/yy'
+                });
             });
         </script>
 		<g:layoutHead/>
