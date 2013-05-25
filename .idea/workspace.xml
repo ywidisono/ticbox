@@ -20,14 +20,14 @@
     <file path="/Dummy.txt" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369408639874" ignored="false" />
     <file path="/ticbox.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369475200807" ignored="false" />
     <file path="/RespondentProfile.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369467322741" ignored="false" />
-    <file path="/AuthController.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369411119102" ignored="false" />
+    <file path="/AuthController.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369496699792" ignored="false" />
     <file path="/registerRespondent.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369152473824" ignored="false" />
     <file path="/application.js" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369152633714" ignored="false" />
     <file path="/main.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369412391206" ignored="false" />
     <file path="/User.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369418371761" ignored="false" />
-    <file path="/fragment.java" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369413095201" ignored="false" />
+    <file path="/fragment.java" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369496428752" ignored="false" />
     <file path="/RespondentController.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369470034281" ignored="false" />
-    <file path="/profileForm.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369477128849" ignored="false" />
+    <file path="/profileForm.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369497499773" ignored="false" />
     <file path="/DbRealm.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369417634216" ignored="false" />
     <file path="/Role.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369418276600" ignored="false" />
     <file path="/respondent.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369469522061" ignored="false" />
@@ -99,7 +99,7 @@
       <file leaf-file-name="AuthController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/ticbox/AuthController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="8" selection-start="713" selection-end="713" vertical-scroll-proportion="-7.3913045">
+            <state line="171" column="30" selection-start="7117" selection-end="7117" vertical-scroll-proportion="-4.4347825">
               <folding />
             </state>
           </provider>
@@ -117,10 +117,8 @@
       <file leaf-file-name="ticbox.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/ticbox.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="34" selection-start="49" selection-end="49" vertical-scroll-proportion="-1.9615384">
-              <folding>
-                <marker date="1369474927637" expanded="true" signature="1806:1930" placeholder="..." />
-              </folding>
+            <state line="3" column="34" selection-start="49" selection-end="49" vertical-scroll-proportion="81.38461">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,7 +126,7 @@
       <file leaf-file-name="ticbox.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="131" selection-start="2171" selection-end="2171" vertical-scroll-proportion="-6.230769">
+            <state line="42" column="150" selection-start="2135" selection-end="2190" vertical-scroll-proportion="-6.230769">
               <folding />
             </state>
           </provider>
@@ -137,7 +135,7 @@
       <file leaf-file-name="BootStrap.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="92" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+            <state line="17" column="108" selection-start="562" selection-end="596" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -157,7 +155,7 @@
       <file leaf-file-name="profileForm.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/profileForm.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="279" selection-start="5223" selection-end="5233" vertical-scroll-proportion="0.77298313">
+            <state line="173" column="39" selection-start="9349" selection-end="9349" vertical-scroll-proportion="0.36857143">
               <folding />
             </state>
           </provider>
@@ -178,7 +176,7 @@
       <file leaf-file-name="respondent.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/respondent.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="136" column="11" selection-start="5121" selection-end="5121" vertical-scroll-proportion="-13.076923">
+            <state line="221" column="0" selection-start="8357" selection-end="8357" vertical-scroll-proportion="-16.153847">
               <folding />
             </state>
           </provider>
@@ -214,7 +212,6 @@
         <option value="$PROJECT_DIR$/web-app/js/application.js" />
         <option value="$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/ticbox/AuthController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/realms/ticbox/DbRealm.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/ticbox/Role.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/ticbox/User.groovy" />
@@ -226,6 +223,7 @@
         <option value="$PROJECT_DIR$/grails-app/views/auth/login.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/ticbox/AuthController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/respondent/profileForm.gsp" />
       </list>
     </option>
@@ -429,7 +427,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47196263" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.490625" sideWeight="0.49756888" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2796748" sideWeight="0.52803737" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2796748" sideWeight="0.71495324" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -437,7 +435,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24227643" sideWeight="0.309375" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2857143" sideWeight="0.49675852" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28504673" sideWeight="0.49675852" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.65625" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -559,13 +557,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/respondent.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="11" selection-start="5121" selection-end="5121" vertical-scroll-proportion="-13.076923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
       <provider editor-type-id="ResourceBundle">
         <state />
@@ -597,41 +588,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/ticbox.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="34" selection-start="49" selection-end="49" vertical-scroll-proportion="-1.9615384">
-          <folding>
-            <marker date="1369474927637" expanded="true" signature="1806:1930" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ticbox/AuthController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="8" selection-start="713" selection-end="713" vertical-scroll-proportion="-7.3913045">
+        <state line="42" column="150" selection-start="2135" selection-end="2190" vertical-scroll-proportion="-6.230769">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/ticbox.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="131" selection-start="2171" selection-end="2171" vertical-scroll-proportion="-6.230769">
+        <state line="3" column="34" selection-start="49" selection-end="49" vertical-scroll-proportion="81.38461">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/respondent.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="221" column="0" selection-start="8357" selection-end="8357" vertical-scroll-proportion="-16.153847">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="92" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+        <state line="17" column="108" selection-start="562" selection-end="596" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ticbox/AuthController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="30" selection-start="7117" selection-end="7117" vertical-scroll-proportion="-4.4347825">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/profileForm.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="279" selection-start="5223" selection-end="5233" vertical-scroll-proportion="0.77298313">
+        <state line="173" column="39" selection-start="9349" selection-end="9349" vertical-scroll-proportion="0.36857143">
           <folding />
         </state>
       </provider>

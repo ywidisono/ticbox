@@ -19,11 +19,25 @@
 
     <!-- static fields -->
     <div class="control-group">
+        <label class="control-label">Username</label>
+        <div class="controls">
+            <g:textField name="username" value="${respondent.username}" disabled="disabled"/>
+        </div>
+    </div>
+    <div class="control-group">
         <label class="control-label">E-Mail</label>
         <div class="controls">
             <g:textField name="email" value="${respondent.email}"/>
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">Password</label>
+        <div class="controls">
+            <a href="#change-password-modal" role="button" class="btn" data-toggle="modal">Change</a>
+        </div>
+    </div>
+
+    <br />
 
     <!-- dynamic fields -->
     <g:each in="${profileItems}" var="profileItem">
@@ -115,6 +129,65 @@
     </div>
 
 </g:form>
+
+<!-- Change password modal -->
+<div id="change-password-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Change Password</h3>
+    </div>
+    <div class="modal-body container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                <label class="control-label">Old Password</label>
+            </div>
+            <div class="span5">
+                <g:hiddenField name="id" value="${respondent.id}"/>
+                <g:passwordField name="oldPassword" />
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span5">
+                <label class="control-label">New Password</label>
+            </div>
+            <div class="span5">
+                <g:passwordField name="newPassword" />
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span5">
+                <label class="control-label">Confirm Password</label>
+            </div>
+            <div class="span5">
+                <g:passwordField name="confirmPassword" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button id="change-password-button" class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    /* Change password modal trigger */
+    $('#change-password-button').click(function() {
+        var url = '${g.createLink(controller: "auth", action: "changePassword")}';
+        var data = $('#change-password-modal').find('input').serialize();
+        $.post(url, data, function(response) {
+            var message = (response) ? response.message : 'Application error';
+            $('#change-password-modal').modal('hide');
+            alert(message);
+        });
+    });
+
+    /* Change password modal on close */
+    $('#change-password-modal').on('hide', function() {
+        $('#change-password-modal').find('input[type="password"]').val('');
+    });
+
+</script>
 
 </body>
 </html>

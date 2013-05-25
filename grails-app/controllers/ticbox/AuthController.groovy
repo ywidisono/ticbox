@@ -163,4 +163,35 @@ class AuthController {
         }
         forward(action: errorAction)
     }
+
+    def changePassword = {
+        def result
+        def success = false
+        def message
+        if (params.id) {
+            if (params.oldPassword && params.newPassword && params.confirmPassword) {
+                if (params.newPassword == params.confirmPassword) {
+                    def oldPasswordHash = new Sha256Hash(params.oldPassword).toHex()
+                    def newPasswordHash = new Sha256Hash(params.newPassword).toHex()
+                    def user = User.findByIdAndPasswordHash(params.id, oldPasswordHash)
+                    if (user) {
+                        user.passwordHash = newPasswordHash
+                        user.save()
+                        success = true
+                        message = "Password successfully changed"
+                    } else {
+                        message = "Invalid password"
+                    }
+                } else {
+                    message = "New password mismatch"
+                }
+            } else {
+                message = "Please provide all details"
+            }
+        } else {
+            message = "invalid user"
+        }
+        result = [success: success, message: message]
+        render result  as JSON
+    }
 }
