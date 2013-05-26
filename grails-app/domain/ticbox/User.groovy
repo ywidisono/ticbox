@@ -5,6 +5,7 @@ class User {
     String username
     String passwordHash
     String email
+    String pic
     RespondentProfile respondentProfile
     static hasMany = [ roles: Role, permissions: String ]
     static embedded = ["respondentProfile"]

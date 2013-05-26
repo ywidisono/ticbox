@@ -154,3 +154,10 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// ajax-uploader
+ticbox {
+    imageUpload {
+        respondentImageDir = "${userHome}/"
+    }
+}

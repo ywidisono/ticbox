@@ -10,6 +10,7 @@
 <head>
     <meta name="layout" content="respondent"/>
     <title>Respondent Profile Form</title>
+    <r:require module="fileuploader" />
 </head>
 <body>
 
@@ -18,6 +19,16 @@
     <g:hiddenField name="id" value="${respondent.id}"/>
 
     <!-- static fields -->
+    <div class="control-group">
+        <div class="controls">
+            <p><img id="pic" src="${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}"/></p>
+            <uploader:uploader id="imageUploader" url="${[controller:'respondent', action:'uploadImage']}" params="${[respondentId: respondent.id]}">
+                <uploader:onComplete>
+                    $('#pic').attr('src', '${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}&u='+new Date().getTime());
+                </uploader:onComplete>
+            </uploader:uploader>
+        </div>
+    </div>
     <div class="control-group">
         <label class="control-label">Username</label>
         <div class="controls">
