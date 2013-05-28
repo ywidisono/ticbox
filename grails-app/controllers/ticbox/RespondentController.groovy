@@ -1,5 +1,6 @@
 package ticbox
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream
 import grails.converters.JSON
 import org.apache.shiro.SecurityUtils
@@ -38,41 +39,46 @@ class RespondentController {
     }
 
     def uploadImage = {
+        def message
         try {
             def inputStream
-            def fileExt = params.qqfile.split("\\.").last()
             if (request instanceof MultipartHttpServletRequest) {
                 MultipartFile multipartFile = ((MultipartHttpServletRequest) request).getFile("qqfile")
                 inputStream = multipartFile.inputStream
             } else {
                 inputStream = request.inputStream
             }
-            def filePath = grailsApplication.config.ticbox.imageUpload.respondentImageDir + params.respondentId + "." + fileExt
-            def uploaded = new File(filePath)
-            if(uploaded.exists()) uploaded.delete()
-            uploaded.createNewFile()
-            writeToFile(inputStream, uploaded)
 
             // update user
             def user = User.findById(params.respondentId)
-            user.pic = uploaded.getName()
+            user.pic = Base64.encode(inputStream.bytes)
             user.save()
 
-            return render(text: [success:true, fileName: uploaded.getName()] as JSON, contentType:'text/json')
-        } catch (FileUploadException e) {
-            log.error("Failed to upload file.", e)
-            return render(text: [success:false] as JSON, contentType:'text/json')
-        }
+            if (user.hasErrors()) {
+                throw new Exception(user.errors.allErrors.first())
+            }
 
+            return render(text: [success:true] as JSON, contentType:'text/json')
+        } catch (FileUploadException e) {
+            message = "Failed to upload file."
+            log.error(message, e)
+        } catch (Exception e) {
+            message = "Failed to save respondent"
+            log.error(message, e)
+        }
+        return render(text: [success:false, message: message] as JSON, contentType:'text/json')
     }
 
     def viewImage = {
         def user = User.findById(params.respondentId)
-        def image = (user?.pic) ? new File(grailsApplication.config.ticbox.imageUpload.respondentImageDir + user.pic) : null
+        //def image = (user?.pic) ? new File(grailsApplication.config.ticbox.imageUpload.respondentImageDir + user.pic) : null
         def imageByte
-        if (image) {
-            def is = new FileInputStream(image)
-            imageByte = is.bytes
+//        if (image) {
+//            def is = new FileInputStream(image)
+//            imageByte = is.bytes
+//        }
+        if (user?.pic) {
+            imageByte = Base64.decode(user?.pic)
         }
         response.outputStream << imageByte
     }

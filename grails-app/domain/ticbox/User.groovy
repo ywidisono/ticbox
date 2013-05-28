@@ -14,6 +14,7 @@ class User {
         passwordHash(nullable: false)
         email(nullable: true, unique: true)
         respondentProfile(nullable: true)
+        pic(nullable: true)
     }
     static mapping = {
         username index: true

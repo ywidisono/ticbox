@@ -155,11 +155,14 @@ class AuthController {
                 newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company, respondentProfile: respondentProfile)
                 newUser.addToRoles(respondentRole).save()
             }
+            if (newUser.hasErrors()) {
+                throw new Exception(newUser.errors.allErrors.first())
+            }
             flash.message = message(code: "general.create.success.message")
             redirect(uri: "/")
         } catch (Exception e) {
             flash.message = message(code: "general.create.failed.message")
-            log.error(e.message)
+            log.error(e.message, e)
         }
         forward(action: errorAction)
     }
