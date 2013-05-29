@@ -52,7 +52,7 @@
                     </shiro:authenticated>
                 </ul>
 
-                <div class="header-logo pull-left"></div>
+                <a href="${request.contextPath}"><div class="header-logo pull-left"></div></a>
 
                 <div class="header-nav navbar pull-right" style="display: table-row">
 
@@ -140,7 +140,6 @@
     </div>
 
 </div>
-
 
 </body>
 </html>

@@ -1,34 +1,35 @@
 <%@ page import="ticbox.LookupMaster; ticbox.ProfileItem" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <meta name="layout" content="main"/>
+    <meta name="layout" content="ticbox"/>
     <title><g:message code="app.register.respondent.label" /></title>
 </head>
 <body>
-<g:form action="register">
+<div class="container-fluid">
+<g:form name="registerForm" action="register">
     <g:hiddenField name="userType" value="respondent"/>
     <fieldset>
         <legend><g:message code="app.register.respondent.label" /></legend>
         <div class="row-fluid">
             <div class="span3"><label><g:message code="app.username.label"/></label></div>
-            <div class="span3"><g:textField name="username"/></div>
+            <div class="span9"><g:textField name="username"/></div>
         </div>
         <div class="row-fluid">
             <div class="span3"><label><g:message code="app.email.label"/></label></div>
-            <div class="span3"><g:textField name="email"/></div>
+            <div class="span9"><g:textField name="email"/></div>
         </div>
         <div class="row-fluid">
             <div class="span3"><label><g:message code="app.password.label"/></label></div>
-            <div class="span3"><g:passwordField name="password"/></div>
+            <div class="span9"><g:passwordField name="password"/></div>
         </div>
         <div class="row-fluid">
             <div class="span3"><label><g:message code="app.passwordconfirm.label"/></label></div>
-            <div class="span3"><g:passwordField name="passwordconfirm"/></div>
+            <div class="span9"><g:passwordField name="passwordconfirm"/></div>
         </div>
         <g:each in="${profileItemList}" var="profileItem">
-            <div class="control-group">
-                <label class="control-label">${profileItem.label}</label>
-                <div class="controls">
+            <div class="row-fluid control-group">
+                <div class="span3"><label class="control-label">${profileItem.label}</label></div>
+                <div class="span9 controls">
                     <g:if test="${profileItem.type == ticbox.ProfileItem.TYPES.STRING}">
                         <g:if test="${profileItem.row > 1}">
                             <g:textArea name="${profileItem.code}" rows="${profileItem.row}" cols="30" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}"></g:textArea>
@@ -105,14 +106,50 @@
             </div>
         </g:each>
         <br/>
-        
+
         <div class="row-fluid">
             <div class="span12"><p class="muted"><g:message code="app.register.disclaimer.message"/></p></div>
-        </div>        
+        </div>
         <div class="row-fluid">
-            <div class="span12"><p><g:submitButton name="submit" value="${g.message(code:'app.register.label')}" class="btn btn-primary btn-large"/></p></div>
+            <div class="span12">
+                <p>
+                    <g:submitButton name="submit" value="${g.message(code:'app.register.label')}" class="btn btn-primary btn-large"/>
+                    <button type="reset" name="reset" class="btn btn-large">${g.message(code:'app.reset.label')}</button>
+                </p>
+            </div>
+
         </div>
     </fieldset>
 </g:form>
+</div>
+<g:javascript src="jquery.validate.min.js"/>
+<g:javascript src="additional-methods.min.js"/>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#registerForm').validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 5
+                },
+                email: {
+                    email: true,
+                    required: true,
+                    minlength: 5
+                },
+                password: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: passwordconfirm
+                },
+                passwordconfirm: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: password
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

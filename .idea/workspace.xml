@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" name="Default" comment="" />
+    <list default="true" id="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" name="Default" comment="">
+      <change type="DELETED" beforePath="D:\workspace\IdeaProjects\ticbox\grails-app\views\layouts\main.gsp" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/i18n/messages.properties" afterPath="$PROJECT_DIR$/grails-app/i18n/messages.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp" afterPath="$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/auth/registerSurveyor.gsp" afterPath="$PROJECT_DIR$/grails-app/views/auth/registerSurveyor.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/ticbox.css" afterPath="$PROJECT_DIR$/web-app/css/ticbox.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp" afterPath="$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="ticbox.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME$/.grails/" />
@@ -11,10 +20,10 @@
     <file path="/RespondentService.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369467467751" ignored="false" />
     <file path="/BuildConfig.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369570643500" ignored="false" />
     <file path="/Dummy.txt" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369577006680" ignored="false" />
-    <file path="/ticbox.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369475200807" ignored="false" />
+    <file path="/ticbox.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369855450573" ignored="false" />
     <file path="/RespondentProfile.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369467322741" ignored="false" />
     <file path="/AuthController.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369764015572" ignored="false" />
-    <file path="/registerRespondent.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369573545732" ignored="false" />
+    <file path="/registerRespondent.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369854681244" ignored="false" />
     <file path="/application.js" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369152633714" ignored="false" />
     <file path="/main.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369498633128" ignored="false" />
     <file path="/User.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369763026311" ignored="false" />
@@ -28,6 +37,9 @@
     <file path="/BootStrap.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369475397912" ignored="false" />
     <file path="/Config.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369586100894" ignored="false" />
     <file path="/AjaxUploadController.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369575407744" ignored="false" />
+    <file path="/messages.properties" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369853178252" ignored="false" />
+    <file path="/registerSurveyor.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369855729744" ignored="false" />
+    <file path="/ticbox.css" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1369855510642" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,10 +105,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BuildConfig.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+      <file leaf-file-name="registerRespondent.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.9976019">
+            <state line="151" column="0" selection-start="8251" selection-end="8251" vertical-scroll-proportion="0.9325397">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
+          <provider editor-type-id="ResourceBundle">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="21" selection-start="2058" selection-end="2058" vertical-scroll-proportion="-8.36">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registerSurveyor.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/auth/registerSurveyor.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="0" selection-start="2805" selection-end="3475" vertical-scroll-proportion="-10.265306">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ticbox.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="68" selection-start="1456" selection-end="1456" vertical-scroll-proportion="-8.538462">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ticbox.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/css/ticbox.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="164" column="18" selection-start="2695" selection-end="2695" vertical-scroll-proportion="-14.2">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/frameworks/bootstrap/css/bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2263" column="27" selection-start="40940" selection-end="40946" vertical-scroll-proportion="-14.36">
               <folding />
             </state>
           </provider>
@@ -120,15 +180,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/domain/ticbox/RespondentProfile.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/ticbox/RespondentService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/ticbox.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/auth/login.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/respondent.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/ajax-uploader-1.1/grails-app/controllers/uk/co/desirableobjects/ajaxuploader/AjaxUploadController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/respondent/profileForm.gsp" />
@@ -136,6 +190,12 @@
         <option value="$PROJECT_DIR$/grails-app/domain/ticbox/User.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/ticbox/RespondentController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/ticbox/AuthController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/i18n/messages.properties" />
+        <option value="$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp" />
+        <option value="$PROJECT_DIR$/web-app/css/ticbox.css" />
+        <option value="$PROJECT_DIR$/grails-app/views/auth/registerSurveyor.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp" />
       </list>
     </option>
   </component>
@@ -162,7 +222,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -173,7 +233,98 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -316,14 +467,14 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47040498" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.490625" sideWeight="0.49756888" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32576984" sideWeight="0.71028036" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32576984" sideWeight="0.71028036" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24227643" sideWeight="0.309375" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2897196" sideWeight="0.49675852" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24149108" sideWeight="0.711838" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.288162" sideWeight="0.49675852" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6546875" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -398,34 +549,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/ajax-uploader-1.1/AjaxUploaderGrailsPlugin.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Grails/grails-2.2.1/src/grails-core-2.2.1-sources.jar!/org/codehaus/groovy/grails/commons/GrailsApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="17" selection-start="5948" selection-end="5948" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Grails/grails-2.2.1/src/grails-web-2.2.1-sources.jar!/org/codehaus/groovy/grails/plugins/web/api/CommonWebApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="30" selection-start="3291" selection-end="3291" vertical-scroll-proportion="0.33214286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_04/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1919" column="23" selection-start="83162" selection-end="83162" vertical-scroll-proportion="0.33214286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/ajax-uploader-1.1/grails-app/controllers/uk/co/desirableobjects/ajaxuploader/AjaxUploadController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="38" selection-start="1664" selection-end="1664" vertical-scroll-proportion="-7.304348">
@@ -475,13 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="8" selection-start="968" selection-end="968" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="43" selection-start="511" selection-end="522" vertical-scroll-proportion="0.0">
@@ -503,16 +619,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="1" selection-start="988" selection-end="988" vertical-scroll-proportion="0.04347826">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.9976019">
+        <state line="64" column="21" selection-start="2058" selection-end="2058" vertical-scroll-proportion="-8.36">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/frameworks/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2263" column="27" selection-start="40940" selection-end="40946" vertical-scroll-proportion="-14.36">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/ticbox.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="68" selection-start="1456" selection-end="1456" vertical-scroll-proportion="-8.538462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/ticbox.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="18" selection-start="2695" selection-end="2695" vertical-scroll-proportion="-14.2">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/auth/registerSurveyor.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="0" selection-start="2805" selection-end="3475" vertical-scroll-proportion="-10.265306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/auth/registerRespondent.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="0" selection-start="8251" selection-end="8251" vertical-scroll-proportion="0.9325397">
           <folding />
         </state>
       </provider>

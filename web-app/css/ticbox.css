@@ -160,3 +160,7 @@ ul.sign-up-icons li.li{
     width: 489px;
     height: 67px;
 }
+
+.error {
+    color: tomato;
+}
