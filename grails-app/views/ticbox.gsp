@@ -2,7 +2,7 @@
 <head>
 
     <meta name="layout" content="ticbox"/>
-
+    <title>Welcome</title>
     <style>
 
     .landing-container {
