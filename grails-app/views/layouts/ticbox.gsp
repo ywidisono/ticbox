@@ -15,7 +15,9 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/jquery-ui-1.10.2/css/smoothness', file: 'jquery-ui-1.10.2.custom.css')}" type="text/css">
+
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap.css')}" type="text/css">
+
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap-responsive.css')}" type="text/css">
 
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'ticbox.css')}" type="text/css">
@@ -140,6 +142,21 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+
+    jQuery(function(){
+        jQuery('.link').click(function(){
+            var href = jQuery(this).attr('href');
+            if(href){
+                window.location.href = href;
+            }
+        });
+
+    });
+
+</script>
+
 
 </body>
 </html>

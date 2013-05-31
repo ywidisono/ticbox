@@ -3,7 +3,7 @@
 }
 
 .col {
-    display: inline-block;
+    float: left;
     min-height: 1px;
 }
 
@@ -15,8 +15,9 @@
 
 body{
     background-color: #f3f3f3;
-    font-family: helvetica,tahoma,sans-serif;
+    font-family: helveticaneue-light,tahoma,sans-serif;
     font-size: 12px;
+    letter-spacing: 1px;
 }
 
 .container{
@@ -114,7 +115,7 @@ ul.sign-up-icons li {
     display:inline-block;
     *display:inline; /*IE7*/
     *zoom:1; /*IE7*/
-    background: transparent url("../images/ticbox/FB_TW_LI_logo.png") no-repeat;
+    background: transparent url("../images/ticbox/FB_TW_LI_Gl_logo.png") no-repeat;
     width: 23px;
     height: 25px;
     padding: 0;
@@ -131,6 +132,10 @@ ul.sign-up-icons li.tw{
 
 ul.sign-up-icons li.li{
     background-position: -48px 0;
+}
+
+ul.sign-up-icons li.gg{
+    background-position: -72px 0;
 }
 
 .bottom-nav {
@@ -159,6 +164,10 @@ ul.sign-up-icons li.li{
     background: url("../images/ticbox/SecurityLogoForMockUp.jpg");
     width: 489px;
     height: 67px;
+}
+
+.link {
+    cursor: pointer;
 }
 
 .error {

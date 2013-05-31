@@ -1,4 +1,3 @@
-<%@ page import="org.apache.shiro.SecurityUtils" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -21,16 +20,56 @@
     <style type="text/css">
 
     body {
-        padding-top: 50px;
+        padding-top: 65px;
+        font-family: helveticaneue-light,tahoma,sans-serif;
+        letter-spacing: 0.1em;
+        color: #5a5a5a;
+    }
+
+    textarea, input[type=text] {
+        background-color: #f5f5f5;
+    }
+
+    textarea:focus, input[type=text]:focus {
+        background-color: #ffffff;
     }
 
     .line {
-        display: block;
+        clear: both;
+        min-height: 1px;
+        margin-bottom: 5px;
+    }
+
+    .rowLine10 {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .rowLine5 {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .rowLine2 {
+        display: inline-block;
+        margin-bottom: 2px;
     }
 
     .col {
-        display: inline-block;
+        float: left;
         min-height: 1px;
+    }
+
+    .col2 {
+        margin-right: 2px;
+    }
+
+    .col5 {
+        margin-right: 5px;
+    }
+
+    .col10 {
+        margin-right: 10px;
     }
 
     @media (max-width: 980px) {
@@ -44,6 +83,7 @@
 
     .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
         color: #ffffff;
+        padding-top: 10px;
     }
 
     .navbar-inverse .navbar-inner {
@@ -60,8 +100,11 @@
         color: #ffffff;
     }
 
-    .navbar-inverse .brand, .navbar-inverse .nav > li > a  {
+    .navbar-inverse .nav > li > a  {
         color: #ffffff;
+        height: 30px;
+        padding-top: 20px;
+        padding-bottom: 0;
     }
 
     .navbar .nav > .active > a,
@@ -80,12 +123,23 @@
     }
 
     #menuNavPanel {
-        width: 220px;
+        width: 300px;
         margin-left: 0;
+        padding-top: 20px;
+        border-right: #7F9B09 solid 1px;
+    }
+
+    #menuNavPanel .side-panel {
+        width: 300px;
+        -webkit-box-shadow: 0 5px 15px -8px #000000;
+        -moz-box-shadow: 0 5px 15px -8px #000000;
+        box-shadow: 0 5px 15px -8px #000000;
+        margin-bottom: 15px;
+        padding-left: 5px;;
     }
 
     #mainContentPanel {
-        width: 800px;
+        width: 720px;
         margin-left: 10px;
     }
 
@@ -115,10 +169,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="${request.contextPath}/">TicBOX</a>
+            <a class="brand" href="${request.contextPath}/">
+                <img src="../images/ticbox/TicBoxLogo.png" width="200" height="100">
+            </a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
-                    Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
+                    Logged in as <a href="#" class="navbar-link"><strong>Username</strong></a>
                 </p>
                 <ul class="nav">
                     <li class="index"><a href="${request.contextPath}/survey/index">Survey Type</a></li>
@@ -134,31 +190,17 @@
     <div class="row" style="margin-left: -10px;">
         <div id="menuNavPanel" class="span" style="position: fixed;">
             %{--menu navigation panel--}%
-            <div id="surveySummaryAccordion" class="accordion" style="width: 220px;">
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveySummaryAccordion" href="#surveySummaryContainer">
-                            <g:message code="nav.header.survey-summary" default="Survey Summary"/>
-                        </a>
-                    </div>
-                    <div id="surveySummaryContainer" class="accordion-body collapse in">
-                        <div class="accordion-inner" style="padding: 5px 5px;">
-                            <div class="line">
-                                Total Targeted Respondents :
-                            </div>
-                            <div class="line">
-                                Pricing :
-                            </div>
-                            <div class="line">
-                                [ACTIONS]
-                            </div>
-                        </div>
-                    </div>
+            <div class="line side-panel">
+                <div class="line">
+                    Total : Rp. 3,200,000.00,-
+                </div>
+                <div class="line">
+                    Rp. 15,000.00,- x 200 Respondents
                 </div>
             </div>
 
         </div>
-        <div id="mainContentPanel" class="span" style="margin-left: 230px;">
+        <div id="mainContentPanel" class="span" style="margin-left: 310px;">
             <g:layoutBody/>
         </div>
     </div>
@@ -169,9 +211,6 @@
 
 </div>
 
-<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
-
-<g:javascript library="application"/>
 <r:layoutResources />
 
 <script type="text/javascript">
