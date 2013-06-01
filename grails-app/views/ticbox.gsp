@@ -24,6 +24,8 @@
     .landing-bar {
         width: 196px;
         height: 391px;
+        margin-top: 34px;
+        margin-left: 2px;
     }
 
     .landing-bar div {
@@ -106,8 +108,8 @@
         <div class="landing-menu navbar">
             <div class="landing-menu-btn-left col pull-left"></div>
             <ul class="nav">
-                <li class="${request.contextPath}/survey/">Create Survey</li>
-                <li class="${request.contextPath}/respondent/profileForm">Join Respondent</li>
+                <li class="link" href="${request.contextPath}/survey/">Create Survey</li>
+                <li class="link" href="${request.contextPath}/respondent/profileForm">Join Respondent</li>
                 <li>Solutions</li>
                 <li>Watch Demo</li>
             </ul>
@@ -122,7 +124,7 @@
             <ul class="sign-up-icons">
                 <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
                 <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
-                <oauth:connect provider="google"><li class="li"></li></oauth:connect>
+                <oauth:connect provider="google"><li class="gg"> </li></oauth:connect>
             </ul>
         </div>
         <div class="center">
@@ -219,21 +221,6 @@
         </p>
     </div>
 </div>
-
-<script type="text/javascript">
-
-    jQuery(function(){
-        jQuery('.nav > li').click(function(){
-            var href = jQuery(this).prop('class');
-            if(href){
-                window.location.href = href;
-            }
-        });
-
-    });
-
-</script>
-
 
 </body>
 </html>

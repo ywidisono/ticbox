@@ -15,12 +15,13 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/jquery-ui-1.10.2/css/smoothness', file: 'jquery-ui-1.10.2.custom.css')}" type="text/css">
+
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap.css')}" type="text/css">
 
     <style type="text/css">
 
     body {
-        padding-top: 50px;
+        padding-top: 65px;
     }
 
     .line {
@@ -43,6 +44,7 @@
 
     .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
         color: #ffffff;
+        padding-top: 10px;
     }
 
     .navbar-inverse .navbar-inner {
@@ -59,8 +61,11 @@
         color: #ffffff;
     }
 
-    .navbar-inverse .brand, .navbar-inverse .nav > li > a  {
+    .navbar-inverse .nav > li > a  {
         color: #ffffff;
+        height: 30px;
+        padding-top: 20px;
+        padding-bottom: 0;
     }
 
     .navbar .nav > .active > a,
@@ -114,7 +119,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="${request.contextPath}/">TicBOX</a>
+            <a class="brand" href="${request.contextPath}/">
+                <img src="../images/ticbox/TicBoxLogo.png" width="200" height="100">
+            </a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
@@ -198,7 +205,6 @@
 
 <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 
-<g:javascript library="application"/>
 <r:layoutResources />
 
 <script type="text/javascript">
