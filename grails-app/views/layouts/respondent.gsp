@@ -172,10 +172,10 @@
                     <div id="respondentNavContainer" class="accordion-body collapse in">
                         <div class="accordion-inner" style="padding: 5px 5px;">
                             <div class="line">
-                                Survey List
+                                <g:link action="index">Survey List</g:link>
                             </div>
                             <div class="line">
-                                Profile
+                                <g:link action="profileForm">Profile</g:link>
                             </div>
                             <div class="line">
                                 Invite Friends

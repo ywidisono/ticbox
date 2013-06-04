@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="container-fluid">
+    <h3>Register Respondent</h3>
 <g:form name="registerForm" action="register">
     <g:hiddenField name="userType" value="respondent"/>
     <fieldset>
@@ -35,7 +36,7 @@
                             <g:textArea name="${profileItem.code}" rows="${profileItem.row}" cols="30" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}"></g:textArea>
                         </g:if>
                         <g:else>
-                            <input name="${profileItem.code}" type="text" class="" max="${profileItem.max}" placeholder="${profileItem.placeHolder}"/>
+                            <input name="${profileItem.code}" type="text" class="" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}"/>
                         </g:else>
                     </g:if>
                     <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.DATE}">

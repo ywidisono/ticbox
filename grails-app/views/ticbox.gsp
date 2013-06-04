@@ -109,7 +109,7 @@
             <div class="landing-menu-btn-left col pull-left"></div>
             <ul class="nav">
                 <li class="link" href="${request.contextPath}/survey/">Create Survey</li>
-                <li class="link" href="${request.contextPath}/respondent/profileForm">Join Respondent</li>
+                <li class="link" href="${request.contextPath}/respondent/">Join Respondent</li>
                 <li>Solutions</li>
                 <li>Watch Demo</li>
             </ul>

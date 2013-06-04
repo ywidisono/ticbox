@@ -146,6 +146,7 @@
 <script type="text/javascript">
 
     jQuery(function(){
+
         jQuery('.link').click(function(){
             var href = jQuery(this).attr('href');
             if(href){
@@ -153,6 +154,10 @@
             }
         });
 
+        jQuery('.datePicker').datepicker({
+            showAnim : 'slideDown',
+            format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
+        });
     });
 
 </script>

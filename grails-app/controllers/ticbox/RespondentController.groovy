@@ -1,7 +1,6 @@
 package ticbox
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream
 import grails.converters.JSON
 import org.apache.shiro.SecurityUtils
 import org.springframework.web.multipart.MultipartFile
@@ -13,7 +12,10 @@ class RespondentController {
     def grailsApplication
 
     def index() {
-        render ""
+        def surveyList = Survey.all
+        def principal = SecurityUtils.subject.principal
+        def respondent = User.findByUsername(principal.toString())
+        [surveyList:surveyList, respondent: respondent]
     }
 
     def profileForm() {
@@ -71,12 +73,7 @@ class RespondentController {
 
     def viewImage = {
         def user = User.findById(params.respondentId)
-        //def image = (user?.pic) ? new File(grailsApplication.config.ticbox.imageUpload.respondentImageDir + user.pic) : null
         def imageByte
-//        if (image) {
-//            def is = new FileInputStream(image)
-//            imageByte = is.bytes
-//        }
         if (user?.pic) {
             imageByte = Base64.decode(user?.pic)
         }
