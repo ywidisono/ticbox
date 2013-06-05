@@ -127,8 +127,8 @@
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
-                    <li class="index"><a href="#">Survey List</a></li>
-                    <li class="respondentFilter"><a href="#">Profile</a></li>
+                    <li class="index"><g:link action="index">Survey List</g:link></li>
+                    <li class="respondentFilter"><g:link action="profileForm">Profile</g:link></li>
                     <li class="surveyGenerator"><a href="#">Invite Friends</a></li>
                     <li class="surveyGenerator"><a href="#">Redeem GOLD Points</a></li>
                     <li class="surveyGenerator"><a href="#">GOLD Points History</a></li>

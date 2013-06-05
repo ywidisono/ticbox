@@ -43,7 +43,7 @@
                                 <li style="background: none; width: auto; margin-right: 10px;"><g:link controller="auth" action="login">Login</g:link></li>
                                 <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
                                 <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
-                                <oauth:connect provider="linkedin"><li class="li"> </li></oauth:connect>
+                                <oauth:connect provider="google"><li class="gg"> </li></oauth:connect>
                             </ul>
                         </li>
                     </shiro:notAuthenticated>
