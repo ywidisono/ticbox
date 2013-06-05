@@ -1,3 +1,4 @@
+<%@ page import="ticbox.ProfileItem; ticbox.Survey" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -19,133 +20,157 @@
 
     <style type="text/css">
 
-    body {
-        padding-top: 65px;
-        font-family: helveticaneue-light,tahoma,sans-serif;
-        letter-spacing: 0.1em;
-        color: #5a5a5a;
-    }
-
-    textarea, input[type=text] {
-        background-color: #f5f5f5;
-    }
-
-    textarea:focus, input[type=text]:focus {
-        background-color: #ffffff;
-    }
-
-    .line {
-        clear: both;
-        min-height: 1px;
-        margin-bottom: 5px;
-    }
-
-    .rowLine10 {
-        display: inline-block;
-        margin-bottom: 10px;
-    }
-
-    .rowLine5 {
-        display: inline-block;
-        margin-bottom: 5px;
-    }
-
-    .rowLine2 {
-        display: inline-block;
-        margin-bottom: 2px;
-    }
-
-    .col {
-        float: left;
-        min-height: 1px;
-    }
-
-    .col2 {
-        margin-right: 2px;
-    }
-
-    .col5 {
-        margin-right: 5px;
-    }
-
-    .col10 {
-        margin-right: 10px;
-    }
-
-    @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-            float: none;
-            padding-left: 5px;
-            padding-right: 5px;
+        body {
+            padding-top: 65px;
+            font-family: helveticaneue-light,tahoma,sans-serif;
+            letter-spacing: 0.1em;
+            color: #5a5a5a;
         }
-    }
 
-    .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
-        color: #ffffff;
-        padding-top: 10px;
-    }
+        textarea, input[type=text] {
+            background-color: #f5f5f5;
+        }
 
-    .navbar-inverse .navbar-inner {
-        background-color: #BAD33C;
-        background-image: -moz-linear-gradient(top, #BAD33C, #7F9B09);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#BAD33C), to(#7F9B09));
-        background-image: -webkit-linear-gradient(top, #BAD33C, #7F9B09);
-        background-image: -o-linear-gradient(top, #BAD33C, #7F9B09);
-        background-image: linear-gradient(to bottom, #BAD33C, #7F9B09);
-        border: 0;
-        -webkit-box-shadow: 0px 0px 10px #000000;
-        box-shadow: 0px 0px 10px #000000;
-        -moz-box-shadow: 0px 0px 10px #000000;
-        color: #ffffff;
-    }
+        textarea:focus, input[type=text]:focus {
+            background-color: #ffffff;
+        }
 
-    .navbar-inverse .nav > li > a  {
-        color: #ffffff;
-        height: 30px;
-        padding-top: 20px;
-        padding-bottom: 0;
-    }
+        .clickable {
+            cursor: pointer;
+        }
 
-    .navbar .nav > .active > a,
-    .navbar .nav > .active > a:hover,
-    .navbar .nav > .active > a:focus,
-    .navbar .nav > li > a:hover {
-        background: transparent;
-        -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-        -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-        box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-    }
+        .line {
+            clear: both;
+            min-height: 1px;
+            margin-bottom: 5px;
+        }
 
-    #main-container {
-        width: 1024px;
-        margin: 0 auto;
-    }
+        .rowLine10 {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
 
-    #menuNavPanel {
-        width: 300px;
-        margin-left: 0;
-        padding-top: 20px;
-        border-right: #7F9B09 solid 1px;
-    }
+        .rowLine5 {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
 
-    #menuNavPanel .side-panel {
-        width: 300px;
-        -webkit-box-shadow: 0 5px 15px -8px #000000;
-        -moz-box-shadow: 0 5px 15px -8px #000000;
-        box-shadow: 0 5px 15px -8px #000000;
-        margin-bottom: 15px;
-        padding-left: 5px;;
-    }
+        .rowLine2 {
+            display: inline-block;
+            margin-bottom: 2px;
+        }
 
-    #mainContentPanel {
-        width: 720px;
-        margin-left: 10px;
-    }
+        .col {
+            float: left;
+            min-height: 1px;
+        }
 
-    [class*="span"] {
-        float: left;
-    }
+        .col2 {
+            margin-right: 2px;
+        }
+
+        .col5 {
+            margin-right: 5px;
+        }
+
+        .col10 {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
+            color: #ffffff;
+            padding-top: 10px;
+        }
+
+        .navbar-inverse .navbar-inner {
+            background-color: #BAD33C;
+            background-image: -moz-linear-gradient(top, #BAD33C, #7F9B09);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#BAD33C), to(#7F9B09));
+            background-image: -webkit-linear-gradient(top, #BAD33C, #7F9B09);
+            background-image: -o-linear-gradient(top, #BAD33C, #7F9B09);
+            background-image: linear-gradient(to bottom, #BAD33C, #7F9B09);
+            border: 0;
+            -webkit-box-shadow: 0px 0px 10px #000000;
+            box-shadow: 0px 0px 10px #000000;
+            -moz-box-shadow: 0px 0px 10px #000000;
+            color: #ffffff;
+        }
+
+        .navbar-inverse .nav > li > a  {
+            color: #ffffff;
+            height: 30px;
+            padding-top: 20px;
+            padding-bottom: 0;
+        }
+
+        .navbar .nav > .active > a,
+        .navbar .nav > .active > a:hover,
+        .navbar .nav > .active > a:focus,
+        .navbar .nav > li > a:hover {
+            background: transparent;
+            -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+            -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+        }
+
+        #main-container {
+            width: 1024px;
+            margin: 5px auto;
+        }
+
+        #menuNavPanel {
+            width: 300px;
+            margin-left: 0;
+        }
+
+        #menuNavPanel .side-panel {
+            width: 300px;
+            -webkit-box-shadow: 0 5px 17px -7px #7F9B09;
+            -moz-box-shadow: 0 5px 17px -7px #7F9B09;
+            box-shadow: 0 5px 17px -7px #7F9B09;
+            margin-bottom: 15px;
+            padding-bottom: 7px;
+            /*border-right: #7F9B09 solid 1px;*/
+        }
+
+        #menuNavPanel .side-panel .line {
+            padding-left: 5px;
+        }
+
+        #mainContentPanel {
+            width: 720px;
+            margin-left: 10px;
+        }
+
+        .control-label {
+            /*text-align: left !important;*/
+        }
+
+        .summary-header {
+            /*background-color: #565655;*/
+            margin-bottom: 10px;
+        }
+
+        .summary-body {
+            /*background-color: #a0a0a0;*/
+        }
+
+        .preview-item-even {
+            background-color: #ececec;
+        }
+
+        [class*="span"] {
+            float: left;
+        }
 
     </style>
 
@@ -188,9 +213,12 @@
 
 <div id="main-container">
     <div class="row" style="margin-left: -10px;">
-        <div id="menuNavPanel" class="span" style="position: fixed;">
+        <div id="menuNavPanel" class="col" style="position: fixed;">
             %{--menu navigation panel--}%
-            <div class="line side-panel">
+            <div class="survey-summary line side-panel">
+                <div class="line">
+                    <legend class="summary-header">Survey Summary : </legend>
+                </div>
                 <div class="line">
                     Total : Rp. 3,200,000.00,-
                 </div>
@@ -199,8 +227,17 @@
                 </div>
             </div>
 
+            <div class="line side-panel">
+                <div class="line">
+                    <legend class="summary-header">Filter Details : </legend>
+                </div>
+                <div class="filter-details-container line">
+
+                </div>
+            </div>
+
         </div>
-        <div id="mainContentPanel" class="span" style="margin-left: 310px;">
+        <div id="mainContentPanel" class="col" style="margin-left: 310px;">
             <g:layoutBody/>
         </div>
     </div>
@@ -219,6 +256,7 @@
 
         jQuery(".nav > li.${actionName}").addClass('active');
 
+        //jQuery('#menuNavPanel .survey-summary').before(jQuery('#menuNavPanelContent'));
         jQuery('#menuNavPanel').append(jQuery('#menuNavPanelContent'));
 
         jQuery('.datePicker').datepicker({
@@ -226,7 +264,84 @@
             format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
         });
 
+        loadRespondentFilter();
+
     });
+
+    function loadRespondentFilter(){
+        jQuery.getJSON('${request.contextPath}/survey/getRespondentFilter', {}, function(respondentFilter){
+            if(respondentFilter){
+                jQuery('.filter-details-container').empty();
+
+                jQuery.each(respondentFilter, function(idx, filter){
+
+                    var filterContent = null;
+
+                    switch(filter.type){
+
+                        case '${ProfileItem.TYPES.STRING}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.val);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.NUMBER}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.CHOICE}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
+                            var ul = jQuery('<ul></ul>');
+
+                            jQuery.each(filter.checkItems, function(idx, item){
+                                ul.append(jQuery('<li></li>').append(item));
+                            });
+
+                            filterContent.append(ul);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.LOOKUP}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
+                            var ul = jQuery('<ul></ul>');
+
+                            jQuery.each(filter.checkItems, function(idx, item){
+                                ul.append(jQuery('<li></li>').append(item));
+                            });
+
+                            filterContent.append(ul);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.DATE}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
+
+                            break;
+
+                        default :
+
+                            break;
+
+                    }
+
+                    jQuery('.filter-details-container').append(jQuery('<div class="line"><div>')
+                            .append(jQuery('<label></label>').append(filter.label + ' : '))
+                            .append(filterContent)
+                    );
+
+                });
+
+            }else{
+                //TODO no survey fetched
+            }
+
+        });
+    }
 
 </script>
 

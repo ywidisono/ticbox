@@ -29,6 +29,8 @@
         .surveyItemContainer .seqNumberContainer {
             width: 40px;
             vertical-align: top;
+            text-align: right;
+            padding-right: 5px;
         }
 
         .questionNumber {
@@ -78,7 +80,6 @@
             height:70px;
             background:transparent url('../images/ticbox/question_BasicState.png');
             background-position: 0 0;
-            cursor: pointer;
         }
 
         #questionTypesTitleContainer {
@@ -132,13 +133,12 @@
         }
 
         .answerTemplate {
-            margin: 0 0 0 40px;
+            margin: 0 0 0 45px;
         }
 
         .question-action-btn {
             width: 20px;
             height: 15px;
-            cursor: pointer;
         }
 
         .upload-pic-icon {
@@ -213,7 +213,8 @@
                         jQuery('.item-check', newItem).click(function(){
                             newItem.remove();
                         });
-                        answerComp.append(newItem);
+
+                        newItem.appendTo(jQuery('.choice-items', answerComp));
                     });
 
                     jQuery('.item-check', answerComp).click(function(){
@@ -250,7 +251,7 @@
                     jQuery('.questionNumber', jQuery(this)).html(idx + 1 + '.');
                 });
 
-                jQuery('.surveyItemActions > .remove', questionComp).click(function(){
+                jQuery('.surveyItemActions .remove', questionComp).click(function(){
                     jQuery(this).parents('.surveyItemContainer').remove();
                     jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(idx){
                         jQuery('.questionNumber', jQuery(this)).html(idx + 1 + '.');
@@ -268,7 +269,7 @@
 
 <div class="line rowLine10">
     <div class="col col10">
-        <div style="width: 250px; height: 150px; background: #f5f5f5 url('../images/ticbox/Logo_Placeholder.png') no-repeat center"></div>
+        <div class="clickable" style="width: 250px; height: 150px; background: #f5f5f5 url('../images/ticbox/Logo_Placeholder.png') no-repeat center"></div>
     </div>
     <div class="col" style="width: 400px; height: auto; vertical-align: bottom; display: inline-block; color: #97b11a; padding-top: 80px;">
         Your survey title here
@@ -285,11 +286,11 @@
     <div id="questionTypesMenuContainer">
         <div id="questionTypesItemContainer">
             <ul>
-                <li class="surveyItemTypeAdd single-choice" type="choice single"></li>
-                <li class="surveyItemTypeAdd multiple-choice" type="choice multiple"></li>
-                <li class="surveyItemTypeAdd single-text" type="typedAnswer singleText"></li>
-                <li class="surveyItemTypeAdd scale" type="rating scale"></li>
-                <li class="surveyItemTypeAdd star-rating" type="rating star"></li>
+                <li class="surveyItemTypeAdd single-choice clickable" type="choice single"></li>
+                <li class="surveyItemTypeAdd multiple-choice clickable" type="choice multiple"></li>
+                <li class="surveyItemTypeAdd single-text clickable" type="typedAnswer singleText"></li>
+                <li class="surveyItemTypeAdd scale clickable" type="rating scale"></li>
+                <li class="surveyItemTypeAdd star-rating clickable" type="rating star"></li>
 
                 <li id="questionTypesTitleContainer"></li>
 
@@ -304,7 +305,7 @@
     <div id="questionTemplate" class="surveyItemContainer line rowLine10">
 
         <div class="line rowLine2">
-            <div class="seqNumberContainer col"> <span class="questionNumber"></span> </div>
+            <div class="seqNumberContainer questionNumber col"> </div>
             <div class="questionTextContainer col col5">
                 <textarea rows="3" placeholder="${message([code: 'message.type-to-set-question', default: 'Type your question here..'])}"></textarea>
             </div>
@@ -312,21 +313,21 @@
                 <div class="line rowLine2">
                     <div class="col col5">
                         %{--<button class="btn picture" data-toggle="tooltip" data-placement="top" title="Upload picture"><i class="icon-camera"></i></button>--}%
-                        <div class="question-action-btn upload-pic-icon"></div>
+                        <div class="question-action-btn upload-pic-icon clickable"></div>
                     </div>
                     <div class="col">
                         %{--<button class="btn video" data-toggle="tooltip" data-placement="top" title="Upload video"><i class="icon-play"></i></button>--}%
-                        <div class="question-action-btn change-question-type-btn"></div>
+                        <div class="question-action-btn change-question-type-btn clickable"></div>
                     </div>
                 </div>
                 <div class="line">
                     <div class="col col5">
                         %{--<button class="btn remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="icon-remove"></i></button>--}%
-                        <div class="question-action-btn upload-vid-icon"></div>
+                        <div class="question-action-btn upload-vid-icon clickable"></div>
                     </div>
                     <div class="col">
                         %{--<button class="btn remove" data-toggle="tooltip" data-placement="top" title="Remove"><i class="icon-remove"></i></button>--}%
-                        <div class="question-action-btn delete-question-icon"></div>
+                        <div class="remove question-action-btn delete-question-icon clickable"></div>
                     </div>
                 </div>
             </div>
@@ -341,6 +342,20 @@
     </div>
 
     <div id="answerTemplate-choice" class="answerTemplate line rowLine2">
+        <div class="choice-items line">
+            <div class="choice-item line rowLine2">
+                <div class="col col5">
+                    <input class="item-check" type="checkbox" checked>
+                </div>
+                <div class="col col5 ">
+                    <input class="item-label" type="text" placeholder="${message([code: 'message.type-to-set-label', default: 'Type here to set label..'])}">
+                </div>
+                <div class="col" style="height: 30px">
+                    %{--<button class="btn" data-toggle="tooltip" data-placement="right" title="Upload picture"><i class="icon-camera"></i></button>--}%
+                    <div style="width: 20px; height: 100%; cursor: pointer; background: transparent url('../images/ticbox/06_Question_UploadIcon_Picture.png') no-repeat center"></div>
+                </div>
+            </div>
+        </div>
         <div class="line rowLine2">
             <div class="col col2">
                 <select class="choice-type">
@@ -352,18 +367,6 @@
                 <button class="btn add-item"><i class="icon-plus"></i></button>
             </div>
         </div>
-        <div class="choice-item line rowLine2">
-            <div class="col col5">
-                <input class="item-check" type="checkbox" checked>
-            </div>
-            <div class="col col5 ">
-                <input class="item-label" type="text" placeholder="${message([code: 'message.type-to-set-label', default: 'Type here to set label..'])}">
-            </div>
-            <div class="col" style="height: 30px">
-                %{--<button class="btn" data-toggle="tooltip" data-placement="right" title="Upload picture"><i class="icon-camera"></i></button>--}%
-                <div style="width: 20px; height: 100%; cursor: pointer; background: transparent url('../images/ticbox/06_Question_UploadIcon_Picture.png') no-repeat center"></div>
-            </div>
-        </div>
     </div>
 
     <div id="answerTemplate-scale" class="answerTemplate line rowLine2">
@@ -372,7 +375,7 @@
                 <thead>
                     <tr class="scale-head">
                         <th style="text-align: center; width: 100px;">
-                            <button class="btn add-row">
+                            <button class="btn btn-small add-row">
                                 <i class="icon-plus"></i>
                             </button>
                         </th>
@@ -380,7 +383,7 @@
                             <input type="text" class="input-small" placeholder="Rating label.." style="width: 100px; padding: 1px;">
                         </th>
                         <th>
-                            <button class="btn add-rating">
+                            <button class="btn btn-small add-rating">
                                 <i class="icon-plus"></i>
                             </button>
                         </th>
