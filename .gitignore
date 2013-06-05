@@ -6,7 +6,9 @@
 .project
 eclipse
 stacktrace.log
+out
 /out
+target
 /target
 /plugins
 /web-app/plugins
