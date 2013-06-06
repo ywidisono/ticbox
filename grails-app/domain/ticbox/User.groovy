@@ -7,7 +7,7 @@ class User {
     String email
     String pic
     RespondentProfile respondentProfile
-    static hasMany = [ roles: Role, permissions: String ]
+    static hasMany = [ roles: Role ]
     static embedded = ["respondentProfile"]
     static constraints = {
         username(nullable: false, blank: false, unique: true)

@@ -173,3 +173,7 @@ ul.sign-up-icons li.gg{
 .error {
     color: tomato;
 }
+
+.center {
+    text-align: center;
+}

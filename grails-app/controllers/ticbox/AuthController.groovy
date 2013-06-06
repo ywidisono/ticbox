@@ -88,7 +88,8 @@ class AuthController {
     }
 
     def unauthorized = {
-        render "You do not have permission to access this page."
+        flash.message = message(code: "general.auth.notauthorized.message")
+        redirect(uri: "/")
     }
 
     def linkAccount = {

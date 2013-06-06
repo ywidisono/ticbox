@@ -70,8 +70,15 @@ class DbRealm {
         //
         // First find all the permissions that the user has that match
         // the required permission's type and project code.
-        def user = (principal instanceof String) ? User.findByUsername(principal): User.findById(principal)
-        def permissions = user.permissions
+        def user = User.findByUsername(principal)
+        user ?: User.findById(principal)
+        def permissions = []
+
+        user.roles.each { role ->
+            role.permissions.each { permission ->
+                permissions << permission
+            }
+        }
 
         // Try each of the permissions found and see whether any of
         // them confer the required permission.

@@ -89,7 +89,6 @@
     .foot-landing h4, .foot-landing h5 {
         color: #bad33c;
     }
-
     </style>
 
 </head>
@@ -97,7 +96,7 @@
 
 <g:if test="${flash.message}">
     <div class="row-fluid">
-        <div class="span12"><p class="text-error">${flash.message}</p></div>
+        <div class="span12"><p class="text-error center">${flash.message}</p></div>
     </div>
 </g:if>
 
