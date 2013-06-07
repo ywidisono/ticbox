@@ -23,6 +23,14 @@
             margin-bottom: 10px;
         }
 
+        #filterForm .profile-item-container {
+            -webkit-box-shadow: 0 5px 17px -7px #7F9B09;
+            -moz-box-shadow: 0 5px 17px -7px #7F9B09;
+            box-shadow: 0 5px 17px -7px #7F9B09;
+            margin-bottom: 10px;
+            padding: 10px 0 10px 0;
+        }
+
     </style>
 
     <script type="text/javascript">
@@ -32,15 +40,8 @@
             jQuery('#addFilterBtn').click(function(){
 
                 var filterComponentCode = jQuery('#respondentFilterComponents').val();
-                var template = jQuery('#filterTemplates').find('.control-group[code="'+ filterComponentCode +'"]');
 
-                if (template.length > 0) {
-                    jQuery('#filterForm').append(template);
-
-                    jQuery('.remove-filter', template).click(function(){
-                        jQuery(this).parent().appendTo(jQuery('#filterTemplates'));
-                    });
-                }
+                populateFilterComponent(filterComponentCode);
 
             });
 
@@ -74,7 +75,11 @@
                         case '${ProfileItem.TYPES.CHOICE}' :
                             filterItem['checkItems'] = [];
                             jQuery('input.check-item:checked', this).each(function(){
-                                filterItem['checkItems'].push(jQuery(this).val())
+                                if (jQuery(this).attr('label')) {
+                                    filterItem['checkItems'].push({key:jQuery(this).val(), value:jQuery(this).attr('label')});
+                                } else {
+                                    filterItem['checkItems'].push(jQuery(this).val());
+                                }
                             });
 
                             break;
@@ -82,7 +87,7 @@
                         case '${ProfileItem.TYPES.LOOKUP}' :
                             filterItem['checkItems'] = [];
                             jQuery('input.check-item:checked', this).each(function(){
-                                filterItem['checkItems'].push(jQuery(this).val())
+                                filterItem['checkItems'].push({key:jQuery(this).val(), value:jQuery(this).attr('label')});
                             });
 
                             break;
@@ -106,23 +111,209 @@
 
                 var filterItemsJSON = JSON.stringify(filterItems);
 
-                jQuery.post('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON}, function(data){
+                jQuery.getJSON('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON}, function(data){
                     alert('Submitted');
-                    loadRespondentFilter();
+                    loadRespondentFilter(data);
                 });
 
             });
 
+            jQuery.getJSON('${request.contextPath}/survey/getRespondentFilter', {}, function(respondentFilter){
+
+                jQuery.each(respondentFilter, function(idx, filter){
+                    populateFilterComponent(filter.code, filter)
+                });
+
+                loadRespondentFilter(respondentFilter);
+
+            });
+
         });
+
+        function populateFilterComponent(filterComponentCode, filter){
+            var template = jQuery('#filterTemplates').find('.control-group[code="'+ filterComponentCode +'"]');
+
+            if (template.length > 0) {
+                jQuery('#filterForm').append(template);
+
+                jQuery('.remove-filter', template).click(function(){
+                    jQuery(this).parent().appendTo(jQuery('#filterTemplates'));
+                });
+
+                if(filter){
+                    switch(filter.type){
+
+                        case '${ProfileItem.TYPES.STRING}' :
+
+                            jQuery('.filter-value', template).val(filter.val);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.NUMBER}' :
+
+                            jQuery('.filter-value-from', template).val(filter.valFrom);
+                            jQuery('.filter-value-to', template).val(filter.valTo);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.CHOICE}' :
+                            var filter_ = filter;
+                            jQuery('.check-item', template).each(function(){
+                                var chkBox = this;
+                                jQuery.each(filter_.checkItems, function(idx, item){
+                                    if(item instanceof Object){
+                                        if(jQuery(chkBox).val() == item.key){
+                                            jQuery(chkBox).prop('checked', true);
+                                        }
+                                    }else{
+                                        if(jQuery(chkBox).val() == item){
+                                            jQuery(chkBox).prop('checked',true);
+                                        }
+                                    }
+                                });
+                            });
+
+                            break;
+
+                        case '${ProfileItem.TYPES.LOOKUP}' :
+                            var filter_ = filter;
+                            jQuery('.check-item', template).each(function(){
+                                var chkBox = this;
+                                jQuery.each(filter_.checkItems, function(idx, item){
+                                    if(item instanceof Object){
+                                        if(jQuery(chkBox).val() == item.key){
+                                            jQuery(chkBox).prop('checked', true);
+                                        }
+                                    }else{
+                                        if(jQuery(chkBox).val() == item){
+                                            jQuery(chkBox).prop('checked', true);
+                                        }
+                                    }
+                                });
+                            });
+
+                            break;
+
+                        case '${ProfileItem.TYPES.DATE}' :
+
+                            jQuery('.filter-value-from', template).val(filter.valFrom);
+                            jQuery('.filter-value-to', template).val(filter.valTo);
+
+                            break;
+
+                        default :
+
+                            break;
+
+                    }
+                }
+            }
+        }
+
+        function loadRespondentFilter(respondentFilter){
+
+            if(respondentFilter){
+                jQuery('.filter-details-container').empty();
+
+                jQuery.each(respondentFilter, function(idx, filter){
+
+                    var filterContent = null;
+
+                    switch(filter.type){
+
+                        case '${ProfileItem.TYPES.STRING}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.val);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.NUMBER}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.CHOICE}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
+                            var ul = jQuery('<ul></ul>');
+
+                            jQuery.each(filter.checkItems, function(idx, item){
+                                if (item instanceof Object) {
+                                    ul.append(jQuery('<li></li>').append(item.value));
+                                }else{
+                                    ul.append(jQuery('<li></li>').append(item));
+                                }
+                            });
+
+                            filterContent.append(ul);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.LOOKUP}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
+                            var ul = jQuery('<ul></ul>');
+
+                            jQuery.each(filter.checkItems, function(idx, item){
+                                ul.append(jQuery('<li></li>').append(item.value));
+                            });
+
+                            filterContent.append(ul);
+
+                            break;
+
+                        case '${ProfileItem.TYPES.DATE}' :
+
+                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
+
+                            break;
+
+                        default :
+
+                            break;
+
+                    }
+
+                    jQuery('.filter-details-container').append(jQuery('<div class="line"><div>')
+                            .append(jQuery('<label></label>').append(jQuery('<strong></strong>').append(filter.label + ' : ')))
+                            .append(filterContent)
+                    );
+
+                });
+
+            }else{
+                //TODO no survey fetched
+            }
+        }
 
     </script>
 
 </head>
 <body>
 
-<div id="menuNavPanelContent" style="min-height: 150px">
+<div id="menuNavPanelContent">
 
+    <div class="survey-summary line side-panel">
+        <div class="line">
+            <legend class="summary-header">Survey Summary</legend>
+        </div>
+        <div class="line">
+            Total : Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent * survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent}
+        </div>
+        <div class="line">
+            Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent} x ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent} Respondents
+        </div>
+    </div>
 
+    <div class="line side-panel">
+        <div class="line">
+            <legend class="summary-header">Filter Details</legend>
+        </div>
+        <div class="filter-details-container line">
+
+        </div>
+    </div>
 
 </div>
 
@@ -151,7 +342,7 @@
 
 <form id="filterTemplates" class="form-horizontal" style="display: none">
     <g:each in="${profileItems}" var="profileItem">
-        <div class="profile-item-container control-group well" code="${profileItem.code}" type="${profileItem.type}" label="${profileItem.label}" style="position: relative">
+        <div class="profile-item-container control-group" code="${profileItem.code}" type="${profileItem.type}" label="${profileItem.label}" style="position: relative">
             <i class="remove-filter icon-remove clickable" style="position: absolute; top: 5px; right: 7px;"></i>
             <label class="control-label" for="${profileItem.code}">${profileItem.label}</label>
             <div class="controls">
@@ -172,7 +363,7 @@
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.LOOKUP}">
                     <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
                         <label class="checkbox">
-                            <input id="${profileItem.code}_${item.key}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item.key}"> ${"$item.value"}
+                            <input id="${profileItem.code}_${item.key}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item.key}" label="${item.value}"> ${item.value}
                         </label>
                     </g:each>
                 </g:elseif>
@@ -181,14 +372,14 @@
                     <g:if test="${profileItem.items}">
                         <g:each in="${profileItem.items}" var="item">
                             <label class="checkbox">
-                                <input id="${profileItem.code}_${item}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item}"> ${"$item"}
+                                <input id="${profileItem.code}_${item}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item}"> ${item}
                             </label>
                         </g:each>
                     </g:if>
                     <g:elseif test="${profileItem.lookupFrom}">
                         <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
                             <label class="checkbox">
-                                <input id="${profileItem.code}_${item.key}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item.key}"> ${"$item.value"}
+                                <input id="${profileItem.code}_${item.key}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item.key}" label="${item.value}"> ${item.value}
                             </label>
                         </g:each>
                     </g:elseif>

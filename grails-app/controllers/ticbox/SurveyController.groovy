@@ -7,7 +7,9 @@ class SurveyController {
 
     def surveyService
 
-    def index() { }
+    def index() {
+        [survey : surveyService.getEditedSurvey()]
+    }
 
     def easySurvey() {
 
@@ -18,7 +20,9 @@ class SurveyController {
     }
 
     def getRespondentFilter() {
-        render surveyService.getEditedSurvey()[Survey.COMPONENTS.RESPONDENT_FILTER] as JSON
+        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getEditedSurvey()[Survey.COMPONENTS.RESPONDENT_FILTER])
+
+        render jsonStr
     }
 
     def respondentFilter(){
@@ -31,7 +35,7 @@ class SurveyController {
 
         surveyService.submitRespondentFilter(filterItemsJSON)
 
-        render 'SUCCESS'
+        render filterItemsJSON
     }
 
     def surveyGenerator(){

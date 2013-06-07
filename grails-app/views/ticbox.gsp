@@ -89,6 +89,7 @@
     .foot-landing h4, .foot-landing h5 {
         color: #bad33c;
     }
+
     </style>
 
 </head>

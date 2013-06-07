@@ -213,31 +213,12 @@
 
 <div id="main-container">
     <div class="row" style="margin-left: -10px;">
-        <div id="menuNavPanel" class="col" style="position: fixed;">
+        <div id="menuNavPanel" class="col">
             %{--menu navigation panel--}%
-            <div class="survey-summary line side-panel">
-                <div class="line">
-                    <legend class="summary-header">Survey Summary : </legend>
-                </div>
-                <div class="line">
-                    Total : Rp. 3,200,000.00,-
-                </div>
-                <div class="line">
-                    Rp. 15,000.00,- x 200 Respondents
-                </div>
-            </div>
 
-            <div class="line side-panel">
-                <div class="line">
-                    <legend class="summary-header">Filter Details : </legend>
-                </div>
-                <div class="filter-details-container line">
-
-                </div>
-            </div>
 
         </div>
-        <div id="mainContentPanel" class="col" style="margin-left: 310px;">
+        <div id="mainContentPanel" class="col">
             <g:layoutBody/>
         </div>
     </div>
@@ -264,84 +245,9 @@
             format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
         });
 
-        loadRespondentFilter();
-
     });
 
-    function loadRespondentFilter(){
-        jQuery.getJSON('${request.contextPath}/survey/getRespondentFilter', {}, function(respondentFilter){
-            if(respondentFilter){
-                jQuery('.filter-details-container').empty();
 
-                jQuery.each(respondentFilter, function(idx, filter){
-
-                    var filterContent = null;
-
-                    switch(filter.type){
-
-                        case '${ProfileItem.TYPES.STRING}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.val);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.NUMBER}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.CHOICE}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
-                            var ul = jQuery('<ul></ul>');
-
-                            jQuery.each(filter.checkItems, function(idx, item){
-                                ul.append(jQuery('<li></li>').append(item));
-                            });
-
-                            filterContent.append(ul);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.LOOKUP}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
-                            var ul = jQuery('<ul></ul>');
-
-                            jQuery.each(filter.checkItems, function(idx, item){
-                                ul.append(jQuery('<li></li>').append(item));
-                            });
-
-                            filterContent.append(ul);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.DATE}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
-
-                            break;
-
-                        default :
-
-                            break;
-
-                    }
-
-                    jQuery('.filter-details-container').append(jQuery('<div class="line"><div>')
-                            .append(jQuery('<label></label>').append(filter.label + ' : '))
-                            .append(filterContent)
-                    );
-
-                });
-
-            }else{
-                //TODO no survey fetched
-            }
-
-        });
-    }
 
 </script>
 

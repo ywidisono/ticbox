@@ -24,7 +24,7 @@ class BootStrap {
             defaultUser.addToRoles(adminRole).save()
         }
 
-        if(Survey.count <= 0) {
+        /*if(Survey.count <= 0) {
             for (int i = 0; i < 2; i++) {
                 def surveyName = "Trust Survey " + i;
                 def trustSurvey = new Survey(name: surveyName, pointType: Survey.POINT_TYPE.TRUST, point: i, target: i*100, current: i*10).save()
@@ -33,7 +33,7 @@ class BootStrap {
                 def surveyName = "Gold Survey " + i;
                 def goldSurvey = new Survey(name: surveyName, pointType: Survey.POINT_TYPE.GOLD, point: i, target: i*100, current: i*10).save()
             }
-        }
+        }*/
 
         bootstrapService.init()
 

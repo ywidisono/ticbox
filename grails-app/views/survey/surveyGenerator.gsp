@@ -5,7 +5,7 @@
   Time: 9:56 PM
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="ticbox.Survey" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="survey"/>
@@ -56,8 +56,8 @@
             height: auto;
             background: #97b11a;
             color: #ffffff;
-            padding: 10px 0 30px 0;
-            position: fixed;
+            padding: 10px 0 30px 0 !important;
+            position: relative;
         }
 
         #questionTypesItemContainer{
@@ -281,9 +281,21 @@
 
 </div>
 
-<div id="menuNavPanelContent" style="min-height: 150px">
+<div id="menuNavPanelContent" class="line">
 
-    <div id="questionTypesMenuContainer">
+    <div class="survey-summary line side-panel">
+        <div class="line">
+            <legend class="summary-header">Survey Summary</legend>
+        </div>
+        <div class="line">
+            Total : Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent * survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent}
+        </div>
+        <div class="line">
+            Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent} x ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent} Respondents
+        </div>
+    </div>
+
+    <div id="questionTypesMenuContainer" class="side-panel">
         <div id="questionTypesItemContainer">
             <ul>
                 <li class="surveyItemTypeAdd single-choice clickable" type="choice single"></li>
