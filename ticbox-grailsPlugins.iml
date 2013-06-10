@@ -61,6 +61,7 @@
       <sourceFolder url="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/shiro-oauth-0.2/grails-app/domain" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/shiro-oauth-0.2/grails-app/services" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/spock-0.6" />
     <content url="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/tomcat-2.2.1" />
     <content url="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/webxml-1.4.1">
       <sourceFolder url="file://$USER_HOME$/.grails/2.2.1/projects/ticbox/plugins/webxml-1.4.1/src/groovy" isTestSource="false" />

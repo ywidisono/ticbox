@@ -1,7 +1,6 @@
 package ticbox
 
 class User {
-    String id
     String username
     String passwordHash
     String email
