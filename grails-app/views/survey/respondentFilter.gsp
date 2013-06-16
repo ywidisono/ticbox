@@ -24,9 +24,9 @@
         }
 
         #filterForm .profile-item-container {
-            -webkit-box-shadow: 0 5px 17px -7px #7F9B09;
-            -moz-box-shadow: 0 5px 17px -7px #7F9B09;
-            box-shadow: 0 5px 17px -7px #7F9B09;
+            -webkit-box-shadow: 0 6px 5px -5px #a0a0a0/*#7F9B09*/;
+            -moz-box-shadow: 0 6px 5px -5px#a0a0a0/*#7F9B09*/;
+            box-shadow: 0 6px 5px -5px #a0a0a0/*#7F9B09*/;
             margin-bottom: 10px;
             padding: 10px 0 10px 0;
         }
@@ -294,25 +294,14 @@
 
 <div id="menuNavPanelContent">
 
-    <div class="survey-summary line side-panel">
-        <div class="line">
-            <legend class="summary-header">Survey Summary</legend>
-        </div>
-        <div class="line">
-            Total : Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent * survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent}
-        </div>
-        <div class="line">
-            Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent} x ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent} Respondents
-        </div>
-    </div>
-
     <div class="line side-panel">
-        <div class="line">
-            <legend class="summary-header">Filter Details</legend>
+        <div class="line summary-header">
+            Filter Details
         </div>
         <div class="filter-details-container line">
 
         </div>
+        <hr>
     </div>
 
 </div>

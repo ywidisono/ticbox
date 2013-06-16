@@ -180,28 +180,50 @@
 
         jQuery(function() {
 
+            jQuery('#surveyLogo').click(function(){
+                jQuery('.qq-upload-button > input').trigger('click');
+            });
+
             jQuery('.enableTooltip').tooltip({
                 selector: "button[data-toggle=tooltip]"
             });
 
             jQuery('.surveyItemTypeAdd').click(function(){
                 var type = jQuery(this).attr('type');
+                var subtype = jQuery(this).attr('subtype');
 
-                var answerComp = null;
+                constructQuestionItem(type, subtype);
 
-                var changeTypeIconClass = '';
+            });
 
-                if(type.indexOf('singleText') >= 0){
-                    answerComp = jQuery('#answerTemplate-singleText').clone().removeAttr('id');
-                    changeTypeIconClass = 'free-text-icon';
-                }else if(type.indexOf('choice') >= 0){
+            jQuery('#submitSurveyBtn').click(function(){
+
+                submitSurvey();
+
+            });
+
+            loadSurvey();
+
+            jQuery('#surveyTitle').val('${survey.title}');
+
+        });
+
+        function constructQuestionItem(type, subtype){
+            var answerComp = null;
+
+            var changeTypeIconClass = '';
+
+            switch(type){
+
+                case '${Survey.QUESTION_TYPE.CHOICE}' :
+
                     answerComp = jQuery('#answerTemplate-choice').clone().removeAttr('id');
 
-                    if (type.indexOf('single') >= 0) {
+                    if (subtype == 'single') {
                         jQuery('.choice-type', answerComp).val('single');
 
                         changeTypeIconClass = 'single-choice-icon';
-                    }else if (type.indexOf('multiple') >= 0) {
+                    }else if (subtype == 'multiple') {
                         jQuery('.choice-type', answerComp).val('multiple');
 
                         changeTypeIconClass = 'multiple-choice-icon';
@@ -220,7 +242,18 @@
                     jQuery('.item-check', answerComp).click(function(){
                         jQuery('.choice-item:first', answerComp).remove();
                     });
-                }else if(type.indexOf('scale') >= 0){
+
+                    break;
+
+                case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
+
+                    answerComp = jQuery('#answerTemplate-singleText').clone().removeAttr('id');
+                    changeTypeIconClass = 'free-text-icon';
+
+                    break;
+
+                case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
+
                     answerComp = jQuery('#answerTemplate-scale').clone().removeAttr('id');
 
                     jQuery('.add-row', answerComp).click(function(){
@@ -241,73 +274,252 @@
                     });
 
                     changeTypeIconClass = 'scale-rating-icon';
-                }
 
-                var questionComp = jQuery('#questionTemplate').clone().removeAttr('id').append(answerComp).appendTo('.surveyItemsContainer');
+                    break;
 
-                jQuery('.change-question-type-btn', questionComp).addClass(changeTypeIconClass);
+                case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
+
+
+                    break;
+
+            }
+
+            var questionComp = jQuery('#questionTemplate').clone().removeAttr('id').append(answerComp).appendTo('.surveyItemsContainer');
+
+            jQuery('.change-question-type-btn', questionComp).addClass(changeTypeIconClass);
+
+            jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(idx){
+                jQuery('.questionNumber', jQuery(this)).html(idx + 1 + '.');
+            });
+
+            jQuery('.surveyItemActions .remove', questionComp).click(function(){
+                jQuery(this).parents('.surveyItemContainer').remove();
                 jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(idx){
                     jQuery('.questionNumber', jQuery(this)).html(idx + 1 + '.');
                 });
+            });
 
-                jQuery('.surveyItemActions .remove', questionComp).click(function(){
-                    jQuery(this).parents('.surveyItemContainer').remove();
-                    jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(idx){
-                        jQuery('.questionNumber', jQuery(this)).html(idx + 1 + '.');
-                    });
+            return questionComp;
+        }
+
+        function submitSurvey(){
+            var questionItems = [];
+
+            jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(){
+
+                var container = jQuery(this);
+                var type = jQuery('.answerTemplate', container).attr('type');
+
+                var questionStr = jQuery('.questionTextContainer > textarea', container).val();
+                var answerDetails = {};
+                answerDetails['type'] = type;
+
+                switch(type){
+
+                    case '${Survey.QUESTION_TYPE.CHOICE}' :
+
+                        answerDetails['choiceItems'] = [];
+                        jQuery('.choice-items > .choice-item', container).each(function(){
+
+                            var item = jQuery(this);
+                            answerDetails['choiceItems'].push(jQuery('input.item-label', item).val());
+                        });
+
+                        answerDetails['choiceType'] = jQuery('select.choice-type', container).val();
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
+
+                        answerDetails['questionPlaceholder'] = jQuery('textarea.place-holder-text', container).val();
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
+
+                        answerDetails['ratingLabels'] = [];
+                        jQuery('table.scale-table > thead .rating-label input', container).each(function(){
+
+                            answerDetails['ratingLabels'].push(jQuery(this).val());
+
+                        });
+
+                        answerDetails['rowLabels'] = [];
+                        jQuery('table.scale-table > tbody input.row-label', container).each(function(){
+
+                            answerDetails['rowLabels'].push(jQuery(this).val());
+
+                        });
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.STAR_RATING}' :
+
+
+
+                        break;
+
+                }
+
+                questionItems.push({
+                    questionStr : questionStr,
+                    answerDetails : answerDetails
                 });
 
             });
 
-        });
+            jQuery.post('${request.contextPath}/survey/submitQuestionItems', {questionItems: JSON.stringify(questionItems), surveyTitle: jQuery('#surveyTitle').val()}, function(data){
+
+                if('SUCCESS' == data){
+                    alert('Submission success..');
+                }else{
+                    alert('Submission failure');
+                }
+
+            });
+        }
+
+        function loadSurvey(){
+
+            jQuery.getJSON('${request.contextPath}/survey/getQuestionItems', {}, function(questionItems){
+
+                if (questionItems) {
+
+                    jQuery.each(questionItems, function(idx, item){
+
+                        var answerDetails = item.answerDetails;
+                        var container = null;
+
+                        switch(answerDetails.type){
+
+                            case '${Survey.QUESTION_TYPE.CHOICE}' :
+
+                                var choiceItems = answerDetails.choiceItems;
+                                var choiceType = answerDetails.choiceType;
+
+                                container = constructQuestionItem(answerDetails.type, choiceType);
+
+                                jQuery.each(choiceItems, function(idx, choiceItem){
+                                    var choiceItemCont = jQuery('.choice-items > .choice-item:first', container).clone();
+                                    jQuery('.choice-items', container).append(choiceItemCont
+                                    );
+                                    jQuery('.item-label', choiceItemCont).val(choiceItem);
+                                });
+                                jQuery('.choice-items > .choice-item:first', container).remove();
+
+                                jQuery('select.choice-type', container).val(choiceType);
+
+                                break;
+
+                            case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
+
+                                var questionPlaceHolder = answerDetails.questionPlaceholder;
+
+                                container = constructQuestionItem(answerDetails.type);
+
+                                jQuery('textarea.place-holder-text', container).val(questionPlaceHolder);
+
+                                break;
+
+                            case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
+
+                                var ratingLabels = answerDetails.ratingLabels;
+                                var rowLabels = answerDetails.rowLabels;
+
+                                container = constructQuestionItem(answerDetails.type);
+
+                                jQuery.each(ratingLabels, function(idx, ratingLabel){
+                                    var ratingLabelCont = jQuery('table.scale-table > thead th.rating-label:first', container).clone();
+                                    jQuery('table.scale-table > thead th.rating-label:first', container).after(ratingLabelCont);
+                                    jQuery('input', ratingLabelCont).val(ratingLabel);
+                                });
+                                jQuery('table.scale-table > thead th.rating-label:first', container).remove();
+
+                                jQuery.each(rowLabels, function(idx, rowLabel){
+                                    var rowLabelCont = jQuery('table.scale-table > tbody > tr.scale-row:first', container).clone();
+                                    jQuery('table.scale-table > tbody > tr.scale-row:first', container).after(rowLabelCont);
+                                    jQuery('input.row-label', rowLabelCont).val(rowLabel);
+                                    for(var i = 1; i < ratingLabels.length; i++){
+                                        jQuery('td.rating-weight:first', rowLabelCont).after(jQuery('td.rating-weight:first', rowLabelCont).clone());
+                                    }
+                                });
+                                jQuery('table.scale-table > tbody > tr.scale-row:first', container).remove();
+
+                                break;
+
+                            case '${Survey.QUESTION_TYPE.STAR_RATING}' :
+
+
+
+                                break;
+
+                        }
+
+                        jQuery('.questionTextContainer textarea', container).val(item.questionStr);
+
+                    });
+
+                }
+
+            });
+
+        }
 
     </script>
+
+    <r:require module="fileuploader" />
 
 </head>
 <body>
 
 <div class="line rowLine10">
     <div class="col col10">
-        <div class="clickable" style="width: 250px; height: 150px; background: #f5f5f5 url('../images/ticbox/Logo_Placeholder.png') no-repeat center"></div>
+        <div id="surveyLogo" class="clickable" style="width: 250px; height: 150px; background: #f5f5f5 url('../images/ticbox/Logo_Placeholder.png') no-repeat center">
+            <img src="${request.contextPath}/survey/viewLogo" style="width: 250px; height: 150px">
+        </div>
     </div>
     <div class="col" style="width: 400px; height: auto; vertical-align: bottom; display: inline-block; color: #97b11a; padding-top: 80px;">
-        Your survey title here
-        <textarea style="width: 350px; display: inline-block; resize: none;"></textarea>
+        <g:message code="label.survey.survey-generator.survey-title" default="Your survey title here"/>
+        <textarea id="surveyTitle" style="width: 350px; display: inline-block; resize: none;"></textarea>
     </div>
 </div>
 
-<div class="surveyItemsContainer enableTooltip">
+<div class="line" style="display: none">
+    <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}">
+        <uploader:onComplete>
+            jQuery('#surveyLogo > img').attr('src', '${request.contextPath}/survey/viewLogo');
+        </uploader:onComplete>
+    </uploader:uploader>
+</div>
 
+<div class="surveyItemsContainer enableTooltip line10">
+
+</div>
+
+<div class="line" style="text-align: center">
+    <button id="submitSurveyBtn" class="btn-ticbox"><g:message code="label.button.submit" default="SUBMIT"/></button>
 </div>
 
 <div id="menuNavPanelContent" class="line">
 
-    <div class="survey-summary line side-panel">
-        <div class="line">
-            <legend class="summary-header">Survey Summary</legend>
-        </div>
-        <div class="line">
-            Total : Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent * survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent}
-        </div>
-        <div class="line">
-            Rp. ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].chargePerRespondent} x ${survey[Survey.COMPONENTS.SUMMARY_DETAIL].totalRespondent} Respondents
-        </div>
-    </div>
-
     <div id="questionTypesMenuContainer" class="side-panel">
         <div id="questionTypesItemContainer">
             <ul>
-                <li class="surveyItemTypeAdd single-choice clickable" type="choice single"></li>
-                <li class="surveyItemTypeAdd multiple-choice clickable" type="choice multiple"></li>
-                <li class="surveyItemTypeAdd single-text clickable" type="typedAnswer singleText"></li>
-                <li class="surveyItemTypeAdd scale clickable" type="rating scale"></li>
-                <li class="surveyItemTypeAdd star-rating clickable" type="rating star"></li>
+                <li class="surveyItemTypeAdd single-choice clickable" type="${Survey.QUESTION_TYPE.CHOICE}" subtype="single"></li>
+                <li class="surveyItemTypeAdd multiple-choice clickable" type="${Survey.QUESTION_TYPE.CHOICE}" subtype="multiple"></li>
+                <li class="surveyItemTypeAdd single-text clickable" type="${Survey.QUESTION_TYPE.FREE_TEXT}"></li>
+                <li class="surveyItemTypeAdd scale clickable" type="${Survey.QUESTION_TYPE.SCALE_RATING}"></li>
+                <li class="surveyItemTypeAdd star-rating clickable" type="${Survey.QUESTION_TYPE.STAR_RATING}"></li>
 
                 <li id="questionTypesTitleContainer"></li>
 
             </ul>
         </div>
+    </div>
+
+    <div class="line" style="text-align: center">
+        <button class="btn-ticbox"><g:message code="label.button.preview" default="PREVIEW"/> </button>
     </div>
 
 </div>
@@ -347,13 +559,13 @@
 
     </div>
 
-    <div id="answerTemplate-singleText" class="answerTemplate line rowLine2">
+    <div id="answerTemplate-singleText" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.FREE_TEXT}">
         <div class="col">
-            <textarea rows="3" placeholder="${message([code: 'message.type-to-replace-place-holder', default: 'Type here to change this placeholder..'])}"></textarea>
+            <textarea class="place-holder-text" rows="3" placeholder="${message([code: 'message.type-to-replace-place-holder', default: 'Type here to change this placeholder..'])}"></textarea>
         </div>
     </div>
 
-    <div id="answerTemplate-choice" class="answerTemplate line rowLine2">
+    <div id="answerTemplate-choice" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.CHOICE}">
         <div class="choice-items line">
             <div class="choice-item line rowLine2">
                 <div class="col col5">
@@ -381,9 +593,9 @@
         </div>
     </div>
 
-    <div id="answerTemplate-scale" class="answerTemplate line rowLine2">
+    <div id="answerTemplate-scale" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.SCALE_RATING}">
         <div class="col" style="height:auto; overflow-x: auto; max-width: 720px;">
-            <table class="table">
+            <table class="table scale-table">
                 <thead>
                     <tr class="scale-head">
                         <th style="text-align: center; width: 100px;">
@@ -404,7 +616,7 @@
                 <tbody>
                     <tr class="scale-row">
                         <td style="max-width: 100px;">
-                            <input type="text" class="input-small" placeholder="Row label.." style="width: 100px; padding: 1px;">
+                            <input type="text" class="row-label input-small" placeholder="Row label.." style="width: 100px; padding: 1px;">
                         </td>
                         <td class="rating-weight" style="text-align: center">
                             <input type="radio" name="rd-1">

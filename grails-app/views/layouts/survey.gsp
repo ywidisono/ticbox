@@ -35,6 +35,20 @@
             background-color: #ffffff;
         }
 
+        button.btn-ticbox {
+            font-family: helveticaneue-light, tahoma, sans-serif !important;
+            letter-spacing: 0.1em;
+            font-weight: normal;
+            background-color: #a0a0a0;
+            border: none;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+
+        button.btn-ticbox:hover {
+            color: #BAD33C;
+        }
+
         .clickable {
             cursor: pointer;
         }
@@ -130,20 +144,30 @@
         #menuNavPanel {
             width: 300px;
             margin-left: 0;
+            border-right: 1px solid #7F9B09;
         }
 
         #menuNavPanel .side-panel {
             width: 300px;
-            -webkit-box-shadow: 0 5px 17px -7px #7F9B09;
-            -moz-box-shadow: 0 5px 17px -7px #7F9B09;
-            box-shadow: 0 5px 17px -7px #7F9B09;
-            margin-bottom: 15px;
-            padding-bottom: 7px;
-            /*border-right: #7F9B09 solid 1px;*/
+            margin: 10px 0;
         }
 
         #menuNavPanel .side-panel .line {
             padding-left: 5px;
+        }
+
+        #menuNavPanel .side-panel .summary-header {
+            color: #bad33c;
+            font-size: x-large;
+        }
+
+        #menuNavPanel hr{
+            height: 5px;
+            border: 0;
+            margin: 5px 0;
+            -webkit-box-shadow: inset 0 6px 5px -5px #a0a0a0;
+            -moz-box-shadow: inset 0 6px 5px -5px #a0a0a0;
+            box-shadow: inset 0 6px 5px -5px #a0a0a0;
         }
 
         #mainContentPanel {
@@ -216,6 +240,19 @@
         <div id="menuNavPanel" class="col">
             %{--menu navigation panel--}%
 
+            <div class="survey-summary line side-panel">
+                <div class="line summary-header">
+                    Survey Summary
+                </div>
+                <div class="line">
+                    Total : $<span class="total-charge"></span>
+                </div>
+                <div class="line">
+                    $<span class="charge-per-respondent"></span> x <span class="total-respondents"></span> Respondents
+                </div>
+                <hr>
+            </div>
+
 
         </div>
         <div id="mainContentPanel" class="col">
@@ -233,16 +270,28 @@
 
 <script type="text/javascript">
 
+    var surveySummary;
+
     jQuery(function(){
 
         jQuery(".nav > li.${actionName}").addClass('active');
 
         //jQuery('#menuNavPanel .survey-summary').before(jQuery('#menuNavPanelContent'));
-        jQuery('#menuNavPanel').append(jQuery('#menuNavPanelContent'));
+        jQuery('#menuNavPanel').append(jQuery('#menuNavPanelContent').contents());
 
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
             format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
+        });
+
+        jQuery.getJSON('${request.contextPath}/survey/getSurveySummary', {}, function(data){
+            if(data){
+                surveySummary = data;
+
+                jQuery('.total-charge').html(parseFloat(surveySummary.chargePerRespondent) * parseFloat(surveySummary.totalRespondent));
+                jQuery('.charge-per-respondent').html(surveySummary.chargePerRespondent);
+                jQuery('.total-respondents').html(surveySummary.totalRespondent);
+            }
         });
 
     });
