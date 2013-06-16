@@ -1,4 +1,4 @@
-<%@ page import="ticbox.ProfileItem; ticbox.Survey" %>
+<%@ page import="org.apache.shiro.SecurityUtils; ticbox.ProfileItem; ticbox.Survey" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -223,7 +223,7 @@
             </a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
-                    Logged in as <a href="#" class="navbar-link"><strong>Username</strong></a>
+                    Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
                     <li class="index"><a href="${request.contextPath}/survey/index">Survey Type</a></li>
