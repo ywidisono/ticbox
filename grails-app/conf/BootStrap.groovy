@@ -23,6 +23,7 @@ class BootStrap {
         respondentRole.save()
 
         def defaultUser = User.findByUsername('user123')?:new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
+        defaultUser.roles = []
         defaultUser.addToRoles(adminRole).save()
 
         bootstrapService.init()

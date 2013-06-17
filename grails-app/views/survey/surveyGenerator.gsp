@@ -198,13 +198,25 @@
 
             jQuery('#submitSurveyBtn').click(function(){
 
-                submitSurvey();
+                var questionItems = buildQuestionItemsMap();
+                submitSurvey(questionItems);
 
             });
 
-            loadSurvey();
-
             jQuery('#surveyTitle').val('${survey.title}');
+
+            jQuery.getJSON('${request.contextPath}/survey/getQuestionItems', {}, function(questionItems){
+
+                loadSurvey(questionItems);
+
+            });
+
+            jQuery('#surveyPreviewModal').on('shown', function(){
+
+                var questionItems = buildQuestionItemsMap();
+                constructPreview(questionItems);
+
+            });
 
         });
 
@@ -303,7 +315,7 @@
             return questionComp;
         }
 
-        function submitSurvey(){
+        function buildQuestionItemsMap(){
             var questionItems = [];
 
             jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(){
@@ -369,6 +381,11 @@
 
             });
 
+            return questionItems
+        }
+
+        function submitSurvey(questionItems){
+
             jQuery.post('${request.contextPath}/survey/submitQuestionItems', {questionItems: JSON.stringify(questionItems), surveyTitle: jQuery('#surveyTitle').val()}, function(data){
 
                 if('SUCCESS' == data){
@@ -380,90 +397,138 @@
             });
         }
 
-        function loadSurvey(){
+        function loadSurvey(questionItems){
 
-            jQuery.getJSON('${request.contextPath}/survey/getQuestionItems', {}, function(questionItems){
+            if (questionItems) {
 
-                if (questionItems) {
+                jQuery.each(questionItems, function(idx, item){
 
-                    jQuery.each(questionItems, function(idx, item){
+                    var answerDetails = item.answerDetails;
+                    var container = null;
 
-                        var answerDetails = item.answerDetails;
-                        var container = null;
+                    switch(answerDetails.type){
 
-                        switch(answerDetails.type){
+                        case '${Survey.QUESTION_TYPE.CHOICE}' :
 
-                            case '${Survey.QUESTION_TYPE.CHOICE}' :
+                            var choiceItems = answerDetails.choiceItems;
+                            var choiceType = answerDetails.choiceType;
 
-                                var choiceItems = answerDetails.choiceItems;
-                                var choiceType = answerDetails.choiceType;
+                            container = constructQuestionItem(answerDetails.type, choiceType);
 
-                                container = constructQuestionItem(answerDetails.type, choiceType);
+                            jQuery.each(choiceItems, function(idx, choiceItem){
+                                var choiceItemCont = jQuery('.choice-items > .choice-item:first', container).clone();
+                                jQuery('.choice-items', container).append(choiceItemCont
+                                );
+                                jQuery('.item-label', choiceItemCont).val(choiceItem);
+                            });
+                            jQuery('.choice-items > .choice-item:first', container).remove();
 
-                                jQuery.each(choiceItems, function(idx, choiceItem){
-                                    var choiceItemCont = jQuery('.choice-items > .choice-item:first', container).clone();
-                                    jQuery('.choice-items', container).append(choiceItemCont
-                                    );
-                                    jQuery('.item-label', choiceItemCont).val(choiceItem);
-                                });
-                                jQuery('.choice-items > .choice-item:first', container).remove();
+                            jQuery('select.choice-type', container).val(choiceType);
 
-                                jQuery('select.choice-type', container).val(choiceType);
+                            break;
 
-                                break;
+                        case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
 
-                            case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
+                            var questionPlaceHolder = answerDetails.questionPlaceholder;
 
-                                var questionPlaceHolder = answerDetails.questionPlaceholder;
+                            container = constructQuestionItem(answerDetails.type);
 
-                                container = constructQuestionItem(answerDetails.type);
+                            jQuery('textarea.place-holder-text', container).val(questionPlaceHolder);
 
-                                jQuery('textarea.place-holder-text', container).val(questionPlaceHolder);
+                            break;
 
-                                break;
+                        case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
 
-                            case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
+                            var ratingLabels = answerDetails.ratingLabels;
+                            var rowLabels = answerDetails.rowLabels;
 
-                                var ratingLabels = answerDetails.ratingLabels;
-                                var rowLabels = answerDetails.rowLabels;
+                            container = constructQuestionItem(answerDetails.type);
 
-                                container = constructQuestionItem(answerDetails.type);
+                            jQuery.each(ratingLabels, function(idx, ratingLabel){
+                                var ratingLabelCont = jQuery('table.scale-table > thead th.rating-label:first', container).clone();
+                                jQuery('table.scale-table > thead th.rating-label:first', container).after(ratingLabelCont);
+                                jQuery('input', ratingLabelCont).val(ratingLabel);
+                            });
+                            jQuery('table.scale-table > thead th.rating-label:first', container).remove();
 
-                                jQuery.each(ratingLabels, function(idx, ratingLabel){
-                                    var ratingLabelCont = jQuery('table.scale-table > thead th.rating-label:first', container).clone();
-                                    jQuery('table.scale-table > thead th.rating-label:first', container).after(ratingLabelCont);
-                                    jQuery('input', ratingLabelCont).val(ratingLabel);
-                                });
-                                jQuery('table.scale-table > thead th.rating-label:first', container).remove();
+                            jQuery.each(rowLabels, function(idx, rowLabel){
+                                var rowLabelCont = jQuery('table.scale-table > tbody > tr.scale-row:first', container).clone();
+                                jQuery('table.scale-table > tbody > tr.scale-row:first', container).after(rowLabelCont);
+                                jQuery('input.row-label', rowLabelCont).val(rowLabel);
+                                for(var i = 1; i < ratingLabels.length; i++){
+                                    jQuery('td.rating-weight:first', rowLabelCont).after(jQuery('td.rating-weight:first', rowLabelCont).clone());
+                                }
+                            });
+                            jQuery('table.scale-table > tbody > tr.scale-row:first', container).remove();
 
-                                jQuery.each(rowLabels, function(idx, rowLabel){
-                                    var rowLabelCont = jQuery('table.scale-table > tbody > tr.scale-row:first', container).clone();
-                                    jQuery('table.scale-table > tbody > tr.scale-row:first', container).after(rowLabelCont);
-                                    jQuery('input.row-label', rowLabelCont).val(rowLabel);
-                                    for(var i = 1; i < ratingLabels.length; i++){
-                                        jQuery('td.rating-weight:first', rowLabelCont).after(jQuery('td.rating-weight:first', rowLabelCont).clone());
-                                    }
-                                });
-                                jQuery('table.scale-table > tbody > tr.scale-row:first', container).remove();
+                            break;
 
-                                break;
-
-                            case '${Survey.QUESTION_TYPE.STAR_RATING}' :
+                        case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
 
 
-                                break;
+                            break;
 
-                        }
+                    }
 
-                        jQuery('.questionTextContainer textarea', container).val(item.questionStr);
+                    jQuery('.questionTextContainer textarea', container).val(item.questionStr);
 
-                    });
+                });
+
+            }
+
+        }
+
+        function constructPreview(questionItems){
+
+            jQuery.each(questionItems, function(idx, item){
+
+                var questionStr = item.questionStr;
+                var answerDetails = item.answerDetails;
+
+                switch(answerDetails.type){
+
+                    case '${Survey.QUESTION_TYPE.CHOICE}' :
+
+                        var choiceItems = answerDetails.choiceItems;
+                        var choiceType = answerDetails.choiceType;
+
+                        jQuery.each(choiceItems, function(idx, choiceItem){
+
+                        });
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
+
+                        var questionPlaceHolder = answerDetails.questionPlaceholder;
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
+
+                        var ratingLabels = answerDetails.ratingLabels;
+                        var rowLabels = answerDetails.rowLabels;
+
+                        jQuery.each(ratingLabels, function(idx, ratingLabel){
+
+                        });
+
+                        jQuery.each(rowLabels, function(idx, rowLabel){
+
+                        });
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.STAR_RATING}' :
+
+
+
+                        break;
 
                 }
 
             });
-
         }
 
     </script>
@@ -519,7 +584,7 @@
     </div>
 
     <div class="line" style="text-align: center">
-        <button class="btn-ticbox"><g:message code="label.button.preview" default="PREVIEW"/> </button>
+        <button class="btn-ticbox" href="#surveyPreviewModal" role="button" data-toggle="modal"><g:message code="label.button.preview" default="PREVIEW" /> </button>
     </div>
 
 </div>
@@ -629,6 +694,20 @@
     </div>
 
 
+</div>
+
+<!-- Preview Modal -->
+<div id="surveyPreviewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="surveyPreviewModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="surveyPreviewModalLabel">Survey Preview</h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn-ticbox" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
 </div>
 
 </body>
