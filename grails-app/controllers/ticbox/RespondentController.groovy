@@ -9,7 +9,7 @@ import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
 
 class RespondentController {
     def respondentService
-    def grailsApplication
+    def surveyService
 
     def index() {
         def surveyList = Survey.all
@@ -80,13 +80,37 @@ class RespondentController {
         response.outputStream << imageByte
     }
 
-    private void writeToFile(InputStream inputStream, File file) {
+    def takeSurvey = {
+        def survey = surveyService.getSurveyForRespondent(params.surveyId)
+        def principal = SecurityUtils.subject.principal
+        def respondent = User.findByUsername(principal.toString())
+        [survey: survey, respondent: respondent]
+    }
 
-        try {
-            file << inputStream
-        } catch (Exception e) {
-            throw new FileUploadException(e)
+    def getSurvey = {
+        def survey = surveyService.getSurveyForRespondent(params.surveyId)
+        def questions = com.mongodb.util.JSON.serialize(survey[Survey.COMPONENTS.QUESTION_ITEMS])
+        render questions
+    }
+
+    def viewSurveyLogo() {
+        def survey = surveyService.getSurveyForRespondent(params.surveyId)
+
+        if (survey[Survey.COMPONENTS.LOGO]) {
+            def imageByte
+            imageByte = Base64.decode(survey[Survey.COMPONENTS.LOGO])
+            response.outputStream << imageByte
         }
+    }
 
+    def saveResponse(){
+        try {
+            def surveyResponse = params.surveyResponse
+            surveyService.saveResponse(surveyResponse, params.surveyId, params.respondentId)
+            render 'SUCCESS'
+        } catch (Exception e) {
+            e.printStackTrace()
+            render 'FAILED'
+        }
     }
 }

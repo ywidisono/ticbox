@@ -40,7 +40,7 @@
                         </g:if>
                     </div>
                     <div class="row">
-                        <g:link>Take Survey</g:link>
+                        <g:link action="takeSurvey" params="[surveyId:survey.surveyId]">Take Survey</g:link>
                     </div>
                 </div>
             </div>

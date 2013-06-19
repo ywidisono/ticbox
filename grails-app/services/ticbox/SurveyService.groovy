@@ -21,6 +21,10 @@ class SurveyService {
         return survey
     }
 
+    def getSurveyForRespondent(String surveyId) {
+        return Survey.findBySurveyId(surveyId)
+    }
+
     def getProfileItemsForRespondentFilter(){
         return ProfileItem.list()?.sort{it.seq}
     }
@@ -45,4 +49,12 @@ class SurveyService {
 
         survey.save()
     }
+
+    def saveResponse(String responseJSON, String surveyId, String respondentId){
+        SurveyResponse surveyResponse = SurveyResponse.findBySurveyIdAndRespondentId(surveyId, respondentId) ?: new SurveyResponse(surveyId: surveyId, respondentId: respondentId).save()
+        DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(responseJSON)
+        surveyResponse["response"] = dbObject
+        surveyResponse.save()
+    }
+
 }
