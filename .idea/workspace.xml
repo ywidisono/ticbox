@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/ticbox/RespondentController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/ticbox/RespondentController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/respondent/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/respondent/index.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp" afterPath="$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp" />
     </list>
     <ignored path="ticbox.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +50,7 @@
     <file path="/CompetencyController.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1370659695310" ignored="false" />
     <file path="$PROJECT_DIR$/../ucds/grails-app/views/competency/core.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1370659288511" ignored="false" />
     <file path="$PROJECT_DIR$/../ucds/target/stacktrace.log" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1370869947292" ignored="false" />
-    <file path="/takeSurvey.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1371661270081" ignored="false" />
+    <file path="/takeSurvey.gsp" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1371735371881" ignored="false" />
     <file path="/SurveyResponse.groovy" changelist="d0a04ba5-3bd0-4775-a053-863cb7b4aae0" time="1371660263816" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,19 +117,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SurveyController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/ticbox/SurveyController.groovy">
+      <file leaf-file-name="takeSurvey.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="26" selection-start="1917" selection-end="1917" vertical-scroll-proportion="-9.5">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SurveyService.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="0" selection-start="1507" selection-end="1507" vertical-scroll-proportion="0.33128834">
+            <state line="312" column="31" selection-start="8577" selection-end="8577" vertical-scroll-proportion="0.33262712">
               <folding />
             </state>
           </provider>
@@ -143,76 +129,7 @@
       <file leaf-file-name="RespondentController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/ticbox/RespondentController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="0" selection-start="3755" selection-end="3755" vertical-scroll-proportion="-4.5652175">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/index.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="84" selection-start="1618" selection-end="1618" vertical-scroll-proportion="-8.428572">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="takeSurvey.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="395" column="77" selection-start="11635" selection-end="11635" vertical-scroll-proportion="-1.3648648">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="survey.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/survey.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1720" selection-end="2099" vertical-scroll-proportion="-3.1764705">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="profileForm.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/profileForm.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="12" selection-start="8193" selection-end="8430" vertical-scroll-proportion="-6.265306">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Survey.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/ticbox/Survey.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="256" selection-end="446" vertical-scroll-proportion="-3.3958333">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SurveyResponse.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/ticbox/SurveyResponse.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="97" selection-end="97" vertical-scroll-proportion="-2.125">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="respondent.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/respondent.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="5" selection-start="3248" selection-end="3248" vertical-scroll-proportion="-0.65384614">
+            <state line="108" column="0" selection-start="3755" selection-end="3755" vertical-scroll-proportion="-13.956522">
               <folding />
             </state>
           </provider>
@@ -470,11 +387,11 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34017095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34017095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41025642" sideWeight="0.5007576" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.574359" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21732523" sideWeight="0.6598291" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21732523" sideWeight="0.5931624" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991454" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -654,23 +571,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="395" column="77" selection-start="11635" selection-end="11635" vertical-scroll-proportion="-1.3648648">
+        <state line="53" column="0" selection-start="1507" selection-end="1507" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/ticbox/RespondentController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="0" selection-start="3755" selection-end="3755" vertical-scroll-proportion="-4.5652175">
+        <state line="108" column="0" selection-start="3755" selection-end="3755" vertical-scroll-proportion="-13.956522">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/ticbox/SurveyService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/respondent/takeSurvey.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="1507" selection-end="1507" vertical-scroll-proportion="0.33128834">
+        <state line="312" column="31" selection-start="8577" selection-end="8577" vertical-scroll-proportion="0.33262712">
           <folding />
         </state>
       </provider>

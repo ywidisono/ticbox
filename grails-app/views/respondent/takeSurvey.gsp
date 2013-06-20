@@ -195,7 +195,7 @@
 
         });
 
-        jQuery('#saveRespond').click(function () {
+        jQuery('#saveResponse').click(function () {
 
             var questionItems = buildSurveyResponseMap();
             saveResponse(questionItems);
@@ -248,30 +248,14 @@
             case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
 
                 answerComp = jQuery('#answerTemplate-scale').clone().removeAttr('id');
-
-                jQuery('.add-row', answerComp).click(function () {
-                    var row = jQuery('.scale-row:first', answerComp).clone();
-                    jQuery('table', answerComp).append(row);
-                    jQuery('.rating-weight > input', row).attr('name', 'rd-' + jQuery('.scale-row', answerComp).size());
-                });
-
-                jQuery('.add-rating', answerComp).click(function () {
-                    var ratingLabel = jQuery('.rating-label', '#answerTemplate-scale').clone();
-                    jQuery(this).parent().before(ratingLabel);
-
-                    jQuery('.scale-row', answerComp).each(function (idx) {
-                        var ratingWeight = jQuery('.rating-weight', '#answerTemplate-scale').clone();
-                        jQuery('.rating-weight:last', jQuery(this)).after(ratingWeight);
-                        jQuery('input', ratingWeight).attr('name', jQuery('.rating-weight > input:first', ratingWeight.parent()).attr('name'));
-                    });
-                });
-
                 changeTypeIconClass = 'scale-rating-icon';
 
                 break;
 
             case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
+                // TODO
+                answerComp = jQuery('#answerTemplate-singleText').clone().removeAttr('id');
 
                 break;
 
@@ -320,26 +304,19 @@
 
                 case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
 
-                    answerDetails['questionPlaceholder'] = jQuery('textarea.place-holder-text', container).val();
-
+                    answerDetails['value'] = jQuery('textarea', container).val();
                     break;
 
                 case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
 
-                    answerDetails['ratingLabels'] = [];
-                    jQuery('table.scale-table > thead .rating-label input', container).each(function () {
-
-                        answerDetails['ratingLabels'].push(jQuery(this).val());
-
+                    answerDetails['value'] = {};
+                    alert('size: ' + jQuery('.scale-row', container).size());
+                    jQuery('.scale-row', container).each(function () {
+                        var label = jQuery(this).find('.row-label').text();
+                        var value = jQuery(this).find('input:checked').val();
+                        alert('label: ' + label + ' value: ' + value);
+                        answerDetails['value'][label] = value;
                     });
-
-                    answerDetails['rowLabels'] = [];
-                    jQuery('table.scale-table > tbody input.row-label', container).each(function () {
-
-                        answerDetails['rowLabels'].push(jQuery(this).val());
-
-                    });
-
                     break;
 
                 case '${Survey.QUESTION_TYPE.STAR_RATING}' :
@@ -423,16 +400,21 @@
                         jQuery.each(ratingLabels, function (idx, ratingLabel) {
                             var ratingLabelCont = jQuery('table.scale-table > thead th.rating-label:first', container).clone();
                             jQuery('table.scale-table > thead th.rating-label:first', container).after(ratingLabelCont);
-                            jQuery('input', ratingLabelCont).val(ratingLabel);
+                            jQuery('div', ratingLabelCont).text(ratingLabel);
                         });
                         jQuery('table.scale-table > thead th.rating-label:first', container).remove();
 
                         jQuery.each(rowLabels, function (idx, rowLabel) {
                             var rowLabelCont = jQuery('table.scale-table > tbody > tr.scale-row:first', container).clone();
                             jQuery('table.scale-table > tbody > tr.scale-row:first', container).after(rowLabelCont);
-                            jQuery('input.row-label', rowLabelCont).val(rowLabel);
+                            jQuery('div.row-label', rowLabelCont).text(rowLabel);
+
+                            var original = jQuery('td.rating-weight:first', rowLabelCont);
+                            original.find('input[type=radio]').attr('name', idx).val(ratingLabels[ratingLabels.length-1]);
                             for (var i = 1; i < ratingLabels.length; i++) {
-                                jQuery('td.rating-weight:first', rowLabelCont).after(jQuery('td.rating-weight:first', rowLabelCont).clone());
+                                var clone = original.clone();
+                                clone.find('input[type=radio]').attr('name', idx).val(ratingLabels[i-1]);
+                                original.after(clone);
                             }
                         });
                         jQuery('table.scale-table > tbody > tr.scale-row:first', container).remove();
@@ -441,6 +423,7 @@
 
                     case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
+                        container = constructQuestionItem(answerDetails.type);
 
                         break;
 
@@ -480,8 +463,10 @@
 
 </div>
 
-<div class="line" style="text-align: center">
-    <button id="saveRespond" class="btn btn-primary btn-large">${g.message(code:'app.submit.label')}</button>
+<br />
+
+<div class="line" style="padding-left: 3em">
+    <button id="saveResponse" class="btn btn-primary btn-large">${g.message(code:'app.submit.label')}</button>
 </div>
 
 <div class="templates" style="display: none;">
@@ -525,30 +510,20 @@
             <table class="table scale-table">
                 <thead>
                 <tr class="scale-head">
-                    <th style="text-align: center; width: 100px;">
-                        <button class="btn btn-small add-row">
-                            <i class="icon-plus"></i>
-                        </button>
-                    </th>
+                    <th style="text-align: center; width: 100px;">&nbsp;</th>
                     <th class="rating-label" style="text-align: center">
-                        <input type="text" class="input-small" placeholder="Rating label.."
-                               style="width: 100px; padding: 1px;">
+                        <div style="width: 100px; padding: 1px;"></div>
                     </th>
-                    <th>
-                        <button class="btn btn-small add-rating">
-                            <i class="icon-plus"></i>
-                        </button>
-                    </th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="scale-row">
                     <td style="max-width: 100px;">
-                        <input type="text" class="row-label input-small" placeholder="Row label.."
-                               style="width: 100px; padding: 1px;">
+                        <div class="row-label" style="width: 100px; padding: 1px;"></div>
                     </td>
                     <td class="rating-weight" style="text-align: center">
-                        <input type="radio" name="rd-1">
+                        <input type="radio" name="rd-1"/>
                     </td>
                     <td></td>
                 </tr>
