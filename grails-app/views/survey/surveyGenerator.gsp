@@ -544,32 +544,11 @@
                     case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
 
                         answerTemplate = jQuery('#answerPreviewTemplate-singleText').clone().removeAttr('id');
-                        jQuery('textarea', answerTemplate).append(answerDetails.questionPlaceholder);
+                        jQuery('textarea', answerTemplate).attr('placeholder', answerDetails.questionPlaceholder);
 
                         break;
 
                     case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
-
-                        /*<div id="answerPreviewTemplate-scale" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.SCALE_RATING}">
-                     <div class="col" style="height:auto; overflow-x: auto; max-width: 720px;">
-                     <table class="table scale-table">
-                     <thead>
-                     <tr class="scale-head">
-                     <th></th>
-                     <th class="rating-label" style="text-align: center"></th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                     <tr class="scale-row">
-                     <td class="row-label" style="max-width: 100px;"> </td>
-                     <td class="rating-weight" style="text-align: center">
-                     <input type="radio" name="rd-1">
-                     </td>
-                     </tr>
-                     </tbody>
-                     </table>
-                     </div>
-                     </div>*/
 
                         answerTemplate = jQuery('#answerPreviewTemplate-scale').clone().removeAttr('id');
 
