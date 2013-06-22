@@ -199,6 +199,7 @@
             jQuery('#submitSurveyBtn').click(function(){
 
                 var questionItems = buildQuestionItemsMap();
+
                 submitSurvey(questionItems);
 
             });
@@ -216,7 +217,18 @@
                 var questionItems = buildQuestionItemsMap();
                 constructPreview(questionItems);
 
-            });
+            }).on('hidden', function(){
+
+                jQuery('#surveyPreviewModal .modal-body').empty();
+
+            })/*.css({
+                'width': function () {
+                    return ($(document).width() * .8) + 'px';
+                },
+                'margin-left': function () {
+                    return -($(this).width() / 2);
+                }
+            })*/;
 
         });
 
@@ -446,14 +458,14 @@
 
                             jQuery.each(ratingLabels, function(idx, ratingLabel){
                                 var ratingLabelCont = jQuery('table.scale-table > thead th.rating-label:first', container).clone();
-                                jQuery('table.scale-table > thead th.rating-label:first', container).after(ratingLabelCont);
+                                jQuery('table.scale-table > thead > tr.scale-head > th.rating-label:last', container).after(ratingLabelCont);
                                 jQuery('input', ratingLabelCont).val(ratingLabel);
                             });
                             jQuery('table.scale-table > thead th.rating-label:first', container).remove();
 
                             jQuery.each(rowLabels, function(idx, rowLabel){
                                 var rowLabelCont = jQuery('table.scale-table > tbody > tr.scale-row:first', container).clone();
-                                jQuery('table.scale-table > tbody > tr.scale-row:first', container).after(rowLabelCont);
+                                jQuery('table.scale-table > tbody', container).append(rowLabelCont);
                                 jQuery('input.row-label', rowLabelCont).val(rowLabel);
                                 for(var i = 1; i < ratingLabels.length; i++){
                                     jQuery('td.rating-weight:first', rowLabelCont).after(jQuery('td.rating-weight:first', rowLabelCont).clone());
@@ -486,6 +498,13 @@
                 var questionStr = item.questionStr;
                 var answerDetails = item.answerDetails;
 
+                var questionTemplate = jQuery('#questionPreviewTemplate').clone().removeAttr('id');
+
+                jQuery('.seqNumberContainer', questionTemplate).html(idx+1+'.');
+                jQuery('.question-text', questionTemplate).html(questionStr);
+
+                var answerTemplate = null;
+
                 switch(answerDetails.type){
 
                     case '${Survey.QUESTION_TYPE.CHOICE}' :
@@ -493,40 +512,102 @@
                         var choiceItems = answerDetails.choiceItems;
                         var choiceType = answerDetails.choiceType;
 
-                        jQuery.each(choiceItems, function(idx, choiceItem){
+                        switch(choiceType){
 
-                        });
+                            case 'multiple' :
+
+                                answerTemplate = jQuery('#answerPreviewTemplate-multipleChoice').clone().removeAttr('id');
+
+                                jQuery.each(choiceItems, function(idx, choiceItem){
+                                    var choiceItemContainer = jQuery('.choice-item:first', answerTemplate).clone();
+                                    jQuery('input.item-check', choiceItemContainer).val(choiceItem);
+                                    jQuery('.item-label', choiceItemContainer).html(choiceItem);
+                                    answerTemplate.append(choiceItemContainer);
+                                });
+                                jQuery('.choice-item:first', answerTemplate).remove();
+
+                                break;
+                            case 'single' :
+
+                                answerTemplate = jQuery('#answerPreviewTemplate-singleChoice').clone().removeAttr('id');
+
+                                jQuery.each(choiceItems, function(idx, choiceItem){
+                                    jQuery('.item-select', answerTemplate).append(jQuery('<option></option>').append(choiceItem).val(choiceItem));
+                                });
+
+                                break;
+
+                        }
 
                         break;
 
                     case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
 
-                        var questionPlaceHolder = answerDetails.questionPlaceholder;
+                        answerTemplate = jQuery('#answerPreviewTemplate-singleText').clone().removeAttr('id');
+                        jQuery('textarea', answerTemplate).append(answerDetails.questionPlaceholder);
 
                         break;
 
                     case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
 
+                        /*<div id="answerPreviewTemplate-scale" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.SCALE_RATING}">
+                     <div class="col" style="height:auto; overflow-x: auto; max-width: 720px;">
+                     <table class="table scale-table">
+                     <thead>
+                     <tr class="scale-head">
+                     <th></th>
+                     <th class="rating-label" style="text-align: center"></th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr class="scale-row">
+                     <td class="row-label" style="max-width: 100px;"> </td>
+                     <td class="rating-weight" style="text-align: center">
+                     <input type="radio" name="rd-1">
+                     </td>
+                     </tr>
+                     </tbody>
+                     </table>
+                     </div>
+                     </div>*/
+
+                        answerTemplate = jQuery('#answerPreviewTemplate-scale').clone().removeAttr('id');
+
                         var ratingLabels = answerDetails.ratingLabels;
                         var rowLabels = answerDetails.rowLabels;
 
                         jQuery.each(ratingLabels, function(idx, ratingLabel){
-
+                            jQuery('.scale-head', answerTemplate).append(jQuery('<th class="rating-label" style="text-align: center"></th>').html(ratingLabel));
                         });
 
                         jQuery.each(rowLabels, function(idx, rowLabel){
+                            var scaleRow = jQuery('table.scale-table > tbody > tr.scale-row:first', answerTemplate).clone();
+                            jQuery('.row-label', scaleRow).html(rowLabel);
 
+                            jQuery.each(ratingLabels, function(idx, ratingLabel){
+                                var ratingWeightCont = jQuery('td.rating-weight:first', scaleRow).clone();
+                                jQuery('input', ratingWeightCont).attr('name', rowLabel + '-' + ratingLabel)
+                                scaleRow.append(ratingWeightCont);
+                            });
+                            jQuery('td.rating-weight:first', scaleRow).remove();
+
+                            jQuery('table.scale-table > tbody', answerTemplate).append(scaleRow);
                         });
+                        jQuery('table.scale-table > tbody > tr.scale-row:first', answerTemplate).remove();
 
                         break;
 
                     case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
-
-
                         break;
 
                 }
+
+                if (answerTemplate) {
+                    questionTemplate.append(answerTemplate);
+                }
+
+                jQuery('#surveyPreviewModal .modal-body').append(questionTemplate);
 
             });
         }
@@ -562,7 +643,7 @@
 
 </div>
 
-<div class="line" style="text-align: center">
+<div class="line line-centered">
     <button id="submitSurveyBtn" class="btn-ticbox"><g:message code="label.button.submit" default="SUBMIT"/></button>
 </div>
 
@@ -583,7 +664,7 @@
         </div>
     </div>
 
-    <div class="line" style="text-align: center">
+    <div class="line line-centered">
         <button class="btn-ticbox" href="#surveyPreviewModal" role="button" data-toggle="modal"><g:message code="label.button.preview" default="PREVIEW" /> </button>
     </div>
 
@@ -693,16 +774,73 @@
         </div>
     </div>
 
+    %{--Preview Templates--}%
+
+    <div id="questionPreviewTemplate" class="surveyItemContainer line rowLine10">
+
+        <div class="line rowLine2">
+            <div class="seqNumberContainer questionNumber col"> </div>
+            <div class="questionTextContainer col col5">
+                <span class="question-text"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="answerPreviewTemplate-singleText" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.FREE_TEXT}">
+        <div class="col">
+            <textarea rows="3" placeholder=""></textarea>
+        </div>
+    </div>
+
+    <div id="answerPreviewTemplate-multipleChoice" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.CHOICE}">
+        <div class="choice-items line">
+            <div class="choice-item line rowLine2">
+                <label class="checkbox">
+                    <input class="item-check" type="checkbox">
+                    <span class="item-label"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="answerPreviewTemplate-singleChoice" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.CHOICE}">
+        <select class="item-select">
+            <option></option>
+        </select>
+    </div>
+
+    <div id="answerPreviewTemplate-scale" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.SCALE_RATING}">
+        <div class="col" style="height:auto; overflow-x: auto; max-width: 720px;">
+            <table class="table scale-table">
+                <thead>
+                <tr class="scale-head">
+                    <th></th>
+                    %{--<th class="rating-label" style="text-align: center"></th>--}%
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="scale-row">
+                    <td class="row-label" style="max-width: 100px;"> </td>
+                    <td class="rating-weight" style="text-align: center">
+                        <input type="radio" name="rd-1">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
 </div>
 
 <!-- Preview Modal -->
-<div id="surveyPreviewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="surveyPreviewModalLabel" aria-hidden="true">
+<div id="surveyPreviewModal" class="modal modal80 hide fade" tabindex="-1" role="dialog" aria-labelledby="surveyPreviewModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="surveyPreviewModalLabel">Survey Preview</h3>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="overflow: auto">
 
     </div>
     <div class="modal-footer">

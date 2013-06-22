@@ -57,20 +57,26 @@
             clear: both;
             min-height: 1px;
             margin-bottom: 5px;
+            display: table;
+        }
+
+        .line-centered {
+            text-align: center;
+            width: 100%;
         }
 
         .rowLine10 {
-            display: inline-block;
+            /*display: inline-block;*/
             margin-bottom: 10px;
         }
 
         .rowLine5 {
-            display: inline-block;
+            /*display: inline-block;*/
             margin-bottom: 5px;
         }
 
         .rowLine2 {
-            display: inline-block;
+            /*display: inline-block;*/
             margin-bottom: 2px;
         }
 
@@ -194,6 +200,11 @@
 
         [class*="span"] {
             float: left;
+        }
+
+        .modal80 {
+            width:80%;
+            margin-left:-40%;
         }
 
     </style>
