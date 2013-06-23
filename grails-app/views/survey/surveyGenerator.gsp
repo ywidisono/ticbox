@@ -256,15 +256,12 @@
                     jQuery('.add-item', answerComp).click(function(){
                         var newItem = jQuery('.choice-item:first', '#answerTemplate-choice').clone();
                         jQuery('.item-label', newItem).val('');
-                        jQuery('.item-check', newItem).click(function(){
-                            newItem.remove();
-                        });
 
                         newItem.appendTo(jQuery('.choice-items', answerComp));
-                    });
 
-                    jQuery('.item-check', answerComp).click(function(){
-                        jQuery('.choice-item:first', answerComp).remove();
+                        jQuery('input.item-check', newItem).click(function(){
+                            newItem.remove();
+                        });
                     });
 
                     break;
@@ -429,9 +426,12 @@
 
                             jQuery.each(choiceItems, function(idx, choiceItem){
                                 var choiceItemCont = jQuery('.choice-items > .choice-item:first', container).clone();
-                                jQuery('.choice-items', container).append(choiceItemCont
-                                );
+                                jQuery('.choice-items', container).append(choiceItemCont);
                                 jQuery('.item-label', choiceItemCont).val(choiceItem);
+
+                                jQuery('input.item-check', choiceItemCont).click(function(){
+                                    choiceItemCont.remove();
+                                });
                             });
                             jQuery('.choice-items > .choice-item:first', container).remove();
 
@@ -565,7 +565,7 @@
 
                             jQuery.each(ratingLabels, function(idx, ratingLabel){
                                 var ratingWeightCont = jQuery('td.rating-weight:first', scaleRow).clone();
-                                jQuery('input', ratingWeightCont).attr('name', rowLabel + '-' + ratingLabel)
+                                jQuery('input', ratingWeightCont).attr('name', rowLabel);
                                 scaleRow.append(ratingWeightCont);
                             });
                             jQuery('td.rating-weight:first', scaleRow).remove();
