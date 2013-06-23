@@ -1,0 +1,86 @@
+h1, h2, h3{
+    color: #bad33c;
+    font-weight: normal;
+}
+
+button.btn-ticbox {
+    font-family: helveticaneue-light, tahoma, sans-serif !important;
+    letter-spacing: 0.1em;
+    font-weight: normal;
+    background-color: #a0a0a0;
+    border: none;
+    color: #ffffff;
+    padding: 5px 10px;
+}
+
+button.btn-ticbox:hover {
+    color: #BAD33C;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.line {
+    clear: both;
+    min-height: 1px;
+    margin-bottom: 5px;
+    display: table;
+}
+
+.line-centered {
+    text-align: center;
+    width: 100%;
+}
+
+.rowLine10 {
+    /*display: inline-block;*/
+    margin-bottom: 10px;
+}
+
+.rowLine5 {
+    /*display: inline-block;*/
+    margin-bottom: 5px;
+}
+
+.rowLine2 {
+    /*display: inline-block;*/
+    margin-bottom: 2px;
+}
+
+.col {
+    float: left;
+    min-height: 1px;
+}
+
+.col-centered {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.col2 {
+    margin-right: 2px;
+}
+
+.col5 {
+    margin-right: 5px;
+}
+
+.col10 {
+    margin-right: 10px;
+}
+
+.shadowed-container {
+    -webkit-box-shadow: 0 0 15px #000000;
+    -moz-box-shadow: 0 0 15px #000000;
+    box-shadow: 0 0 15px #000000;
+}
+
+.modal80 {
+    width:80%;
+    margin-left:-40%;
+}
+
+[class*="span"] {
+    float: left;
+}
