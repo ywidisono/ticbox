@@ -184,10 +184,6 @@
                 jQuery('.qq-upload-button > input').trigger('click');
             });
 
-            jQuery('.enableTooltip').tooltip({
-                selector: "button[data-toggle=tooltip]"
-            });
-
             jQuery('.surveyItemTypeAdd').click(function(){
                 var type = jQuery(this).attr('type');
                 var subtype = jQuery(this).attr('subtype');

@@ -294,6 +294,19 @@
 
 <div id="menuNavPanelContent">
 
+    <div class="survey-summary line side-panel">
+        <div class="line summary-header">
+            Survey Summary
+        </div>
+        <div class="line">
+            Total : $<span class="total-charge"></span>
+        </div>
+        <div class="line">
+            $<span class="charge-per-respondent"></span> x <span class="total-respondents"></span> Respondents
+        </div>
+        <hr>
+    </div>
+
     <div class="line side-panel">
         <div class="line summary-header">
             Filter Details
@@ -304,6 +317,16 @@
         <hr>
     </div>
 
+</div>
+
+<div class="line line-centered">
+    <h3>Choose Your Survey Type</h3>
+</div>
+<div class="line line-centered">
+    <div class="col col-centered enableTooltip">
+        <button class="btn-ticbox" data-toggle="tooltip" data-placement="bottom" title="<g:message code="survey.type.free.description"/>"><g:message code="survey.type.free.label"/></button>
+        <button class="btn-ticbox" data-toggle="tooltip" data-placement="bottom" title="<g:message code="survey.type.easy.description"/>"><g:message code="survey.type.easy.label"/></button>
+    </div>
 </div>
 
 <form id="filterForm" class="form-horizontal">

@@ -18,6 +18,8 @@
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap.css')}" type="text/css">
 
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'app.css')}" type="text/css">
+
     <style type="text/css">
 
         body {
@@ -25,6 +27,7 @@
             font-family: helveticaneue-light,tahoma,sans-serif;
             letter-spacing: 0.1em;
             color: #5a5a5a;
+
         }
 
         textarea, input[type=text] {
@@ -33,68 +36,6 @@
 
         textarea:focus, input[type=text]:focus {
             background-color: #ffffff;
-        }
-
-        button.btn-ticbox {
-            font-family: helveticaneue-light, tahoma, sans-serif !important;
-            letter-spacing: 0.1em;
-            font-weight: normal;
-            background-color: #a0a0a0;
-            border: none;
-            color: #ffffff;
-            padding: 5px 10px;
-        }
-
-        button.btn-ticbox:hover {
-            color: #BAD33C;
-        }
-
-        .clickable {
-            cursor: pointer;
-        }
-
-        .line {
-            clear: both;
-            min-height: 1px;
-            margin-bottom: 5px;
-            display: table;
-        }
-
-        .line-centered {
-            text-align: center;
-            width: 100%;
-        }
-
-        .rowLine10 {
-            /*display: inline-block;*/
-            margin-bottom: 10px;
-        }
-
-        .rowLine5 {
-            /*display: inline-block;*/
-            margin-bottom: 5px;
-        }
-
-        .rowLine2 {
-            /*display: inline-block;*/
-            margin-bottom: 2px;
-        }
-
-        .col {
-            float: left;
-            min-height: 1px;
-        }
-
-        .col2 {
-            margin-right: 2px;
-        }
-
-        .col5 {
-            margin-right: 5px;
-        }
-
-        .col10 {
-            margin-right: 10px;
         }
 
         @media (max-width: 980px) {
@@ -143,8 +84,9 @@
         }
 
         #main-container {
-            width: 1024px;
-            margin: 5px auto;
+            min-width: 1060px !important;
+            margin: 0 20px !important;
+            padding: 0 10px !important;
         }
 
         #menuNavPanel {
@@ -177,8 +119,8 @@
         }
 
         #mainContentPanel {
-            width: 720px;
-            margin-left: 10px;
+            width: 890px;
+            margin: 10px 0 0 10px;
         }
 
         .control-label {
@@ -196,15 +138,6 @@
 
         .preview-item-even {
             background-color: #ececec;
-        }
-
-        [class*="span"] {
-            float: left;
-        }
-
-        .modal80 {
-            width:80%;
-            margin-left:-40%;
         }
 
     </style>
@@ -246,23 +179,10 @@
     </div>
 </div>
 
-<div id="main-container">
-    <div class="row" style="margin-left: -10px;">
+<div id="main-container" class="shadowed-container">
+    <div class="line">
         <div id="menuNavPanel" class="col">
             %{--menu navigation panel--}%
-
-            <div class="survey-summary line side-panel">
-                <div class="line summary-header">
-                    Survey Summary
-                </div>
-                <div class="line">
-                    Total : $<span class="total-charge"></span>
-                </div>
-                <div class="line">
-                    $<span class="charge-per-respondent"></span> x <span class="total-respondents"></span> Respondents
-                </div>
-                <hr>
-            </div>
 
 
         </div>
@@ -303,6 +223,10 @@
                 jQuery('.charge-per-respondent').html(surveySummary.chargePerRespondent);
                 jQuery('.total-respondents').html(surveySummary.totalRespondent);
             }
+        });
+
+        jQuery('.enableTooltip').tooltip({
+            selector: "button[data-toggle=tooltip]"
         });
 
     });
