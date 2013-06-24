@@ -3,11 +3,10 @@
     <meta name="layout" content="respondent"/>
     <title>Survey List</title>
     <style type="text/css">
-         .surveyList .row-fluid{
-             margin: 1em 0;
-             border-bottom: 1px solid #eee;
-         }
-
+        .survey {
+            background-color: #efefef;
+            margin: 1em 0em;
+        }
         .center {
             text-align: center;
             vertical-align: middle;
@@ -18,29 +17,24 @@
     <div class="container-fluid surveyList">
         <h3>Survey List</h3>
         <g:each in="${surveyList}" var="survey">
-            <div class="row-fluid">
-                <div class="span3 center">
-                    <div>${survey.point}</div>
-                    <div>${survey.pointType}</div>
+            <div class="row-fluid survey">
+                <div class="span2 center" style="background-color: #dddddd">
+                    <div><h2>${survey.point}</h2></div>
+                    <div><h3>${survey.pointType}</h3></div>
                 </div>
-                <div class="span7">
-                    <div class="row">
+                <div class="span8">
+                    <div>
                         <h4>${survey.name}</h4>
                     </div>
-                    <div class="row">
+                    <div>
                         <g:if test="${ticbox.Survey.POINT_TYPE.GOLD.equalsIgnoreCase(survey.pointType)}">
-                            Need ${survey.target} Respondents | Fulfill ${survey.getPercentage()} %
+                            Need 0 Respondents | Fulfill 100%
                         </g:if>
                     </div>
                 </div>
-                <div class="span2">
-                    <div class="row">
-                        <g:if test="${survey.logo != null}">
-                            <img class="logo" src="${g.createLink(controller: "survey", action: "viewLogo", params: [surveyId: survey.id])}"/>
-                        </g:if>
-                    </div>
-                    <div class="row">
-                        <g:link action="takeSurvey" params="[surveyId:survey.surveyId]">Take Survey</g:link>
+                <div class="span2 center">
+                    <div style="background-color: #dddddd; padding:0.5em">
+                        <h3><g:link action="takeSurvey" params="[surveyId:survey.surveyId]">Take Survey</g:link></h3>
                     </div>
                 </div>
             </div>

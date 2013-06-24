@@ -21,7 +21,9 @@ class Survey {
     String surveyId
     String name
     String title
-    
+    long point = 0
+    String pointType = POINT_TYPE.GOLD
+
     static constraints = {
         title maxSize: 1000, nullable: true
     }

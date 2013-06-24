@@ -198,7 +198,7 @@
         jQuery('#saveResponse').click(function () {
 
             var questionItems = buildSurveyResponseMap();
-            saveResponse(questionItems);
+            saveResponse(questionItems, this);
 
         });
 
@@ -310,12 +310,10 @@
                 case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
 
                     answerDetails['value'] = {};
-                    alert('size: ' + jQuery('.scale-row', container).size());
                     jQuery('.scale-row', container).each(function () {
                         var label = jQuery(this).find('.row-label').text();
                         var value = jQuery(this).find('input:checked').val();
-                        alert('label: ' + label + ' value: ' + value);
-                        answerDetails['value'][label] = value;
+                        answerDetails['value'][label] = (value) ? value : '';
                     });
                     break;
 
@@ -336,14 +334,16 @@
         return responseItem
     }
 
-    function saveResponse(questionItems) {
-
+    function saveResponse(questionItems, btn) {
+        jQuery(btn).attr('disabled', 'disabled');
         jQuery.post('${request.contextPath}/respondent/saveResponse', {surveyResponse: JSON.stringify(questionItems), surveyId: '${survey.surveyId}', respondentId: ${respondent.id}}, function (data) {
 
             if ('SUCCESS' == data) {
                 alert('Submission success..');
+                window.location.replace('${request.contextPath}/respondent/');
             } else {
                 alert('Submission failure');
+                jQuery(btn).removeAttr('disabled');
             }
 
         });
@@ -397,9 +397,11 @@
 
                         container = constructQuestionItem(answerDetails.type);
 
+                        var first = jQuery('table.scale-table > thead th.rating-label:first', container);
+                        var thead = jQuery('table.scale-table > thead tr', container);
                         jQuery.each(ratingLabels, function (idx, ratingLabel) {
-                            var ratingLabelCont = jQuery('table.scale-table > thead th.rating-label:first', container).clone();
-                            jQuery('table.scale-table > thead th.rating-label:first', container).after(ratingLabelCont);
+                            var ratingLabelCont = first.clone();
+                            thead.append(ratingLabelCont);
                             jQuery('div', ratingLabelCont).text(ratingLabel);
                         });
                         jQuery('table.scale-table > thead th.rating-label:first', container).remove();
@@ -514,7 +516,6 @@
                     <th class="rating-label" style="text-align: center">
                         <div style="width: 100px; padding: 1px;"></div>
                     </th>
-                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>

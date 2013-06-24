@@ -107,10 +107,18 @@ class RespondentController {
         try {
             def surveyResponse = params.surveyResponse
             surveyService.saveResponse(surveyResponse, params.surveyId, params.respondentId)
+            respondentService.saveReward(params.respondentId, params.surveyId)
             render 'SUCCESS'
         } catch (Exception e) {
-            e.printStackTrace()
+            log.error(e.getMessage(), e)
             render 'FAILED'
         }
+    }
+
+    def goldHistory = {
+        def principal = SecurityUtils.subject.principal
+        def respondent = User.findByUsername(principal.toString())
+        def goldHistory = respondent.respondentProfile?.goldHistory
+        [goldHistory:goldHistory, respondent: respondent]
     }
 }
