@@ -27,6 +27,7 @@
             font-family: helveticaneue-light,tahoma,sans-serif;
             letter-spacing: 0.1em;
             color: #5a5a5a;
+            background-color: #f3f3f3;
 
         }
 
@@ -84,9 +85,11 @@
         }
 
         #main-container {
-            min-width: 1060px !important;
-            margin: 0 20px !important;
+            width: 1024px !important;
+            min-width: 1024px !important;
+            margin: 0 auto!important;
             padding: 0 10px !important;
+            background-color: #ffffff;
         }
 
         #menuNavPanel {
@@ -104,9 +107,10 @@
             padding-left: 5px;
         }
 
-        #menuNavPanel .side-panel .summary-header {
+        #menuNavPanel .side-panel .header {
             color: #bad33c;
             font-size: x-large;
+            margin-bottom: 10px;
         }
 
         #menuNavPanel hr{
@@ -119,7 +123,7 @@
         }
 
         #mainContentPanel {
-            width: 890px;
+            width: 700px;
             margin: 10px 0 0 10px;
         }
 
@@ -129,7 +133,6 @@
 
         .summary-header {
             /*background-color: #565655;*/
-            margin-bottom: 10px;
         }
 
         .summary-body {
@@ -170,9 +173,9 @@
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
-                    <li class="index"><a href="${request.contextPath}/survey/index">Survey Type</a></li>
-                    <li class="respondentFilter"><a href="${request.contextPath}/survey/respondentFilter">Respondent Filter</a></li>
-                    <li class="surveyGenerator"><a href="${request.contextPath}/survey/surveyGenerator">Create Survey</a></li>
+                    <li class="index"><a href="${request.contextPath}/survey/index">Survey</a></li>
+                    <li class="respondentFilter"><a href="${request.contextPath}/survey/respondentFilter">Filter Respondents</a></li>
+                    <li class="surveyGenerator"><a href="${request.contextPath}/survey/surveyGenerator">Edit Survey</a></li>
                 </ul>
             </div>
         </div>
