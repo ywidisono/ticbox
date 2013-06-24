@@ -131,7 +131,7 @@
                     <li class="respondentFilter"><g:link action="profileForm">Profile</g:link></li>
                     <li class="surveyGenerator"><a href="#">Invite Friends</a></li>
                     <li class="surveyGenerator"><a href="#">Redeem GOLD Points</a></li>
-                    <li class="surveyGenerator"><a href="#">GOLD Points History</a></li>
+                    <li class="surveyGenerator"><g:link action="goldHistory">GOLD Points History</g:link></li>
                 </ul>
             </div>
         </div>
@@ -184,7 +184,7 @@
                                 Redeem GOLD Points
                             </div>
                             <div class="line">
-                                GOLD Points History
+                                <g:link action="goldHistory">GOLD Points History</g:link>
                             </div>
                         </div>
                     </div>
