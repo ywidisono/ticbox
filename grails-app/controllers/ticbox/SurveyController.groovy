@@ -14,8 +14,9 @@ class SurveyController {
         [survey : surveyService.getEditedSurvey()]
     }
 
-    def easySurvey() {
+    def createSurvey(){
 
+        redirect action: 'respondentFilter'
     }
 
     def getSurveySummary() {

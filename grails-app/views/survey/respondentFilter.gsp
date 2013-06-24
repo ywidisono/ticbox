@@ -9,7 +9,7 @@
 <%@ page import="ticbox.Survey; ticbox.ProfileItem; ticbox.LookupMaster" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <meta name="layout" content="survey"/>
+    <meta name="layout" content="surveyor"/>
     <title></title>
 
     <style type="text/css">
@@ -112,7 +112,9 @@
                 var filterItemsJSON = JSON.stringify(filterItems);
 
                 jQuery.getJSON('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON}, function(data){
+
                     alert('Submitted');
+
                     loadRespondentFilter(data);
                 });
 
@@ -294,9 +296,9 @@
 
 <div id="menuNavPanelContent">
 
-    <div class="survey-summary line side-panel">
-        <div class="line summary-header">
-            Survey Summary
+    <div class="line side-panel">
+        <div class="line header">
+            Charge Summary
         </div>
         <div class="line">
             Total : $<span class="total-charge"></span>
@@ -308,7 +310,7 @@
     </div>
 
     <div class="line side-panel">
-        <div class="line summary-header">
+        <div class="line header">
             Filter Details
         </div>
         <div class="filter-details-container line">
@@ -342,15 +344,25 @@
                     <option value="${profileItem.code}">${profileItem.label}</option>
                 </g:each>
             </select>
+
             <button id="addFilterBtn" class="btn" type="button">
                 <i class="icon-plus"></i>
             </button>
-            <button id="submitFilterBtn" class="btn" type="button">
-                Submit
+
+            <button id="submitFilterBtn" class="btn-ticbox" type="button">
+                Save
             </button>
         </div>
     </div>
 </form>
+
+<div class="line line-centered rowLine10">
+
+    <button class="btn-ticbox link" href="${request.contextPath}/survey/surveyGenerator" type="button">
+        Next
+    </button>
+
+</div>
 
 <form id="filterTemplates" class="form-horizontal" style="display: none">
     <g:each in="${profileItems}" var="profileItem">
@@ -401,6 +413,24 @@
         </div>
     </g:each>
 </form>
+
+<script type="text/javascript">
+
+    jQuery(function(){
+
+        jQuery.getJSON('${request.contextPath}/survey/getSurveySummary', {}, function(data){
+            if(data){
+                surveySummary = data;
+
+                jQuery('.total-charge').html(parseFloat(surveySummary.chargePerRespondent) * parseFloat(surveySummary.totalRespondent));
+                jQuery('.charge-per-respondent').html(surveySummary.chargePerRespondent);
+                jQuery('.total-respondents').html(surveySummary.totalRespondent);
+            }
+        });
+
+    });
+
+</script>
 
 </body>
 </html>

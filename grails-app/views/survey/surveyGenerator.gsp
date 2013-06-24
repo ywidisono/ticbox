@@ -8,10 +8,14 @@
 <%@ page import="ticbox.Survey" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <meta name="layout" content="survey"/>
+    <meta name="layout" content="surveyor"/>
     <title></title>
 
     <style type="text/css">
+
+        .surveyItemsContainer{
+
+        }
 
         .surveyItemsContainer input, .surveyItemsContainer textarea, .surveyItemsContainer select {
             margin: 0;
@@ -606,7 +610,7 @@
     </div>
 </div>
 
-<div class="line" style="display: none">
+<div style="display: none">
     <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}">
         <uploader:onComplete>
             jQuery('#surveyLogo > img').attr('src', '${request.contextPath}/survey/viewLogo');
@@ -715,7 +719,7 @@
     </div>
 
     <div id="answerTemplate-scale" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.SCALE_RATING}">
-        <div class="col" style="height:auto; overflow-x: auto; max-width: 720px;">
+        <div class="col" style="height:auto; overflow-x: auto; max-width: 600px;">
             <table class="table scale-table">
                 <thead>
                     <tr class="scale-head">
@@ -755,7 +759,7 @@
 
         <div class="line rowLine2">
             <div class="seqNumberContainer questionNumber col"> </div>
-            <div class="questionTextContainer col col5">
+            <div class="questionTextContainer col col5" style="max-width: 93%">
                 <span class="question-text"></span>
             </div>
         </div>

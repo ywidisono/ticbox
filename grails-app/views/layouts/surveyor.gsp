@@ -100,7 +100,7 @@
 
         #menuNavPanel .side-panel {
             width: 300px;
-            margin: 10px 0;
+            margin: 15px 0 10px 0;
         }
 
         #menuNavPanel .side-panel .line {
@@ -116,7 +116,7 @@
         #menuNavPanel hr{
             height: 5px;
             border: 0;
-            margin: 5px 0;
+            margin: 0;
             -webkit-box-shadow: inset 0 6px 5px -5px #a0a0a0;
             -moz-box-shadow: inset 0 6px 5px -5px #a0a0a0;
             box-shadow: inset 0 6px 5px -5px #a0a0a0;
@@ -124,23 +124,17 @@
 
         #mainContentPanel {
             width: 700px;
-            margin: 10px 0 0 10px;
-        }
-
-        .control-label {
-            /*text-align: left !important;*/
-        }
-
-        .summary-header {
-            /*background-color: #565655;*/
-        }
-
-        .summary-body {
-            /*background-color: #a0a0a0;*/
+            margin: 15px 0 0 10px;
         }
 
         .preview-item-even {
             background-color: #ececec;
+        }
+
+        table.table th {
+            color: #5a5a5a;
+            font-family: calibri, helveticaneue-light,sans-serif;
+            font-weight: normal;
         }
 
     </style>
@@ -173,9 +167,9 @@
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
-                    <li class="index"><a href="${request.contextPath}/survey/index">Survey</a></li>
-                    <li class="respondentFilter"><a href="${request.contextPath}/survey/respondentFilter">Filter Respondents</a></li>
-                    <li class="surveyGenerator"><a href="${request.contextPath}/survey/surveyGenerator">Edit Survey</a></li>
+                    <li class="surveyor"><a href="javascript:void(0);">Profile</a></li>
+                    <li class="survey"><a href="${request.contextPath}/survey/index">Survey</a></li>
+                    <li class="details"><a href="javascript:void(0);">Pricing Details</a></li>
                 </ul>
             </div>
         </div>
@@ -208,7 +202,14 @@
 
     jQuery(function(){
 
-        jQuery(".nav > li.${actionName}").addClass('active');
+        jQuery(".nav > li.${controllerName}").addClass('active');
+
+        jQuery('button.link').click(function(){
+            var href = jQuery(this).attr('href');
+            if(href){
+                window.location.href = href;
+            }
+        });
 
         //jQuery('#menuNavPanel .survey-summary').before(jQuery('#menuNavPanelContent'));
         jQuery('#menuNavPanel').append(jQuery('#menuNavPanelContent').contents());
@@ -216,16 +217,6 @@
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
             format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
-        });
-
-        jQuery.getJSON('${request.contextPath}/survey/getSurveySummary', {}, function(data){
-            if(data){
-                surveySummary = data;
-
-                jQuery('.total-charge').html(parseFloat(surveySummary.chargePerRespondent) * parseFloat(surveySummary.totalRespondent));
-                jQuery('.charge-per-respondent').html(surveySummary.chargePerRespondent);
-                jQuery('.total-respondents').html(surveySummary.totalRespondent);
-            }
         });
 
         jQuery('.enableTooltip').tooltip({

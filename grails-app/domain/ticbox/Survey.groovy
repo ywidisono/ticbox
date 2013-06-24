@@ -11,7 +11,7 @@ class Survey {
     ]
 
     static COMPONENTS = [
-        SUMMARY_DETAIL : 'DETAIL_SUMMARIES',
+        SUMMARY_DETAIL : 'SUMMARY_DETAIL',
         RESPONDENT_FILTER : 'RESPONDENT_FILTER',
         QUESTION_ITEMS : 'QUESTION_ITEMS',
         LOGO : 'LOGO'
