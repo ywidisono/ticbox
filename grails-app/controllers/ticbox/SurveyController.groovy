@@ -11,10 +11,18 @@ class SurveyController {
     def surveyService
 
     def index() {
-        [survey : surveyService.getEditedSurvey()]
+        [surveys : Survey.list()]
     }
 
     def createSurvey(){
+
+        surveyService.createSurvey(params)
+
+        redirect action: 'respondentFilter'
+    }
+
+    def editSurvey(){
+        session.putAt('current-edited-survey-id', params.surveyId)
 
         redirect action: 'respondentFilter'
     }

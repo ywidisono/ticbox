@@ -350,7 +350,7 @@
             </button>
 
             <button id="submitFilterBtn" class="btn-ticbox" type="button">
-                Save
+                <g:message code="label.button.save" default="Save"/>
             </button>
         </div>
     </div>
@@ -358,8 +358,12 @@
 
 <div class="line line-centered rowLine10">
 
+    <button class="btn-ticbox link" href="${request.contextPath}/survey/" type="button">
+        <g:message code="label.button.back" default="Back"/>
+    </button>
+
     <button class="btn-ticbox link" href="${request.contextPath}/survey/surveyGenerator" type="button">
-        Next
+        <g:message code="label.button.next" default="Next"/>
     </button>
 
 </div>

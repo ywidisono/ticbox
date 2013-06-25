@@ -41,7 +41,7 @@
 
         <div class="line line-centered">
 
-            <button href="${request.contextPath}/survey/createSurvey" id="createSurveyBtn" class="btn-ticbox link">Create Survey</button>
+            <button id="createSurveyModalBtn" href="#createSurveyModal" role="button" data-toggle="modal" class="btn-ticbox" type="button"><g:message code="label.button.create" default="Create"/> Survey</button>
 
         </div>
 
@@ -87,6 +87,14 @@
             </tr>
         </thead>
         <tbody>
+            <g:each in="${surveys}" var="survey">
+                <tr>
+                    <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </g:each>
             <tr>
                 <td></td>
                 <td></td>
@@ -118,6 +126,23 @@
         </tbody>
     </table>
 
+</div>
+
+<div id="createSurveyModal" class="modal modal60 hide fade" tabindex="-1" role="dialog" aria-labelledby="createSurveyModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="createSurveyModalLabel">Create Survey</h3>
+    </div>
+    <div class="modal-body" style="overflow: auto">
+
+        <label for="surveyName">Please name your survey</label>
+        <input type="text" id="surveyName" name="surveyName" param-of="createSurveyBtn">
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn-ticbox" data-dismiss="modal" aria-hidden="true"><g:message code="label.button.close" default="Close"/></button>
+        <button href="${request.contextPath}/survey/createSurvey" id="createSurveyBtn" class="btn-ticbox submit-redirect"><g:message code="label.button.create" default="Create"/></button>
+    </div>
 </div>
 
 <script type="text/javascript">

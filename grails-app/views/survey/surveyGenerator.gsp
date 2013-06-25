@@ -51,6 +51,10 @@
             padding: 5px 1px;
         }
 
+        #surveyPreviewModal .table th, #surveyPreviewModal .table td{
+            padding: 5px 5px;
+        }
+
         .surveyItemContainer .item-label {
             width: 485px !important;
         }
@@ -196,7 +200,7 @@
 
             });
 
-            jQuery('#submitSurveyBtn').click(function(){
+            jQuery('#saveSurveyBtn').click(function(){
 
                 var questionItems = buildQuestionItemsMap();
 
@@ -623,7 +627,9 @@
 </div>
 
 <div class="line line-centered">
-    <button id="submitSurveyBtn" class="btn-ticbox"><g:message code="label.button.submit" default="SUBMIT"/></button>
+    <button class="btn-ticbox link" href="${request.contextPath}/survey/respondentFilter"><g:message code="label.button.back" default="Back"/></button>
+    <button id="saveSurveyBtn" class="btn-ticbox"><g:message code="label.button.save" default="Save"/></button>
+    <button id="finalizeSurveyBtn" class="btn-ticbox"><g:message code="label.button.finalize" default="Finalize and Publish"/></button>
 </div>
 
 <div id="menuNavPanelContent" class="line">
@@ -791,7 +797,7 @@
 
     <div id="answerPreviewTemplate-scale" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.SCALE_RATING}">
         <div class="col" style="height:auto; overflow-x: auto; max-width: 720px;">
-            <table class="table scale-table">
+            <table class="table scale-table table-bordered">
                 <thead>
                 <tr class="scale-head">
                     <th></th>

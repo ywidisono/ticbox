@@ -1,6 +1,7 @@
 package ticbox
 
 import com.mongodb.DBObject
+import org.codehaus.groovy.grails.web.util.WebUtils
 
 class SurveyService {
 
@@ -8,15 +9,25 @@ class SurveyService {
 
     }
 
+    Survey createSurvey(def params){
+        Survey survey = new Survey(surveyId: UUID.randomUUID().toString(), name: params.surveyName).save();
+
+        WebUtils.retrieveGrailsWebRequest().session.putAt('current-edited-survey-id', survey.surveyId)
+
+        return survey
+    }
+
     Survey getEditedSurvey(){
         //TODO should be fetching from current surveyor's edited survey
-        Survey survey = Survey.findBySurveyId('TEST001')?:new Survey(surveyId: 'TEST001', name: 'Survey Test 001').save()
+        def surveyId = WebUtils.retrieveGrailsWebRequest().session.getAt('current-edited-survey-id')
+        Survey survey = surveyId?Survey.findBySurveyId("${surveyId}"):null
 
         //TODO should be fetching from global conf and keep save per survey for locking
-        survey[Survey.COMPONENTS.SUMMARY_DETAIL] = com.mongodb.util.JSON.parse("""{
+        /*survey[Survey.COMPONENTS.SUMMARY_DETAIL] = com.mongodb.util.JSON.parse(
+        """{
             chargePerRespondent : "15000",
                 totalRespondent : "200"
-        }""")
+        }""")*/
 
         return survey
     }

@@ -211,6 +211,18 @@
             }
         });
 
+        jQuery('button.submit-redirect').click(function(){
+
+            var form = jQuery('<form method="post"></form>').attr('action', jQuery(this).attr('href')).hide();
+
+            jQuery("[param-of='"+jQuery(this).attr('id')+"']").each(function(){
+                form.append(jQuery('<input type="hidden">').attr('name', jQuery(this).attr('name')).val(jQuery(this).val()));
+            });
+
+            form.appendTo('body').submit();
+
+        });
+
         //jQuery('#menuNavPanel .survey-summary').before(jQuery('#menuNavPanelContent'));
         jQuery('#menuNavPanel').append(jQuery('#menuNavPanelContent').contents());
 
