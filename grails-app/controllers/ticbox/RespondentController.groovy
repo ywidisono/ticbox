@@ -10,6 +10,7 @@ import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
 class RespondentController {
     def respondentService
     def surveyService
+    def goldService
 
     def index() {
         def surveyList = Survey.all
@@ -120,5 +121,35 @@ class RespondentController {
         def respondent = User.findByUsername(principal.toString())
         def goldHistory = respondent.respondentProfile?.goldHistory
         [goldHistory:goldHistory, respondent: respondent]
+    }
+
+    def redeemGold = {
+        def principal = SecurityUtils.subject.principal
+        def respondent = User.findByUsername(principal.toString())
+
+        def goldRateValue = Double.parseDouble(Parameter.findByCode("GOLD_RATE_IDR")?.value)
+        def goldRate = formatNumber(number: goldRateValue, formatName: "app.currency.format")
+
+        def balanceGoldValue = respondent.respondentProfile?.gold;
+        def balanceValue = balanceGoldValue * goldRateValue
+        def balance = formatNumber(number: balanceValue, formatName: "app.currency.format")
+
+        def minRedemptionPointValue = Double.parseDouble(Parameter.findByCode("GOLD_MIN_REDEMPTION")?.value)
+        def minRedemptionValue = minRedemptionPointValue * goldRateValue
+
+        [maxRedemption: balanceValue, minRedemption:minRedemptionValue, goldRate:goldRate, balance:balance, respondent: respondent]
+    }
+
+    def requestRedemption = {
+        try {
+            def principal = SecurityUtils.subject.principal
+            def respondent = User.findByUsername(principal.toString())
+            params.respondentId = respondent.id
+            goldService.saveRedemptionRequest(params)
+            render 'SUCCESS'
+        } catch (Exception e) {
+            log.error(e.getMessage(), e)
+            render 'FAILED'
+        }
     }
 }

@@ -97,6 +97,9 @@
         float: left;
     }
 
+    .error {
+        color: tomato;
+    }
     </style>
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap-responsive.css')}" type="text/css">
@@ -130,7 +133,7 @@
                     <li class="index"><g:link action="index">Survey List</g:link></li>
                     <li class="respondentFilter"><g:link action="profileForm">Profile</g:link></li>
                     <li class="surveyGenerator"><a href="#">Invite Friends</a></li>
-                    <li class="surveyGenerator"><a href="#">Redeem GOLD Points</a></li>
+                    <li class="surveyGenerator"><g:link action="redeemGold">Redeem GOLD Points</g:link></li>
                     <li class="surveyGenerator"><g:link action="goldHistory">GOLD Points History</g:link></li>
                 </ul>
             </div>
@@ -181,7 +184,7 @@
                                 Invite Friends
                             </div>
                             <div class="line">
-                                Redeem GOLD Points
+                                <g:link action="redeemGold">Redeem GOLD Points</g:link>
                             </div>
                             <div class="line">
                                 <g:link action="goldHistory">GOLD Points History</g:link>
