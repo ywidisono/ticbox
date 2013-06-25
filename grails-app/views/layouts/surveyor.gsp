@@ -27,6 +27,7 @@
             font-family: helveticaneue-light,tahoma,sans-serif;
             letter-spacing: 0.1em;
             color: #5a5a5a;
+            background-color: #f3f3f3;
 
         }
 
@@ -84,9 +85,11 @@
         }
 
         #main-container {
-            min-width: 1060px !important;
-            margin: 0 20px !important;
+            width: 1024px !important;
+            min-width: 1024px !important;
+            margin: 0 auto!important;
             padding: 0 10px !important;
+            background-color: #ffffff;
         }
 
         #menuNavPanel {
@@ -97,47 +100,41 @@
 
         #menuNavPanel .side-panel {
             width: 300px;
-            margin: 10px 0;
+            margin: 15px 0 10px 0;
         }
 
         #menuNavPanel .side-panel .line {
             padding-left: 5px;
         }
 
-        #menuNavPanel .side-panel .summary-header {
+        #menuNavPanel .side-panel .header {
             color: #bad33c;
             font-size: x-large;
+            margin-bottom: 10px;
         }
 
         #menuNavPanel hr{
             height: 5px;
             border: 0;
-            margin: 5px 0;
+            margin: 0;
             -webkit-box-shadow: inset 0 6px 5px -5px #a0a0a0;
             -moz-box-shadow: inset 0 6px 5px -5px #a0a0a0;
             box-shadow: inset 0 6px 5px -5px #a0a0a0;
         }
 
         #mainContentPanel {
-            width: 890px;
-            margin: 10px 0 0 10px;
-        }
-
-        .control-label {
-            /*text-align: left !important;*/
-        }
-
-        .summary-header {
-            /*background-color: #565655;*/
-            margin-bottom: 10px;
-        }
-
-        .summary-body {
-            /*background-color: #a0a0a0;*/
+            width: 700px;
+            margin: 15px 0 0 10px;
         }
 
         .preview-item-even {
             background-color: #ececec;
+        }
+
+        table.table th {
+            color: #5a5a5a;
+            font-family: calibri, helveticaneue-light,sans-serif;
+            font-weight: normal;
         }
 
     </style>
@@ -170,9 +167,9 @@
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
-                    <li class="index"><a href="${request.contextPath}/survey/index">Survey Type</a></li>
-                    <li class="respondentFilter"><a href="${request.contextPath}/survey/respondentFilter">Respondent Filter</a></li>
-                    <li class="surveyGenerator"><a href="${request.contextPath}/survey/surveyGenerator">Create Survey</a></li>
+                    <li class="surveyor"><a href="javascript:void(0);">Profile</a></li>
+                    <li class="survey"><a href="${request.contextPath}/survey/index">Survey</a></li>
+                    <li class="details"><a href="javascript:void(0);">Pricing Details</a></li>
                 </ul>
             </div>
         </div>
@@ -205,7 +202,26 @@
 
     jQuery(function(){
 
-        jQuery(".nav > li.${actionName}").addClass('active');
+        jQuery(".nav > li.${controllerName}").addClass('active');
+
+        jQuery('button.link').click(function(){
+            var href = jQuery(this).attr('href');
+            if(href){
+                window.location.href = href;
+            }
+        });
+
+        jQuery('button.submit-redirect').click(function(){
+
+            var form = jQuery('<form method="post"></form>').attr('action', jQuery(this).attr('href')).hide();
+
+            jQuery("[param-of='"+jQuery(this).attr('id')+"']").each(function(){
+                form.append(jQuery('<input type="hidden">').attr('name', jQuery(this).attr('name')).val(jQuery(this).val()));
+            });
+
+            form.appendTo('body').submit();
+
+        });
 
         //jQuery('#menuNavPanel .survey-summary').before(jQuery('#menuNavPanelContent'));
         jQuery('#menuNavPanel').append(jQuery('#menuNavPanelContent').contents());
@@ -213,16 +229,6 @@
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
             format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
-        });
-
-        jQuery.getJSON('${request.contextPath}/survey/getSurveySummary', {}, function(data){
-            if(data){
-                surveySummary = data;
-
-                jQuery('.total-charge').html(parseFloat(surveySummary.chargePerRespondent) * parseFloat(surveySummary.totalRespondent));
-                jQuery('.charge-per-respondent').html(surveySummary.chargePerRespondent);
-                jQuery('.total-respondents').html(surveySummary.totalRespondent);
-            }
         });
 
         jQuery('.enableTooltip').tooltip({
