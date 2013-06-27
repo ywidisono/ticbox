@@ -376,7 +376,7 @@
             <div class="controls">
                 <g:if test="${profileItem.type == ticbox.ProfileItem.TYPES.STRING}">
                     <g:if test="${profileItem.row > 1}">
-                        <g:textArea class="filter-value" id="${profileItem.code}" name="${profileItem.code}" rows="${profileItem.row}" cols="30" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}" style="width: 85%; resize: none"></g:textArea>
+                        <textArea class="filter-value" id="${profileItem.code}" name="${profileItem.code}" rows="${profileItem.row}" cols="30" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}" style="width: 85%; resize: none"></textArea>
                     </g:if>
                     <g:else>
                         <input class="filter-value" id="${profileItem.code}" name="${profileItem.code}" type="text" class="" max="${profileItem.max}" placeholder="${profileItem.placeHolder}"/>

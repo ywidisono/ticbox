@@ -2,6 +2,7 @@ package ticbox
 
 class Survey {
     static POINT_TYPE = [TRUST:"TRUST", GOLD:"GOLD"]
+    static STATUS = [DRAFT:'DRAFT', IN_PROGRESS:'IN_PROGRESS', COMPLETED:'COMPLETED']
 
     static QUESTION_TYPE = [
         CHOICE : 'CHOICE',
@@ -23,6 +24,9 @@ class Survey {
     String title
     long point = 0
     String pointType = POINT_TYPE.GOLD
+    String status = STATUS.DRAFT
+
+    static belongsTo = [surveyor:SurveyorProfile]
 
     static constraints = {
         title maxSize: 1000, nullable: true

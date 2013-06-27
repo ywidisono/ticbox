@@ -5,19 +5,24 @@ import org.codehaus.groovy.grails.web.util.WebUtils
 
 class SurveyService {
 
-    def serviceMethod() {
+    def surveyorService
 
+    def surveyList(){
+
+        return Survey.findAllBySurveyor(surveyorService.getCurrentSurveyor())
     }
 
     Survey createSurvey(def params){
-        Survey survey = new Survey(surveyId: UUID.randomUUID().toString(), name: params.surveyName).save();
+        SurveyorProfile surveyor = surveyorService.getCurrentSurveyor()
 
-        WebUtils.retrieveGrailsWebRequest().session.putAt('current-edited-survey-id', survey.surveyId)
+        Survey survey = new Survey(surveyId: UUID.randomUUID().toString(), name: params.surveyName, surveyor: surveyor).save();
+
+        WebUtils.retrieveGrailsWebRequest().session.putAt('current-edited-survey-id', survey?.surveyId)
 
         return survey
     }
 
-    Survey getEditedSurvey(){
+    Survey getCurrentEditedSurvey(){
         //TODO should be fetching from current surveyor's edited survey
         def surveyId = WebUtils.retrieveGrailsWebRequest().session.getAt('current-edited-survey-id')
         Survey survey = surveyId?Survey.findBySurveyId("${surveyId}"):null
@@ -40,25 +45,25 @@ class SurveyService {
         return ProfileItem.list()?.sort{it.seq}
     }
 
-    def submitRespondentFilter(String filterItemsJSON){
-        Survey survey = getEditedSurvey()
+    def submitRespondentFilter(String filterItemsJSON, Survey survey){
+        if (survey) {
+            DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(filterItemsJSON)
 
-        DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(filterItemsJSON)
+            survey[Survey.COMPONENTS.RESPONDENT_FILTER] = dbObject
 
-        survey[Survey.COMPONENTS.RESPONDENT_FILTER] = dbObject
-
-        survey.save()
+            survey.save()
+        }
     }
 
-    def submitQuestionItems(String questionItemsJSON, String title){
-        Survey survey = getEditedSurvey()
+    def submitQuestionItems(String questionItemsJSON, String title, Survey survey){
+        if (survey) {
+            DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(questionItemsJSON)
 
-        DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(questionItemsJSON)
+            survey[Survey.COMPONENTS.QUESTION_ITEMS] = dbObject
+            survey.title = title
 
-        survey[Survey.COMPONENTS.QUESTION_ITEMS] = dbObject
-        survey.title = title
-
-        survey.save()
+            survey.save()
+        }
     }
 
     def saveResponse(String responseJSON, String surveyId, String respondentId){

@@ -4,14 +4,18 @@ import grails.converters.JSON
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
-import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
 
 class SurveyController {
 
     def surveyService
+    def surveyorService
 
     def index() {
-        [surveys : Survey.list()]
+        [
+            drafts : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.DRAFT),
+            inProgress : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.IN_PROGRESS),
+            completes : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.COMPLETED)
+        ]
     }
 
     def createSurvey(){
@@ -28,33 +32,39 @@ class SurveyController {
     }
 
     def getSurveySummary() {
-        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getEditedSurvey()[Survey.COMPONENTS.SUMMARY_DETAIL])
+        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getCurrentEditedSurvey()[Survey.COMPONENTS.SUMMARY_DETAIL])
 
         render jsonStr
     }
 
     def getRespondentFilter() {
-        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getEditedSurvey()[Survey.COMPONENTS.RESPONDENT_FILTER])
+        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getCurrentEditedSurvey()[Survey.COMPONENTS.RESPONDENT_FILTER])
 
         render jsonStr
     }
 
     def getQuestionItems(){
-        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getEditedSurvey()[Survey.COMPONENTS.QUESTION_ITEMS])
+        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getCurrentEditedSurvey()[Survey.COMPONENTS.QUESTION_ITEMS])
 
         render jsonStr
     }
 
     def respondentFilter(){
 
-        [survey : surveyService.getEditedSurvey(), profileItems : surveyService.profileItemsForRespondentFilter]
+        Survey survey = surveyService.getCurrentEditedSurvey()
+
+        if(!survey){
+            redirect action: 'index'
+        }
+
+        [survey : survey, profileItems : surveyService.profileItemsForRespondentFilter]
     }
 
     def submitRespondentFilter() {
         try {
             def filterItemsJSON = params.filterItemsJSON
 
-            surveyService.submitRespondentFilter(filterItemsJSON)
+            surveyService.submitRespondentFilter(filterItemsJSON, surveyService.getCurrentEditedSurvey())
 
             render filterItemsJSON
         } catch (Exception e) {
@@ -64,7 +74,11 @@ class SurveyController {
     }
 
     def surveyGenerator(){
-        def survey = surveyService.getEditedSurvey()
+        Survey survey = surveyService.getCurrentEditedSurvey()
+
+        if(!survey){
+            redirect action: 'index'
+        }
 
         [survey : survey]
     }
@@ -73,7 +87,7 @@ class SurveyController {
         try {
             def questionItemsJSON = params.questionItems
 
-            surveyService.submitQuestionItems(questionItemsJSON, params.surveyTitle)
+            surveyService.submitQuestionItems(questionItemsJSON, params.surveyTitle, surveyService.getCurrentEditedSurvey())
 
             render 'SUCCESS'
         } catch (Exception e) {
@@ -94,7 +108,7 @@ class SurveyController {
                 inputStream = request.inputStream
             }
 
-            def survey = surveyService.getEditedSurvey()
+            def survey = surveyService.getCurrentEditedSurvey()
             survey[Survey.COMPONENTS.LOGO] = Base64.encode(inputStream.bytes)
             survey.save()
 
@@ -115,7 +129,7 @@ class SurveyController {
     }
     
     def viewLogo() {
-        def survey = surveyService.getEditedSurvey()
+        def survey = surveyService.getCurrentEditedSurvey()
 
         if (survey[Survey.COMPONENTS.LOGO]) {
             def imageByte

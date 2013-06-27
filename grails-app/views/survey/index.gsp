@@ -66,10 +66,15 @@
             </tr>
         </thead>
         <tbody>
+            <g:each in="${inProgress}" var="survey">
+                <tr>
+                    <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </g:each>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="3"></td>
             </tr>
         </tbody>
     </table>
@@ -87,7 +92,7 @@
             </tr>
         </thead>
         <tbody>
-            <g:each in="${surveys}" var="survey">
+            <g:each in="${drafts}" var="survey">
                 <tr>
                     <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
                     <td></td>
@@ -96,10 +101,7 @@
                 </tr>
             </g:each>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="4"></td>
             </tr>
         </tbody>
     </table>
@@ -117,11 +119,16 @@
         </tr>
         </thead>
         <tbody>
+        <g:each in="${completes}" var="survey">
+            <tr>
+                <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </g:each>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colspan="4"></td>
         </tr>
         </tbody>
     </table>

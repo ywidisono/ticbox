@@ -146,9 +146,14 @@ class AuthController {
         try {
             if ("surveyor".equalsIgnoreCase(params.userType)) {
                 errorAction = "registerSurveyor"
-                def surveyorRole = Role.findByName("Surveyor")
-                newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company)
+                Role surveyorRole = Role.findByName("Surveyor")
+                newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email)
                 newUser.addToRoles(surveyorRole).save()
+                new SurveyorProfile(
+                        email: params.email,
+                        companyName: params.company,
+                        userAccount: newUser
+                ).save()
             } else if ("respondent".equalsIgnoreCase(params.userType)) {
                 errorAction = "registerRespondent"
                 def respondentRole = Role.findByName("Respondent")
