@@ -18,6 +18,8 @@
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap.css')}" type="text/css">
 
+    <link rel="stylesheet" href="${resource(dir: 'frameworks/prettyCheckable', file: 'prettyCheckable.css')}" type="text/css">
+
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'app.css')}" type="text/css">
 
     <style type="text/css">
@@ -144,6 +146,7 @@
     <script type="text/javascript" src="${resource(dir: 'frameworks/jquery-ui-1.10.2/js', file: 'jquery-1.9.1.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'frameworks/jquery-ui-1.10.2/js', file: 'jquery-ui-1.10.2.custom.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'frameworks/bootstrap/js', file: 'bootstrap.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'frameworks/prettyCheckable', file: 'prettyCheckable.js')}"></script>
 
     <g:layoutHead/>
     <r:layoutResources />
@@ -201,6 +204,8 @@
     var surveySummary;
 
     jQuery(function(){
+
+        jQuery('input.prettyChk').prettyCheckable();
 
         jQuery(".nav > li.${controllerName}").addClass('active');
 

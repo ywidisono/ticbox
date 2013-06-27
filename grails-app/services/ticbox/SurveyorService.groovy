@@ -9,12 +9,12 @@ class SurveyorService {
     }
 
     SurveyorProfile getSurveyor(def username){
-        SurveyorProfile surveyor = SurveyorProfile.createCriteria().list {
+        def res = SurveyorProfile.createCriteria().list {
             userAccount {
                 eq 'username', username
             }
-        }?.get(0)
+        }
 
-        return surveyor
+        return res ? res.get(0) : null
     }
 }

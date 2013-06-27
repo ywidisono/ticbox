@@ -1,6 +1,7 @@
 package ticbox
 
 class Survey {
+    static SURVEY_TYPE = [EASY:"EASY", FREE:"FREE"]
     static POINT_TYPE = [TRUST:"TRUST", GOLD:"GOLD"]
     static STATUS = [DRAFT:'DRAFT', IN_PROGRESS:'IN_PROGRESS', COMPLETED:'COMPLETED']
 
@@ -25,6 +26,7 @@ class Survey {
     long point = 0
     String pointType = POINT_TYPE.GOLD
     String status = STATUS.DRAFT
+    String type = SURVEY_TYPE.EASY
 
     static belongsTo = [surveyor:SurveyorProfile]
 

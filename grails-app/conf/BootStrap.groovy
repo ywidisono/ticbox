@@ -11,11 +11,11 @@ class BootStrap {
     def init = { servletContext ->
 
         // users & roles
-        def adminRole = Role.findByName('Surveyor')?:new Role(name: "Surveyor")
-        adminRole.permissions = []
-        adminRole.addToPermissions("survey:*")
-        adminRole.addToPermissions("ajaxUpload:*")
-        adminRole.save()
+        def surveyorRole = Role.findByName('Surveyor')?:new Role(name: "Surveyor")
+        surveyorRole.permissions = []
+        surveyorRole.addToPermissions("survey:*")
+        surveyorRole.addToPermissions("ajaxUpload:*")
+        surveyorRole.save()
 
         def respondentRole = Role.findByName('Respondent')?:new Role(name: "Respondent")
         respondentRole.permissions = []
@@ -24,7 +24,8 @@ class BootStrap {
         respondentRole.save()
 
         def defaultUser = User.findByUsername('user123')?:new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
-        defaultUser.addToRoles(adminRole).save()
+        defaultUser.addToRoles(surveyorRole)
+                   .addToRoles(respondentRole).save()
 
         // parameters
         if (Parameter.count <= 0) {

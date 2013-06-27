@@ -11,6 +11,13 @@ class SurveyController {
     def surveyorService
 
     def index() {
+        /*if(!surveyorService.getCurrentSurveyor()){
+            flash.message = 'Your profile as surveyor cannot be found'
+
+            redirect uri: '/'
+        }*/
+
+
         [
             drafts : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.DRAFT),
             inProgress : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.IN_PROGRESS),

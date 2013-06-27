@@ -31,6 +31,10 @@
             padding: 10px 0 10px 0;
         }
 
+        #filterForm.form-horizontal .controls {
+            margin-right: 25px;
+        }
+
     </style>
 
     <script type="text/javascript">
@@ -326,8 +330,8 @@
 </div>
 <div class="line line-centered">
     <div class="col col-centered enableTooltip">
-        <button class="btn-ticbox" data-toggle="tooltip" data-placement="bottom" title="<g:message code="survey.type.free.description"/>"><g:message code="survey.type.free.label"/></button>
-        <button class="btn-ticbox" data-toggle="tooltip" data-placement="bottom" title="<g:message code="survey.type.easy.description"/>"><g:message code="survey.type.easy.label"/></button>
+        <input name="surveyType" data-toggle="tooltip" data-placement="bottom" type="radio" class="prettyChk" id="freeSurveyChk" data-label="<g:message code="survey.type.free.label"/>">
+        <input name="surveyType" data-toggle="tooltip" data-placement="bottom" type="radio" class="prettyChk" id="easySurveyChk" data-label="<g:message code="survey.type.easy.label"/>">
     </div>
 </div>
 
@@ -390,25 +394,28 @@
                 </g:elseif>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.LOOKUP}">
                     <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
-                        <label class="checkbox">
+                        %{--<label class="checkbox">
                             <input id="${profileItem.code}_${item.key}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item.key}" label="${item.value}"> ${item.value}
-                        </label>
+                        </label>--}%
+                        <input id="${profileItem.code}_${item.key}" class="check-item prettyChk" type="checkbox" data-label="${item.value}" name="${profileItem.code}" value="${item.key}" label="${item.value}">
                     </g:each>
                 </g:elseif>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.CHOICE}">
 
                     <g:if test="${profileItem.items}">
                         <g:each in="${profileItem.items}" var="item">
-                            <label class="checkbox">
+                            %{--<label class="checkbox">
                                 <input id="${profileItem.code}_${item}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item}"> ${item}
-                            </label>
+                            </label>--}%
+                            <input id="${profileItem.code}_${item}" class="check-item prettyChk" type="checkbox" data-label="${item}" name="${profileItem.code}" value="${item}">
                         </g:each>
                     </g:if>
                     <g:elseif test="${profileItem.lookupFrom}">
                         <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
-                            <label class="checkbox">
+                            %{--<label class="checkbox">
                                 <input id="${profileItem.code}_${item.key}" class="check-item" type="checkbox" name="${profileItem.code}" value="${item.key}" label="${item.value}"> ${item.value}
-                            </label>
+                            </label>--}%
+                            <input id="${profileItem.code}_${item.key}" class="check-item prettyChk" type="checkbox" data-label="${item.value}" name="${profileItem.code}" value="${item.key}" label="${item.value}">
                         </g:each>
                     </g:elseif>
 
