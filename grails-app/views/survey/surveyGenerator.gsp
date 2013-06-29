@@ -188,8 +188,17 @@
 
         jQuery(function() {
 
-            jQuery('#surveyLogo').click(function(){
+            jQuery('#uploadLogoBtn').click(function(){
                 jQuery('.qq-upload-button > input').trigger('click');
+            });
+
+            jQuery('#pickLogoBtn').click(function(){
+                logoId = jQuery('input.logoResourceId:checked').val();
+
+                if (logoId) {
+                    jQuery('#surveyLogo > img').attr('src', '${request.contextPath}/survey/viewLogo?resourceId='+logoId);
+                    jQuery('#chooseLogoModal').modal('hide');
+                }
             });
 
             jQuery('.surveyItemTypeAdd').click(function(){
@@ -234,7 +243,41 @@
                 }
             })*/;
 
+            jQuery('#chooseLogoModal').on('show', function(){
+
+                if(jQuery('#chooseLogoModal .modal-body').html().trim() == ''){ //TODO .is(:empty) doesn't work -___-'
+                    jQuery.getJSON('${request.contextPath}/survey/getLogoIds', {}, function(data){
+
+                        jQuery('#chooseLogoModal .modal-body').empty();
+                        jQuery.each(data, function(idx, id){
+                            populateLogoImageResources(id);
+                        });
+
+                    });
+                }
+
+                if (logoId) {
+                    jQuery('input.logoResourceId[value="'+ logoId +'"]', jQuery('#chooseLogoModal')).next('a').trigger('click'); //TODO to accommodate prettyCheckable
+                }
+
+            }).on('hide', function(){
+
+                //TODO
+
+            });
+
         });
+
+        var logoId = null;
+
+        function populateLogoImageResources(id){
+            var logoWrapper = jQuery('.templates .logoWrapper').clone().appendTo(jQuery('#chooseLogoModal .modal-body'));
+            jQuery('.logoImg', logoWrapper).attr('src', "${request.contextPath}/survey/viewLogo?resourceId="+id).click(function(){
+                //jQuery('input[name="logoResourceId"]', logoWrapper).prop('checked', true);
+                jQuery('input.logoResourceId', logoWrapper).next('a').trigger('click'); //TODO to accommodate prettyCheckable
+            });
+            jQuery('input.logoResourceId', logoWrapper).val(id).prettyCheckable();
+        }
 
         function constructQuestionItem(type, subtype){
             var answerComp = null;
@@ -399,7 +442,7 @@
 
         function submitSurvey(questionItems){
 
-            jQuery.post('${request.contextPath}/survey/submitQuestionItems', {questionItems: JSON.stringify(questionItems), surveyTitle: jQuery('#surveyTitle').val()}, function(data){
+            jQuery.post('${request.contextPath}/survey/submitSurvey', {questionItems: JSON.stringify(questionItems), surveyTitle: jQuery('#surveyTitle').val(), logoResourceId:logoId}, function(data){
 
                 if('SUCCESS' == data){
                     alert('Submission success..');
@@ -604,8 +647,8 @@
 
 <div class="line rowLine10">
     <div class="col col10">
-        <div id="surveyLogo" class="clickable" style="width: 250px; height: 150px; background: #f5f5f5 url('../images/ticbox/Logo_Placeholder.png') no-repeat center">
-            <img src="${request.contextPath}/survey/viewLogo" style="width: 250px; height: 150px">
+        <div id="surveyLogo" class="clickable" data-toggle="modal" href="#chooseLogoModal" style="width: 250px; height: 150px; background: #f5f5f5 url('../images/ticbox/Logo_Placeholder.png') no-repeat center">
+            <img src="${request.contextPath}/survey/viewLogo?resourceId=${survey[Survey.COMPONENTS.LOGO]}" style="width: 250px; height: 150px">
         </div>
     </div>
     <div class="col" style="width: 400px; height: auto; vertical-align: bottom; display: inline-block; color: #97b11a; padding-top: 80px;">
@@ -617,7 +660,11 @@
 <div style="display: none">
     <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}">
         <uploader:onComplete>
-            jQuery('#surveyLogo > img').attr('src', '${request.contextPath}/survey/viewLogo');
+            if(responseJSON.resourceId){
+                populateLogoImageResources(responseJSON.resourceId);
+            }else{
+                alert(responseJSON.message);
+            }
         </uploader:onComplete>
     </uploader:uploader>
 </div>
@@ -816,6 +863,14 @@
         </div>
     </div>
 
+    <div class="logoWrapper col">
+        <div class="col col10 clickable" style="border: 1px solid #cccccc">
+            <img class="logoImg" src="" style="width: 235px; height: 150px">
+        </div>
+        <div class="line line-centered" style="margin: 10px auto;">
+            <input type="radio" name="logoResourceId" class="logoResourceId">
+        </div>
+    </div>
 
 </div>
 
@@ -829,7 +884,23 @@
 
     </div>
     <div class="modal-footer">
-        <button class="btn-ticbox" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn-ticbox" data-dismiss="modal" aria-hidden="true"><g:message code="label.button.close" default="Close"/></button>
+    </div>
+</div>
+
+%{--Upload image resource modal--}%
+<div id="chooseLogoModal" class="modal modal80 hide fade" tabindex="-1" role="dialog" aria-labelledby="chooseLogoModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="chooseLogoModalLabel">Choose your logo or upload a new one</h3>
+    </div>
+    <div class="modal-body" style="overflow: auto">
+
+    </div>
+    <div class="modal-footer">
+        <button id="pickLogoBtn" class="btn-ticbox">Pick</button>
+        <button id="uploadLogoBtn" class="btn-ticbox">Upload</button>
+        <button class="btn-ticbox" data-dismiss="modal" aria-hidden="true"><g:message code="label.button.close" default="Close"/></button>
     </div>
 </div>
 

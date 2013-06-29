@@ -1,6 +1,7 @@
 package ticbox
 
 import com.mongodb.DBObject
+import org.bson.types.ObjectId
 import org.codehaus.groovy.grails.web.util.WebUtils
 
 class SurveyService {
@@ -55,12 +56,19 @@ class SurveyService {
         }
     }
 
-    def submitQuestionItems(String questionItemsJSON, String title, Survey survey){
+    def submitSurvey(params, Survey survey){
         if (survey) {
-            DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(questionItemsJSON)
+            DBObject dbObject = (DBObject) com.mongodb.util.JSON.parse(params.questionItems)
 
             survey[Survey.COMPONENTS.QUESTION_ITEMS] = dbObject
-            survey.title = title
+            survey.title = params.surveyTitle
+
+            if(params.logoResourceId){
+                def userResource = UserResource.findById(new ObjectId(params.logoResourceId))
+                if (userResource) {
+                    survey[Survey.COMPONENTS.LOGO] = userResource.id
+                }
+            }
 
             survey.save()
         }

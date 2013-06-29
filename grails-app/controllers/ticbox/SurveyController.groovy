@@ -2,6 +2,7 @@ package ticbox
 
 import grails.converters.JSON
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
+import org.bson.types.ObjectId
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 
@@ -90,17 +91,24 @@ class SurveyController {
         [survey : survey]
     }
 
-    def submitQuestionItems(){
+    def submitSurvey(){
         try {
-            def questionItemsJSON = params.questionItems
 
-            surveyService.submitQuestionItems(questionItemsJSON, params.surveyTitle, surveyService.getCurrentEditedSurvey())
+            surveyService.submitSurvey(params, surveyService.getCurrentEditedSurvey())
 
             render 'SUCCESS'
         } catch (Exception e) {
             e.printStackTrace()
             render 'FAILED'
         }
+    }
+
+    def getLogoIds(){
+        def ids = UserResource.findAllByUserAndKind(surveyorService.getCurrentSurveyor()?.userAccount, Survey.COMPONENTS.LOGO)?.collect {
+            it.id.toStringMongod()
+        }
+
+        render ids as JSON
     }
 
     def uploadLogo(){
@@ -115,15 +123,16 @@ class SurveyController {
                 inputStream = request.inputStream
             }
 
-            def survey = surveyService.getCurrentEditedSurvey()
-            survey[Survey.COMPONENTS.LOGO] = Base64.encode(inputStream.bytes)
-            survey.save()
+            def userResource = new UserResource(user: surveyorService.getCurrentSurveyor()?.userAccount, kind: Survey.COMPONENTS.LOGO).save()
+            userResource[Survey.COMPONENTS.LOGO] = Base64.encode(inputStream.bytes)
+            userResource.save()
 
-            if (survey.hasErrors()) {
-                throw new Exception("${survey.errors.allErrors.first()}")
+            if (userResource.hasErrors()) {
+                throw new Exception("${userResource.errors.allErrors.first()}")
             }
 
             rend.success = true
+            rend.resourceId = userResource.id.toStringMongod()
 
         } catch (Exception e) {
             rend.success = false
@@ -136,11 +145,21 @@ class SurveyController {
     }
     
     def viewLogo() {
-        def survey = surveyService.getCurrentEditedSurvey()
+        def userResource
 
-        if (survey[Survey.COMPONENTS.LOGO]) {
-            def imageByte
-            imageByte = Base64.decode(survey[Survey.COMPONENTS.LOGO])
+        if (params.resourceId) {
+            userResource = UserResource.findById(new ObjectId(params.resourceId))
+        }else{
+            def survey = surveyService.getCurrentEditedSurvey()
+
+            if (survey) {
+                ObjectId objectId = survey[Survey.COMPONENTS.LOGO]
+                userResource = UserResource.findByid(objectId)
+            }
+        }
+
+        if (userResource) {
+            def imageByte = Base64.decode(userResource[Survey.COMPONENTS.LOGO])
             response.outputStream << imageByte
         }
     }
