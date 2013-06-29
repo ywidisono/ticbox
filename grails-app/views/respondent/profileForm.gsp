@@ -23,7 +23,7 @@
     <!-- static fields -->
     <div class="control-group">
         <div class="controls">
-            <p><img id="pic" src="${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}"/></p>
+            <p><img id="pic" class="img-polaroid" src="${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}"/></p>
             <uploader:uploader id="imageUploader" url="${[controller:'respondent', action:'uploadImage']}" params="${[respondentId: respondent.id]}">
                 <uploader:onComplete>
                     $('#pic').attr('src', '${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}&u='+new Date().getTime());

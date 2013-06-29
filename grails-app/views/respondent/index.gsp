@@ -7,10 +7,6 @@
             background-color: #efefef;
             margin: 1em 0em;
         }
-        .center {
-            text-align: center;
-            vertical-align: middle;
-        }
     </style>
 </head>
 <body>
