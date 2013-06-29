@@ -66,5 +66,6 @@ grails.project.dependency.resolution = {
         compile ":shiro:1.1.4"
         compile ":shiro-oauth:0.2"
         compile ":ajax-uploader:1.1"
+        compile ":mail:1.0.1"
     }
 }

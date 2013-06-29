@@ -100,6 +100,12 @@
     .error {
         color: tomato;
     }
+
+    .center {
+        text-align: center;
+        vertical-align: middle;
+    }
+
     </style>
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap-responsive.css')}" type="text/css">
@@ -131,10 +137,10 @@
                 </p>
                 <ul class="nav">
                     <li class="index"><g:link action="index">Survey List</g:link></li>
-                    <li class="respondentFilter"><g:link action="profileForm">Profile</g:link></li>
-                    <li class="surveyGenerator"><a href="#">Invite Friends</a></li>
-                    <li class="surveyGenerator"><g:link action="redeemGold">Redeem GOLD Points</g:link></li>
-                    <li class="surveyGenerator"><g:link action="goldHistory">GOLD Points History</g:link></li>
+                    <li class="profileForm"><g:link action="profileForm">Profile</g:link></li>
+                    <li class="inviteFriends"><g:link action="inviteFriends">Invite Friends</g:link></li>
+                    <li class="redeemGold"><g:link action="redeemGold">Redeem GOLD Points</g:link></li>
+                    <li class="goldHistory"><g:link action="goldHistory">GOLD Points History</g:link></li>
                 </ul>
             </div>
         </div>
@@ -154,11 +160,21 @@
                     </div>
                     <div id="respondentProfileContainer" class="accordion-body collapse in">
                         <div class="accordion-inner" style="padding: 5px 5px;">
-                            <div class="line">
-                                Trust : ${respondent?.respondentProfile?.trust}
+                            <div class="row-fluid">
+                                <div class="span12 center">
+                                    <img id="pic" src="${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}"/>
+                                </div>
                             </div>
-                            <div class="line">
-                                Gold  : ${respondent?.respondentProfile?.gold}
+                            <br />
+                            <div class="row-fluid">
+                                <div class="span6 center">
+                                    <div>Trust</div>
+                                    <div>${respondent?.respondentProfile?.trust}</div>
+                                </div>
+                                <div class="span6 center">
+                                    <div>Gold</div>
+                                    <div>${respondent?.respondentProfile?.gold}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -181,7 +197,7 @@
                                 <g:link action="profileForm">Profile</g:link>
                             </div>
                             <div class="line">
-                                Invite Friends
+                                <g:link action="inviteFriends">Invite Friends</g:link>
                             </div>
                             <div class="line">
                                 <g:link action="redeemGold">Redeem GOLD Points</g:link>

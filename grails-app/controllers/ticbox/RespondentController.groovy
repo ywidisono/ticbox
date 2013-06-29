@@ -11,6 +11,7 @@ class RespondentController {
     def respondentService
     def surveyService
     def goldService
+    def mailService
 
     def index() {
         def surveyList = Survey.all
@@ -151,5 +152,42 @@ class RespondentController {
             log.error(e.getMessage(), e)
             render 'FAILED'
         }
+    }
+
+    def inviteFriends = {
+        def principal = SecurityUtils.subject.principal
+        def respondent = User.findByUsername(principal.toString())
+        [respondent: respondent]
+    }
+
+    def inviteByEmail = {
+        def emails = prepareEmails(params.friendEmails)
+        def emailFrom = "no-reply@ticbox.co"
+        def emailSubject = "Join Ticbox Respondent!"
+        def emailBody = "Hi <br><br> Please join Ticbox as respondent to make me rich! <br><br> Thanks, <br> " + SecurityUtils.subject.principal
+        try {
+            mailService.sendMail {
+                to emails
+                from emailFrom
+                subject emailSubject
+                html emailBody
+            }
+            render 'SUCCESS'
+        } catch (Exception e) {
+            log.error(e.getMessage(), e)
+            render 'FAILED'
+        }
+    }
+
+    private String[] prepareEmails(String rawEmails) {
+        def res = null
+        if (rawEmails) {
+            def arrayEmails = rawEmails.split(",")
+            for (int i = 0; i < arrayEmails.length; i++) {
+                arrayEmails[i] = arrayEmails[i].trim().replaceAll(" ","")
+            }
+            res = (arrayEmails.length > 0) ? arrayEmails : null
+        }
+        return res;
     }
 }
