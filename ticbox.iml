@@ -82,6 +82,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="grails-2.2.1" level="application" />
+    <orderEntry type="library" name="grails-2.2.1" level="project" />
     <orderEntry type="module" module-name="ticbox-grailsPlugins" />
   </component>
 </module>
