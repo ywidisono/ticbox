@@ -42,8 +42,8 @@
                             <ul class="sign-up-icons">
                                 <li style="background: none; width: auto; margin-right: 10px;"><g:link controller="auth" action="login">Login</g:link></li>
                                 <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
-                                <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
-                                <oauth:connect provider="google"><li class="gg"> </li></oauth:connect>
+                                <oauth:connect provider="twitter"><li class="tw"></li></oauth:connect>
+                                <oauth:connect provider="google"><li class="gg"></li></oauth:connect>
                             </ul>
                         </li>
                     </shiro:notAuthenticated>
@@ -156,8 +156,12 @@
 
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
-            format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
+            format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-60:c+10'
         });
+
     });
 
 </script>

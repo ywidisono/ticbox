@@ -137,7 +137,7 @@ class AuthController {
 
     def registerRespondent = {
         def profileItemList = respondentService.getProfileItems()
-        [profileItemList : profileItemList]
+        [profileItemList : profileItemList, ref: params.ref]
     }
 
     def register = {
@@ -160,10 +160,13 @@ class AuthController {
                 def respondentProfile = respondentService.getRespondentProfileFromParams(params)
                 newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company, respondentProfile: respondentProfile)
                 newUser.addToRoles(respondentRole).save()
+                processReference(params.referer, newUser)
             }
+
             if (newUser.hasErrors()) {
                 throw new Exception(newUser.errors.allErrors.first())
             }
+
             flash.message = message(code: "general.create.success.message")
             redirect(uri: "/")
         } catch (Exception e) {
@@ -202,5 +205,17 @@ class AuthController {
         }
         result = [success: success, message: message]
         render result  as JSON
+    }
+
+    private void processReference(String referer, User reference) {
+        if (referer && reference) {
+            User user = User.findByUsername(referer)
+            if (user) {
+                user.respondentProfile?.references?.add(reference.username)
+                user.save()
+                reference.respondentProfile?.referer = referer
+                reference.save()
+            }
+        }
     }
 }
