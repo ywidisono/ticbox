@@ -1,3 +1,6 @@
+dataSource {
+
+}
 environments {
     development {
         grails {
@@ -7,6 +10,7 @@ environments {
                 username = ""
                 password = ""
                 databaseName = "ticbox"
+                //diaglog = 3
             }
         }
     }

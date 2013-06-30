@@ -1,7 +1,7 @@
 package ticbox
 
 class RespondentProfile {
-    Map<String,String> profileItems  = [:]
+    Map<String,Object> profileItems  = [:]
     List<RespondentGoldHistory> goldHistory = []
     String referer
     List<String> references = []

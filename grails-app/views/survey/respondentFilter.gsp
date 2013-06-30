@@ -41,6 +41,8 @@
 
         jQuery(function(){
 
+            jQuery('input.surveyType[value="${survey.type}"]').prop('checked', true);
+
             jQuery('#addFilterBtn').click(function(){
 
                 var filterComponentCode = jQuery('#respondentFilterComponents').val();
@@ -115,7 +117,7 @@
 
                 var filterItemsJSON = JSON.stringify(filterItems);
 
-                jQuery.getJSON('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON}, function(data){
+                jQuery.getJSON('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON, surveyType:jQuery('input.surveyType:checked').val()}, function(data){
 
                     alert('Submitted');
 
@@ -164,39 +166,43 @@
 
                         case '${ProfileItem.TYPES.CHOICE}' :
                             var filter_ = filter;
-                            jQuery('.check-item', template).each(function(){
+                            jQuery('input.check-item', template).each(function(){
                                 var chkBox = this;
                                 jQuery.each(filter_.checkItems, function(idx, item){
                                     if(item instanceof Object){
                                         if(jQuery(chkBox).val() == item.key){
-                                            jQuery(chkBox).prop('checked', true);
+                                            //jQuery(chkBox).prop('checked', true);
+                                            jQuery(chkBox).parent().find('a').trigger('click');
                                         }
                                     }else{
                                         if(jQuery(chkBox).val() == item){
-                                            jQuery(chkBox).prop('checked',true);
+                                            //jQuery(chkBox).prop('checked',true);
+                                            jQuery(chkBox).parent().find('a').trigger('click');
                                         }
                                     }
                                 });
-                            });
+                            })/*.prettyCheckable()*/;
 
                             break;
 
                         case '${ProfileItem.TYPES.LOOKUP}' :
                             var filter_ = filter;
-                            jQuery('.check-item', template).each(function(){
+                            jQuery('input.check-item', template).each(function(){
                                 var chkBox = this;
                                 jQuery.each(filter_.checkItems, function(idx, item){
                                     if(item instanceof Object){
                                         if(jQuery(chkBox).val() == item.key){
-                                            jQuery(chkBox).prop('checked', true);
+                                            //jQuery(chkBox).prop('checked', true);
+                                            jQuery(chkBox).parent().find('a').trigger('click');
                                         }
                                     }else{
                                         if(jQuery(chkBox).val() == item){
-                                            jQuery(chkBox).prop('checked', true);
+                                            //jQuery(chkBox).prop('checked', true);
+                                            jQuery(chkBox).parent().find('a').trigger('click');
                                         }
                                     }
                                 });
-                            });
+                            })/*.prettyCheckable()*/;
 
                             break;
 
@@ -302,6 +308,16 @@
 
     <div class="line side-panel">
         <div class="line header">
+            Survey
+        </div>
+        <div class="line">
+            Name : ${survey.name}
+        </div>
+        <hr/>
+    </div>
+
+    <div class="line side-panel">
+        <div class="line header">
             Charge Summary
         </div>
         <div class="line">
@@ -330,8 +346,8 @@
 </div>
 <div class="line line-centered">
     <div class="col col-centered enableTooltip">
-        <input name="surveyType" data-toggle="tooltip" data-placement="bottom" type="radio" class="prettyChk" id="freeSurveyChk" data-label="<g:message code="survey.type.free.label"/>">
-        <input name="surveyType" data-toggle="tooltip" data-placement="bottom" type="radio" class="prettyChk" id="easySurveyChk" data-label="<g:message code="survey.type.easy.label"/>">
+        <input name="surveyType" data-toggle="tooltip" data-placement="bottom" type="radio" class="surveyType prettyChk" id="freeSurveyChk" data-label="<g:message code="survey.type.free.label"/>" value="${Survey.SURVEY_TYPE.FREE}">
+        <input name="surveyType" data-toggle="tooltip" data-placement="bottom" type="radio" class="surveyType prettyChk" id="easySurveyChk" data-label="<g:message code="survey.type.easy.label"/>" value="${Survey.SURVEY_TYPE.EASY}">
     </div>
 </div>
 

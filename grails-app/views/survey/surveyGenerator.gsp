@@ -189,7 +189,9 @@
         jQuery(function() {
 
             jQuery('#uploadLogoBtn').click(function(){
-                jQuery('.qq-upload-button > input').trigger('click');
+                jQuery('.qq-upload-button > input')
+                        .attr('accept', 'image/*')
+                        .trigger('click');
             });
 
             jQuery('#pickLogoBtn').click(function(){
@@ -651,14 +653,19 @@
             <img src="${request.contextPath}/survey/viewLogo?resourceId=${survey[Survey.COMPONENTS.LOGO]}" style="width: 250px; height: 150px">
         </div>
     </div>
-    <div class="col" style="width: 400px; height: auto; vertical-align: bottom; display: inline-block; color: #97b11a; padding-top: 80px;">
-        <g:message code="label.survey.survey-generator.survey-title" default="Your survey title here"/>
-        <textarea id="surveyTitle" style="width: 350px; display: inline-block; resize: none;"></textarea>
+    <div class="col" style="width: 400px; height: auto; vertical-align: bottom; display: inline-block; color: #97b11a; padding-top: 20px;">
+        <div class="line line-centered">
+            <h3>${survey.name}</h3>
+        </div>
+        <div class="line">
+            <g:message code="label.survey.survey-generator.survey-title" default="Your survey title here"/>
+            <textarea id="surveyTitle" style="width: 350px; display: inline-block; resize: none;"></textarea>
+        </div>
     </div>
 </div>
 
 <div style="display: none">
-    <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}">
+    <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}" sizeLimit="512" allowedExtensions="['jpeg', 'png', 'gif']">
         <uploader:onComplete>
             if(responseJSON.resourceId){
                 populateLogoImageResources(responseJSON.resourceId);
@@ -676,7 +683,7 @@
 <div class="line line-centered">
     <button class="btn-ticbox link" href="${request.contextPath}/survey/respondentFilter"><g:message code="label.button.back" default="Back"/></button>
     <button id="saveSurveyBtn" class="btn-ticbox"><g:message code="label.button.save" default="Save"/></button>
-    <button id="finalizeSurveyBtn" class="btn-ticbox"><g:message code="label.button.finalize" default="Finalize and Publish"/></button>
+    <button id="finalizeSurveyBtn" class="btn-ticbox link" href="${request.contextPath}/survey/finalizeAndPublishSurvey"><g:message code="label.button.finalize" default="Finalize and Publish"/></button>
 </div>
 
 <div id="menuNavPanelContent" class="line">
@@ -865,7 +872,7 @@
 
     <div class="logoWrapper col">
         <div class="col col10 clickable" style="border: 1px solid #cccccc">
-            <img class="logoImg" src="" style="width: 235px; height: 150px">
+            <img class="logoImg" src="" style="width: 230px; height: 150px">
         </div>
         <div class="line line-centered" style="margin: 10px auto;">
             <input type="radio" name="logoResourceId" class="logoResourceId">

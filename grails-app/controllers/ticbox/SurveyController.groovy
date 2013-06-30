@@ -20,9 +20,9 @@ class SurveyController {
 
 
         [
-            drafts : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.DRAFT),
-            inProgress : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.IN_PROGRESS),
-            completes : Survey.findBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.COMPLETED)
+            drafts : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.DRAFT),
+            inProgress : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.IN_PROGRESS),
+            completes : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.COMPLETED)
         ]
     }
 
@@ -72,7 +72,7 @@ class SurveyController {
         try {
             def filterItemsJSON = params.filterItemsJSON
 
-            surveyService.submitRespondentFilter(filterItemsJSON, surveyService.getCurrentEditedSurvey())
+            surveyService.submitRespondentFilter(filterItemsJSON, params.surveyType, surveyService.getCurrentEditedSurvey())
 
             render filterItemsJSON
         } catch (Exception e) {
@@ -101,6 +101,12 @@ class SurveyController {
             e.printStackTrace()
             render 'FAILED'
         }
+    }
+
+    def finalizeAndPublishSurvey(){
+        surveyService.finalizeAndPublishSurvey(params, surveyService.getCurrentEditedSurvey())
+
+        redirect action: 'index'
     }
 
     def getLogoIds(){
