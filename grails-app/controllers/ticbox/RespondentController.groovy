@@ -3,9 +3,12 @@ package ticbox
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 import grails.converters.JSON
 import org.apache.shiro.SecurityUtils
+import org.scribe.model.Token
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
+import uk.co.desirableobjects.oauth.scribe.OauthProvider
+import uk.co.desirableobjects.oauth.scribe.SupportedOauthVersion
 
 class RespondentController {
     def respondentService
@@ -112,7 +115,7 @@ class RespondentController {
             respondentService.saveReward(params.respondentId, params.surveyId)
             render 'SUCCESS'
         } catch (Exception e) {
-            log.error(e.getMessage(), e)
+            log.error(e.message(), e)
             render 'FAILED'
         }
     }
@@ -149,22 +152,31 @@ class RespondentController {
             goldService.saveRedemptionRequest(params)
             render 'SUCCESS'
         } catch (Exception e) {
-            log.error(e.getMessage(), e)
+            log.error(e.message(), e)
             render 'FAILED'
         }
     }
 
     def inviteFriends = {
         def principal = SecurityUtils.subject.principal
-        def respondent = User.findByUsername(principal.toString())
-        [respondent: respondent]
+        def respondent = null
+        def fbAppId = null
+        try {
+            respondent = User.findByUsername(principal.toString())
+            fbAppId = grailsApplication.config.oauth.providers.facebook.key
+        } catch (Exception e) {
+            log.error(e.message, e)
+        }
+        [respondent: respondent, refLink: getRespondentReferenceLink(respondent), fbAppId:fbAppId]
     }
 
     def inviteByEmail = {
+        def principal = SecurityUtils.subject.principal
+        def respondent = User.findByUsername(principal.toString())
         def emails = prepareEmails(params.friendEmails)
-        def emailFrom = "no-reply@ticbox.co"
-        def emailSubject = "Join Ticbox Respondent!"
-        def emailBody = "Hi <br><br> Please join Ticbox as respondent to make me rich! <br><br> Thanks, <br> " + SecurityUtils.subject.principal
+        def emailFrom = message(code: "ticbox.respondent.invite.email.from")
+        def emailSubject = message(code: "ticbox.respondent.invite.email.subject")
+        def emailBody = message(code: "ticbox.respondent.invite.email.body", args: [getRespondentReferenceLink(respondent)])
         try {
             mailService.sendMail {
                 to emails
@@ -174,7 +186,7 @@ class RespondentController {
             }
             render 'SUCCESS'
         } catch (Exception e) {
-            log.error(e.getMessage(), e)
+            log.error(e.message(), e)
             render 'FAILED'
         }
     }
@@ -189,5 +201,9 @@ class RespondentController {
             res = (arrayEmails.length > 0) ? arrayEmails : null
         }
         return res;
+    }
+
+    private String getRespondentReferenceLink(User respondent) {
+        return "${g.createLink(controller: 'auth', action: 'registerRespondent', absolute: true)}?ref=${respondent.username}"
     }
 }

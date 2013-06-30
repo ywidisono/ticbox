@@ -106,6 +106,34 @@
         vertical-align: middle;
     }
 
+    .icon-fb, .icon-tw, .icon-li, .icon-gg {
+        display:inline-block;
+        *display:inline; /*IE7*/
+        *zoom:1; /*IE7*/
+        background: transparent url("../images/ticbox/FB_TW_LI_Gl_logo.png") no-repeat;
+        width: 23px;
+        height: 25px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .icon-fb{
+        background-position: 0 0;
+    }
+
+    .icon-tw{
+        background-position: -24px 0;
+    }
+
+    .icon-li{
+        background-position: -48px 0;
+    }
+
+    .icon-gg{
+        background-position: -72px 0;
+    }
+
+
     </style>
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap-responsive.css')}" type="text/css">
