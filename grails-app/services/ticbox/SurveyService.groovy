@@ -94,69 +94,69 @@ class SurveyService {
     def getFilteredRespondents(Survey survey){
         if(survey && survey[Survey.COMPONENTS.RESPONDENT_FILTER]){
 
-            def c = User.createCriteria()
+            def c = RespondentProfile.createCriteria()
 
             c.list {
 
-                respondentProfile {
-                    survey[Survey.COMPONENTS.RESPONDENT_FILTER].each{filter ->
-                        switch(filter.type){
+                survey[Survey.COMPONENTS.RESPONDENT_FILTER].each{filter ->
+                    switch(filter.type){
 
-                            case ProfileItem.TYPES.CHOICE :
+                        case ProfileItem.TYPES.CHOICE :
 
-                                /*profileItems{
-                                    "${filter.code}" {
-                                        inlist(filter.checkItems instanceof List<Map> ? filter.checkItems.keys : filter.checkItems)
+                            profileItems {
+                                filter.checkItems?.each{item ->
+                                    or {
+                                        like filter.code, "%${item instanceof  Map ? item.key : item}%"
                                     }
-                                }*/
-
-                                break
-
-                            case ProfileItem.TYPES.DATE :
-
-                                profileItems {
-                                    gte filter.code, Date.parse('dd/MM/yyyy', filter.valFrom)
-                                    lte filter.code, Date.parse('dd/MM/yyyy', filter.valTo)
                                 }
+                            }
 
-                                break
+                            break
 
-                            case ProfileItem.TYPES.LOOKUP :
+                        case ProfileItem.TYPES.DATE :
 
-                                /*profileItems{
-                                    "${filter.code}" {
-                                        inlist(filter.checkItems instanceof List<Map> ? filter.checkItems.keys : filter.checkItems)
+                            profileItems {
+                                gte filter.code, Date.parse('dd/MM/yyyy', filter.valFrom)
+                                lte filter.code, Date.parse('dd/MM/yyyy', filter.valTo)
+                            }
+
+                            break
+
+                        case ProfileItem.TYPES.LOOKUP :
+
+                            profileItems {
+                                filter.checkItems?.each{item ->
+                                    or {
+                                        like filter.code, "%${item instanceof  Map ? item.key : item}%"
                                     }
-                                }*/
-
-                                break
-
-                            case ProfileItem.TYPES.NUMBER :
-
-                                profileItems {
-                                    gte filter.code, Double.valueOf(filter.valFrom)
-                                    lte filter.code, Double.valueOf(filter.valTo)
                                 }
+                            }
 
-                                break
+                            break
 
-                            case ProfileItem.TYPES.STRING :
+                        case ProfileItem.TYPES.NUMBER :
 
-                                profileItems {
-                                    eq filter.code, filter.val //TODO should be a wildcard query
-                                }
+                            profileItems {
+                                gte filter.code, Double.valueOf(filter.valFrom)
+                                lte filter.code, Double.valueOf(filter.valTo)
+                            }
 
-                                break
+                            break
 
-                            default :
+                        case ProfileItem.TYPES.STRING :
 
-                                break
+                            profileItems {
+                                like filter.code, "%${filter.val}%" //TODO should be a wildcard query
+                            }
 
-                        }
+                            break
+
+                        default :
+
+                            break
+
                     }
                 }
-
-
 
             }
 
