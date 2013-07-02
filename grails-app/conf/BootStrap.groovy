@@ -11,20 +11,26 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        // todo for dev only
+        Role.collection.drop()
+        User.collection.drop()
+        Parameter.collection.drop()
+
+
         // users & roles
-        def surveyorRole = Role.findByName('Surveyor')?:new Role(name: "Surveyor")
+        def surveyorRole = new Role(name: "Surveyor")
         surveyorRole.permissions = []
         surveyorRole.addToPermissions("survey:*")
                     .addToPermissions("ajaxUpload:*")
                     .save()
 
-        def respondentRole = Role.findByName('Respondent')?:new Role(name: "Respondent")
+        def respondentRole = new Role(name: "Respondent")
         respondentRole.permissions = []
         respondentRole.addToPermissions("respondent:*")
                       .addToPermissions("ajaxUpload:*")
                       .save()
 
-        def defaultUser = User.findByUsername('user123')?:new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
+        def defaultUser = new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
         def profile = new RespondentProfile()
         profile.profileItems = [
                 PI_ADDR001 : 'nowhere somewhere everywhere wherever',
@@ -42,10 +48,9 @@ class BootStrap {
         defaultUser.save()
 
         // parameters
-        if (Parameter.count <= 0) {
-            new Parameter(code:"GOLD_RATE_IDR", value: "1000").save()
-            new Parameter(code:"GOLD_MIN_REDEMPTION", value: "50").save()
-        }
+        new Parameter(code:"GOLD_RATE_IDR", value: "1000", desc: "Conversion rate gold to IDR").save()
+        new Parameter(code:"GOLD_MIN_REDEMPTION", value: "50", desc: "Minimum redemption in gold").save()
+        new Parameter(code:"REFERRER_REWARD", value: "1", desc: "Gold reward to referrer on reference survey completion").save()
 
         bootstrapService.init()
 

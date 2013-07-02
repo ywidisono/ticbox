@@ -2,6 +2,8 @@ package ticbox
 
 class RespondentService {
 
+    def goldService
+
     def getProfileItems () {
         return ProfileItem.list()?.sort{it.seq}
     }
@@ -24,16 +26,27 @@ class RespondentService {
         return profile
     }
 
-    def saveReward(String respondentId, String surveyId) throws Exception {
+    def saveSurveyReward(String respondentId, String surveyId) throws Exception {
         def respondent = User.findById(respondentId)
         def survey = Survey.findBySurveyId(surveyId)
         if (Survey.POINT_TYPE.GOLD.equalsIgnoreCase(survey.pointType)) {
-            def goldHistory = new RespondentGoldHistory(description: survey.title, amount: survey.point, type: RespondentGoldHistory.TYPES.INCOME, date: new Date()).save()
-            respondent?.respondentProfile?.goldHistory?.add(goldHistory)
-            respondent?.respondentProfile?.gold += survey.point
+            goldService.addGoldByTakingSurvey(survey, respondent)
         } else if (Survey.POINT_TYPE.TRUST.equalsIgnoreCase(survey.pointType)) {
             respondent?.respondentProfile?.trust += survey.point
+            respondent.save()
         }
-        respondent.save()
     }
+
+    def processReference(String referrer, User reference) {
+        if (referrer && reference) {
+            User user = User.findByUsername(referrer)
+            if (user) {
+                user.respondentProfile?.references?.add(reference.username)
+                user.save()
+                reference.respondentProfile?.referrer = referrer
+                reference.save()
+            }
+        }
+    }
+
 }

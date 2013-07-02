@@ -3,12 +3,9 @@ package ticbox
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 import grails.converters.JSON
 import org.apache.shiro.SecurityUtils
-import org.scribe.model.Token
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
-import uk.co.desirableobjects.oauth.scribe.OauthProvider
-import uk.co.desirableobjects.oauth.scribe.SupportedOauthVersion
 
 class RespondentController {
     def respondentService
@@ -112,10 +109,10 @@ class RespondentController {
         try {
             def surveyResponse = params.surveyResponse
             surveyService.saveResponse(surveyResponse, params.surveyId, params.respondentId)
-            respondentService.saveReward(params.respondentId, params.surveyId)
+            respondentService.saveSurveyReward(params.respondentId, params.surveyId)
             render 'SUCCESS'
         } catch (Exception e) {
-            log.error(e.message(), e)
+            log.error(e.message, e)
             render 'FAILED'
         }
     }
@@ -152,7 +149,7 @@ class RespondentController {
             goldService.saveRedemptionRequest(params)
             render 'SUCCESS'
         } catch (Exception e) {
-            log.error(e.message(), e)
+            log.error(e.message, e)
             render 'FAILED'
         }
     }
@@ -186,7 +183,7 @@ class RespondentController {
             }
             render 'SUCCESS'
         } catch (Exception e) {
-            log.error(e.message(), e)
+            log.error(e.message, e)
             render 'FAILED'
         }
     }

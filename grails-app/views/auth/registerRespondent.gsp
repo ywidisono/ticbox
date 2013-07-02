@@ -9,7 +9,7 @@
     <h3>Register Respondent</h3>
 <g:form name="registerForm" action="register">
     <g:hiddenField name="userType" value="respondent"/>
-    <g:hiddenField name="referer" value="${ref}"/>
+    <g:hiddenField name="referrer" value="${ref}"/>
     <fieldset>
         <legend><g:message code="app.register.respondent.label" /></legend>
         <div class="row-fluid">

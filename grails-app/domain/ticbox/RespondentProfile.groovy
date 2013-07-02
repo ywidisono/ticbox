@@ -3,12 +3,12 @@ package ticbox
 class RespondentProfile {
     Map<String,Object> profileItems  = [:]
     List<RespondentGoldHistory> goldHistory = []
-    String referer
+    String referrer
     List<String> references = []
     long trust = 0
     long gold = 0
     static embedded = ["profileItems", "goldHistory"]
     static constraints = {
-        referer (nullable: true)
+        referrer (nullable: true)
     }
 }

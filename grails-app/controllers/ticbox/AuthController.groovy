@@ -15,7 +15,7 @@ import uk.co.desirableobjects.oauth.scribe.OauthService
 
 class AuthController {
     def respondentService
-    OauthService oauthService
+    def oauthService
 
     def index = { redirect(action: "login", params: params) }
 
@@ -160,7 +160,7 @@ class AuthController {
                 def respondentProfile = respondentService.getRespondentProfileFromParams(params)
                 newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company, respondentProfile: respondentProfile)
                 newUser.addToRoles(respondentRole).save()
-                processReference(params.referer, newUser)
+                respondentService.processReference(params.referrer, newUser)
             }
 
             if (newUser.hasErrors()) {
@@ -207,15 +207,4 @@ class AuthController {
         render result  as JSON
     }
 
-    private void processReference(String referer, User reference) {
-        if (referer && reference) {
-            User user = User.findByUsername(referer)
-            if (user) {
-                user.respondentProfile?.references?.add(reference.username)
-                user.save()
-                reference.respondentProfile?.referer = referer
-                reference.save()
-            }
-        }
-    }
 }
