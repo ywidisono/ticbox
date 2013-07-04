@@ -164,95 +164,15 @@
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
-                    <li class="index"><g:link action="index">Survey List</g:link></li>
-                    <li class="profileForm"><g:link action="profileForm">Profile</g:link></li>
-                    <li class="inviteFriends"><g:link action="inviteFriends">Invite Friends</g:link></li>
-                    <li class="redeemGold"><g:link action="redeemGold">Redeem GOLD Points</g:link></li>
-                    <li class="goldHistory"><g:link action="goldHistory">GOLD Points History</g:link></li>
+                    <li class="index"><g:link action="index">Manage Users</g:link></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 
-<div id="main-container">
-    <div class="row" style="margin-left: -10px;">
-        <div id="menuNavPanel" class="span" style="position: fixed;">
-
-            <div id="respondentProfileAccordion" class="accordion" style="width: 220px;">
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#respondentProfileAccordion" href="#respondentProfileContainer">
-                            Hello, ${respondent?.username}
-                        </a>
-                    </div>
-                    <div id="respondentProfileContainer" class="accordion-body collapse in">
-                        <div class="accordion-inner" style="padding: 5px 5px;">
-                            <div class="row-fluid">
-                                <div class="span12 center">
-                                    <g:if test="${respondent.pic}">
-                                        <img id="pic" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
-                                    </g:if>
-                                    <g:else>
-                                        <img id="pic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
-                                    </g:else>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row-fluid">
-                                <div class="span6 center">
-                                    <div>Trust</div>
-                                    <div>${respondent?.respondentProfile?.trust}</div>
-                                </div>
-                                <div class="span6 center">
-                                    <div>Gold</div>
-                                    <div>${respondent?.respondentProfile?.gold}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="respondentNavAccordion" class="accordion" style="width: 220px;">
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#respondentNavAccordion" href="#respondentNavContainer">
-                            DASHBOARD
-                        </a>
-                    </div>
-                    <div id="respondentNavContainer" class="accordion-body collapse in">
-                        <div class="accordion-inner" style="padding: 5px 5px;">
-                            <div class="line">
-                                <g:link action="index">Survey List</g:link>
-                            </div>
-                            <div class="line">
-                                <g:link action="profileForm">Profile</g:link>
-                            </div>
-                            <div class="line">
-                                <g:link action="inviteFriends">Invite Friends</g:link>
-                            </div>
-                            <div class="line">
-                                <g:link action="redeemGold">Redeem GOLD Points</g:link>
-                            </div>
-                            <div class="line">
-                                <g:link action="goldHistory">GOLD Points History</g:link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div id="mainContentPanel" class="span" style="margin-left: 230px;">
-            <g:layoutBody/>
-        </div>
-    </div>
-
-    %{--<footer>
-        &copy; TicBOX 2013
-    </footer>--}%
-
+<div id="main-container" class="container-fluid">
+    <g:layoutBody/>
 </div>
 
 <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
@@ -269,10 +189,7 @@
 
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
-            dateFormat : '<g:message code="app.date.format.js" default="dd/mm/yy"/>',
-            changeMonth: true,
-            changeYear: true,
-            yearRange: 'c-60:c+10'
+            format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
         });
 
     });

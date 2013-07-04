@@ -18,6 +18,10 @@ class BootStrap {
 
 
         // users & roles
+        def adminRole = new Role(name: "Admin")
+        adminRole.permissions = []
+        adminRole.addToPermissions("admin:*").save()
+
         def surveyorRole = new Role(name: "Surveyor")
         surveyorRole.permissions = []
         surveyorRole.addToPermissions("survey:*")
@@ -29,6 +33,9 @@ class BootStrap {
         respondentRole.addToPermissions("respondent:*")
                       .addToPermissions("ajaxUpload:*")
                       .save()
+
+        def defaultAdmin = new User(username: "admin", passwordHash: new Sha256Hash("admin").toHex())
+        defaultAdmin.addToRoles(adminRole).save()
 
         def defaultUser = new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
         def profile = new RespondentProfile()

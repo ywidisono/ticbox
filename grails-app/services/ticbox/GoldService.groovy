@@ -19,7 +19,7 @@ class GoldService {
         def respondent = User.findById(params.respondentId)
         if (respondent.respondentProfile.gold >= goldAmount){
             def details = params.bankAccountName + delimiter + params.bankBranchName + delimiter + params.bankAccountNumber + delimiter + params.bankAccountName;
-            history = new RespondentGoldHistory(description: "Redemption", amount: goldAmount, type: RespondentGoldHistory.TYPES.EXPENSE, date: new Date(), details: details, status: RespondentGoldHistory.STATUS.IN_PROGRESS).save()
+            history = new RespondentGoldHistory(description: "Redemption", amount: goldAmount, type: RespondentGoldHistory.TYPES.EXPENSE_REDEMPTION, date: new Date(), details: details, status: RespondentGoldHistory.STATUS.IN_PROGRESS).save()
             respondent.respondentProfile.gold -= goldAmount
             respondent.respondentProfile.goldHistory.add(history)
             respondent.save()
@@ -34,7 +34,7 @@ class GoldService {
             def rewardParam = Parameter.findByCode("REFERRER_REWARD");
             long reward = (rewardParam) ? Long.parseLong(rewardParam.value) : 0
             def referer = User.findByUsername(respondent.respondentProfile.referrer)
-            def goldHistory = new RespondentGoldHistory(description: description, amount: reward, type: RespondentGoldHistory.TYPES.INCOME, date: date).save()
+            def goldHistory = new RespondentGoldHistory(description: description, amount: reward, type: RespondentGoldHistory.TYPES.INCOME_REFERENCE, date: date).save()
             referer.respondentProfile.goldHistory.add(goldHistory)
             referer.respondentProfile.gold += reward
             referer.save()
@@ -46,11 +46,19 @@ class GoldService {
         def desc = survey.title
         def refDesc = respondent.username + " " + survey.title
         def currentDate = new Date()
-        def goldHistory = new RespondentGoldHistory(description: desc, amount: survey.point, type: RespondentGoldHistory.TYPES.INCOME, date: currentDate).save()
+        def goldHistory = new RespondentGoldHistory(description: desc, amount: survey.point, type: RespondentGoldHistory.TYPES.INCOME_SURVEY, date: currentDate).save()
         respondent?.respondentProfile?.goldHistory?.add(goldHistory)
         respondent?.respondentProfile?.gold += survey.point
         respondent.save()
         addGoldToReferrer(refDesc, respondent, currentDate)
     }
 
+    def getTotalGoldByType(int type, User respondent) {
+        def res = 0
+        def historyList = respondent.respondentProfile.goldHistory
+        historyList?.each {
+            res += (type.equals(it.type)) ? it.amount : 0
+        }
+        return res
+    }
 }

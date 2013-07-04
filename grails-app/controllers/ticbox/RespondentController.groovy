@@ -158,13 +158,15 @@ class RespondentController {
         def principal = SecurityUtils.subject.principal
         def respondent = null
         def fbAppId = null
+        def totalGold = 0
         try {
             respondent = User.findByUsername(principal.toString())
             fbAppId = grailsApplication.config.oauth.providers.facebook.key
+            totalGold = goldService.getTotalGoldByType(RespondentGoldHistory.TYPES.INCOME_REFERENCE, respondent)
         } catch (Exception e) {
             log.error(e.message, e)
         }
-        [respondent: respondent, refLink: getRespondentReferenceLink(respondent), fbAppId:fbAppId]
+        [respondent: respondent, refLink: getRespondentReferenceLink(respondent), fbAppId:fbAppId, totalGold: totalGold]
     }
 
     def inviteByEmail = {

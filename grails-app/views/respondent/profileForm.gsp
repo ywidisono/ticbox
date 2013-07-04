@@ -23,7 +23,14 @@
     <!-- static fields -->
     <div class="control-group">
         <div class="controls">
-            <p><img id="pic" class="img-polaroid" src="${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}"/></p>
+            <p>
+                <g:if test="${respondent.pic}">
+                    <img id="pic" class="img-polaroid" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
+                </g:if>
+                <g:else>
+                    <img id="pic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
+                </g:else>
+            </p>
             <uploader:uploader id="imageUploader" url="${[controller:'respondent', action:'uploadImage']}" params="${[respondentId: respondent.id]}">
                 <uploader:onComplete>
                     $('#pic').attr('src', '${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}&u='+new Date().getTime());
@@ -66,7 +73,7 @@
                     </g:else>
                 </g:if>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.DATE}">
-                    <input name="${profileItem.code}" type="text" class="datePicker" placeholder="${message([code: 'app.date.format.input', default: 'dd/MM/yyyy'])}" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}" />
+                    <input name="${profileItem.code}" type="text" class="datePicker" placeholder="${message([code: 'app.date.format.input', default: 'dd/MM/yyyy'])}" value="${g.formatDate(format: g.message(code: 'app.date.format.input', default: 'dd/MM/yyyy'), date: respondent?.respondentProfile?.profileItems[profileItem.code])}" />
                 </g:elseif>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.NUMBER}">
                     <input name="${profileItem.code}" type="text" placeholder="${profileItem.min && profileItem.max ? "${profileItem.min} - ${profileItem.max}" : ''}" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}">
