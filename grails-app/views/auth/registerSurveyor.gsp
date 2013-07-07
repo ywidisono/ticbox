@@ -72,8 +72,7 @@
                 },
                 password: {
                     required: true,
-                    minlength: 5,
-                    equalTo: passwordconfirm
+                    minlength: 5
                 },
                 passwordconfirm: {
                     required: true,
