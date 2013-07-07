@@ -156,7 +156,7 @@
 
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
-            format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>',
+            dateFormat : '<g:message code="app.date.format.js" default="dd/mm/yy"/>',
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-60:c+10'

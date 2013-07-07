@@ -19,23 +19,26 @@ class BootStrap {
         adminRole.addToPermissions("*:*")
                  .save()
 
-        def surveyorRole = Role.findByName('Surveyor')?:new Role(name: "Surveyor")
+        def surveyorRole = new Role(name: "Surveyor")
         surveyorRole.permissions = []
         surveyorRole.addToPermissions("survey:*")
                 .addToPermissions("ajaxUpload:*")
                 .save()
 
-        def respondentRole = Role.findByName('Respondent')?:new Role(name: "Respondent")
+        def respondentRole = new Role(name: "Respondent")
         respondentRole.permissions = []
         respondentRole.addToPermissions("respondent:*")
                 .addToPermissions("ajaxUpload:*")
                 .save()
 
+
         def defaultUser = User.findByUsername('user123')?:new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
-        defaultUser.addToRoles(adminRole)
         defaultUser.addToRoles(surveyorRole)
-        defaultUser.addToRoles(respondentRole)
-        defaultUser.save()
+                   .addToRoles(respondentRole)
+                   .save()
+
+        def defaultAdmin = new User(username: "admin", passwordHash: new Sha256Hash("admin").toHex())
+        defaultAdmin.addToRoles(adminRole).save()
 
         bootstrapService.init()
 

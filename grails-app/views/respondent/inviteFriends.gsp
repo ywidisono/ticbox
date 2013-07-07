@@ -11,7 +11,7 @@
     <h3>Invite Friends</h3>
 
     <div class="row-fluid">
-        <div class="span2"># Reference</div><div class="span1">0</div>
+        <div class="span2"># Reference</div><div class="span1">${respondent.respondentProfile.references.size()}</div>
         <div class="span2">Gold</div><div class="span1">0</div>
     </div>
 

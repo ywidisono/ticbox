@@ -15,7 +15,7 @@ import uk.co.desirableobjects.oauth.scribe.OauthService
 
 class AuthController {
     def respondentService
-    OauthService oauthService
+    def oauthService
 
     def index = { redirect(action: "login", params: params) }
 
@@ -31,22 +31,39 @@ class AuthController {
             authToken.rememberMe = true
         }
 
-        // If a controller redirected to this page, redirect back
-        // to it. Otherwise redirect to the root URI.
-        def targetUri = params.targetUri ?: "/"
-
-        // Handle requests saved by Shiro filters.
-        def savedRequest = WebUtils.getSavedRequest(request)
-        if (savedRequest) {
-            targetUri = savedRequest.requestURI - request.contextPath
-            if (savedRequest.queryString) targetUri = targetUri + '?' + savedRequest.queryString
-        }
-
         try {
             // Perform the actual login. An AuthenticationException
             // will be thrown if the username is unrecognised or the
             // password is incorrect.
             SecurityUtils.subject.login(authToken)
+
+            // If a controller redirected to this page, redirect back
+            // to it. Otherwise redirect depends on role
+            def targetUri = params.targetUri
+            if (!targetUri) {
+                def user = User.findByUsername(SecurityUtils.subject.principal)
+                def role = user?.roles?.first()
+                switch (role.name.toLowerCase()) {
+                    case "admin" :
+                        targetUri = "/admin/index"
+                        break
+                    case "surveyor" :
+                        targetUri = "/survey/index"
+                        break
+                    case "respondent" :
+                        targetUri = "/respondent/index"
+                        break
+                    default:
+                        targetUri = "/"
+                }
+            }
+
+            // Handle requests saved by Shiro filters.
+            def savedRequest = WebUtils.getSavedRequest(request)
+            if (savedRequest) {
+                targetUri = savedRequest.requestURI - request.contextPath
+                if (savedRequest.queryString) targetUri = targetUri + '?' + savedRequest.queryString
+            }
 
             log.info "Redirecting to '${targetUri}'."
             redirect(uri: targetUri)
@@ -70,7 +87,7 @@ class AuthController {
             }
 
             // Now redirect back to the login page.
-            redirect(uri: "/", params: m)
+            redirect(uri: "/auth/login", params: m)
         }
     }
 
@@ -160,7 +177,7 @@ class AuthController {
                 def respondentProfile = respondentService.getRespondentProfileFromParams(params)
                 newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company, respondentProfile: respondentProfile)
                 newUser.addToRoles(respondentRole).save()
-                processReference(params.referer, newUser)
+                respondentService.processReference(params.referrer, newUser)
             }
 
             if (newUser.hasErrors()) {
@@ -207,15 +224,4 @@ class AuthController {
         render result  as JSON
     }
 
-    private void processReference(String referer, User reference) {
-        if (referer && reference) {
-            User user = User.findByUsername(referer)
-            if (user) {
-                user.respondentProfile?.references?.add(reference.username)
-                user.save()
-                reference.respondentProfile?.referer = referer
-                reference.save()
-            }
-        }
-    }
 }
