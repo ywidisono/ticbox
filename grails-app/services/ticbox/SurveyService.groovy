@@ -92,7 +92,18 @@ class SurveyService {
     }
 
     def getFilteredRespondents(Survey survey){
-        if(survey && survey[Survey.COMPONENTS.RESPONDENT_FILTER]){
+
+        def c = User.createCriteria().list {
+            respondentProfile {
+                respondentProfileItems {
+                    eq ('itemCode','PI_ADDR001')
+                }
+            }
+        }
+
+        println c.get(0).respondentProfile.respondentProfileItems.get(0).value
+
+        /*if(survey && survey[Survey.COMPONENTS.RESPONDENT_FILTER]){
 
             def c = RespondentProfile.createCriteria()
 
@@ -162,7 +173,7 @@ class SurveyService {
 
             println c
 
-        }
+        }*/
 
         return null
     }

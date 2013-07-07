@@ -1,8 +1,10 @@
+import com.mongodb.BasicDBList
+import com.mongodb.DBObject
 import org.apache.shiro.crypto.hash.Sha256Hash
+import org.springframework.data.mongodb.UncategorizedMongoDbException
 import ticbox.Parameter
 import ticbox.RespondentProfile
 import ticbox.Role
-import ticbox.Survey
 import ticbox.User
 
 class BootStrap {
@@ -12,43 +14,37 @@ class BootStrap {
     def init = { servletContext ->
 
         // users & roles
+        def adminRole = Role.findByName('Admin')?:new Role(name: "Admin")
+        adminRole.permissions = []
+        adminRole.addToPermissions("*:*")
+                 .save()
+
         def surveyorRole = Role.findByName('Surveyor')?:new Role(name: "Surveyor")
         surveyorRole.permissions = []
         surveyorRole.addToPermissions("survey:*")
-                    .addToPermissions("ajaxUpload:*")
-                    .save()
+                .addToPermissions("ajaxUpload:*")
+                .save()
 
         def respondentRole = Role.findByName('Respondent')?:new Role(name: "Respondent")
         respondentRole.permissions = []
         respondentRole.addToPermissions("respondent:*")
-                      .addToPermissions("ajaxUpload:*")
-                      .save()
+                .addToPermissions("ajaxUpload:*")
+                .save()
 
         def defaultUser = User.findByUsername('user123')?:new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
-        def profile = new RespondentProfile()
-        profile.profileItems = [
-                PI_ADDR001 : 'nowhere somewhere everywhere wherever',
-                PI_OCCUPATION001 : 'jobless',
-                PI_COUNTRY001 : 'ID',
-                PI_DOB001 : Date.parse('dd/MM/yyyy', '30/06/2013'),
-                PI_HEIGHT001 : 179,
-                PI_WEIGHT001 : 65,
-                PI_EDU001 : 'DEGREE',
-                PI_HOBBY001 : 'Game'
-        ]
+        defaultUser.addToRoles(adminRole)
         defaultUser.addToRoles(surveyorRole)
-                   .addToRoles(respondentRole)
-                   .respondentProfile = profile
+        defaultUser.addToRoles(respondentRole)
         defaultUser.save()
-
-        // parameters
-        if (Parameter.count <= 0) {
-            new Parameter(code:"GOLD_RATE_IDR", value: "1000").save()
-            new Parameter(code:"GOLD_MIN_REDEMPTION", value: "50").save()
-        }
 
         bootstrapService.init()
 
+        //parameters
+        Parameter.findByCode('GOLD_RATE_IDR')?:new Parameter(code:"GOLD_RATE_IDR", value: "1000").save()
+        Parameter.findByCode('GOLD_MIN_REDEMPTION')?:new Parameter(code:"GOLD_MIN_REDEMPTION", value: "50").save()
+
+
+        println 'should be ok!!....'
     }
 
     def destroy = {
