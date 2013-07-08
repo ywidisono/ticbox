@@ -13,8 +13,13 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        // todo for dev only
+        Role.collection.drop()
+        User.collection.drop()
+        Parameter.collection.drop()
+
         // users & roles
-        def adminRole = Role.findByName('Admin')?:new Role(name: "Admin")
+        def adminRole = new Role(name: "Admin")
         adminRole.permissions = []
         adminRole.addToPermissions("*:*")
                  .save()
@@ -32,7 +37,7 @@ class BootStrap {
                 .save()
 
 
-        def defaultUser = User.findByUsername('user123')?:new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
+        def defaultUser = new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
         defaultUser.addToRoles(surveyorRole)
                    .addToRoles(respondentRole)
                    .save()
