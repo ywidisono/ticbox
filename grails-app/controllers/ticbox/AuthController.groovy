@@ -8,12 +8,12 @@ import org.apache.shiro.SecurityUtils
 import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.crypto.hash.Sha256Hash
-import org.apache.shiro.web.util.WebUtils
 import org.apache.shiro.grails.ConfigUtils
+import org.apache.shiro.web.util.WebUtils
 import org.scribe.model.Token
-import uk.co.desirableobjects.oauth.scribe.OauthService
 
 class AuthController {
+    def userService
     def respondentService
     def oauthService
 
@@ -44,13 +44,13 @@ class AuthController {
                 def user = User.findByUsername(SecurityUtils.subject.principal)
                 def role = user?.roles?.first()
                 switch (role.name.toLowerCase()) {
-                    case "admin" :
+                    case "admin":
                         targetUri = "/admin/index"
                         break
-                    case "surveyor" :
+                    case "surveyor":
                         targetUri = "/survey/index"
                         break
-                    case "respondent" :
+                    case "respondent":
                         targetUri = "/respondent/index"
                         break
                     default:
@@ -72,7 +72,7 @@ class AuthController {
             // Authentication failed, so display the appropriate message
             // on the login page.
             log.info "Authentication failure for user '${params.username}'."
-            flash.message = message(code: "login.failed")
+            flash.error = message(code: "login.failed")
 
             // Keep the username and "remember me" setting so that the
             // user doesn't have to enter them again.
@@ -105,7 +105,7 @@ class AuthController {
     }
 
     def unauthorized = {
-        flash.message = message(code: "general.auth.notauthorized.message")
+        flash.error = message(code: "general.auth.notauthorized.message")
         redirect(uri: "/")
     }
 
@@ -145,7 +145,7 @@ class AuthController {
             user.addToRoles(adminRole).save()
             forward controller: "shiroOAuth", action: "linkAccount", params: [userId: user.id, targetUri: "/"]
         } catch (Exception e) {
-            flash.message = message(code: "app.error.sso.message") + ". " + e.message
+            flash.error = message(code: "app.error.sso.message") + ". " + e.message
             redirect(uri: "/")
         }
     }
@@ -154,40 +154,18 @@ class AuthController {
 
     def registerRespondent = {
         def profileItemList = respondentService.getProfileItems()
-        [profileItemList : profileItemList, ref: params.ref]
+        [profileItemList: profileItemList, ref: params.ref]
     }
 
     def register = {
-        def newUser
         def errorAction
         try {
-            if ("surveyor".equalsIgnoreCase(params.userType)) {
-                errorAction = "registerSurveyor"
-                Role surveyorRole = Role.findByName("Surveyor")
-                newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email)
-                newUser.addToRoles(surveyorRole).save()
-                new SurveyorProfile(
-                        email: params.email,
-                        companyName: params.company,
-                        userAccount: newUser
-                ).save()
-            } else if ("respondent".equalsIgnoreCase(params.userType)) {
-                errorAction = "registerRespondent"
-                def respondentRole = Role.findByName("Respondent")
-                def respondentProfile = respondentService.getRespondentProfileFromParams(params)
-                newUser = new User(username: params.username, passwordHash: new Sha256Hash(params.password).toHex(), email: params.email, company: params.company, respondentProfile: respondentProfile)
-                newUser.addToRoles(respondentRole).save()
-                respondentService.processReference(params.referrer, newUser)
-            }
-
-            if (newUser.hasErrors()) {
-                throw new Exception(newUser.errors.allErrors.first())
-            }
-
+            errorAction = ("surveyor".equalsIgnoreCase(params.userType)) ? "registerSurveyor" : "registerRespondent"
+            userService.createUser(params)
             flash.message = message(code: "general.create.success.message")
             redirect(uri: "/")
         } catch (Exception e) {
-            flash.message = message(code: "general.create.failed.message")
+            flash.error = message(code: "general.create.failed.message") + " : " + e.message
             log.error(e.message, e)
         }
         forward(action: errorAction)
@@ -221,7 +199,7 @@ class AuthController {
             message = "invalid user"
         }
         result = [success: success, message: message]
-        render result  as JSON
+        render result as JSON
     }
 
 }
