@@ -93,89 +93,60 @@ class SurveyService {
 
     def getFilteredRespondents(Survey survey){
 
-        def c = User.createCriteria().list {
-            respondentProfile {
-                respondentProfileItems {
-                    eq ('itemCode','PI_ADDR001')
+        def profiles = RespondentProfile.createCriteria().list {
+            survey[Survey.COMPONENTS.RESPONDENT_FILTER]?.each{filter ->
+
+                switch(filter.type){
+                    case ProfileItem.TYPES.CHOICE :
+
+                        or {
+                            filter.checkItems?.each{item ->
+                                like "profileItems.${filter.code}",  "%${item instanceof Map ? item.key : item}%"
+                            }
+                        }
+
+                        break
+
+                    case ProfileItem.TYPES.DATE :
+
+                        gte "profileItems.${filter.code}", Date.parse('dd/MM/yyyy', filter.valFrom).getTime()
+                        lte "profileItems.${filter.code}", Date.parse('dd/MM/yyyy', filter.valTo).getTime()
+
+                        break
+
+                    case ProfileItem.TYPES.LOOKUP :
+
+                        or{
+                            filter.checkItems?.each{item ->
+                                like "profileItems.${filter.code}",  "%${item.key}%"
+                            }
+                        }
+
+                        break
+
+                    case ProfileItem.TYPES.NUMBER :
+
+                        gte "profileItems.${filter.code}", Double.valueOf(filter.valFrom)
+                        lte "profileItems.${filter.code}", Double.valueOf(filter.valTo)
+
+                        break
+
+                    case ProfileItem.TYPES.STRING :
+
+                        like "profileItems.${filter.code}", "%${filter.val}%"
+
+                        break
+
+                    default :
+
+                        break
+
                 }
+
             }
         }
 
-        println c.get(0).respondentProfile.respondentProfileItems.get(0).value
-
-        /*if(survey && survey[Survey.COMPONENTS.RESPONDENT_FILTER]){
-
-            def c = RespondentProfile.createCriteria()
-
-            c.list {
-
-                survey[Survey.COMPONENTS.RESPONDENT_FILTER].each{filter ->
-                    switch(filter.type){
-
-                        case ProfileItem.TYPES.CHOICE :
-
-                            profileItems {
-                                filter.checkItems?.each{item ->
-                                    or {
-                                        like filter.code, "%${item instanceof  Map ? item.key : item}%"
-                                    }
-                                }
-                            }
-
-                            break
-
-                        case ProfileItem.TYPES.DATE :
-
-                            profileItems {
-                                gte filter.code, Date.parse('dd/MM/yyyy', filter.valFrom)
-                                lte filter.code, Date.parse('dd/MM/yyyy', filter.valTo)
-                            }
-
-                            break
-
-                        case ProfileItem.TYPES.LOOKUP :
-
-                            profileItems {
-                                filter.checkItems?.each{item ->
-                                    or {
-                                        like filter.code, "%${item instanceof  Map ? item.key : item}%"
-                                    }
-                                }
-                            }
-
-                            break
-
-                        case ProfileItem.TYPES.NUMBER :
-
-                            profileItems {
-                                gte filter.code, Double.valueOf(filter.valFrom)
-                                lte filter.code, Double.valueOf(filter.valTo)
-                            }
-
-                            break
-
-                        case ProfileItem.TYPES.STRING :
-
-                            profileItems {
-                                like filter.code, "%${filter.val}%" //TODO should be a wildcard query
-                            }
-
-                            break
-
-                        default :
-
-                            break
-
-                    }
-                }
-
-            }
-
-            println c
-
-        }*/
-
-        return null
+        return profiles
     }
 
     def saveResponse(String responseJSON, String surveyId, String respondentId){

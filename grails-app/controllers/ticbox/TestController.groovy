@@ -11,7 +11,7 @@ class TestController {
 
     def index() {
 
-        def user = User.findByUsername('user123')
+        /*def user = User.findByUsername('user123')
         def defaultRespondentProfile = user?.respondentProfile?:new RespondentProfile()
 
         def profileItems = defaultRespondentProfile.profileItems
@@ -24,23 +24,33 @@ class TestController {
         profileItems.put('PI_EDU001', 'DEGREE')
         profileItems.put('PI_HOBBY001', 'Game')
 
+        defaultRespondentProfile.save()
+
         user.respondentProfile = defaultRespondentProfile
-        user.save()
+        user.save()*/
 
         String query = """
             {
-                respondentProfile: {
-                    profileItems: {
-                        PI_COUNTRY001: "ID"
-                    }
-                }
+                'profileItems.PI_COUNTRY001': 'ID'
             }
         """
-        DBCollection coll = User.collection
-        def found = coll.findOne(com.mongodb.util.JSON.parse(query)) as User
+        DBCollection coll = RespondentProfile.collection
+        def found = coll.findOne(com.mongodb.util.JSON.parse(query)) as RespondentProfile
 
-        //def found = User.findByRespondentProfile(defaultRespondentProfile)
+        found = null
 
-        render found?.respondentProfile?.profileItems?:[:] as JSON
+        found = RespondentProfile.createCriteria().list {
+            //eq 'profileItems.PI_COUNTRY001', 'ID'
+
+            /*or{
+                like "profileItems.PI_COUNTRY001", "%ID%"
+                like "profileItems.PI_COUNTRY001", "%SG%"
+            }*/
+
+            gte "profileItems.PI_DOB001", Date.parse('dd/MM/yyyy', '06/01/1985').getTime()
+            lte "profileItems.PI_DOB001", Date.parse('dd/MM/yyyy', '07/31/2013').getTime()
+        }
+
+        render found?.profileItems?:[:] as JSON
     }
 }
