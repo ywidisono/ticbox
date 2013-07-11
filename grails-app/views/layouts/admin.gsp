@@ -164,7 +164,8 @@
                     Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
                 </p>
                 <ul class="nav">
-                    <li class="index"><g:link action="index">Manage Users</g:link></li>
+                    <li class="index"><g:link action="index"><i class="icon-user icon-white"></i> Users</g:link></li>
+                    <li class="Redemptions"><g:link action="redemptions"><i class="icon-download icon-white"></i> Redemptions </g:link></li>
                 </ul>
             </div>
         </div>

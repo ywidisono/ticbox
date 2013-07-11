@@ -2,8 +2,10 @@ package ticbox
 
 class AdminController {
     def userService
+    def goldService
 
     def index() {
+        // todo add pagination
         def users = User.all
         def roles = Role.all*.name
         [users: users, userTypes: roles]
@@ -36,4 +38,24 @@ class AdminController {
         redirect(controller: "admin", action: "index")
     }
 
+    def redemptions = {
+        def redemptionRequestList = RedemptionRequest.all
+        [redemptionRequestList:redemptionRequestList, redemptionStatuses: RedemptionRequest.STATUS]
+    }
+
+    def changeRedemptionStatus = {
+        try {
+            if (params.redemptionIds) {
+                def redemptionIds = ((String) params.redemptionIds).split(",")
+                goldService.updateRedemptionRequestStatus(redemptionIds, params.newStatus)
+                flash.message = message(code: "general.update.success.message")
+            } else {
+                throw new Exception("Redemption is not found")
+            }
+        } catch (Exception e) {
+            flash.error = message(code: "general.update.failed.message") + " : " + e.message
+            log.error(e.message, e)
+        }
+        redirect(controller: "admin", action: "redemptions")
+    }
 }

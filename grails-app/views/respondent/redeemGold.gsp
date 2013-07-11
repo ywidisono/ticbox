@@ -11,13 +11,13 @@
     <h3>Redeem Gold</h3>
 
     <div class="row">
-        <div class="span12">
+        <div class="span4">
             <h4>1 Gold = ${goldRate}</h4>
         </div>
     </div>
 
     <div class="row">
-        <div class="span12">
+        <div class="span4">
             <h4>Your balance is ${balance}</h4>
         </div>
     </div>
@@ -26,51 +26,51 @@
 
     <g:form name="redeemForm">
         <div class="row-fluid">
-            <div class="span3">
-                <label><g:message code="app.respondent.redeemAmount.label" default="Redeem Amount"/></label>
+            <div class="span4">
+                <label><g:message code="app.respondent.redeemAmount.label" default="Redeem Amount"/> (min ${g.formatNumber(number: minRedemption, formatName: 'app.currency.format')}) </label>
             </div>
 
-            <div class="span8">
-                <g:textField id="redemptionAmount" name="redemptionAmount"/>
+            <div class="span4">
+                <g:textField id="redemptionAmount" name="redemptionAmount" placeholder="${g.formatNumber(number: minRedemption, maxFractionDigits: 0)}"/>
             </div>
         </div>
 
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span4">
                 <label><g:message code="app.respondent.bankName.label" default="Bank Name"/></label>
             </div>
 
-            <div class="span8">
+            <div class="span4">
                 <g:textField id="bankName" name="bankName"/>
             </div>
         </div>
 
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span4">
                 <label><g:message code="app.respondent.bankBranchName.label" default="Bank Branch Name"/></label>
             </div>
 
-            <div class="span8">
+            <div class="span4">
                 <g:textField id="bankBranchName" name="bankBranchName"/>
             </div>
         </div>
 
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span4">
                 <label><g:message code="app.respondent.bankAccountNumber.label" default="Bank Account Number"/></label>
             </div>
 
-            <div class="span8">
+            <div class="span4">
                 <g:textField id="bankAccountNumber" name="bankAccountNumber"/>
             </div>
         </div>
 
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span4">
                 <label><g:message code="app.respondent.bankAccountName.label" default="Bank Account Name"/></label>
             </div>
 
-            <div class="span8">
+            <div class="span4">
                 <g:textField id="bankAccountName" name="bankAccountName"/>
             </div>
         </div>
@@ -97,6 +97,8 @@
     }
 
     $(document).ready(function () {
+
+        $('#redemptionAmount').focus();
 
         $('#submitRequest').click(function() {
             submitRequest(this);

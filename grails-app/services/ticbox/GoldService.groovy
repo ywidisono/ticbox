@@ -6,10 +6,11 @@ class GoldService {
 
     def saveRedemptionRequest(Map params) throws Exception {
         def redemptionAmount = Double.parseDouble(params.redemptionAmount)
+        def respondent = User.findById(params.respondentId)
         params.redemptionAmount = redemptionAmount
         params.status = RedemptionRequest.STATUS.New
         def history = deductGold(params)
-        def newRequest = new RedemptionRequest(respondentId: params.respondentId, respondentGoldHistoryId: history.id, redemptionAmount: params.redemptionAmount, bankName: params.bankName, bankBranchName: params.bankBranchName, bankAccountNumber: params.bankAccountNumber, bankAccountName: params.bankAccountName, status: params.status).save()
+        def newRequest = new RedemptionRequest(respondentId: respondent.id, respondentUsername: respondent.username, respondentGoldHistoryId: history.id, redemptionAmount: params.redemptionAmount, bankName: params.bankName, bankBranchName: params.bankBranchName, bankAccountNumber: params.bankAccountNumber, bankAccountName: params.bankAccountName, status: params.status).save()
     }
 
     def deductGold(Map params) throws Exception {
@@ -19,9 +20,8 @@ class GoldService {
         def respondent = User.findById(params.respondentId)
         if (respondent.respondentProfile.gold >= goldAmount){
             def details = params.bankAccountName + delimiter + params.bankBranchName + delimiter + params.bankAccountNumber + delimiter + params.bankAccountName;
-            history = new RespondentGoldHistory(description: "Redemption", amount: goldAmount, type: RespondentGoldHistory.TYPES.EXPENSE_REDEMPTION, date: new Date(), details: details, status: RespondentGoldHistory.STATUS.IN_PROGRESS).save()
+            history = new RespondentGoldHistory(respondentId: respondent.id, description: "Redemption", amount: goldAmount, type: RespondentGoldHistory.TYPES.EXPENSE_REDEMPTION, date: new Date(), details: details, status: RespondentGoldHistory.STATUS.IN_PROGRESS).save()
             respondent.respondentProfile.gold -= goldAmount
-            respondent.respondentProfile.goldHistory.add(history)
             respondent.save()
         } else {
             throw new Exception("Invalid amount")
@@ -33,11 +33,10 @@ class GoldService {
         if (respondent.respondentProfile?.referrer) {
             def rewardParam = Parameter.findByCode("REFERRER_REWARD");
             long reward = (rewardParam) ? Long.parseLong(rewardParam.value) : 0
-            def referer = User.findByUsername(respondent.respondentProfile.referrer)
-            def goldHistory = new RespondentGoldHistory(description: description, amount: reward, type: RespondentGoldHistory.TYPES.INCOME_REFERENCE, date: date).save()
-            referer.respondentProfile.goldHistory.add(goldHistory)
-            referer.respondentProfile.gold += reward
-            referer.save()
+            def referrer = User.findByUsername(respondent.respondentProfile.referrer)
+            new RespondentGoldHistory(respondentId: referrer.id, description: description, amount: reward, type: RespondentGoldHistory.TYPES.INCOME_REFERENCE, date: date, status: RespondentGoldHistory.STATUS.SUCCESS).save()
+            referrer.respondentProfile.gold += reward
+            referrer.save()
         }
     }
 
@@ -46,8 +45,7 @@ class GoldService {
         def desc = survey.title
         def refDesc = respondent.username + " " + survey.title
         def currentDate = new Date()
-        def goldHistory = new RespondentGoldHistory(description: desc, amount: survey.point, type: RespondentGoldHistory.TYPES.INCOME_SURVEY, date: currentDate).save()
-        respondent?.respondentProfile?.goldHistory?.add(goldHistory)
+        def goldHistory = new RespondentGoldHistory(respondentId: respondent.id, description: desc, amount: survey.point, type: RespondentGoldHistory.TYPES.INCOME_SURVEY, date: currentDate, status: RespondentGoldHistory.STATUS.SUCCESS).save()
         respondent?.respondentProfile?.gold += survey.point
         respondent.save()
         addGoldToReferrer(refDesc, respondent, currentDate)
@@ -60,5 +58,39 @@ class GoldService {
             res += (type.equals(it.type)) ? it.amount : 0
         }
         return res
+    }
+
+    def updateRedemptionRequestStatus(String[] ids, String status) throws Exception {
+        def requests = RedemptionRequest.findAll{
+            inList("id", ids)
+        }
+        if (requests) {
+            for (RedemptionRequest request : requests) {
+                request.status = status
+                request.save()
+                User respondent = User.findById(request.respondentId)
+                RespondentGoldHistory goldHistory = RespondentGoldHistory.findById(request.respondentGoldHistoryId)
+                goldHistory.status = getRespondentGoldHistoryStatus(status)
+                goldHistory.save()
+            }
+        } else {
+            throw new Exception("No redemption request was found")
+        }
+    }
+
+    private int getRespondentGoldHistoryStatus(String status) {
+        int res = 0;
+        switch (status) {
+            case RedemptionRequest.STATUS.New :
+                res = RespondentGoldHistory.STATUS.IN_PROGRESS
+                break
+            case RedemptionRequest.STATUS.Failed :
+                res = RespondentGoldHistory.STATUS.FAILED
+                break
+            case RedemptionRequest.STATUS.Success :
+                res = RespondentGoldHistory.STATUS.SUCCESS
+                break
+        }
+        return res;
     }
 }

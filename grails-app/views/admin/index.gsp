@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta name="layout" content="admin"/>
-    <title>Administrator Page</title>
+    <title>Administrator Page : Users</title>
     <style type="text/css">
 
     </style>
 </head>
 <body>
-    <h3>Manage Users</h3>
+    <h3>Users</h3>
 
     <div>
         <a id="addNewUser" href="#add-new-user-modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus icon-white"></i> New User</a>

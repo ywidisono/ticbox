@@ -120,7 +120,7 @@ class RespondentController {
     def goldHistory = {
         def principal = SecurityUtils.subject.principal
         def respondent = User.findByUsername(principal.toString())
-        def goldHistory = respondent.respondentProfile?.goldHistory
+        def goldHistory = RespondentGoldHistory.findAllByRespondentId(respondent.id)
         [goldHistory:goldHistory, respondent: respondent]
     }
 
