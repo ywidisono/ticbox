@@ -5,6 +5,7 @@ class RedemptionRequest {
 
     String id
     String respondentId
+    String respondentUsername
     String respondentGoldHistoryId
     double redemptionAmount
     String bankName
@@ -17,6 +18,7 @@ class RedemptionRequest {
     Date lastUpdated
     static constraints = {
         respondentId (blank: false)
+        respondentUsername (blank: false)
         respondentGoldHistoryId (blank: false)
         redemptionAmount (blank: false)
         bankName (blank: false)
@@ -26,4 +28,5 @@ class RedemptionRequest {
         status (blank: false)
         remarks (nullable: true)
     }
+
 }

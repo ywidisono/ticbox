@@ -20,7 +20,7 @@ class RespondentService {
                 }
             }
         }
-        if (items.size() > 0) {
+        if (profileItems.size() > 0) {
             profile = new RespondentProfile(profileItems: profileItems)
         }
         return profile

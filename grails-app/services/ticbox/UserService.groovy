@@ -38,7 +38,7 @@ class UserService {
     }
 
     def deleteUsers(String[] ids) throws Exception {
-        List<Long> delIds = getListOfLong(ids)
+        List<Long> delIds = HelperService.getListOfLong(ids)
         def users = User.findAll{
             inList("_id", delIds)
         }
@@ -49,11 +49,4 @@ class UserService {
         }
     }
 
-    private List<Long> getListOfLong(String[] ids) {
-        def res = []
-        for (String id : ids) {
-            res << Long.parseLong(id)
-        }
-        return res
-    }
 }

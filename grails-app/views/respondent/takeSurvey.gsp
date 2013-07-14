@@ -210,13 +210,6 @@
 
         });
 
-        jQuery('#surveyPreviewModal').on('shown', function () {
-
-            var questionItems = buildSurveyResponseMap();
-            constructPreview(questionItems);
-
-        });
-
     });
 
     function constructQuestionItem(type, subtype) {
@@ -386,7 +379,7 @@
 
                         container = constructQuestionItem(answerDetails.type);
 
-                        jQuery('textarea.place-holder-text', container).val(questionPlaceHolder);
+                        jQuery('textarea.place-holder-text', container).attr('placeholder', questionPlaceHolder);
 
                         break;
 
@@ -412,10 +405,10 @@
                             jQuery('div.row-label', rowLabelCont).text(rowLabel);
 
                             var original = jQuery('td.rating-weight:first', rowLabelCont);
-                            original.find('input[type=radio]').attr('name', idx).val(ratingLabels[ratingLabels.length-1]);
-                            for (var i = 1; i < ratingLabels.length; i++) {
+                            original.find('input[type=radio]').attr('name', i+'_'+idx).val(ratingLabels[ratingLabels.length-1]);
+                            for (var k = 1; k < ratingLabels.length; k++) {
                                 var clone = original.clone();
-                                clone.find('input[type=radio]').attr('name', idx).val(ratingLabels[i-1]);
+                                clone.find('input[type=radio]').attr('name', i+'_'+idx).val(ratingLabels[k-1]);
                                 original.after(clone);
                             }
                         });
@@ -487,8 +480,7 @@
 
     <div id="answerTemplate-singleText" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.FREE_TEXT}">
         <div class="col">
-            <textarea class="place-holder-text" rows="3"
-                      placeholder="${message([code: 'message.type-to-replace-place-holder', default: 'Type here to change this placeholder..'])}"></textarea>
+            <textarea class="place-holder-text" rows="3" placeholder="${message([code: 'message.type-to-replace-place-holder', default: 'Type here to change this placeholder..'])}"></textarea>
         </div>
     </div>
 
