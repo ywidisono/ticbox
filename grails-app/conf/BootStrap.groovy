@@ -1,7 +1,5 @@
-import com.mongodb.BasicDBList
-import com.mongodb.DBObject
+import grails.util.Environment
 import org.apache.shiro.crypto.hash.Sha256Hash
-import org.springframework.data.mongodb.UncategorizedMongoDbException
 import ticbox.Parameter
 import ticbox.RedemptionRequest
 import ticbox.RespondentGoldHistory
@@ -16,13 +14,24 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        // todo for dev only
-        Role.collection.drop()
-        User.collection.drop()
-        Parameter.collection.drop()
-        SurveyResponse.collection.drop()
-        RedemptionRequest.collection.drop()
-        RespondentGoldHistory.collection.drop()
+        switch (Environment.current) {
+            case Environment.DEVELOPMENT:
+
+                // todo for dev only
+                Role.collection.drop()
+                User.collection.drop()
+                Parameter.collection.drop()
+                SurveyResponse.collection.drop()
+                RedemptionRequest.collection.drop()
+                RespondentGoldHistory.collection.drop()
+
+                break
+            case Environment.PRODUCTION:
+
+                //TODO
+
+                break
+        }
 
         // users & roles
         def adminRole = new Role(name: "Admin")
