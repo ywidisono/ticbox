@@ -8,6 +8,7 @@ import org.codehaus.groovy.grails.web.util.WebUtils
 class SurveyService {
 
     def surveyorService
+    def helperService
 
     def surveyList(){
 
@@ -83,6 +84,27 @@ class SurveyService {
 
                 def filteredRespondents = getFilteredRespondents(survey)
 
+                if (filteredRespondents){
+
+                    String notifCode = "ps_${survey.id}"
+
+                    //TODO find a way for bulky insert
+                    for (RespondentProfile profile : filteredRespondents){
+                        new UserNotification(
+                            code: notifCode,
+                            username: profile.userAccount.username,
+                            actionLink: "respondent/takeSurvey?surveyId=${survey.surveyId}"
+                        ).save()
+                    }
+
+                    String link = "/userNotification?code=${notifCode}" //TODO should be prepend with context path
+
+                    //TODO how to send bulk email personally
+
+
+                }
+
+
                 break
             case Survey.SURVEY_TYPE.FREE :
 
@@ -109,8 +131,8 @@ class SurveyService {
 
                     case ProfileItem.TYPES.DATE :
 
-                        gte "profileItems.${filter.code}", Date.parse('dd/MM/yyyy', filter.valFrom).getTime()
-                        lte "profileItems.${filter.code}", Date.parse('dd/MM/yyyy', filter.valTo).getTime()
+                        gte "profileItems.${filter.code}", Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), filter.valFrom).getTime()
+                        lte "profileItems.${filter.code}", Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), filter.valTo).getTime()
 
                         break
 
