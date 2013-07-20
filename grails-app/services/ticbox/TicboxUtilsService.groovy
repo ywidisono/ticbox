@@ -4,6 +4,8 @@ import org.apache.shiro.SecurityUtils
 
 class TicboxUtilsService {
 
+    def transaction = false
+
     def serviceMethod() {
 
     }

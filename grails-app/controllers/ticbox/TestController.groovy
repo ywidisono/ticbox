@@ -53,4 +53,12 @@ class TestController {
 
         render found?.profileItems?:[:] as JSON
     }
+
+    def testService
+
+    def testEmail(){
+        testService.testSendEmail()
+
+        render 'email sent'
+    }
 }

@@ -9,6 +9,7 @@ class SurveyService {
 
     def surveyorService
     def helperService
+    def emailBlasterService
 
     def surveyList(){
 
@@ -84,6 +85,8 @@ class SurveyService {
 
                 def filteredRespondents = getFilteredRespondents(survey)
 
+                def emails = []
+
                 if (filteredRespondents){
 
                     String notifCode = "ps_${survey.id}"
@@ -95,12 +98,14 @@ class SurveyService {
                             username: profile.userAccount.username,
                             actionLink: "respondent/takeSurvey?surveyId=${survey.surveyId}"
                         ).save()
+
+                        emails << profile.userAccount.email
                     }
 
-                    String link = "/userNotification?code=${notifCode}" //TODO should be prepend with context path
+                    String link = "${servletContext.contextPath}/userNotification?code=${notifCode}" //TODO should be prepend with context path
 
-                    //TODO how to send bulk email personally
-
+                    //TODO should be sending bulk emails personally
+                    emailBlasterService.blastEmail(emails, 'takeSurvey', 'Take a survey', [link:link])
 
                 }
 
@@ -138,7 +143,7 @@ class SurveyService {
 
                     case ProfileItem.TYPES.LOOKUP :
 
-                        or{
+                        or {
                             filter.checkItems?.each{item ->
                                 like "profileItems.${filter.code}",  "%${item.key}%"
                             }
