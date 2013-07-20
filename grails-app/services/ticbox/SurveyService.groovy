@@ -10,6 +10,7 @@ class SurveyService {
     def surveyorService
     def helperService
     def emailBlasterService
+    def servletContext
 
     def surveyList(){
 
