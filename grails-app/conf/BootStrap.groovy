@@ -4,6 +4,7 @@ import ticbox.Parameter
 import ticbox.RedemptionRequest
 import ticbox.RespondentGoldHistory
 import ticbox.RespondentProfile
+import ticbox.RespondentDetail
 import ticbox.Role
 import ticbox.SurveyResponse
 import ticbox.User
@@ -23,6 +24,7 @@ class BootStrap {
         RedemptionRequest.collection.drop()
         RespondentGoldHistory.collection.drop()
         RespondentProfile.collection.drop()
+        RespondentDetail.collection.drop()
 
         // users & roles
         def adminRole = new Role(name: "Admin")

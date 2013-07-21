@@ -96,11 +96,11 @@ class SurveyService {
                     for (RespondentProfile profile : filteredRespondents){
                         new UserNotification(
                             code: notifCode,
-                            username: profile.userAccount.username,
+                            username: profile['username'],
                             actionLink: "respondent/takeSurvey?surveyId=${survey.surveyId}"
                         ).save()
 
-                        emails << profile.userAccount.email
+                        emails << profile['email']
                     }
 
                     String link = "${servletContext.contextPath}/userNotification?code=${notifCode}"
@@ -121,7 +121,7 @@ class SurveyService {
 
     def getFilteredRespondents(Survey survey){
 
-        def profiles = RespondentProfile.createCriteria().list {
+        def profiles = RespondentDetail.createCriteria().list {
             survey[Survey.COMPONENTS.RESPONDENT_FILTER]?.each{filter ->
 
                 switch(filter.type){

@@ -65,6 +65,10 @@ class RespondentService {
         }
 
         respondentDetail.profileItems = profileItems
+
+        respondentDetail['username'] = params.username
+        respondentDetail['email'] = params.email
+
         respondentDetail.save()
     }
 
