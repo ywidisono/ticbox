@@ -41,7 +41,7 @@ class UserService {
         if (!newUser) {
             throw new Exception("Unable to create user")
         } else if (newUser.hasErrors()) {
-            throw new Exception(newUser.errors.allErrors.first())
+            throw new Exception("${newUser.errors.allErrors}")
         }
 
         return newUser

@@ -103,7 +103,7 @@ class SurveyService {
                         emails << profile.userAccount.email
                     }
 
-                    String link = "${servletContext.contextPath}/userNotification?code=${notifCode}" //TODO should be prepend with context path
+                    String link = "${servletContext.contextPath}/userNotification?code=${notifCode}"
 
                     //TODO should be sending bulk emails personally
                     emailBlasterService.blastEmail(emails, 'takeSurvey', 'Take a survey', [link:link])

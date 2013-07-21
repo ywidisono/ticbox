@@ -8,44 +8,75 @@ import org.springframework.data.mongodb.core.query.BasicQuery
 class TestController {
 
     def mongo
-
+    def userService
+    
     def index() {
+        
+    }
 
-        /*def user = User.findByUsername('user123')
-        def defaultRespondentProfile = user?.respondentProfile?:new RespondentProfile()
+    def createRespondents() {
+        
+        userService.createUser([
+                username : 'arnold',
+                email : 'arnold.palar@gmail.com',
+                password : 'password',
+                userType : 'respondent',
+                'PI_ADDR001': 'nowhere',
+                'PI_OCCUPATION001': 'jobless',
+                'PI_COUNTRY001': 'ID',
+                'PI_DOB001': '01/24/1985', //Date.parse('dd/MM/yyyy', '01/24/1985').getTime(),
+                'PI_HEIGHT001': 169,
+                'PI_WEIGHT001': 60,
+                'PI_EDU001': 'DEGREE',
+                'PI_HOBBY001': 'Game,Programming,Photography'
+        ]).save()
 
-        def profileItems = defaultRespondentProfile.profileItems
-        profileItems.put('PI_ADDR001', 'nowhere')
-        profileItems.put('PI_OCCUPATION001', 'jobless')
-        profileItems.put('PI_COUNTRY001', 'ID')
-        profileItems.put('PI_DOB001', Date.parse('dd/MM/yyyy', '30/06/1985').getTime())
-        profileItems.put('PI_HEIGHT001', 300)
-        profileItems.put('PI_WEIGHT001', 105)
-        profileItems.put('PI_EDU001', 'DEGREE')
-        profileItems.put('PI_HOBBY001', 'Game')
+        userService.createUser([
+                username : 'respondent1',
+                email : 'respondent1@mail.com',
+                password : 'password',
+                userType : 'respondent',
+                'PI_ADDR001': 'nowhere',
+                'PI_OCCUPATION001': 'jobless',
+                'PI_COUNTRY001': 'ID',
+                'PI_DOB001': '01/24/1985', //Date.parse('dd/MM/yyyy', '01/24/1985').getTime(),
+                'PI_HEIGHT001': 169,
+                'PI_WEIGHT001': 60,
+                'PI_EDU001': 'DEGREE',
+                'PI_HOBBY001': 'Game,Programming,Photography'
+        ]).save()
 
-        defaultRespondentProfile.save()
+        userService.createUser([
+                username : 'respondent2',
+                email : 'respondent2@mail.com',
+                password : 'password',
+                userType : 'respondent',
+                'PI_ADDR001': 'nowhere',
+                'PI_OCCUPATION001': 'jobless',
+                'PI_COUNTRY001': 'ID',
+                'PI_DOB001': '01/24/1985', //Date.parse('dd/MM/yyyy', '01/24/1985').getTime(),
+                'PI_HEIGHT001': 169,
+                'PI_WEIGHT001': 60,
+                'PI_EDU001': 'DEGREE',
+                'PI_HOBBY001': 'Game,Programming,Photography'
+        ]).save()
 
-        user.respondentProfile = defaultRespondentProfile
-        user.save()*/
-
-        String query = """
+        /*String query = """
             {
                 'profileItems.PI_COUNTRY001': 'ID'
             }
         """
         DBCollection coll = RespondentProfile.collection
         def found = coll.findOne(com.mongodb.util.JSON.parse(query)) as RespondentProfile
+        println found*/
 
-        found = null
+        def found = RespondentProfile.createCriteria().list {
+            eq 'profileItems.PI_COUNTRY001', 'ID'
 
-        found = RespondentProfile.createCriteria().list {
-            //eq 'profileItems.PI_COUNTRY001', 'ID'
-
-            /*or{
+            or{
                 like "profileItems.PI_COUNTRY001", "%ID%"
                 like "profileItems.PI_COUNTRY001", "%SG%"
-            }*/
+            }
 
             gte "profileItems.PI_DOB001", Date.parse('dd/MM/yyyy', '06/01/1985').getTime()
             lte "profileItems.PI_DOB001", Date.parse('dd/MM/yyyy', '07/31/2013').getTime()

@@ -15,6 +15,6 @@ class HelperService {
     }
 
     public String getProperty(String key, String defaultVal){
-        return messageSource.getMessage(key, [], defaultVal, LocaleContextHolder.getLocale())
+        return messageSource.getMessage(key, [].toArray(), defaultVal, LocaleContextHolder.getLocale())
     }
 }
