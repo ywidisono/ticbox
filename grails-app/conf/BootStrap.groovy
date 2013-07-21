@@ -14,24 +14,15 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        switch (Environment.current) {
-            case Environment.DEVELOPMENT:
-
-                // todo for dev only
-                Role.collection.drop()
-                User.collection.drop()
-                Parameter.collection.drop()
-                SurveyResponse.collection.drop()
-                RedemptionRequest.collection.drop()
-                RespondentGoldHistory.collection.drop()
-
-                break
-            case Environment.PRODUCTION:
-
-                //TODO
-
-                break
-        }
+        // todo for dev only but required on Heroku (which automatically set env as Production)
+        // todo should only be modified on deployment to real Production or delivery to client
+        Role.collection.drop()
+        User.collection.drop()
+        Parameter.collection.drop()
+        SurveyResponse.collection.drop()
+        RedemptionRequest.collection.drop()
+        RespondentGoldHistory.collection.drop()
+        RespondentProfile.collection.drop()
 
         // users & roles
         def adminRole = new Role(name: "Admin")

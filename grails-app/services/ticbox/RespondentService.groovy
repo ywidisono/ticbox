@@ -11,8 +11,65 @@ class RespondentService {
         return ProfileItem.list()?.sort{it.seq}
     }
 
-    def getRespondentProfileFromParams(Map<String, String> params) {
-        def profile = null
+    def updateRespondentDetail(Map<String, String> params) throws Exception {
+        def respondentDetail = RespondentDetail.findByRespondentId(params.id)
+        respondentDetail = respondentDetail ?: new RespondentDetail(respondentId: params.id).save()
+        def profileItems = [:]
+        def items = ProfileItem.all
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            for (ProfileItem item : items) {
+                if (entry.value && entry.key.equalsIgnoreCase(item.code)) {
+
+                    switch(item.type){
+                        case ProfileItem.TYPES.CHOICE :
+
+                            //TODO all the items must be appended in 1 string
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        case ProfileItem.TYPES.DATE :
+
+                            profileItems.put(entry.key, Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), entry.value).getTime())
+
+                            break
+
+                        case ProfileItem.TYPES.LOOKUP :
+
+                            //TODO all the items must be appended in 1 string
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        case ProfileItem.TYPES.NUMBER :
+
+                            profileItems.put(entry.key, Double.valueOf(entry.value))
+
+                            break
+
+                        case ProfileItem.TYPES.STRING :
+
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        default :
+
+                            break
+
+                    }
+
+                    break
+                }
+            }
+        }
+
+        respondentDetail.profileItems = profileItems
+        respondentDetail.save()
+    }
+
+    def getRespondentDetailFromParams(Map<String, String> params) {
+        def detail = null
         def profileItems = [:]
         def items = ProfileItem.all
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -63,9 +120,9 @@ class RespondentService {
             }
         }
         if (profileItems.size() > 0) {
-            profile = new RespondentProfile(profileItems: profileItems)
+            detail = new RespondentDetail(respondentId: params.id, profileItems: profileItems)
         }
-        return profile
+        return detail
     }
 
     def saveSurveyReward(String respondentId, String surveyId) throws Exception {
@@ -79,30 +136,16 @@ class RespondentService {
         }
     }
 
-    def processReference(String referrer, RespondentProfile referenceProfile) {
-        if (referrer && referenceProfile?.userAccount) {
-
-            RespondentProfile referrerProfile = getRespondentByUsername(referrer)
-
-            if (referrerProfile) {
-
-                referrerProfile?.references?.add(referenceProfile?.userAccount?.username)
-                referrerProfile.save()
-
-                referenceProfile?.referrer = referrer
-                referenceProfile.save()
+    def processReference(String referrer, User reference) {
+        if (referrer && reference) {
+            User user = User.findByUsername(referrer)
+            if (user) {
+                user.respondentProfile?.references?.add(reference.username)
+                user.save()
+                reference.respondentProfile?.referrer = referrer
+                reference.save()
             }
         }
-    }
-
-    def getRespondentByUsername(String username){
-        def res = RespondentProfile.createCriteria().list {
-            userAccount {
-                eq 'username', username
-            }
-        }
-
-        return res && res.size() > 0 ? res.get(0) : null
     }
 
 }

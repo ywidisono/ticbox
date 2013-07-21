@@ -15,28 +15,26 @@ class UserService {
         if ("surveyor".equalsIgnoreCase(params.userType)) {
             Role surveyorRole = Role.findByName("Surveyor")
             newUser.addToRoles(surveyorRole)
-
             new SurveyorProfile(
                 email: params.email,
                 companyName: params.company,
                 userAccount: newUser
             ).save()
+            newUser.save()
         } else if ("respondent".equalsIgnoreCase(params.userType)) {
             def respondentRole = Role.findByName("Respondent")
             newUser.addToRoles(respondentRole)
-
-            RespondentProfile respondentProfile = respondentService.getRespondentProfileFromParams(params)
-            respondentProfile.userAccount = newUser
-            respondentProfile.save()
-
+            newUser.respondentProfile = new RespondentProfile()
+            newUser.save()
+            params.id = newUser.id
+            respondentService.updateRespondentDetail(params)
             // reference point
-            respondentService.processReference(params.referrer, respondentProfile)
+            respondentService.processReference(params.referrer, newUser)
         } else if ("admin".equalsIgnoreCase(params.userType)) {
             Role adminRole = Role.findByName("Admin")
             newUser.addToRoles(adminRole)
+            newUser.save()
         }
-
-        newUser.save()
 
         if (!newUser) {
             throw new Exception("Unable to create user")

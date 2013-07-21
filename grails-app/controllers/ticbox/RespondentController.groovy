@@ -24,16 +24,14 @@ class RespondentController {
         def profileItems = respondentService.getProfileItems()
         def principal = SecurityUtils.subject.principal
         def respondent = User.findByUsername(principal.toString())
-        [profileItems: profileItems, respondent: respondent]
+        def respondentDetail = RespondentDetail.findByRespondentId(respondent.id)
+        respondentDetail = respondentDetail ?: new RespondentDetail(respondentId: respondent.id).save()
+        [profileItems: profileItems, respondent: respondent, respondentDetail: respondentDetail]
     }
 
     def modify = {
-        def respondent
         try {
-            respondent = User.findById(params.id)
-            def respondentProfile = respondentService.getRespondentProfileFromParams(params)
-            respondent.respondentProfile = respondentProfile
-            respondent.save()
+            respondentService.updateRespondentDetail(params)
             flash.message = message(code: "general.create.success.message")
         } catch (Exception e) {
             flash.message = message(code: "general.create.failed.message")

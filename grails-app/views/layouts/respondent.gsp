@@ -7,7 +7,6 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="TicBOX"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
@@ -28,11 +27,6 @@
         display: block;
     }
 
-    .col {
-        display: inline-block;
-        min-height: 1px;
-    }
-
     @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -42,7 +36,7 @@
         }
     }
 
-    .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
+    .navbar-inverse .navbar-text {
         color: #ffffff;
         padding-top: 10px;
     }
@@ -191,10 +185,10 @@
                             <div class="row-fluid">
                                 <div class="span12 center">
                                     <g:if test="${respondent.pic}">
-                                        <img id="pic" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
+                                        <img id="sidebarRespondentPic" class="profilePic" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
                                     </g:if>
                                     <g:else>
-                                        <img id="pic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
+                                        <img id="sidebarRespondentPic" class="profilePic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
                                     </g:else>
                                 </div>
                             </div>

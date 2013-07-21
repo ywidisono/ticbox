@@ -11,6 +11,11 @@
     <meta name="layout" content="respondent"/>
     <title>Respondent Profile Form</title>
     <r:require module="fileuploader" />
+    <style type="text/css">
+        #profilePic {
+            height: 150px;
+        }
+    </style>
 </head>
 <body>
 <g:form class="form-horizontal" action="modify">
@@ -25,15 +30,15 @@
         <div class="controls">
             <p>
                 <g:if test="${respondent.pic}">
-                    <img id="pic" class="img-polaroid" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
+                    <img id="profilePic" class="img-polaroid profilePic" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
                 </g:if>
                 <g:else>
-                    <img id="pic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
+                    <img id="profilePic" class="img-polaroid profilePic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
                 </g:else>
             </p>
             <uploader:uploader id="imageUploader" url="${[controller:'respondent', action:'uploadImage']}" params="${[respondentId: respondent.id]}">
                 <uploader:onComplete>
-                    $('#pic').attr('src', '${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}&u='+new Date().getTime());
+                    $('.profilePic').attr('src', '${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}&u='+new Date().getTime());
                 </uploader:onComplete>
             </uploader:uploader>
         </div>
@@ -66,20 +71,20 @@
             <div class="controls">
                 <g:if test="${profileItem.type == ticbox.ProfileItem.TYPES.STRING}">
                     <g:if test="${profileItem.row > 1}">
-                        <g:textArea name="${profileItem.code}" rows="${profileItem.row}" cols="30" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}">${respondent?.respondentProfile?.profileItems[profileItem.code]}</g:textArea>
+                        <g:textArea name="${profileItem.code}" rows="${profileItem.row}" cols="30" maxlength="${profileItem.max}" placeholder="${profileItem.placeHolder}">${respondentDetail?.profileItems[profileItem.code]}</g:textArea>
                     </g:if>
                     <g:else>
-                        <input name="${profileItem.code}" type="text" class="" max="${profileItem.max}" placeholder="${profileItem.placeHolder}" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}"/>
+                        <input name="${profileItem.code}" type="text" class="" max="${profileItem.max}" placeholder="${profileItem.placeHolder}" value="${respondentDetail?.profileItems[profileItem.code]}"/>
                     </g:else>
                 </g:if>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.DATE}">
-                    <input name="${profileItem.code}" type="text" class="datePicker" placeholder="${message([code: 'app.date.format.input', default: 'dd/MM/yyyy'])}" value="${g.formatDate(format: g.message(code: 'app.date.format.input', default: 'dd/MM/yyyy'), date: respondent?.respondentProfile?.profileItems[profileItem.code])}" />
+                    <input name="${profileItem.code}" type="text" class="datePicker" placeholder="${message([code: 'app.date.format.input', default: 'dd/MM/yyyy'])}" value="${g.formatDate(format: g.message(code: 'app.date.format.input', default: 'dd/MM/yyyy'), date: respondentDetail?.profileItems[profileItem.code])}" />
                 </g:elseif>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.NUMBER}">
-                    <input name="${profileItem.code}" type="text" placeholder="${profileItem.min && profileItem.max ? "${profileItem.min} - ${profileItem.max}" : ''}" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}">
+                    <input name="${profileItem.code}" type="text" placeholder="${profileItem.min && profileItem.max ? "${profileItem.min} - ${profileItem.max}" : ''}" value="${respondentDetail?.profileItems[profileItem.code]}">
                 </g:elseif>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.LOOKUP}">
-                    <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}"/>
+                    <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" value="${respondentDetail?.profileItems[profileItem.code]}"/>
                 </g:elseif>
                 <g:elseif test="${profileItem.type == ticbox.ProfileItem.TYPES.CHOICE}">
 
@@ -87,14 +92,14 @@
                         <g:if test="${profileItem.items}">
                             <g:each in="${profileItem.items}" var="item">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="${profileItem.code}" value="${item}" <g:if test="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.contains(item)}">checked</g:if> /> ${"$item"}
+                                    <input type="checkbox" name="${profileItem.code}" value="${item}" <g:if test="${respondentDetail?.profileItems[profileItem.code]?.contains(item)}">checked</g:if> /> ${"$item"}
                                 </label>
                             </g:each>
                         </g:if>
                         <g:elseif test="${profileItem.lookupFrom}">
                             <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="${profileItem.code}" value="${item.key}" <g:if test="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.contains(item.key)}">checked</g:if> /> ${"$item.value"}
+                                    <input type="checkbox" name="${profileItem.code}" value="${item.key}" <g:if test="${respondentDetail?.profileItems[profileItem.code]?.contains(item.key)}">checked</g:if> /> ${"$item.value"}
                                 </label>
                             </g:each>
                         </g:elseif>
@@ -103,18 +108,18 @@
                     <g:elseif test="${profileItem.componentType == ticbox.ProfileItem.COMPONENT_TYPES.SELECT}">
                         <g:if test="${profileItem.items}">
                             <g:if test="${profileItem.multiple}">
-                                <g:select name="${profileItem.code}" from="${profileItem.items}"  multiple="true"  value="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.toList()}" />
+                                <g:select name="${profileItem.code}" from="${profileItem.items}"  multiple="true"  value="${respondentDetail?.profileItems[profileItem.code]?.toList()}" />
                             </g:if>
                             <g:else> %{--this is stupid!!!!--}%
-                                <g:select name="${profileItem.code}" from="${profileItem.items}" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}" />
+                                <g:select name="${profileItem.code}" from="${profileItem.items}" value="${respondentDetail?.profileItems[profileItem.code]}" />
                             </g:else>
                         </g:if>
                         <g:elseif test="${profileItem.lookupFrom}">
                             <g:if test="${profileItem.multiple}">
-                                <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" multiple="true" value="${respondent?.respondentProfile?.profileItems[profileItem.code]?.split(",")?.toList()}"/>
+                                <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" multiple="true" value="${respondentDetail?.profileItems[profileItem.code]?.toList()}"/>
                             </g:if>
                             <g:else> %{--this is stupid!!!!--}%
-                                <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" value="${respondent?.respondentProfile?.profileItems[profileItem.code]}"/>
+                                <g:select name="${profileItem.code}" from="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" optionKey="key" optionValue="value" value="${respondentDetail?.profileItems[profileItem.code]}"/>
                             </g:else>
                         </g:elseif>
                     </g:elseif>
@@ -123,14 +128,14 @@
                         <g:if test="${profileItem.items}">
                             <g:each in="${profileItem.items}" var="item">
                                 <label class="radio">
-                                    <input type="radio" name="${profileItem.code}" value="${item}" <g:if test="${item.equals(respondent?.respondentProfile?.profileItems[profileItem.code])}">checked</g:if> /> ${"$item"}
+                                    <input type="radio" name="${profileItem.code}" value="${item}" <g:if test="${item.equals(respondentDetail?.profileItems[profileItem.code])}">checked</g:if> /> ${"$item"}
                                 </label>
                             </g:each>
                         </g:if>
                         <g:elseif test="${profileItem.lookupFrom}">
                             <g:each in="${LookupMaster.findByCode(profileItem.lookupFrom)?.values}" var="item">
                                 <label class="radio">
-                                    <input type="radio" name="${profileItem.code}" value="${item.key}" <g:if test="${item.key.equals(respondent?.respondentProfile?.profileItems[profileItem.code])}">checked</g:if> /> ${"$item.value"}
+                                    <input type="radio" name="${profileItem.code}" value="${item.key}" <g:if test="${item.key.equals(respondentDetail?.profileItems[profileItem.code])}">checked</g:if> /> ${"$item.value"}
                                 </label>
                             </g:each>
                         </g:elseif>
