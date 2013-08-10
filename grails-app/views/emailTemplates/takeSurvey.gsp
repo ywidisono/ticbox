@@ -10,9 +10,31 @@
 <html>
 <head>
   <title></title>
+
 </head>
 <body>
-Please take the survey <br>
-<a href="http://localhost:8080${link}">Survey</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <div style="width: 100%; height:60px; background-color: #bad33c; color: #ffffff; padding: 10px 20px 5px 2px; vertical-align: middle">
+                        <img src="http://ticbox.herokuapp.com/static/images/ticbox/TicBoxLogo.png" width="300px" height="50px" alt="TicBox">
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Hi ${fullname?:'Respondent'},
+                    <br>
+                    <br>
+                    Please take the <a href="http://localhost:8080${link}">Survey</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>

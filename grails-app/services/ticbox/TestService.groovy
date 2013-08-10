@@ -12,6 +12,6 @@ class TestService {
     def testSendEmail(){
         String link = "${servletContext.contextPath}/survey"
 
-        emailBlasterService.blastEmail(['arnold.palar@gmail.com'], 'takeSurvey', 'test mail', [link:link])
+        emailBlasterService.blastEmail(['arnold.palar@gmail.com', 'herliena.wijaya@ymail.com'], 'takeSurvey', 'test mail', [link:link])
     }
 }

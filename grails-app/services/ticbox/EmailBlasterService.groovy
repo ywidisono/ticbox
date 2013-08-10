@@ -12,15 +12,16 @@ class EmailBlasterService {
 
     def mailService
 
-    def blastEmail(List<String> recipients, String templateName, String subjectStr, Map model){
+    def blastEmail(def recipients, String templateName, String subjectStr, Map model){
 
         int poolSize = recipients.size() >= max_email_per_job * max_concurrent_job ? max_concurrent_job : ((recipients.size() % max_email_per_job) + 1)
         def threadPool = Executors.newFixedThreadPool(poolSize)
 
         def sendEmailClosure = { recipients_ ->
             recipients_?.each {recipient ->
+                model.putAll(recipient)
                 mailService.sendMail {
-                    to recipient
+                    to recipient.email
                     subject subjectStr
                     body(
                             view: "/emailTemplates/${templateName}",
@@ -36,7 +37,9 @@ class EmailBlasterService {
             futures << threadPool.submit({-> sendEmailClosure recipients_split} as Callable)
         }
 
-        futures.each {println it.get()}
+        futures.each {
+            it.get()
+        }
 
         threadPool.shutdown()
 

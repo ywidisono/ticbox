@@ -86,27 +86,30 @@ class SurveyService {
 
                 def filteredRespondents = getFilteredRespondents(survey)
 
-                def emails = []
+                def recipients = []
 
                 if (filteredRespondents){
 
                     String notifCode = "ps_${survey.id}"
 
                     //TODO find a way for bulky insert
-                    for (RespondentProfile profile : filteredRespondents){
+                    for (RespondentDetail profile : filteredRespondents){
                         new UserNotification(
                             code: notifCode,
                             username: profile['username'],
-                            actionLink: "respondent/takeSurvey?surveyId=${survey.surveyId}"
+                            actionLink: "/respondent/takeSurvey?surveyId=${survey.surveyId}"
                         ).save()
 
-                        emails << profile['email']
+                        recipients << [
+                            email : profile['email'],
+                            fullname : profile['username'] //TODO RespondentProfile should consists full name
+                        ]
                     }
 
                     String link = "${servletContext.contextPath}/userNotification?code=${notifCode}"
 
                     //TODO should be sending bulk emails personally
-                    emailBlasterService.blastEmail(emails, 'takeSurvey', 'Take a survey', [link:link])
+                    emailBlasterService.blastEmail(recipients, 'takeSurvey', 'Take a survey', [link:link])
 
                 }
 
@@ -116,6 +119,9 @@ class SurveyService {
 
                 break
         }
+
+        survey.status = Survey.STATUS.IN_PROGRESS
+        survey.save()
 
     }
 

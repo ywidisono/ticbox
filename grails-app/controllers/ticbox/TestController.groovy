@@ -1,9 +1,6 @@
 package ticbox
 
-import com.mongodb.BasicDBList
-import com.mongodb.DBCollection
 import grails.converters.JSON
-import org.springframework.data.mongodb.core.query.BasicQuery
 
 class TestController {
 
@@ -91,5 +88,11 @@ class TestController {
         testService.testSendEmail()
 
         render 'email sent'
+    }
+
+    def testFoo() {
+
+
+
     }
 }
