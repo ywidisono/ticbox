@@ -95,6 +95,7 @@ class SurveyService {
                     //TODO find a way for bulky insert
                     for (RespondentDetail profile : filteredRespondents){
                         new UserNotification(
+                            title: "New survey : ${survey.name}",
                             code: notifCode,
                             username: profile['username'],
                             actionLink: "/respondent/takeSurvey?surveyId=${survey.surveyId}"
@@ -109,7 +110,7 @@ class SurveyService {
                     String link = "${servletContext.contextPath}/userNotification?code=${notifCode}"
 
                     //TODO should be sending bulk emails personally
-                    emailBlasterService.blastEmail(recipients, 'takeSurvey', 'Take a survey', [link:link])
+                    emailBlasterService.blastEmail(recipients, 'takeSurvey', 'Take a survey', [link:link, surveyName: survey.name])
 
                 }
 

@@ -27,10 +27,15 @@
         <tbody>
             <tr>
                 <td>
-                    Hi ${fullname?:'Respondent'},
-                    <br>
-                    <br>
-                    Please take the <a href="http://localhost:8080${link}">Survey</a>
+                    <pre style="font-size: larger;">
+
+Hi ${fullname?:'Respondent'},
+
+
+We have a new survey for you to participate, '${surveyName}'
+Please take the <a href="http://localhost:8080${link}">Survey</a>
+
+                    </pre>
                 </td>
             </tr>
         </tbody>

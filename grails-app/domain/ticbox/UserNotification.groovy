@@ -6,6 +6,7 @@ class UserNotification {
     String code
     String username
     String actionLink
+    String title
     boolean isNoticed = false
 
     static constraints = {

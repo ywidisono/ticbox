@@ -10,6 +10,7 @@ class UserNotificationController {
         if(userNotification) {
             userNotification.isNoticed = true
             userNotification.save()
+
             redirect uri : userNotification.actionLink
         }else {
             redirect uri: '/'
