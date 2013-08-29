@@ -7,7 +7,6 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="TicBOX"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
@@ -28,11 +27,6 @@
         display: block;
     }
 
-    .col {
-        display: inline-block;
-        min-height: 1px;
-    }
-
     @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -42,7 +36,7 @@
         }
     }
 
-    .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
+    .navbar-inverse .navbar-text {
         color: #ffffff;
         padding-top: 10px;
     }
@@ -133,6 +127,10 @@
         background-position: -72px 0;
     }
 
+    .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle{
+        background-color: transparent !important;
+    }
+
 
     </style>
 
@@ -157,12 +155,10 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href="${request.contextPath}/">
-                <img src="../images/ticbox/TicBoxLogo.png" width="200" height="100">
+                <img src="${g.resource(dir: 'images/ticbox', file: 'TicBoxLogo.png')}" width="200" height="100">
             </a>
             <div class="nav-collapse collapse">
-                <p class="navbar-text pull-right">
-                    Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
-                </p>
+
                 <ul class="nav">
                     <li class="index"><g:link action="index">Survey List</g:link></li>
                     <li class="profileForm"><g:link action="profileForm">Profile</g:link></li>
@@ -170,6 +166,23 @@
                     <li class="redeemGold"><g:link action="redeemGold">Redeem GOLD Points</g:link></li>
                     <li class="goldHistory"><g:link action="goldHistory">GOLD Points History</g:link></li>
                 </ul>
+
+                <ul class="nav nav-pills pull-right">
+                    %{--TODO should be providing different state when there is notification available--}%
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)}</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li role="presentation"><g:link controller="auth" action="signOut">Logout</g:link></li>
+                            <li role="presentation" class="divider"></li>
+                            <g:each in="${ticbox.UserNotification.findAllByUsernameAndIsNoticed(SecurityUtils.getSubject().getPrincipals().oneByType(String.class), false)}" var="notification">
+                                <li role="presentation">
+                                    <g:link controller="userNotification" title="${notification.title}" params="[code: notification.code]">${notification.title}</g:link>
+                                </li>
+                            </g:each>
+                        </ul>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>
@@ -190,7 +203,12 @@
                         <div class="accordion-inner" style="padding: 5px 5px;">
                             <div class="row-fluid">
                                 <div class="span12 center">
-                                    <img id="pic" src="${g.createLink(action: "viewImage", params: [respondentId: respondent.id])}"/>
+                                    <g:if test="${respondent.pic}">
+                                        <img id="sidebarRespondentPic" class="profilePic" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
+                                    </g:if>
+                                    <g:else>
+                                        <img id="sidebarRespondentPic" class="profilePic" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
+                                    </g:else>
                                 </div>
                             </div>
                             <br />
@@ -264,7 +282,10 @@
 
         jQuery('.datePicker').datepicker({
             showAnim : 'slideDown',
-            format : '<g:message code="app.date.format.js" default="dd/mm/yy"/>'
+            dateFormat : '<g:message code="app.date.format.js" default="dd/mm/yy"/>',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-60:c+10'
         });
 
     });

@@ -83,6 +83,13 @@
                 <script type="text/javascript" src="${resource(dir: 'frameworks/jquery-ui-1.10.2/js', file: 'jquery-ui-1.10.2.custom.js')}"></script>
                 <script type="text/javascript" src="${resource(dir: 'frameworks/bootstrap/js', file: 'bootstrap.js')}"></script>
 
+                <g:if test="${flash.error}">
+                    <div class="alert alert-error" style="display: block">${flash.error}</div>
+                </g:if>
+                <g:if test="${flash.message}">
+                    <div class="alert alert-success" style="display: block">${flash.message}</div>
+                </g:if>
+
                 <g:layoutBody/>
 
             </div>

@@ -1,29 +1,132 @@
 package ticbox
 
+import org.springframework.context.i18n.LocaleContextHolder
+
 class RespondentService {
 
+    def helperService
     def goldService
 
     def getProfileItems () {
         return ProfileItem.list()?.sort{it.seq}
     }
 
-    def getRespondentProfileFromParams(Map<String, String> params) {
-        def profile
+    def updateRespondentDetail(Map<String, String> params) throws Exception {
+        def respondentDetail = RespondentDetail.findByRespondentId(params.id)
+        respondentDetail = respondentDetail ?: new RespondentDetail(respondentId: params.id).save()
         def profileItems = [:]
         def items = ProfileItem.all
         for (Map.Entry<String, String> entry : params.entrySet()) {
             for (ProfileItem item : items) {
                 if (entry.value && entry.key.equalsIgnoreCase(item.code)) {
-                    profileItems.put(entry.key, entry.value)
+
+                    switch(item.type){
+                        case ProfileItem.TYPES.CHOICE :
+
+                            //TODO all the items must be appended in 1 string
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        case ProfileItem.TYPES.DATE :
+
+                            profileItems.put(entry.key, Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), entry.value).getTime())
+
+                            break
+
+                        case ProfileItem.TYPES.LOOKUP :
+
+                            //TODO all the items must be appended in 1 string
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        case ProfileItem.TYPES.NUMBER :
+
+                            profileItems.put(entry.key, Double.valueOf(entry.value))
+
+                            break
+
+                        case ProfileItem.TYPES.STRING :
+
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        default :
+
+                            break
+
+                    }
+
                     break
                 }
             }
         }
-        if (items.size() > 0) {
-            profile = new RespondentProfile(profileItems: profileItems)
+
+        respondentDetail.profileItems = profileItems
+
+        respondentDetail['username'] = params.username
+        respondentDetail['email'] = params.email
+
+        respondentDetail.save()
+    }
+
+    def getRespondentDetailFromParams(Map<String, String> params) {
+        def detail = null
+        def profileItems = [:]
+        def items = ProfileItem.all
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            for (ProfileItem item : items) {
+                if (entry.value && entry.key.equalsIgnoreCase(item.code)) {
+
+                    switch(item.type){
+                        case ProfileItem.TYPES.CHOICE :
+
+                            //TODO all the items must be appended in 1 string
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        case ProfileItem.TYPES.DATE :
+
+                            profileItems.put(entry.key, Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), entry.value).getTime())
+
+                            break
+
+                        case ProfileItem.TYPES.LOOKUP :
+
+                            //TODO all the items must be appended in 1 string
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        case ProfileItem.TYPES.NUMBER :
+
+                            profileItems.put(entry.key, Double.valueOf(entry.value))
+
+                            break
+
+                        case ProfileItem.TYPES.STRING :
+
+                            profileItems.put(entry.key, entry.value)
+
+                            break
+
+                        default :
+
+                            break
+
+                    }
+
+                    break
+                }
+            }
         }
-        return profile
+        if (profileItems.size() > 0) {
+            detail = new RespondentDetail(respondentId: params.id, profileItems: profileItems)
+        }
+        return detail
     }
 
     def saveSurveyReward(String respondentId, String surveyId) throws Exception {

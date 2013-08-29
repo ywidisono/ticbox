@@ -163,7 +163,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href="${request.contextPath}/">
-                <img src="../images/ticbox/TicBoxLogo.png" width="200" height="100">
+                <img src="${g.resource(dir: 'images/ticbox', file: 'TicBoxLogo.png')}" width="200" height="100">
             </a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">

@@ -665,7 +665,7 @@
 </div>
 
 <div style="display: none">
-    <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}" sizeLimit="512" allowedExtensions="['jpeg', 'png', 'gif']">
+    <uploader:uploader id="imageUploader" url="${[controller:'survey', action:'uploadLogo']}" params="${[:]}" sizeLimit="512000"> %{--allowedExtensions="['jpeg', 'png', 'gif']"--}%
         <uploader:onComplete>
             if(responseJSON.resourceId){
                 populateLogoImageResources(responseJSON.resourceId);

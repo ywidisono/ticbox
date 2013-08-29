@@ -1,3 +1,4 @@
+<%@ page import="ticbox.RespondentGoldHistory" %>
 <html>
 <head>
     <meta name="layout" content="respondent"/>
@@ -9,22 +10,24 @@
     <div class="container-fluid surveyList">
         <h3>Gold History</h3>
         <g:if test="${goldHistory != null && goldHistory.size() > 0}">
-            <table class="table">
+            <table class="table table-bordered">
                <thead>
                     <tr>
                         <th>Date</th>
                         <th>Type</th>
                         <th>Description</th>
                         <th>Amount</th>
+                        <th>Status</th>
                     </tr>
                </thead>
                <tbody>
                 <g:each in="${goldHistory}" var="history">
-                    <tr class="<g:if test='${ticbox.RespondentGoldHistory.TYPES.INCOME.equals(history.type)}'>info</g:if><g:else>warning</g:else>">
+                    <tr class="<g:if test='${RespondentGoldHistory.TYPES.INCOME_SURVEY.equals(history.type) || RespondentGoldHistory.TYPES.INCOME_REFERENCE.equals(history.type)}'>info</g:if><g:else>warning</g:else>">
                         <td class="span2">${history.date}</td>
-                        <td class="span2"><g:if test='${ticbox.RespondentGoldHistory.TYPES.INCOME.equals(history.type)}'>Income</g:if><g:else>Expense</g:else></td>
+                        <td class="span2">${history.typeDisplay()}</td>
                         <td class="span5">${history.description}</td>
-                        <td class="span5">${history.amount}</td>
+                        <td class="span2">${history.amount}</td>
+                        <td class="span3">${history.statusDisplay()}</td>
                     </tr>
                 </g:each>
                </tbody>

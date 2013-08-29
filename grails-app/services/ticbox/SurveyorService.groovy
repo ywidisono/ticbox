@@ -15,6 +15,6 @@ class SurveyorService {
             }
         }
 
-        return res ? res.get(0) : null
+        return res && res.size() > 0 ? res.get(0) : null
     }
 }

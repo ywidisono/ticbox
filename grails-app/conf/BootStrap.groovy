@@ -1,8 +1,11 @@
 import org.apache.shiro.crypto.hash.Sha256Hash
 import ticbox.Parameter
+import ticbox.RedemptionRequest
+import ticbox.RespondentGoldHistory
 import ticbox.RespondentProfile
+import ticbox.RespondentDetail
 import ticbox.Role
-import ticbox.Survey
+import ticbox.SurveyResponse
 import ticbox.User
 
 class BootStrap {
@@ -11,49 +14,53 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        // todo for dev only
+        // todo for dev only but required on Heroku (which automatically set env as Production)
+        // todo should only be modified on deployment to real Production or delivery to client
         Role.collection.drop()
         User.collection.drop()
         Parameter.collection.drop()
-
+        SurveyResponse.collection.drop()
+        RedemptionRequest.collection.drop()
+        RespondentGoldHistory.collection.drop()
+        RespondentProfile.collection.drop()
+        RespondentDetail.collection.drop()
 
         // users & roles
+        def adminRole = new Role(name: "Admin")
+        adminRole.permissions = []
+        adminRole.addToPermissions("*:*")
+                 .save()
+
         def surveyorRole = new Role(name: "Surveyor")
         surveyorRole.permissions = []
         surveyorRole.addToPermissions("survey:*")
-                    .addToPermissions("ajaxUpload:*")
-                    .save()
+                .addToPermissions("ajaxUpload:*")
+                .save()
 
         def respondentRole = new Role(name: "Respondent")
         respondentRole.permissions = []
         respondentRole.addToPermissions("respondent:*")
-                      .addToPermissions("ajaxUpload:*")
-                      .save()
+                .addToPermissions("ajaxUpload:*")
+                .addToPermissions("userNotification:*")
+                .save()
+
 
         def defaultUser = new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
-        def profile = new RespondentProfile()
-        profile.profileItems = [
-                PI_ADDR001 : 'nowhere somewhere everywhere wherever',
-                PI_OCCUPATION001 : 'jobless',
-                PI_COUNTRY001 : 'ID',
-                PI_DOB001 : Date.parse('dd/MM/yyyy', '30/06/2013'),
-                PI_HEIGHT001 : 179,
-                PI_WEIGHT001 : 65,
-                PI_EDU001 : 'DEGREE',
-                PI_HOBBY001 : 'Game'
-        ]
-        defaultUser.addToRoles(surveyorRole)
-                   .addToRoles(respondentRole)
-                   .respondentProfile = profile
-        defaultUser.save()
+        defaultUser.addToRoles(surveyorRole).save()
 
-        // parameters
-        new Parameter(code:"GOLD_RATE_IDR", value: "1000", desc: "Conversion rate gold to IDR").save()
-        new Parameter(code:"GOLD_MIN_REDEMPTION", value: "50", desc: "Minimum redemption in gold").save()
-        new Parameter(code:"REFERRER_REWARD", value: "1", desc: "Gold reward to referrer on reference survey completion").save()
+        def defaultRespondent = new User(username: "respondent1", passwordHash: new Sha256Hash("respondent1").toHex(), respondentProfile: new RespondentProfile())
+        defaultRespondent.addToRoles(respondentRole).save()
+
+        def defaultAdmin = new User(username: "admin", passwordHash: new Sha256Hash("admin").toHex())
+        defaultAdmin.addToRoles(adminRole).save()
 
         bootstrapService.init()
 
+        //parameters
+        new Parameter(code:"GOLD_RATE_IDR", value: "1000", desc: "Gold to IDR conversion").save()
+        new Parameter(code:"GOLD_MIN_REDEMPTION", value: "50", desc: "Minimum Gold can be redeemed").save()
+
+        println 'should be ok!!....'
     }
 
     def destroy = {

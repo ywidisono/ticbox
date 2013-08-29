@@ -8,6 +8,9 @@ import org.codehaus.groovy.grails.web.util.WebUtils
 class SurveyService {
 
     def surveyorService
+    def helperService
+    def emailBlasterService
+    def servletContext
 
     def surveyList(){
 
@@ -83,88 +86,102 @@ class SurveyService {
 
                 def filteredRespondents = getFilteredRespondents(survey)
 
+                def recipients = []
+
+                if (filteredRespondents){
+
+                    String notifCode = "ps_${survey.id}"
+
+                    //TODO find a way for bulky insert
+                    for (RespondentDetail profile : filteredRespondents){
+                        new UserNotification(
+                            title: "New survey : ${survey.name}",
+                            code: notifCode,
+                            username: profile['username'],
+                            actionLink: "/respondent/takeSurvey?surveyId=${survey.surveyId}"
+                        ).save()
+
+                        recipients << [
+                            email : profile['email'],
+                            fullname : profile['username'] //TODO RespondentProfile should consists full name
+                        ]
+                    }
+
+                    String link = "${servletContext.contextPath}/userNotification?code=${notifCode}"
+
+                    //TODO should be sending bulk emails personally
+                    emailBlasterService.blastEmail(recipients, 'takeSurvey', 'Take a survey', [link:link, surveyName: survey.name])
+
+                }
+
+
                 break
             case Survey.SURVEY_TYPE.FREE :
 
                 break
         }
 
+        survey.status = Survey.STATUS.IN_PROGRESS
+        survey.save()
+
     }
 
     def getFilteredRespondents(Survey survey){
-        if(survey && survey[Survey.COMPONENTS.RESPONDENT_FILTER]){
 
-            def c = RespondentProfile.createCriteria()
+        def profiles = RespondentDetail.createCriteria().list {
+            survey[Survey.COMPONENTS.RESPONDENT_FILTER]?.each{filter ->
 
-            c.list {
+                switch(filter.type){
+                    case ProfileItem.TYPES.CHOICE :
 
-                survey[Survey.COMPONENTS.RESPONDENT_FILTER].each{filter ->
-                    switch(filter.type){
-
-                        case ProfileItem.TYPES.CHOICE :
-
-                            profileItems {
-                                filter.checkItems?.each{item ->
-                                    or {
-                                        like filter.code, "%${item instanceof  Map ? item.key : item}%"
-                                    }
-                                }
+                        or {
+                            filter.checkItems?.each{item ->
+                                like "profileItems.${filter.code}",  "%${item instanceof Map ? item.key : item}%"
                             }
+                        }
 
-                            break
+                        break
 
-                        case ProfileItem.TYPES.DATE :
+                    case ProfileItem.TYPES.DATE :
 
-                            profileItems {
-                                gte filter.code, Date.parse('dd/MM/yyyy', filter.valFrom)
-                                lte filter.code, Date.parse('dd/MM/yyyy', filter.valTo)
+                        gte "profileItems.${filter.code}", Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), filter.valFrom).getTime()
+                        lte "profileItems.${filter.code}", Date.parse(helperService.getProperty('app.date.format.input', 'dd/MM/yyyy'), filter.valTo).getTime()
+
+                        break
+
+                    case ProfileItem.TYPES.LOOKUP :
+
+                        or {
+                            filter.checkItems?.each{item ->
+                                like "profileItems.${filter.code}",  "%${item.key}%"
                             }
+                        }
 
-                            break
+                        break
 
-                        case ProfileItem.TYPES.LOOKUP :
+                    case ProfileItem.TYPES.NUMBER :
 
-                            profileItems {
-                                filter.checkItems?.each{item ->
-                                    or {
-                                        like filter.code, "%${item instanceof  Map ? item.key : item}%"
-                                    }
-                                }
-                            }
+                        gte "profileItems.${filter.code}", Double.valueOf(filter.valFrom)
+                        lte "profileItems.${filter.code}", Double.valueOf(filter.valTo)
 
-                            break
+                        break
 
-                        case ProfileItem.TYPES.NUMBER :
+                    case ProfileItem.TYPES.STRING :
 
-                            profileItems {
-                                gte filter.code, Double.valueOf(filter.valFrom)
-                                lte filter.code, Double.valueOf(filter.valTo)
-                            }
+                        like "profileItems.${filter.code}", "%${filter.val}%"
 
-                            break
+                        break
 
-                        case ProfileItem.TYPES.STRING :
+                    default :
 
-                            profileItems {
-                                like filter.code, "%${filter.val}%" //TODO should be a wildcard query
-                            }
+                        break
 
-                            break
-
-                        default :
-
-                            break
-
-                    }
                 }
 
             }
-
-            println c
-
         }
 
-        return null
+        return profiles
     }
 
     def saveResponse(String responseJSON, String surveyId, String respondentId){
