@@ -180,6 +180,22 @@
             background: transparent url("../images/ticbox/05b_StarRating.png") no-repeat center;
         }
 
+        .star {
+            background:transparent url('../images/ticbox/question_BasicState.png');
+            background-position: 52px -10px;
+            width: 52px; height: 52px;
+        }
+
+        .stars:hover .star, .star.active{
+            background:transparent url('../images/ticbox/question_ActiveState.png');
+            background-position: 52px -10px;
+        }
+
+        .star:hover ~ .star, .star.basic{
+            background:transparent url('../images/ticbox/question_BasicState.png');
+            background-position: 52px -10px !important;
+        }
+
     </style>
 
     <script type="text/javascript">
@@ -349,6 +365,20 @@
 
                 case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
+                    answerComp = jQuery('#answerTemplate-starRating').clone().removeAttr('id');
+                    changeTypeIconClass = 'star-rating-icon';
+
+                    jQuery('.add-star', answerComp).click(function(){
+                        if (jQuery('.stars .star', answerComp).length < 10) {
+                            jQuery('.stars', answerComp).append(jQuery('<div class="col star"></div>'));
+                        }
+                    });
+
+                    jQuery('.remove-star', answerComp).click(function(){
+                        if (jQuery('.stars .star', answerComp).length > 3) {
+                            jQuery('.stars .star:first', answerComp).remove();
+                        }
+                    });
 
 
                     break;
@@ -426,7 +456,7 @@
 
                     case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
-
+                        answerDetails['nofStars'] = jQuery('.stars .star', container).length;
 
                         break;
 
@@ -526,7 +556,12 @@
 
                         case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
+                            container = constructQuestionItem(answerDetails.type);
 
+                            var stars = jQuery('.stars', container).empty();
+                            for(var i = 0; i < parseInt(answerDetails.nofStars); i++){
+                                stars.append(jQuery('<div class="col star clickable" seq="'+i+'"></div>'));
+                            }
 
                             break;
 
@@ -627,6 +662,25 @@
 
                     case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
+                        answerTemplate = jQuery('#answerPreviewTemplate-starRating').clone().removeAttr('id');
+                        var stars = jQuery('.stars', answerTemplate).empty();
+                        for(var i = 0; i < parseInt(answerDetails.nofStars); i++){
+                            jQuery('.stars', answerTemplate).append(jQuery('<div class="col star clickable" seq="'+i+'"></div>'));
+                        }
+
+                        jQuery('.star', stars).click(function(){
+                            var seq = parseInt(jQuery(this).attr('seq'));
+                            jQuery('.star', stars).each(function(idx){
+                                if(idx <= seq){
+                                    jQuery(this).removeClass('basic');
+                                    jQuery(this).addClass('active');
+                                }else{
+                                    jQuery(this).addClass('active');
+                                    jQuery(this).addClass('basic');
+                                }
+                            });
+                        });
+
                         break;
 
                 }
@@ -635,7 +689,7 @@
                     questionTemplate.append(answerTemplate);
                 }
 
-                jQuery('#surveyPreviewModal .modal-body').append(questionTemplate);
+                jQuery('#surveyPreviewModal').find('.modal-body').append(questionTemplate);
 
             });
         }
@@ -813,6 +867,28 @@
         </div>
     </div>
 
+    <div id="answerTemplate-starRating" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.STAR_RATING}">
+        <div class="line stars">
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+        </div>
+        <div class="line">
+            <div class="col">
+                <button class="btn btn-small remove-star">
+                    <i class="icon-minus"></i>
+                </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-small add-star">
+                    <i class="icon-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     %{--Preview Templates--}%
 
     <div id="questionPreviewTemplate" class="surveyItemContainer line rowLine10">
@@ -867,6 +943,12 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div id="answerPreviewTemplate-starRating" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.STAR_RATING}">
+        <div class="line stars">
+
         </div>
     </div>
 
