@@ -34,7 +34,7 @@
             </table>
         </g:if>
         <g:else>
-            <h3>No history yet</h3>
+            <div class="module-message">No history yet</div>
         </g:else>
     </div>
 </body>
