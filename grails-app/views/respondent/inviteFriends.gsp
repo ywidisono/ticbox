@@ -3,50 +3,60 @@
     <meta name="layout" content="respondent"/>
     <title>Invite Friends</title>
     <style type="text/css">
+
+
     </style>
 </head>
 
 <body>
-<div class="container-fluid surveyList">
-    <h3>Invite Friends</h3>
-
-    <div class="row-fluid">
-        <div class="span2"># Reference</div><div class="span1">${respondent.respondentProfile.references.size()}</div>
-        <div class="span2">Gold</div><div class="span1">0</div>
+    <div id="inviteFriendsHeader" class="module-header">
+        <div class="title">Invite Friends</div>
+        <div style="font-weight: regular; font-size: 12px">Invite Friends and Earn Extra Gold!</div>
     </div>
+    <div id="inviteFriendsForm" class="module-content">
+        <div class="message-box">
+            <div class="module-message">
+                Also receive 1 Gold for each completed survey done by a friend.
+            </div>
+        </div>
 
-    <br/>
+        <div class="row-fluid" style="margin: 20px 0 30px; padding-bottom: 20px; border-bottom: 1px solid #E8E8E8;">
+            <div style="color: #6daac9; font-weight: bold">You have refer
+                <span style="font-weight: bold; font-size: 16px; color: black;">${respondent.respondentProfile.references.size()}</span>
+                friend(s) so far.
+            </div>
+        </div>
 
-    <h4>Reference Link</h4>
-    <div class="row-fluid">
-        <div class="span10">
-            <div class="input-append">
-                <input id="refLink" class="input-xxlarge" type="text" value="${refLink}" disabled="disabled"/>
-                <button id="copyRefLink" class="btn"><i class="icon-book"></i> Copy</button>
+        <h4>Reference Link</h4>
+        <div class="row-fluid">
+            <div class="span10">
+                <div class="input-append">
+                    <input id="refLink" class="input-xxlarge" type="text" value="${refLink}" disabled="disabled"/>
+                    <button id="copyRefLink" class="btn"><i class="icon-book"></i> Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <h4>Invite friends by email</h4>
+        <g:form name="inviteForm">
+            <textarea id="friendEmails" name="friendEmails" rows="4" class="input-xxlarge"></textarea>
+            <label style="color:#a0a0a0">Separate valid emails by comma ","</label>
+        </g:form>
+
+        <button id="submitRequest" class="btn btn-primary btn-large">${g.message(code: 'app.submit.label')}</button>
+
+        <br /><br />
+
+        <h4>Invite friends by social media</h4>
+        <div class="row-fluid">
+            <div class="span12">
+                <a id="inviteByFacebookWall" class="btn btn-medium"><i class="icon-fb"></i> Post Wall</a>
+                <a id="inviteByFacebookDM" class="btn btn-medium"><i class="icon-fb"></i> Send Message</a>
+                <a id="inviteByTwitterTweet" class="btn btn-medium"><i class="icon-tw"></i> Send Tweet</a>
+                <a id="inviteByTwitterDM" class="btn btn-medium"><i class="icon-tw"></i> Direct Message</a>
             </div>
         </div>
     </div>
-
-    <h4>Invite friends by email</h4>
-    <g:form name="inviteForm">
-        <textarea id="friendEmails" name="friendEmails" rows="4" class="input-xxlarge"></textarea>
-        <label style="color:#a0a0a0">Separate valid emails by comma ","</label>
-    </g:form>
-
-    <button id="submitRequest" class="btn btn-primary btn-large">${g.message(code: 'app.submit.label')}</button>
-
-    <br /><br />
-
-    <h4>Invite friends by social media</h4>
-    <div class="row-fluid">
-        <div class="span12">
-            <a id="inviteByFacebookWall" class="btn btn-medium"><i class="icon-fb"></i> Post Wall</a>
-            <a id="inviteByFacebookDM" class="btn btn-medium"><i class="icon-fb"></i> Send Message</a>
-            <a id="inviteByTwitterTweet" class="btn btn-medium"><i class="icon-tw"></i> Send Tweet</a>
-            <a id="inviteByTwitterDM" class="btn btn-medium"><i class="icon-tw"></i> Direct Message</a>
-        </div>
-    </div>
-</div>
 
 <g:javascript src="jquery.validate.min.js"/>
 <g:javascript src="additional-methods.min.js"/>

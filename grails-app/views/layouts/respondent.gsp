@@ -207,7 +207,7 @@
         font-size: 12px;
     }
 
-    .moduleContent {
+    .accountGroup .desc {
         margin-left: 62px;
         padding-top: 5px;
     }
@@ -265,7 +265,22 @@
         color: #a67a3a;
         font-style: italic;
         font-size: 12px;
-        padding: 3px;
+        padding-bottom: 10px;
+    }
+
+    .module-content {
+        padding: 12px;
+    }
+
+    .message-box {
+        background-color: gainsboro;
+        border-radius: 6px 6px 6px 6px;
+        width: auto;
+    }
+
+    .message-box .module-message {
+        padding: 5px 10px 5px 10px;
+        width: auto;
     }
 
     </style>
@@ -363,7 +378,7 @@
                         </div>
                     </div>
                     --}%
-                                <div class="moduleContent line20">
+                                <div class="desc line20">
                                     <b class="fullName">${respondent?.username}</b>
                                     <g:link class="metadata" action="profileForm">View profile page</g:link>
                                 </div>

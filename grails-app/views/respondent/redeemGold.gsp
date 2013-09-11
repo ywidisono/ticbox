@@ -7,22 +7,21 @@
 </head>
 
 <body>
-<div class="container-fluid surveyList">
-    <h3>Redeem Gold</h3>
-
-    <div class="row">
-        <div class="span4">
-            <h4>1 Gold = ${goldRate}</h4>
+<div id="inviteFriendsHeader" class="module-header">
+    <div class="title">Redeem Gold</div>
+</div>
+<div id="redeemGoldForm" class="module-content">
+    <div class="message-box">
+        <div class="module-message">
+            1 Gold = ${goldRate}
+        </div>
+    </div>
+    <div class="row-fluid" style="margin: 20px 0 30px; padding-bottom: 20px; border-bottom: 1px solid #E8E8E8;">
+        <div style="color: #6daac9; font-weight: bold">Your balance is
+            <span style="font-weight: bold; font-size: 16px; color: black;">${balance}</span>
         </div>
     </div>
 
-    <div class="row">
-        <div class="span4">
-            <h4>Your balance is ${balance}</h4>
-        </div>
-    </div>
-
-    <br/>
 
     <g:form name="redeemForm">
         <div class="row-fluid">

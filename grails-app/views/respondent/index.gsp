@@ -8,18 +8,13 @@
             margin: 1em 0em;
         }
 
-        .container-fluid {
-            padding: 0;
-        }
-
     </style>
 </head>
 <body>
-    <div class="container-fluid">
         <div id="surveyHeader" class="module-header">
             <div class="title">Survey List</div>
         </div>
-        <div id="surveyList" class="survey-list">
+        <div id="surveyList" class="module-content">
             <g:if test="${surveyList}">
                 <g:each in="${surveyList}" var="survey">
                     <div class="row-fluid survey">
@@ -49,6 +44,5 @@
                 <div class="module-message">There is no survey at the moment..</div>
             </g:else>
         </div>
-    </div>
 </body>
 </html>
