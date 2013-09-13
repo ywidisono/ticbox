@@ -283,6 +283,14 @@
         width: auto;
     }
 
+    .gold {
+        color: goldenrod;
+    }
+
+    .trust {
+        color: #6daac9;
+    }
+
     </style>
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap-responsive.css')}" type="text/css">
@@ -389,11 +397,11 @@
                         <div class="row-fluid">
                             <div class="span6 stats">
                                 <div><strong>${respondent?.respondentProfile?.gold}</strong></div>
-                                <div style="color: goldenrod;"><b>Gold</b></div>
+                                <div class="gold"><b>Gold</b></div>
                             </div>
                             <div class="span6 stats leftBordered">
                                 <div><strong>${respondent?.respondentProfile?.trust}</strong></div>
-                                <div style="color: #6daac9"><b>Trust</b></div>
+                                <div class="trust"><b>Trust</b></div>
                             </div>
                         </div>
                     </div>
