@@ -7,8 +7,10 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid surveyList">
-        <h3>Gold History</h3>
+    <div id="goldHistoryHeader" class="module-header">
+        <div class="title">Gold History</div>
+    </div>
+    <div id="goldHistory" class="module-content">
         <g:if test="${goldHistory != null && goldHistory.size() > 0}">
             <table class="table table-bordered">
                <thead>
@@ -34,7 +36,7 @@
             </table>
         </g:if>
         <g:else>
-            <h3>No history yet</h3>
+            <div class="module-message">No history yet</div>
         </g:else>
     </div>
 </body>

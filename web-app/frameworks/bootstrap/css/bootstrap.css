@@ -1987,7 +1987,7 @@ legend + .control-group {
   -webkit-margin-top-collapse: separate;
 }
 .form-horizontal .control-group {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   *zoom: 1;
 }
 .form-horizontal .control-group:before,
@@ -5032,7 +5032,9 @@ a.thumbnail:focus {
 }
 .accordion-heading .accordion-toggle {
   display: block;
-  padding: 8px 15px;
+  /**padding: 8px 15px;**/
+  padding: 8px 5px;
+
 }
 .accordion-toggle {
   cursor: pointer;
