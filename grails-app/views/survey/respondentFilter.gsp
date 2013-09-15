@@ -41,7 +41,20 @@
 
         jQuery(function(){
 
-            jQuery('input.surveyType[value="${survey.type}"]').prop('checked', true);
+            jQuery('input.surveyType').change(function(){
+                if(jQuery(this).is(':checked')){
+                    var val = jQuery(this).val();
+
+                    if(val == '${Survey.SURVEY_TYPE.FREE}'){
+                        jQuery('#filterAddForm').hide();
+                        jQuery('#filterForm').find('.profile-item-container').appendTo(jQuery('#filterTemplates'));
+                    }else if (val == '${Survey.SURVEY_TYPE.EASY}'){
+                        jQuery('#filterAddForm').show();
+                    }
+                }
+            });
+
+            jQuery('input.surveyType[value="${survey.type}"]').prop('checked', true).trigger('change');
 
             jQuery('#addFilterBtn').click(function(){
 
@@ -355,7 +368,7 @@
 
 </form>
 
-<form class="form-horizontal">
+<form id="filterAddForm" class="form-horizontal">
     <div class="control-group">
         <label class="control-label" for="respondentFilterComponents">Add Filter</label>
         <div class="controls">
@@ -369,9 +382,6 @@
                 <i class="icon-plus"></i>
             </button>
 
-            <button id="submitFilterBtn" class="btn-ticbox" type="button">
-                <g:message code="label.button.save" default="Save"/>
-            </button>
         </div>
     </div>
 </form>
@@ -380,6 +390,10 @@
 
     <button class="btn-ticbox link" href="${request.contextPath}/survey/" type="button">
         <g:message code="label.button.back" default="Back"/>
+    </button>
+
+    <button id="submitFilterBtn" class="btn-ticbox" type="button">
+        <g:message code="label.button.save" default="Save"/>
     </button>
 
     <button class="btn-ticbox link" href="${request.contextPath}/survey/surveyGenerator" type="button">
