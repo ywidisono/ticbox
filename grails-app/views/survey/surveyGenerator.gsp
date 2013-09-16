@@ -820,7 +820,7 @@
             </div>
         </div>
         <div class="line rowLine2">
-            <div class="col col2">
+            <div class="col col2" style="display: none;">
                 <select class="choice-type">
                     <option value="single">Single Choice</option>
                     <option value="multiple">Multiple Choice</option>

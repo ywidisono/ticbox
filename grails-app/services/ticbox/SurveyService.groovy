@@ -42,6 +42,10 @@ class SurveyService {
         return survey
     }
 
+    def getSurvey(String surveyId) {
+        return Survey.findBySurveyId(surveyId)
+    }
+
     def getSurveyForRespondent(String surveyId) {
         return Survey.findBySurveyId(surveyId)
     }

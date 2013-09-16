@@ -52,7 +52,20 @@ class SurveyController {
     }
 
     def getQuestionItems(){
-        def jsonStr = com.mongodb.util.JSON.serialize(surveyService.getCurrentEditedSurvey()[Survey.COMPONENTS.QUESTION_ITEMS])
+
+        Survey survey = null
+
+        if(params.surveyId){
+            survey = surveyService.getSurvey(params.surveyId)
+        }else{
+            survey = surveyService.getCurrentEditedSurvey()
+        }
+
+        def jsonStr = null
+
+        if (survey) {
+            jsonStr = com.mongodb.util.JSON.serialize(survey[Survey.COMPONENTS.QUESTION_ITEMS])
+        }
 
         render jsonStr
     }
