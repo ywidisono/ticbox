@@ -15,8 +15,7 @@
             float: left;
             background-color: #EFEFEF;
             padding:0.5em;
-            width: 15%;
-
+            width: 14%;
         }
 
         .survey-content-box {
@@ -25,6 +24,8 @@
             padding:0.5em;
             width: 67%;
             position: relative;
+            margin-left: 5px;
+            margin-right: 5px;
         }
 
         .survey-nav-box {
@@ -37,6 +38,25 @@
             display: flex;
             flex-direction: column;
         }
+
+        pre {
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+
+            display: block;
+            line-height: inherit;
+            word-break: normal;
+            word-wrap: normal;
+            background-color: inherit;
+            border: 0;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -48,20 +68,15 @@
                 <g:each in="${surveyList}" var="survey">
                     <div class="row-fluid">
                         <div class="survey-row">
-                            <div class="survey-img-box" style="">
-                                Thumbnail
+                            <div class="survey-img-box clickable" data-toggle="modal" href="#chooseLogoModal" style="background: #4f4f4f url('../images/skin/survey-default-icon.png') no-repeat center; background-size: 70% 70%;">
+                                <img src="${request.contextPath}/respondent/viewSurveyLogo?surveyId=${survey.id}" style="" width="100%" height="100%">
                             </div>
                             <div class="survey-content-box">
                                 <div style="font-size:20px; font-weight: bold;">
                                     ${survey.name}
                                 </div>
-                                <div style="overflow: hidden; text-overflow: ellipsis; height: 4.3em; font-size: 12px; line-height: 16px; padding: 0.5em 0 0 0;">
-                                    ${survey.title}
-                                    <br/>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <div style="overflow: auto; text-overflow: ellipsis; height: 4.3em; font-size: 12px; line-height: 16px; padding: 0.5em 0 0 0;">
+                                    <pre>${survey.title}</pre>
                                 </div>
                                 <div style="float: left; position: absolute; bottom: 0.5em; width: 97%;">
                                     <div style="position: relative;">
