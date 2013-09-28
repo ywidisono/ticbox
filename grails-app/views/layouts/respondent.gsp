@@ -447,7 +447,7 @@
     .btnbrown.disabled,
     .btnbrown[disabled] {
         color: #FFFFFF;
-        background-color: #56400A;
+        background-color: #301e08;
     }
 
     .btngreen {
