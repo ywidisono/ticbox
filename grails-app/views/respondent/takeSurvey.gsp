@@ -460,8 +460,8 @@
 
 <br />
 
-<div class="line" style="padding-left: 3em">
-    <button id="saveResponse" class="btn btn-primary btn-large">${g.message(code:'app.submit.label')}</button>
+<div class="line" style="padding: 0 0 3em 1em;">
+    <button id="saveResponse" class="btn btn-green-city-large btngreen">${g.message(code:'app.submit.label')}</button>
 </div>
 
 <div class="templates" style="display: none;">

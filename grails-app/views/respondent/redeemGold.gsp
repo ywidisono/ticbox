@@ -75,7 +75,7 @@
         </div>
     </g:form>
 
-    <button id="submitRequest" class="btn btn-primary btn-large">${g.message(code: 'app.submit.label')}</button>
+    <button id="submitRequest" class="btn btn-green-city-large btngreen">${g.message(code: 'app.submit.label')}</button>
 </div>
 
 <g:javascript src="jquery.validate.min.js"/>

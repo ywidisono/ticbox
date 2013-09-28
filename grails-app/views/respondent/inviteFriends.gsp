@@ -32,7 +32,7 @@
             <div class="span10">
                 <div class="input-append">
                     <input id="refLink" class="input-xxlarge" type="text" value="${refLink}" disabled="disabled"/>
-                    <button id="copyRefLink" class="btn"><i class="icon-book"></i> Copy</button>
+                    <button id="copyRefLink" class="btn btn-green-city-small btn-light-oak" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px; padding: 3px 15px 5px 12px; box-shadow: 0 10px 2px 0 rgba(255, 255, 255, 0.2) inset;"><i class="icon-book"></i> Copy</button>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <label style="color:#a0a0a0">Separate valid emails by comma ","</label>
         </g:form>
 
-        <button id="submitRequest" class="btn btn-primary btn-large">${g.message(code: 'app.submit.label')}</button>
+        <button id="submitRequest" class="btn btn-green-city-large btngreen">${g.message(code: 'app.submit.label')}</button>
 
         <br /><br />
 

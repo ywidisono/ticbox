@@ -192,7 +192,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        padding-bottom: 20px;
+        padding-bottom: 12px;
+        padding-top: 12px;
+        padding-left: 12px;
     }
 
     .fullName {
@@ -200,6 +202,7 @@
         display: block;
         font-size: 16px;
         font-weight: bold;
+        margin-top: 5px;
     }
 
     .metadata {
@@ -209,20 +212,27 @@
 
     .accountGroup .desc {
         margin-left: 62px;
-        padding-top: 5px;
     }
 
     .line20 {
         line-height: 20px;
     }
 
-    .accountGroup img {
-        border-radius: 4px 4px 4px 4px;
+    .artwork {
         height: 50px;
         width: 50px;
-        position: absolute;
+        overflow: hidden;
         float: left;
-        display: block;
+        text-align: center;
+    }
+
+    .accountGroup .artwork img {
+        height: 50px;
+        width: auto;
+        max-width: none !important;
+        position: relative;
+        display: inline-block;
+
     }
 
     .profileStats {
@@ -289,6 +299,192 @@
 
     .trust {
         color: #6daac9;
+    }
+
+    .btn-green-city-large {
+        padding: 2px 15px 4px;
+        line-height: 22px;
+        text-shadow: rgba(0,0,0,.2) 0 .05em .02em;
+
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 20px;
+
+        font-size: 17.5px;
+        padding: 11px 19px;
+
+        box-shadow: 0 17px 4px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.25);
+        border: none !important;
+    }
+
+    .btn-green-city-small {
+        padding: 2px 15px 4px;
+        line-height: 22px;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        box-shadow: 0 10px 2px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.25);
+        border: none !important;
+    }
+
+    .btn-dark-oak {
+        color: #FFFFFF;
+
+        background-color: #56400A;
+        background-image: -moz-linear-gradient(top, #916C0E, #56400A);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#916C0E), to(#56400A));
+        background-image: -webkit-linear-gradient(top, #916C0E, #56400A);
+        background-image: -o-linear-gradient(top, #916C0E, #56400A);
+        background-image: linear-gradient(to bottom, #916C0E, #56400A);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff916C0E', endColorstr='#ff56400A', GradientType=0);
+
+        border-color: #916C0E #916C0E #56400A;
+
+        *background-color: #56400A;
+        /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+        border-bottom-color: #56400A;
+        *border: 0;
+    }
+
+    .btn-dark-oak:hover,
+    .btn-dark-oak:focus,
+    .btn-dark-oak:active,
+    .btn-dark-oak.active,
+    .btn-dark-oak.disabled,
+    .btn-dark-oak[disabled] {
+        color: #FFFFFF;
+        background-color: #56400A;
+    }
+
+    .btn-dark-oak {
+        color: #FFFFFF;
+
+        background-color: #56400A;
+        background-image: -moz-linear-gradient(top, #916C0E, #56400A);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#916C0E), to(#56400A));
+        background-image: -webkit-linear-gradient(top, #916C0E, #56400A);
+        background-image: -o-linear-gradient(top, #916C0E, #56400A);
+        background-image: linear-gradient(to bottom, #916C0E, #56400A);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff916C0E', endColorstr='#ff56400A', GradientType=0);
+
+        border-color: #916C0E #916C0E #56400A;
+
+        *background-color: #56400A;
+        /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+        *border: 0;
+    }
+
+    .btn-dark-oak:hover,
+    .btn-dark-oak:focus,
+    .btn-dark-oak:active,
+    .btn-dark-oak.active,
+    .btn-dark-oak.disabled,
+    .btn-dark-oak[disabled] {
+        color: #FFFFFF;
+        background-color: #56400A;
+    }
+
+    .btn-light-oak {
+        color: #FFFFFF;
+
+        background-color: #6c5103;
+        background-image: -moz-linear-gradient(top, #b29749, #6c5103);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b29749), to(#6c5103));
+        background-image: -webkit-linear-gradient(top, #b29749, #6c5103);
+        background-image: -o-linear-gradient(top, #b29749, #6c5103);
+        background-image: linear-gradient(to bottom, #b29749, #6c5103);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb29749', endColorstr='#ff6c5103', GradientType=0);
+
+        border-color: #b29749 #b29749 #6c5103;
+
+        *background-color: #6c5103;
+        /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+        *border: 0;
+    }
+
+    .btn-light-oak:hover,
+    .btn-light-oak:focus,
+    .btn-light-oak:active,
+    .btn-light-oak.active,
+    .btn-light-oak.disabled,
+    .btn-light-oak[disabled] {
+        color: #FFFFFF;
+        background-color: #6c5103;
+    }
+
+    .btnbrown {
+        color: #FFFFFF;
+
+        background-color: #301e08;
+        background-image: -moz-linear-gradient(top, #9f7032, #301e08);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9f7032), to(#301e08));
+        background-image: -webkit-linear-gradient(top, #9f7032, #301e08);
+        background-image: -o-linear-gradient(top, #9f7032, #301e08);
+        background-image: linear-gradient(to bottom, #9f7032, #301e08);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9f7032', endColorstr='#ff301e08', GradientType=0);
+
+        border-color: #9f7032 #9f7032 #301e08;
+
+        *background-color: #301e08;
+        /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+        *border: 0;
+    }
+
+    .btnbrown:hover,
+    .btnbrown:focus,
+    .btnbrown:active,
+    .btnbrown.active,
+    .btnbrown.disabled,
+    .btnbrown[disabled] {
+        color: #FFFFFF;
+        background-color: #56400A;
+    }
+
+    .btngreen {
+        color: #ffffff;
+
+        background-color: #acc918;
+        background-image: -moz-linear-gradient(top, #acc918, #617800);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#acc918), to(#617800));
+        background-image: -webkit-linear-gradient(top, #acc918, #617800);
+        background-image: -o-linear-gradient(top, #acc918, #617800);
+        background-image: linear-gradient(to bottom, #acc918, #617800);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffacc918', endColorstr='#ff617800', GradientType=0);
+
+        *background-color: #617800;
+        /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+        *border: 0;
+    }
+
+    .btngreen:hover,
+    .btngreen:focus,
+    .btngreen:active,
+    .btngreen.active,
+    .btngreen.disabled,
+    .btngreen[disabled] {
+        color: #ffffff;
+        background-color: #617800;
+    }
+
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        padding: inherit 15px inherit;
     }
 
     </style>
@@ -372,12 +568,14 @@
                                 <div class="row-fluid">
                                     <div class="span12 center">
                                     --}%
+                                    <div class="artwork">
                                         <g:if test="${respondent.pic}">
                                             <img id="sidebarRespondentPic" class="" src="${g.createLink(action: 'viewImage', params: [respondentId: respondent.id])}"/>
                                         </g:if>
                                         <g:else>
                                             <img id="sidebarRespondentPic" class="" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
                                         </g:else>
+                                    </div>
                                     %{--
                                     </div>
                                 </div>
