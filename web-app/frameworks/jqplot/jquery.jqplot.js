@@ -215,8 +215,9 @@
 
         var plot = new jqPlot();
         // remove any error class that may be stuck on target.
-        $('#'+target).removeClass('jqplot-error');
-        
+        //$('#'+target).removeClass('jqplot-error');
+        target.removeClass('jqplot-error');
+
         if ($.jqplot.config.catchErrors) {
             try {
                 plot.init(target, _data, _options);
@@ -226,14 +227,14 @@
             }
             catch(e) {
                 var msg = $.jqplot.config.errorMessage || e.message;
-                $('#'+target).append('<div class="jqplot-error-message">'+msg+'</div>');
-                $('#'+target).addClass('jqplot-error');
-                document.getElementById(target).style.background = $.jqplot.config.errorBackground;
-                document.getElementById(target).style.border = $.jqplot.config.errorBorder;
-                document.getElementById(target).style.fontFamily = $.jqplot.config.errorFontFamily;
-                document.getElementById(target).style.fontSize = $.jqplot.config.errorFontSize;
-                document.getElementById(target).style.fontStyle = $.jqplot.config.errorFontStyle;
-                document.getElementById(target).style.fontWeight = $.jqplot.config.errorFontWeight;
+                target.append('<div class="jqplot-error-message">'+msg+'</div>');
+                target.addClass('jqplot-error');
+                document.getElementById(target.attr('id')).style.background = $.jqplot.config.errorBackground;
+                document.getElementById(target.attr('id')).style.border = $.jqplot.config.errorBorder;
+                document.getElementById(target.attr('id')).style.fontFamily = $.jqplot.config.errorFontFamily;
+                document.getElementById(target.attr('id')).style.fontSize = $.jqplot.config.errorFontSize;
+                document.getElementById(target.attr('id')).style.fontStyle = $.jqplot.config.errorFontStyle;
+                document.getElementById(target.attr('id')).style.fontWeight = $.jqplot.config.errorFontWeight;
             }
         }
         else {        
@@ -1954,8 +1955,8 @@
                 this.preInitHooks.hooks[i].call(this, target, data, options);
             }
             
-            this.targetId = '#'+target;
-            this.target = $('#'+target);
+            this.targetId = target.attr('id');
+            this.target = target;
 
             //////
             // Add a reference to plot
