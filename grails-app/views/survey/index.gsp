@@ -245,15 +245,19 @@
             var txt = that.text();
             that.text('Loading Data..');
 
-            jQuery.getJSON('${request.contextPath}/survey/getQuestionItems', {surveyId: surveyId}, function(data){
+            jQuery.getJSON('${request.contextPath}/survey/getQuestionItems', {surveyId: surveyId}, function(questionsItems){
 
-                jQuery('#displaySurveyResultModal').modal('show').find('.questionItemsContainer').empty();
+                jQuery.getJSON('${request.contextPath}/survey/getSurveyResult', {surveyId: surveyId}, function(result){
 
-                setTimeout(function() {
-                    loadResultGraph(data);
+                    jQuery('#displaySurveyResultModal').modal('show').find('.questionItemsContainer').empty();
 
-                    that.text(txt);
-                }, 500);
+                    setTimeout(function() {
+                        loadResultGraph(questionsItems, result);
+
+                        that.text(txt);
+                    }, 500);
+                });
+
             });
         });
 
@@ -316,7 +320,9 @@
         });
     }
 
-    function loadResultGraph(questionItems){
+    function loadResultGraph(questionItems, result){
+
+        alert(JSON.stringify(result));
 
         var questionItemsContainer = jQuery('#displaySurveyResultModal').find('.questionItemsContainer');
 

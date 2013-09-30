@@ -274,6 +274,7 @@
 
     function buildSurveyResponseMap() {
         var responseItem = [];
+        var seq = 0;
 
         jQuery('.surveyItemsContainer > .surveyItemContainer').each(function () {
 
@@ -318,7 +319,7 @@
             }
 
             responseItem.push({
-                questionStr: questionStr,
+                seq : ++seq,
                 answerDetails: answerDetails
             });
 

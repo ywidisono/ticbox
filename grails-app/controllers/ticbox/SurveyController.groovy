@@ -183,4 +183,10 @@ class SurveyController {
         }
     }
 
+    def getSurveyResult(){
+        def result = surveyService.getSurveyResult(params.surveyId)
+
+        render result as JSON
+    }
+
 }

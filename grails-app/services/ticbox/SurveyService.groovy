@@ -1,6 +1,5 @@
 package ticbox
 
-import com.mongodb.BasicDBObject
 import com.mongodb.DBObject
 import org.bson.types.ObjectId
 import org.codehaus.groovy.grails.web.util.WebUtils
@@ -186,6 +185,59 @@ class SurveyService {
         }
 
         return profiles
+    }
+
+    def getSurveyResult(String surveyId){
+
+        def surveyResponse = SurveyResponse.findBySurveyId(surveyId)
+
+        def result = [:]
+
+        if (surveyResponse && surveyResponse['response']){
+            def responses = surveyResponse['response']
+            responses.each {response ->
+                def answerDetails = response['answerDetails']
+                def seq = response['seq']
+                switch (answerDetails['type']){
+                    case Survey.QUESTION_TYPE.CHOICE :
+
+                        if(!result[seq]){
+                            result[seq] = [:]
+                        }
+
+                        answerDetails['value']?.each{ opt ->
+                            result[seq][opt] = result[seq][opt] ? result[seq][opt] + 1 : 1
+                        }
+
+                        break
+
+                    case Survey.QUESTION_TYPE.FREE_TEXT :
+
+
+                        break
+
+                    case Survey.QUESTION_TYPE.SCALE_RATING :
+
+                        /*answerDetails['value']?.each{ row ->
+                            result[seq][row][answerDetails['value'][row]] = result[seq][row][answerDetails['value'][row]] ? result[seq][row][answerDetails['value'][row]] + 1 : 0
+                        }*/
+
+                        break
+
+                    case Survey.QUESTION_TYPE.STAR_RATING :
+
+
+                        break
+
+                    default :
+
+                        break
+                }
+            }
+        }
+
+        return result
+
     }
 
     def saveResponse(String responseJSON, String surveyId, String respondentId){

@@ -405,6 +405,7 @@
 
         function buildQuestionItemsMap(){
             var questionItems = [];
+            var seq = 0;
 
             jQuery('.surveyItemsContainer > .surveyItemContainer').each(function(){
 
@@ -463,6 +464,7 @@
                 }
 
                 questionItems.push({
+                    seq : ++seq,
                     questionStr : questionStr,
                     answerDetails : answerDetails
                 });
