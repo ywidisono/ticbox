@@ -259,13 +259,14 @@
 
     });
 
-    function constructQuestionItemCont(questionStr, idx){
-        var cont = jQuery('#questionItemTemplate').clone().attr('id', 'qi_'+idx);
+    function constructQuestionItemCont(questionStr, seq){
 
-        jQuery('.questionNumber', cont).html((idx + 1) + '.');
+        var cont = jQuery('#questionItemTemplate').clone().attr('id', 'qi_'+seq);
+
+        jQuery('.questionNumber', cont).html(seq + '.');
         jQuery('.questionTextContainer > span.question-text', cont).html(questionStr);
 
-        jQuery('.chart-container .chart', cont).attr('id', 'chart_'+idx);
+        jQuery('.chart-container .chart', cont).attr('id', 'chart_'+seq);
 
         return cont;
     }
