@@ -221,7 +221,7 @@
                 <span class="question-text"></span>
             </div>
         </div>
-        <div class="chart-container line rowline2">
+        <div class="chart-container line rowline2" style="padding-top: 10px;">
             <div class="chart" style="height:300px;width:500px;"></div>
         </div>
 
@@ -245,19 +245,15 @@
             var txt = that.text();
             that.text('Loading Data..');
 
-            jQuery.getJSON('${request.contextPath}/survey/getQuestionItems', {surveyId: surveyId}, function(questionsItems){
+            jQuery.getJSON('${request.contextPath}/survey/getSurveyResult', {surveyId: surveyId}, function(result){
 
-                jQuery.getJSON('${request.contextPath}/survey/getSurveyResult', {surveyId: surveyId}, function(result){
+                jQuery('#displaySurveyResultModal').modal('show').find('.questionItemsContainer').empty();
 
-                    jQuery('#displaySurveyResultModal').modal('show').find('.questionItemsContainer').empty();
+                setTimeout(function() {
+                    loadResultGraph(result);
 
-                    setTimeout(function() {
-                        loadResultGraph(questionsItems, result);
-
-                        that.text(txt);
-                    }, 500);
-                });
-
+                    that.text(txt);
+                }, 500);
             });
         });
 
@@ -274,7 +270,89 @@
         return cont;
     }
 
-    function constructPieChart(target, data){
+    function loadResultGraph(result){
+
+        var questionItemsContainer = jQuery('#displaySurveyResultModal').find('.questionItemsContainer');
+
+        if (result) {
+
+            jQuery.each(result, function(key, item){
+
+                var questionItem = item.questionItem;
+                var summary = item.summary;
+
+                var answerDetails = questionItem.answerDetails;
+                var container = constructQuestionItemCont(questionItem.questionStr, key);
+
+                questionItemsContainer.append(container);
+
+                var target = jQuery('.chart-container .chart:first', container);
+
+                switch(answerDetails.type){
+
+                    case '${Survey.QUESTION_TYPE.CHOICE}' :
+
+                        var data = [];
+
+                        jQuery.each(summary, function(label, count){
+                            data.push([label, count]);
+                        });
+
+                        constructPieChart(target, data);
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
+
+                        var line1= [['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
+                            ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
+                            ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
+
+                        constructLineChart(target, line1, 'Dummy result : Free Text');
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
+
+                        jQuery.each(summary, function(rowLabel, rowSummary){
+
+                            var data = [];
+
+                            jQuery.each(rowSummary, function(colLabel, count){
+                                data.push([colLabel, count]);
+                            });
+
+                            var targetCopy = target.clone();
+
+                            jQuery('.chart-container', container).append(targetCopy);
+
+                            constructPieChart(targetCopy, data, rowLabel);
+                        });
+
+                        target.remove();
+
+                        break;
+
+                    case '${Survey.QUESTION_TYPE.STAR_RATING}' :
+
+                        var data = [
+                            ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
+                            ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+                        ];
+
+                        constructPieChart(target, data, 'Dummy result : Star Rating');
+
+                        break;
+
+                }
+
+            });
+
+        }
+
+    }
+
+    function constructPieChart(target, data, title){
 
         return jQuery.jqplot (target, [data],
                 {
@@ -287,13 +365,17 @@
                             showDataLabels: true
                         }
                     },
-                    legend: { show:true, location: 'e' }
+                    legend: { show:true, location: 'e' },
+                    title: {
+                        text: title?title:'',
+                        show: title != null
+                    }
                 }
         );
 
     }
 
-    function constructLineChart(target, data){
+    function constructLineChart(target, data, title){
 
         return jQuery.jqplot(target, [data], {
             title:'Data Point Highlighting',
@@ -316,82 +398,12 @@
             },
             cursor: {
                 show: false
+            },
+            title: {
+                text: title?title:'',
+                show: title != null
             }
         });
-    }
-
-    function loadResultGraph(questionItems, result){
-
-        alert(JSON.stringify(result));
-
-        var questionItemsContainer = jQuery('#displaySurveyResultModal').find('.questionItemsContainer');
-
-        if (questionItems) {
-
-            jQuery.each(questionItems, function(idx, item){
-
-                var answerDetails = item.answerDetails;
-                var container = constructQuestionItemCont(item.questionStr, idx);
-
-                questionItemsContainer.append(container);
-
-                var target = jQuery('.chart-container .chart:first', container);
-
-                switch(answerDetails.type){
-
-                    case '${Survey.QUESTION_TYPE.CHOICE}' :
-
-                        var data = [
-                            ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
-                            ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
-                        ];
-
-                        constructPieChart(target, data);
-
-                        break;
-
-                    case '${Survey.QUESTION_TYPE.FREE_TEXT}' :
-
-                        var data = [
-                            ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
-                            ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
-                        ];
-
-                        constructPieChart(target, data);
-
-                        break;
-
-                        break;
-
-                    case '${Survey.QUESTION_TYPE.SCALE_RATING}' :
-
-                        var line1= [['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
-                            ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
-                            ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
-
-                        constructLineChart(target, line1);
-
-                        break;
-
-                    case '${Survey.QUESTION_TYPE.STAR_RATING}' :
-
-                        var data = [
-                            ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
-                            ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
-                        ];
-
-                        constructPieChart(target, data);
-
-                        break;
-
-                        break;
-
-                }
-
-            });
-
-        }
-
     }
 
 </script>

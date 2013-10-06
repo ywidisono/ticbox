@@ -189,52 +189,104 @@ class SurveyService {
 
     def getSurveyResult(String surveyId){
 
-        def surveyResponse = SurveyResponse.findBySurveyId(surveyId)
+        Survey survey = getSurvey(surveyId)
 
         def result = [:]
 
-        if (surveyResponse && surveyResponse['response']){
-            def responses = surveyResponse['response']
-            responses.each {response ->
-                def answerDetails = response['answerDetails']
-                def seq = response['seq']
-                switch (answerDetails['type']){
-                    case Survey.QUESTION_TYPE.CHOICE :
+        if (survey) {
+            def questionItems = survey[Survey.COMPONENTS.QUESTION_ITEMS]
 
-                        if(!result[seq]){
-                            result[seq] = [:]
-                        }
+            if (questionItems){
 
-                        answerDetails['value']?.each{ opt ->
-                            result[seq][opt] = result[seq][opt] ? result[seq][opt] + 1 : 1
-                        }
+                for(questionItem in questionItems){
+                    def seq = questionItem['seq']
 
-                        break
+                    if(!result[seq]){
+                        result[seq] = [:]
+                    }
 
-                    case Survey.QUESTION_TYPE.FREE_TEXT :
+                    result[seq]['questionItem'] = questionItem
 
-
-                        break
-
-                    case Survey.QUESTION_TYPE.SCALE_RATING :
-
-                        /*answerDetails['value']?.each{ row ->
-                            result[seq][row][answerDetails['value'][row]] = result[seq][row][answerDetails['value'][row]] ? result[seq][row][answerDetails['value'][row]] + 1 : 0
-                        }*/
-
-                        break
-
-                    case Survey.QUESTION_TYPE.STAR_RATING :
-
-
-                        break
-
-                    default :
-
-                        break
                 }
+
+                def surveyResponses = SurveyResponse.findAllBySurveyId(surveyId)
+
+                if (surveyResponses) {
+
+                    for(surveyResponse in surveyResponses) {
+
+                        if (surveyResponse['response']){
+
+                            for(response in surveyResponse['response']){
+                                def answerDetails = response['answerDetails']
+
+                                if (answerDetails && answerDetails['value']) {
+                                    def value = answerDetails['value']
+                                    def seq = response['seq']
+                                    def summary = null
+
+                                    switch (answerDetails['type']){
+                                        case Survey.QUESTION_TYPE.CHOICE :
+
+                                            if(!summary){
+                                                summary = [:]
+                                            }
+
+                                            value.each{ String choice ->
+                                                summary[choice] = summary[choice] ? summary[choice] + 1 : 1
+                                            }
+
+                                            break
+
+                                        case Survey.QUESTION_TYPE.FREE_TEXT :
+
+                                            if(!summary){
+                                                summary = []
+                                            }
+
+                                            summary << value
+
+                                            break
+
+                                        case Survey.QUESTION_TYPE.SCALE_RATING :
+
+                                            if(!summary){
+                                                summary = [:]
+                                            }
+
+                                            for(row in value){
+                                                if(!summary[row.key]){
+                                                    summary[row.key] = [:]
+                                                }
+
+                                                summary[row.key][row.value] = summary[row.key][row.value] ? summary[row.key][row.value] + 1 : 1
+                                            }
+
+                                            break
+
+                                        case Survey.QUESTION_TYPE.STAR_RATING :
+
+
+                                            break
+
+                                        default :
+
+                                            break
+                                    }
+
+                                    result[seq]['summary'] = summary
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
+
+
         }
+
+
 
         return result
 
