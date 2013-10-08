@@ -13,7 +13,6 @@ class BootStrap {
     def bootstrapService
 
     def init = { servletContext ->
-
         // todo for dev only but required on Heroku (which automatically set env as Production)
         // todo should only be modified on deployment to real Production or delivery to client
         Role.collection.drop()

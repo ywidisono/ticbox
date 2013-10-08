@@ -166,14 +166,29 @@
                 <img src="${g.resource(dir: 'images/ticbox', file: 'TicBoxLogo.png')}" width="200" height="100">
             </a>
             <div class="nav-collapse collapse">
-                <p class="navbar-text pull-right">
-                    Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)} &nbsp; <g:link controller="auth" action="signOut">Logout</g:link>
-                </p>
+
                 <ul class="nav">
                     <li class="surveyor"><a href="javascript:void(0);">Profile</a></li>
                     <li class="survey"><a href="${request.contextPath}/survey/index">Survey</a></li>
                     <li class="details"><a href="javascript:void(0);">Pricing Details</a></li>
                 </ul>
+
+                <ul class="nav nav-pills pull-right">
+                    %{--TODO should be providing different state when there is notification available--}%
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)}</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li role="presentation"><g:link controller="auth" action="signOut">Logout</g:link></li>
+                            <li role="presentation" class="divider"></li>
+                            <g:each in="${ticbox.UserNotification.findAllByUsernameAndIsNoticed(SecurityUtils.getSubject().getPrincipals().oneByType(String.class), false)}" var="notification">
+                                <li role="presentation">
+                                    <g:link controller="userNotification" title="${notification.title}" params="[code: notification.code]">${notification.title}</g:link>
+                                </li>
+                            </g:each>
+                        </ul>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>

@@ -37,283 +37,6 @@
 
     </style>
 
-    <script type="text/javascript">
-
-        jQuery(function(){
-
-            jQuery('input.surveyType').change(function(){
-                if(jQuery(this).is(':checked')){
-                    var val = jQuery(this).val();
-
-                    if(val == '${Survey.SURVEY_TYPE.FREE}'){
-                        jQuery('#filterAddForm').hide();
-                        jQuery('#filterForm').find('.profile-item-container').appendTo(jQuery('#filterTemplates'));
-                    }else if (val == '${Survey.SURVEY_TYPE.EASY}'){
-                        jQuery('#filterAddForm').show();
-                    }
-                }
-            });
-
-            jQuery('input.surveyType[value="${survey.type}"]').prop('checked', true).trigger('change');
-
-            jQuery('#addFilterBtn').click(function(){
-
-                var filterComponentCode = jQuery('#respondentFilterComponents').val();
-
-                populateFilterComponent(filterComponentCode);
-
-            });
-
-            jQuery('#submitFilterBtn').click(function(){
-
-                var filterItems = [];
-
-                jQuery('#filterForm').find('.profile-item-container').each(function(){
-
-                    var filterItem = {};
-
-                    filterItem['code'] = jQuery(this).attr('code');
-                    filterItem['type'] = jQuery(this).attr('type');
-                    filterItem['label'] = jQuery(this).attr('label');
-
-                    switch(filterItem['type']){
-
-                        case '${ProfileItem.TYPES.STRING}' :
-
-                            filterItem['val'] = jQuery('.filter-value', this).val();
-
-                            break;
-
-                        case '${ProfileItem.TYPES.NUMBER}' :
-
-                            filterItem['valFrom'] = jQuery('.filter-value-from', this).val();
-                            filterItem['valTo'] = jQuery('.filter-value-to', this).val();
-
-                            break;
-
-                        case '${ProfileItem.TYPES.CHOICE}' :
-                            filterItem['checkItems'] = [];
-                            jQuery('input.check-item:checked', this).each(function(){
-                                if (jQuery(this).attr('label')) {
-                                    filterItem['checkItems'].push({key:jQuery(this).val(), value:jQuery(this).attr('label')});
-                                } else {
-                                    filterItem['checkItems'].push(jQuery(this).val());
-                                }
-                            });
-
-                            break;
-
-                        case '${ProfileItem.TYPES.LOOKUP}' :
-                            filterItem['checkItems'] = [];
-                            jQuery('input.check-item:checked', this).each(function(){
-                                filterItem['checkItems'].push({key:jQuery(this).val(), value:jQuery(this).attr('label')});
-                            });
-
-                            break;
-
-                        case '${ProfileItem.TYPES.DATE}' :
-
-                            filterItem['valFrom'] = jQuery('.filter-value-from', this).val();
-                            filterItem['valTo'] = jQuery('.filter-value-to', this).val();
-
-                            break;
-
-                        default :
-
-                            break;
-
-                    }
-
-                    filterItems.push(filterItem);
-
-                });
-
-                var filterItemsJSON = JSON.stringify(filterItems);
-
-                jQuery.getJSON('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON, surveyType:jQuery('input.surveyType:checked').val()}, function(data){
-
-                    alert('Submitted');
-
-                    loadRespondentFilter(data);
-                });
-
-            });
-
-            jQuery.getJSON('${request.contextPath}/survey/getRespondentFilter', {}, function(respondentFilter){
-
-                jQuery.each(respondentFilter, function(idx, filter){
-                    populateFilterComponent(filter.code, filter)
-                });
-
-                loadRespondentFilter(respondentFilter);
-
-            });
-
-        });
-
-        function populateFilterComponent(filterComponentCode, filter){
-            var template = jQuery('#filterTemplates').find('.control-group[code="'+ filterComponentCode +'"]');
-
-            if (template.length > 0) {
-                jQuery('#filterForm').append(template);
-
-                jQuery('.remove-filter', template).click(function(){
-                    jQuery(this).parent().appendTo(jQuery('#filterTemplates'));
-                });
-
-                if(filter){
-                    switch(filter.type){
-
-                        case '${ProfileItem.TYPES.STRING}' :
-
-                            jQuery('.filter-value', template).val(filter.val);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.NUMBER}' :
-
-                            jQuery('.filter-value-from', template).val(filter.valFrom);
-                            jQuery('.filter-value-to', template).val(filter.valTo);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.CHOICE}' :
-                            var filter_ = filter;
-                            jQuery('input.check-item', template).each(function(){
-                                var chkBox = this;
-                                jQuery.each(filter_.checkItems, function(idx, item){
-                                    if(item instanceof Object){
-                                        if(jQuery(chkBox).val() == item.key){
-                                            //jQuery(chkBox).prop('checked', true);
-                                            jQuery(chkBox).parent().find('a').trigger('click');
-                                        }
-                                    }else{
-                                        if(jQuery(chkBox).val() == item){
-                                            //jQuery(chkBox).prop('checked',true);
-                                            jQuery(chkBox).parent().find('a').trigger('click');
-                                        }
-                                    }
-                                });
-                            })/*.prettyCheckable()*/;
-
-                            break;
-
-                        case '${ProfileItem.TYPES.LOOKUP}' :
-                            var filter_ = filter;
-                            jQuery('input.check-item', template).each(function(){
-                                var chkBox = this;
-                                jQuery.each(filter_.checkItems, function(idx, item){
-                                    if(item instanceof Object){
-                                        if(jQuery(chkBox).val() == item.key){
-                                            //jQuery(chkBox).prop('checked', true);
-                                            jQuery(chkBox).parent().find('a').trigger('click');
-                                        }
-                                    }else{
-                                        if(jQuery(chkBox).val() == item){
-                                            //jQuery(chkBox).prop('checked', true);
-                                            jQuery(chkBox).parent().find('a').trigger('click');
-                                        }
-                                    }
-                                });
-                            })/*.prettyCheckable()*/;
-
-                            break;
-
-                        case '${ProfileItem.TYPES.DATE}' :
-
-                            jQuery('.filter-value-from', template).val(filter.valFrom);
-                            jQuery('.filter-value-to', template).val(filter.valTo);
-
-                            break;
-
-                        default :
-
-                            break;
-
-                    }
-                }
-            }
-        }
-
-        function loadRespondentFilter(respondentFilter){
-
-            if(respondentFilter){
-                jQuery('.filter-details-container').empty();
-
-                jQuery.each(respondentFilter, function(idx, filter){
-
-                    var filterContent = null;
-
-                    switch(filter.type){
-
-                        case '${ProfileItem.TYPES.STRING}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.val);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.NUMBER}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.CHOICE}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
-                            var ul = jQuery('<ul></ul>');
-
-                            jQuery.each(filter.checkItems, function(idx, item){
-                                if (item instanceof Object) {
-                                    ul.append(jQuery('<li></li>').append(item.value));
-                                }else{
-                                    ul.append(jQuery('<li></li>').append(item));
-                                }
-                            });
-
-                            filterContent.append(ul);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.LOOKUP}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>');
-                            var ul = jQuery('<ul></ul>');
-
-                            jQuery.each(filter.checkItems, function(idx, item){
-                                ul.append(jQuery('<li></li>').append(item.value));
-                            });
-
-                            filterContent.append(ul);
-
-                            break;
-
-                        case '${ProfileItem.TYPES.DATE}' :
-
-                            filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
-
-                            break;
-
-                        default :
-
-                            break;
-
-                    }
-
-                    jQuery('.filter-details-container').append(jQuery('<div class="line"><div>')
-                            .append(jQuery('<label></label>').append(jQuery('<strong></strong>').append(filter.label + ' : ')))
-                            .append(filterContent)
-                    );
-
-                });
-
-            }else{
-                //TODO no survey fetched
-            }
-        }
-
-    </script>
-
 </head>
 <body>
 
@@ -469,7 +192,282 @@
             }
         });
 
+        jQuery('input.surveyType').change(function(){
+            if(jQuery(this).is(':checked')){
+                var val = jQuery(this).val();
+
+                if(val == '${Survey.SURVEY_TYPE.FREE}'){
+                    jQuery('#filterForm').hide();
+                    jQuery('#filterAddForm').hide();
+                }else if (val == '${Survey.SURVEY_TYPE.EASY}'){
+                    jQuery('#filterForm').show();
+                    jQuery('#filterAddForm').show();
+                }
+            }
+        });
+
+        jQuery('input.surveyType[value="${survey.type}"]').prop('checked', true).trigger('change');
+
+        jQuery('#addFilterBtn').click(function(){
+
+            var filterComponentCode = jQuery('#respondentFilterComponents').val();
+
+            populateFilterComponent(filterComponentCode);
+
+        });
+
+        jQuery('#submitFilterBtn').click(function(){
+
+            var filterItems = [];
+
+            if (jQuery('#easySurveyChk').is(':checked')) {
+                jQuery('#filterForm').find('.profile-item-container').each(function(){
+
+                    var filterItem = {};
+
+                    filterItem['code'] = jQuery(this).attr('code');
+                    filterItem['type'] = jQuery(this).attr('type');
+                    filterItem['label'] = jQuery(this).attr('label');
+
+                    switch(filterItem['type']){
+
+                        case '${ProfileItem.TYPES.STRING}' :
+
+                            filterItem['val'] = jQuery('.filter-value', this).val();
+
+                            break;
+
+                        case '${ProfileItem.TYPES.NUMBER}' :
+
+                            filterItem['valFrom'] = jQuery('.filter-value-from', this).val();
+                            filterItem['valTo'] = jQuery('.filter-value-to', this).val();
+
+                            break;
+
+                        case '${ProfileItem.TYPES.CHOICE}' :
+                            filterItem['checkItems'] = [];
+                            jQuery('input.check-item:checked', this).each(function(){
+                                if (jQuery(this).attr('label')) {
+                                    filterItem['checkItems'].push({key:jQuery(this).val(), value:jQuery(this).attr('label')});
+                                } else {
+                                    filterItem['checkItems'].push(jQuery(this).val());
+                                }
+                            });
+
+                            break;
+
+                        case '${ProfileItem.TYPES.LOOKUP}' :
+                            filterItem['checkItems'] = [];
+                            jQuery('input.check-item:checked', this).each(function(){
+                                filterItem['checkItems'].push({key:jQuery(this).val(), value:jQuery(this).attr('label')});
+                            });
+
+                            break;
+
+                        case '${ProfileItem.TYPES.DATE}' :
+
+                            filterItem['valFrom'] = jQuery('.filter-value-from', this).val();
+                            filterItem['valTo'] = jQuery('.filter-value-to', this).val();
+
+                            break;
+
+                        default :
+
+                            break;
+
+                    }
+
+                    filterItems.push(filterItem);
+
+                });
+            }
+
+            var filterItemsJSON = JSON.stringify(filterItems);
+
+            jQuery.getJSON('${request.contextPath}/survey/submitRespondentFilter', {filterItemsJSON : filterItemsJSON, surveyType:jQuery('input.surveyType:checked').val()}, function(data){
+
+                alert('Submitted');
+
+                loadRespondentFilter(data);
+            });
+
+        });
+
+        if ('${ticbox.Survey.SURVEY_TYPE.EASY}' == '${survey.type}') {
+            jQuery.getJSON('${request.contextPath}/survey/getRespondentFilter', {}, function(respondentFilter){
+
+                jQuery.each(respondentFilter, function(idx, filter){
+                    populateFilterComponent(filter.code, filter)
+                });
+
+                loadRespondentFilter(respondentFilter);
+
+            });
+        }
+
     });
+
+    function populateFilterComponent(filterComponentCode, filter){
+        var template = jQuery('#filterTemplates').find('.control-group[code="'+ filterComponentCode +'"]');
+
+        if (template.length > 0) {
+            jQuery('#filterForm').append(template);
+
+            jQuery('.remove-filter', template).click(function(){
+                jQuery(this).parent().appendTo(jQuery('#filterTemplates'));
+            });
+
+            if(filter){
+                switch(filter.type){
+
+                    case '${ProfileItem.TYPES.STRING}' :
+
+                        jQuery('.filter-value', template).val(filter.val);
+
+                        break;
+
+                    case '${ProfileItem.TYPES.NUMBER}' :
+
+                        jQuery('.filter-value-from', template).val(filter.valFrom);
+                        jQuery('.filter-value-to', template).val(filter.valTo);
+
+                        break;
+
+                    case '${ProfileItem.TYPES.CHOICE}' :
+                        var filter_ = filter;
+                        jQuery('input.check-item', template).each(function(){
+                            var chkBox = this;
+                            jQuery.each(filter_.checkItems, function(idx, item){
+                                if(item instanceof Object){
+                                    if(jQuery(chkBox).val() == item.key){
+                                        //jQuery(chkBox).prop('checked', true);
+                                        jQuery(chkBox).parent().find('a').trigger('click');
+                                    }
+                                }else{
+                                    if(jQuery(chkBox).val() == item){
+                                        //jQuery(chkBox).prop('checked',true);
+                                        jQuery(chkBox).parent().find('a').trigger('click');
+                                    }
+                                }
+                            });
+                        })/*.prettyCheckable()*/;
+
+                        break;
+
+                    case '${ProfileItem.TYPES.LOOKUP}' :
+                        var filter_ = filter;
+                        jQuery('input.check-item', template).each(function(){
+                            var chkBox = this;
+                            jQuery.each(filter_.checkItems, function(idx, item){
+                                if(item instanceof Object){
+                                    if(jQuery(chkBox).val() == item.key){
+                                        //jQuery(chkBox).prop('checked', true);
+                                        jQuery(chkBox).parent().find('a').trigger('click');
+                                    }
+                                }else{
+                                    if(jQuery(chkBox).val() == item){
+                                        //jQuery(chkBox).prop('checked', true);
+                                        jQuery(chkBox).parent().find('a').trigger('click');
+                                    }
+                                }
+                            });
+                        })/*.prettyCheckable()*/;
+
+                        break;
+
+                    case '${ProfileItem.TYPES.DATE}' :
+
+                        jQuery('.filter-value-from', template).val(filter.valFrom);
+                        jQuery('.filter-value-to', template).val(filter.valTo);
+
+                        break;
+
+                    default :
+
+                        break;
+
+                }
+            }
+        }
+    }
+
+    function loadRespondentFilter(respondentFilter){
+
+        jQuery('.filter-details-container').empty();
+
+        if(respondentFilter){
+
+            jQuery.each(respondentFilter, function(idx, filter){
+
+                var filterContent = null;
+
+                switch(filter.type){
+
+                    case '${ProfileItem.TYPES.STRING}' :
+
+                        filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.val);
+
+                        break;
+
+                    case '${ProfileItem.TYPES.NUMBER}' :
+
+                        filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
+
+                        break;
+
+                    case '${ProfileItem.TYPES.CHOICE}' :
+
+                        filterContent = jQuery('<div style="margin-left: 15px"></div>');
+                        var ul = jQuery('<ul></ul>');
+
+                        jQuery.each(filter.checkItems, function(idx, item){
+                            if (item instanceof Object) {
+                                ul.append(jQuery('<li></li>').append(item.value));
+                            }else{
+                                ul.append(jQuery('<li></li>').append(item));
+                            }
+                        });
+
+                        filterContent.append(ul);
+
+                        break;
+
+                    case '${ProfileItem.TYPES.LOOKUP}' :
+
+                        filterContent = jQuery('<div style="margin-left: 15px"></div>');
+                        var ul = jQuery('<ul></ul>');
+
+                        jQuery.each(filter.checkItems, function(idx, item){
+                            ul.append(jQuery('<li></li>').append(item.value));
+                        });
+
+                        filterContent.append(ul);
+
+                        break;
+
+                    case '${ProfileItem.TYPES.DATE}' :
+
+                        filterContent = jQuery('<div style="margin-left: 15px"></div>').append(filter.valFrom + ' - ' + filter.valTo);
+
+                        break;
+
+                    default :
+
+                        break;
+
+                }
+
+                jQuery('.filter-details-container').append(jQuery('<div class="line"><div>')
+                        .append(jQuery('<label></label>').append(jQuery('<strong></strong>').append(filter.label + ' : ')))
+                        .append(filterContent)
+                );
+
+            });
+
+        }else{
+            //TODO no survey fetched
+        }
+    }
 
 </script>
 

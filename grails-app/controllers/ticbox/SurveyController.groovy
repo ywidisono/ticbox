@@ -85,7 +85,7 @@ class SurveyController {
         try {
             def filterItemsJSON = params.filterItemsJSON
 
-            surveyService.submitRespondentFilter(filterItemsJSON, params.surveyType, surveyService.getCurrentEditedSurvey())
+            surveyService.submitRespondentFilter(params.surveyType, filterItemsJSON, surveyService.getCurrentEditedSurvey())
 
             render filterItemsJSON
         } catch (Exception e) {
