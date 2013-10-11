@@ -6,6 +6,7 @@ import ticbox.RespondentProfile
 import ticbox.RespondentDetail
 import ticbox.Role
 import ticbox.SurveyResponse
+import ticbox.SurveyorProfile
 import ticbox.User
 
 class BootStrap {
@@ -46,6 +47,11 @@ class BootStrap {
 
         def defaultUser = new User(username: "user123", passwordHash: new Sha256Hash("password").toHex())
         defaultUser.addToRoles(surveyorRole).save()
+        new SurveyorProfile(
+                email: "user123@gmail.com",
+                companyName: "dev",
+                userAccount: defaultUser
+        ).save()
 
         def defaultRespondent = new User(username: "respondent1", passwordHash: new Sha256Hash("respondent1").toHex(), respondentProfile: new RespondentProfile())
         defaultRespondent.addToRoles(respondentRole).save()
