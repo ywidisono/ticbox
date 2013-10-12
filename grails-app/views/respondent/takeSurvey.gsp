@@ -40,135 +40,24 @@
     padding: 5px 1px;
 }
 
-.surveyItemContainer .item-label {
-    width: 485px !important;
-}
-
-#questionTypesMenuContainer {
-    width: 300px;
-    height: auto;
-    background: #97b11a;
-    color: #ffffff;
-    padding: 10px 0 30px 0 !important;
-    position: relative;
-}
-
-#questionTypesItemContainer {
-    width: 260px;
-    height: 70px;
-    margin: 0 auto;
-    background: #ffffff;
-}
-
-#questionTypesItemContainer ul {
-    list-style: none;
-    margin: 70px 0 0 0;
-    padding: 0;
-    display: block;
-}
-
-#questionTypesItemContainer ul li {
-    float: left;
-    width: 52px;
-    height: 70px;
-    background: transparent url('../images/ticbox/question_BasicState.png');
-    background-position: 0 0;
-}
-
-#questionTypesTitleContainer {
-    background: transparent url('../images/ticbox/00_Question-Type.png') center no-repeat !important;
-    width: 100% !important;
-    height: 70px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: absolute;
-    top: 7px;
-    left: 0;
-}
-
-#questionTypesItemContainer ul li:hover {
-    background: transparent url('../images/ticbox/question_ActiveState.png');
-}
-
-#questionTypesItemContainer ul li {
-    background-position: 0 0;
-}
-
-#questionTypesItemContainer ul li.single-choice:hover ~ #questionTypesTitleContainer {
-    background: transparent url('../images/ticbox/01_SingleChoice.png') center no-repeat !important;
-}
-
-#questionTypesItemContainer ul li.multiple-choice {
-    background-position: 208px 0;
-}
-
-#questionTypesItemContainer ul li.multiple-choice:hover ~ #questionTypesTitleContainer {
-    background: transparent url('../images/ticbox/02_MultipleChoice.png') center no-repeat !important;
-}
-
-#questionTypesItemContainer ul li.single-text {
-    background-position: 156px 0;
-}
-
-#questionTypesItemContainer ul li.single-text:hover ~ #questionTypesTitleContainer {
-    background: transparent url('../images/ticbox/03_FreeText.png') center no-repeat !important;
-}
-
-#questionTypesItemContainer ul li.scale {
-    background-position: 104px 0;
-}
-
-#questionTypesItemContainer ul li.scale:hover ~ #questionTypesTitleContainer {
-    background: transparent url('../images/ticbox/04_ScaleRating.png') center no-repeat !important;
-}
-
-#questionTypesItemContainer ul li.star-rating {
-    background-position: 52px 0;
-}
-
-#questionTypesItemContainer ul li.star-rating:hover ~ #questionTypesTitleContainer {
-    background: transparent url('../images/ticbox/05_StarRating.png') center no-repeat !important;
-}
-
 .answerTemplate {
     margin: 0 0 0 45px;
 }
 
-.question-action-btn {
-    width: 20px;
-    height: 15px;
+.star {
+    background:transparent url('../images/ticbox/question_BasicState.png');
+    background-position: 52px -10px;
+    width: 52px; height: 52px;
 }
 
-.upload-pic-icon {
-    background: transparent url("../images/ticbox/06_Question_UploadIcon_Picture.png") no-repeat center;
+.stars:hover .star, .star.active{
+    background:transparent url('../images/ticbox/question_ActiveState.png');
+    background-position: 52px -10px;
 }
 
-.upload-vid-icon {
-    background: transparent url("../images/ticbox/07_Question_UploadIcon_Video.png") no-repeat center;
-}
-
-.delete-question-icon {
-    background: transparent url("../images/ticbox/07_Question_Delete.png") no-repeat center;
-}
-
-.single-choice-icon {
-    background: transparent url("../images/ticbox/01b_SingleChoice.png") no-repeat center;
-}
-
-.multiple-choice-icon {
-    background: transparent url("../images/ticbox/02b_MultipleChoice.png") no-repeat center;
-}
-
-.free-text-icon {
-    background: transparent url("../images/ticbox/03b_FreeText.png") no-repeat center;
-}
-
-.scale-rating-icon {
-    background: transparent url("../images/ticbox/04b_ScaleRating.png") no-repeat center;
-}
-
-.star-rating-icon {
-    background: transparent url("../images/ticbox/05b_StarRating.png") no-repeat center;
+.star:hover ~ .star, .star.basic{
+    background:transparent url('../images/ticbox/question_BasicState.png');
+    background-position: 52px -10px !important;
 }
 
 </style>
@@ -179,20 +68,8 @@
 
     jQuery(function () {
 
-        jQuery('#surveyLogo').click(function () {
-            jQuery('.qq-upload-button > input').trigger('click');
-        });
-
         jQuery('.enableTooltip').tooltip({
             selector: "button[data-toggle=tooltip]"
-        });
-
-        jQuery('.surveyItemTypeAdd').click(function () {
-            var type = jQuery(this).attr('type');
-            var subtype = jQuery(this).attr('subtype');
-
-            constructQuestionItem(type, subtype);
-
         });
 
         jQuery('#saveResponse').click(function () {
@@ -247,8 +124,8 @@
 
             case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
-                // TODO
-                answerComp = jQuery('#answerTemplate-singleText').clone().removeAttr('id');
+                answerComp = jQuery('#answerTemplate-starRating').clone().removeAttr('id');
+                changeTypeIconClass = 'star-rating-icon';
 
                 break;
 
@@ -313,7 +190,8 @@
 
                 case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
-
+                    answerDetails['nofStars'] = jQuery('.stars .star:not(.basic)', container).length;
+                    alert(answerDetails['nofStars']);
                     break;
 
             }
@@ -420,6 +298,23 @@
                     case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
                         container = constructQuestionItem(answerDetails.type);
+                        var stars = jQuery('.stars', container).empty();
+                        for(var i = 0; i < parseInt(answerDetails.nofStars); i++){
+                            jQuery('.stars', container).append(jQuery('<div class="col star clickable" seq="'+i+'"></div>'));
+                        }
+
+                        jQuery('.star', stars).click(function(){
+                            var seq = parseInt(jQuery(this).attr('seq'));
+                            jQuery('.star', stars).each(function(idx){
+                                if(idx <= seq){
+                                    jQuery(this).removeClass('basic');
+                                    jQuery(this).addClass('active');
+                                }else{
+                                    jQuery(this).addClass('active');
+                                    jQuery(this).addClass('basic');
+                                }
+                            });
+                        });
 
                         break;
 
@@ -523,6 +418,16 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div id="answerTemplate-starRating" class="answerTemplate line rowLine2" type="${Survey.QUESTION_TYPE.STAR_RATING}">
+        <div class="line stars">
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
+            <div class="col star clickable"></div>
         </div>
     </div>
 

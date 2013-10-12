@@ -68,8 +68,10 @@
                 <g:each in="${surveyList}" var="survey">
                     <div class="row-fluid">
                         <div class="survey-row">
-                            <div class="survey-img-box clickable" data-toggle="modal" href="#chooseLogoModal" style="background: #4f4f4f url('../images/skin/survey-default-icon.png') no-repeat center; background-size: 70% 70%;">
-                                <img src="${request.contextPath}/respondent/viewSurveyLogo?surveyId=${survey.id}" style="" width="100%" height="100%">
+                            <div class="survey-img-box clickable" style="background: #4f4f4f url('../images/skin/survey-default-icon.png') no-repeat center; background-size: 70% 70%;">
+                                <g:link action="takeSurvey" params="[surveyId:survey.surveyId]">
+                                    <img src="${request.contextPath}/respondent/viewSurveyLogo?surveyId=${survey.surveyId}" style="" width="100%" height="100%">
+                                </g:link>
                             </div>
                             <div class="survey-content-box">
                                 <div style="font-size:20px; font-weight: bold;">
