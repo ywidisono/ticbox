@@ -98,11 +98,14 @@ ul.login-nav li.help {
 }
 ul.login-nav li.sign-up {
     border: 1px solid #7f9b09;
-    background: #97b11a;
+    border-radius: 30px;
+    /*background: #97b11a;*/
 }
 ul.login-nav li.log-in {
     border: 1px solid #7f9b09;
-    background: #97b11a;
+    border-radius: 30px;
+
+    /*background: #97b11a;*/
 }
 
 ul.sign-up-icons {

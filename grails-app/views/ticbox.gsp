@@ -1,220 +1,216 @@
 <html>
-<head>
+    <head>
+        <meta name="layout" content="ticbox"/>
+        <title>Welcome</title>
+    </head>
+    <body>
 
-    <meta name="layout" content="ticbox"/>
-    <title>Welcome</title>
-    <style>
 
-    .landing-container {
-        width: 934px;
-        height: 425px;
-        background: transparent;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 0;
-        margin-bottom: 20px;
-    }
+        <div id="teaser-container" class="">
 
-    .landing-main {
-        width: 734px;
-        height: 425px;
-        background: transparent url("images/ticbox/LandingPage_Visual01.png") no-repeat center;
-    }
+            <!-- Responsive CSS3 Slider w/o JS by Brendan Zabarauskas http://csscience.com/responsiveslidercss3/-->
+            <article id=slider>
 
-    .landing-bar {
-        width: 196px;
-        height: 391px;
-        margin-top: 34px;
-        margin-left: 2px;
-    }
+                <!-- Slider Setup -->
 
-    .landing-bar div {
-        float: right;
-        clear: right;
-        width: inherit;
-        height:129px;
-        background: #bad33c;
-        text-align: center;
-        color: #ffffff;
-    }
+                <input checked type=radio name=slider id=slide1 />
+                <input type=radio name=slider id=slide2 />
+                <input type=radio name=slider id=slide3 />
+                <input type=radio name=slider id=slide4 />
+                <input type=radio name=slider id=slide5 />
 
-    .landing-bar div.center {
-        margin: 2px 0;
-    }
+                <!-- The Slider -->
 
-    .landing-bar div table {
-        height: 100%;
-        width: 100%;
-    }
+                <div id=slides>
 
-    .landing-bar div table tr td {
-        margin-top: auto;
-        margin-bottom: auto;
-        text-align: center;
-    }
+                    <div id=overflow>
 
-    .landing-menu {
-        top : 390px;
-        position: relative;
-        display: table;
-        margin: 0 auto;
-    }
+                        <div class=inner>
+                            <article>
+                                <div class=info><h3>Create Survey</h3>Cing, need help untuk content</div>
+                                <img src=http://csscience.com/responsiveslidercss3/MountainOutpostByBjzaba.png />
+                            </article>
 
-    .landing-menu .nav {
-        margin: 0 20px;
-    }
+                            <article>
+                                <div class=info><h3>Join Respondent</h3>Cing, need help untuk content</div>
+                                <img src=http://csscience.com/responsiveslidercss3/CouldDragonByBjzaba.png />
+                            </article>
 
-    .landing-menu .nav li {
-        margin: 0 25px;
-        color : #bad33c;
-    }
+                            <article>
+                                <div class=info><h3>Solutions</h3>Cing, need help untuk content</div>
+                                <img src=http://localhost:8080/ticbox/images/ticbox/LandingPage_Visual01.png style="height: 300px; width: auto;"/>
+                            </article>
 
-    .landing-menu .nav li:hover {
-        cursor: pointer;
-        color: #ffffff;
-    }
+                            <article>
+                                <div class=info><h3>Watch Demo</h3>Cing, need help untuk content</a></div>
+                                <img src=http://csscience.com/responsiveslidercss3/CliffsByBjzaba.png />
+                            </article>
 
-    .landing-menu-btn-left {
-        width: 21px;
-        height: 15px;
-        background: transparent url("images/ticbox/GreenArrow-left.png") no-repeat;
-    }
+                            <article>
+                                <div class=info><h3>etc</h3>Cing, need help untuk content</div>
+                                <img src=http://csscience.com/responsiveslidercss3/HillFortByBjzaba.png />
+                            </article>
 
-    .landing-menu-btn-right {
-        width: 21px;
-        height: 15px;
-        background: transparent url("images/ticbox/GreenArrow-right.png") no-repeat;
-    }
+                        </div> <!-- .inner -->
 
-    .foot-landing h4, .foot-landing h5 {
-        color: #bad33c;
-    }
+                    </div> <!-- #overflow -->
 
-    </style>
+                </div> <!-- #slides -->
 
-</head>
-<body>
 
-<div class="landing-container line">
+            <!-- Controls and Active Slide Display -->
 
-    <div class="landing-main col">
+                <div id=controls>
 
-        <div class="landing-menu navbar">
-            <div class="landing-menu-btn-left col pull-left"></div>
-            <ul class="nav">
-                <li class="link" href="${request.contextPath}/survey/">Create Survey</li>
-                <li class="link" href="${request.contextPath}/respondent/">Join Respondent</li>
-                <li>Solutions</li>
-                <li>Watch Demo</li>
-            </ul>
-            <div class="landing-menu-btn-right col pull-right"></div>
-        </div>
+                    <label for=slide1></label>
+                    <label for=slide2></label>
+                    <label for=slide3></label>
+                    <label for=slide4></label>
+                    <label for=slide5></label>
 
-    </div>
-    <div class="landing-bar col">
-        <div>
-            <h1>It's Free</h1>
-            <span>Sign me up</span>
-            <ul class="sign-up-icons">
-                <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
-                <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
-                <oauth:connect provider="google"><li class="gg"> </li></oauth:connect>
-            </ul>
-        </div>
-        <div class="center">
-            <a href="${request.contextPath}/auth/registerSurveyor" style="color: #ffffff;">
-                <h1>Go Pro!</h1>
-                <span>More perks</span><br>
-                <span>Unlimited Surveys</span>
-            </a>
-        </div>
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        <a href="${request.contextPath}/auth/registerRespondent" style="color: #ffffff;">
-                            Be a respondent<br>
-                            Be rewarded
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+                </div> <!-- #controls -->
 
-</div>
+                <div id=active>
 
-<div class="row foot-landing" style="margin: 0 20px;">
-    <div class="span7">
-        <div class="row">
-            <div class="span4">
-                <h4>
-                    About Us
-                </h4>
-                <p>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
+                    <label for=slide1>Create Survey</label>
+                    <label for=slide2>Join Respondent</label>
+                    <label for=slide3>Solutions</label>
+                    <label for=slide4>Watch Demo</label>
+                    <label for=slide5>etc</label>
+
+                </div> <!-- #active -->
+
+            </article> <!-- #slider -->
+
+            <div class="landing-bar col">
+                <div style="background-color: #b9d234;">
+                    <h1>It's Free</h1>
+                    <span>Sign me up</span>
+                    <ul class="sign-up-icons">
+                        <oauth:connect provider="facebook"><li class="fb"></li></oauth:connect>
+                        <oauth:connect provider="twitter"><li class="tw"> </li></oauth:connect>
+                        <oauth:connect provider="google"><li class="gg"> </li></oauth:connect>
+                    </ul>
+                </div>
+                <div class="center" style="background-color: #96b11a;">
+                    <a href="${request.contextPath}/auth/registerSurveyor" style="color: #ffffff;">
+                        <h1>Go Pro!</h1>
+                        <span>More perks</span><br>
+                        <span>Unlimited Surveys</span>
+                    </a>
+                </div>
+                <div style="background-color: #617800;">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="${request.contextPath}/auth/registerRespondent" style="color: #ffffff;">
+                                    Be a respondent<br>
+                                    Be rewarded
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="span3">
-                <h4>
-                    How It Works
-                </h4>
-                <p>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span4">
-                <h4>
-                    Resources
-                </h4>
-                <p>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-            </div>
-            <div class="span3">
-                <h4>
-                    Blog
-                </h4>
-                <p>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="span4">
-        <h4>
-            Latest News
-        </h4>
-        <h5>11.05.13</h5>
-        <p>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        </p>
-        <p>
-            <a class="btn" href="#">View details »</a>
-        </p>
-        <h5>10.05.13</h5>
-        <p>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        </p>
-        <p>
-            <a class="btn" href="#">View details »</a>
-        </p>
-    </div>
-</div>
+        </div> <!-- #teaser-container -->
 
-</body>
+    %{--
+        <div class="landing-container line">
+
+            <div class="landing-main col">
+
+                <div class="landing-menu navbar">
+                    <div class="landing-menu-btn-left col pull-left"></div>
+                    <ul class="nav">
+                        <li class="link" href="${request.contextPath}/survey/">Create Survey</li>
+                        <li class="link" href="${request.contextPath}/respondent/">Join Respondent</li>
+                        <li>Solutions</li>
+                        <li>Watch Demo</li>
+                    </ul>
+                    <div class="landing-menu-btn-right col pull-right"></div>
+                </div>
+
+            </div>
+
+
+        </div>
+        --}%
+
+        <div class="module" style="float: left;">
+            %{--<div class="span5">--}%
+                <div class="row">
+                    <div class="two-cols">
+                        <h4>
+                            About Us
+                        </h4>
+                        <p>
+                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        </p>
+                        <p>
+                            <a class="btn" href="#">View details »</a>
+                        </p>
+                    </div>
+                    <div class="two-cols">
+                        <h4>
+                            How It Works
+                        </h4>
+                        <p>
+                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        </p>
+                        <p>
+                            <a class="btn" href="#">View details »</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="two-cols">
+                        <h4>
+                            Resources
+                        </h4>
+                        <p>
+                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        </p>
+                        <p>
+                            <a class="btn" href="#">View details »</a>
+                        </p>
+                    </div>
+                    <div class="two-cols">
+                        <h4>
+                            Blog
+                        </h4>
+                        <p>
+                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        </p>
+                        <p>
+                            <a class="btn" href="#">View details »</a>
+                        </p>
+                    </div>
+                </div>
+            %{--</div>--}%
+            %{--<div class="span4">--}%
+            <div class="row">
+                <div class="single-col">
+                    <h4>
+                        Latest News
+                    </h4>
+                    <h5>11.05.13</h5>
+                    <p>
+                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                    </p>
+                    <p>
+                        <a class="btn" href="#">View details »</a>
+                    </p>
+                    <h5>10.05.13</h5>
+                    <p>
+                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                    </p>
+                    <p>
+                        <a class="btn" href="#">View details »</a>
+                    </p>
+                </div>
+            </div>
+            %{--</div>--}%
+        </div>
+
+    </body>
 </html>
