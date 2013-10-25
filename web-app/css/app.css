@@ -1,3 +1,23 @@
+html, body, #doc {
+    /**padding-top: 65px;**/
+    /**background-color: #dfdfde;**/
+    /**background: url("http://dryicons.com/images/cutie_animation/header_cutie.jpg") no-repeat fixed right 0 transparent;**/
+    /*background-color: #d3d3d3;*/
+    background: url("../images/skin/bg-building-clean.png") no-repeat center center fixed #F6F4F0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html, body, #doc, #page-outer {
+    height: 100%;
+}
+
+#page-outer {
+    position: relative;
+}
+
 h1, h2, h3{
     color: #7f9b09;
     font-weight: bold;
@@ -104,7 +124,583 @@ hr.profilebar {
     box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
 }
 
-/*Override bootstrap*/
+@media (max-width: 980px) {
+    /* Enable use of floated navbar text */
+    .navbar-text.pull-right {
+        float: none;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+.navbar-inverse .navbar-text {
+    color: #ffffff;
+    padding-top: 10px;
+}
+
+.navbar-inverse .navbar-inner {
+    background-color: #BAD33C;
+    background-image: -moz-linear-gradient(top, #BAD33C, #7F9B09);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#BAD33C), to(#7F9B09));
+    background-image: -webkit-linear-gradient(top, #BAD33C, #7F9B09);
+    background-image: -o-linear-gradient(top, #BAD33C, #7F9B09);
+    background-image: linear-gradient(to bottom, #BAD33C, #7F9B09);
+    border: 0;
+    -webkit-box-shadow: 0px 0px 10px #000000;
+    box-shadow: 0px 0px 10px #000000;
+    -moz-box-shadow: 0px 0px 10px #000000;
+    color: #ffffff;
+    height: 56px;
+}
+
+.navbar-inverse .nav > li > a  {
+    color: #ffffff;
+    height: 30px;
+    padding-top: 20px;
+    padding-bottom: 6px; /*30+20+6=56px=height dari navbar*/
+}
+
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+    background: transparent;
+    /**-webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    **/
+    background: transparent url("../images/skin/menu-shimmer-green3.png") repeat-y;
+    background-position: center;
+    background-size: 100% auto;
+    color: dimgrey;
+    text-shadow: none;
+}
+
+.navbar .nav > li > a:hover {
+    background: transparent;
+    background: transparent url("../images/skin/menu-shimmer-green3.png") repeat-y;
+    background-position: center;
+    background-size: 100% auto;
+    color: white;
+    text-shadow: none;
+}
+
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle{
+    background-color: transparent !important;
+}
+
+.error {
+    color: tomato;
+}
+
+.icon-fb, .icon-tw, .icon-li, .icon-gg {
+    display:inline-block;
+    *display:inline; /*IE7*/
+    *zoom:1; /*IE7*/
+    background: transparent url("../images/ticbox/FB_TW_LI_Gl_logo.png") no-repeat;
+    width: 23px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.icon-fb{
+    background-position: 0 0;
+}
+
+.icon-tw{
+    background-position: -24px 0;
+}
+
+.icon-li{
+    background-position: -48px 0;
+}
+
+.icon-gg{
+    background-position: -72px 0;
+}
+
+.wrapper {
+    padding-bottom: 0;
+    min-height: 100%;
+    position: relative;
+    padding: 70px 14px 15px;
+    width: 1024px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.wrapper.grey {
+    background: url("../images/skin/bg-wash-grey.png") repeat scroll 0 0 transparent;
+    /**background: url("https://abs.twimg.com/a/1378257772/t1/img/wash-white-30.png") repeat scroll 0 0 transparent;**/
+}
+
+.row {
+    margin-left: -10px;
+}
+
+.leftPanel {
+    float: left;
+    width: 220px;
+    position: relative;
+}
+
+.rightPanel {
+    float: right;
+    width: 792px;
+    /*position: relative;*/
+}
+
+.module {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /**text-shadow: 0 1px 0 #FFFFFF;**/
+    margin-bottom: 10px;
+    position: relative;
+    background-color: #F9F9F9;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 1px 1px 5px lightgrey;
+    color: #333333;
+    padding: 12px;
+}
+
+a {
+    color: #333333;
+}
+
+.accountGroup {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    padding-left: 12px;
+}
+
+.fullName {
+    color: #333333;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.metadata {
+    color: #999999;
+    font-size: 12px;
+}
+
+.accountGroup .desc {
+    margin-left: 62px;
+}
+
+.line20 {
+    line-height: 20px;
+}
+
+.artwork {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+}
+
+.accountGroup .artwork img {
+    height: 50px;
+    width: auto;
+    max-width: none !important;
+    position: relative;
+    display: inline-block;
+
+}
+
+.profileStats {
+    border-top: 1px solid #E8E8E8;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+
+.stats {
+    text-transform: uppercase;
+    padding: 12px;
+    color: #999999;
+    font-size: 11px;
+}
+
+.stats strong {
+    color: #333333;
+    display: block;
+    font-size: 16px;
+}
+
+.leftBordered {
+    border-left: 1px solid #E8E8E8;
+}
+
+.module-header {
+    border-bottom: 1px solid #E8E8E8;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*border-bottom-width: 0;*/
+}
+
+.module-header .title {
+    color: #7F9B09;
+}
+
+.module-message {
+    color: #a67a3a;
+    font-style: italic;
+    font-size: 12px;
+    padding-bottom: 10px;
+}
+
+.module-content {
+    padding: 12px;
+}
+
+.message-box {
+    background-color: gainsboro;
+    border-radius: 6px 6px 6px 6px;
+    width: auto;
+}
+
+.message-box .module-message {
+    padding: 5px 10px 5px 10px;
+    width: auto;
+}
+
+.gold {
+    color: goldenrod;
+}
+
+.trust {
+    color: #6daac9;
+}
+
+.btn-green-city-large {
+    padding: 2px 15px 4px;
+    line-height: 22px;
+    text-shadow: rgba(0,0,0,.2) 0 .05em .02em;
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 20px;
+
+    font-size: 17.5px;
+    padding: 11px 19px;
+
+    box-shadow: 0 17px 4px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.25);
+    border: none !important;
+}
+
+.btn-green-city-small {
+    padding: 2px 15px 4px;
+    line-height: 22px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    box-shadow: 0 10px 2px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.25);
+    border: none !important;
+}
+
+.btn-dark-oak {
+    color: #FFFFFF;
+
+    background-color: #56400A;
+    background-image: -moz-linear-gradient(top, #916C0E, #56400A);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#916C0E), to(#56400A));
+    background-image: -webkit-linear-gradient(top, #916C0E, #56400A);
+    background-image: -o-linear-gradient(top, #916C0E, #56400A);
+    background-image: linear-gradient(to bottom, #916C0E, #56400A);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff916C0E', endColorstr='#ff56400A', GradientType=0);
+
+    border-color: #916C0E #916C0E #56400A;
+
+    *background-color: #56400A;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    border-bottom-color: #56400A;
+    *border: 0;
+}
+
+.btn-dark-oak:hover,
+.btn-dark-oak:focus,
+.btn-dark-oak:active,
+.btn-dark-oak.active,
+.btn-dark-oak.disabled,
+.btn-dark-oak[disabled] {
+    color: #FFFFFF;
+    background-color: #56400A;
+}
+
+.btn-dark-oak {
+    color: #FFFFFF;
+
+    background-color: #56400A;
+    background-image: -moz-linear-gradient(top, #916C0E, #56400A);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#916C0E), to(#56400A));
+    background-image: -webkit-linear-gradient(top, #916C0E, #56400A);
+    background-image: -o-linear-gradient(top, #916C0E, #56400A);
+    background-image: linear-gradient(to bottom, #916C0E, #56400A);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff916C0E', endColorstr='#ff56400A', GradientType=0);
+
+    border-color: #916C0E #916C0E #56400A;
+
+    *background-color: #56400A;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    *border: 0;
+}
+
+.btn-dark-oak:hover,
+.btn-dark-oak:focus,
+.btn-dark-oak:active,
+.btn-dark-oak.active,
+.btn-dark-oak.disabled,
+.btn-dark-oak[disabled] {
+    color: #FFFFFF;
+    background-color: #56400A;
+}
+
+.btn-light-oak {
+    color: #FFFFFF;
+
+    background-color: #6c5103;
+    background-image: -moz-linear-gradient(top, #b29749, #6c5103);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b29749), to(#6c5103));
+    background-image: -webkit-linear-gradient(top, #b29749, #6c5103);
+    background-image: -o-linear-gradient(top, #b29749, #6c5103);
+    background-image: linear-gradient(to bottom, #b29749, #6c5103);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb29749', endColorstr='#ff6c5103', GradientType=0);
+
+    border-color: #b29749 #b29749 #6c5103;
+
+    *background-color: #6c5103;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    *border: 0;
+}
+
+.btn-light-oak:hover,
+.btn-light-oak:focus,
+.btn-light-oak:active,
+.btn-light-oak.active,
+.btn-light-oak.disabled,
+.btn-light-oak[disabled] {
+    color: #FFFFFF;
+    background-color: #6c5103;
+}
+
+.btnbrown {
+    color: #FFFFFF;
+
+    background-color: #301e08;
+    background-image: -moz-linear-gradient(top, #9f7032, #301e08);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9f7032), to(#301e08));
+    background-image: -webkit-linear-gradient(top, #9f7032, #301e08);
+    background-image: -o-linear-gradient(top, #9f7032, #301e08);
+    background-image: linear-gradient(to bottom, #9f7032, #301e08);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9f7032', endColorstr='#ff301e08', GradientType=0);
+
+    border-color: #9f7032 #9f7032 #301e08;
+
+    *background-color: #301e08;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    *border: 0;
+}
+
+.btnbrown:hover,
+.btnbrown:focus,
+.btnbrown:active,
+.btnbrown.active,
+.btnbrown.disabled,
+.btnbrown[disabled] {
+    color: #FFFFFF;
+    background-color: #301e08;
+}
+
+.btngreen {
+    color: #ffffff;
+
+    background-color: #acc918;
+    background-image: -moz-linear-gradient(top, #acc918, #617800);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#acc918), to(#617800));
+    background-image: -webkit-linear-gradient(top, #acc918, #617800);
+    background-image: -o-linear-gradient(top, #acc918, #617800);
+    background-image: linear-gradient(to bottom, #acc918, #617800);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffacc918', endColorstr='#ff617800', GradientType=0);
+
+    *background-color: #617800;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    *border: 0;
+}
+
+.btngreen:hover,
+.btngreen:focus,
+.btngreen:active,
+.btngreen.active,
+.btngreen.disabled,
+.btngreen[disabled] {
+    color: #ffffff;
+    background-color: #617800;
+}
+
+.btn-blue-trust {
+    color: #ffffff;
+
+    background-color: #6daac9;
+    background-image: -moz-linear-gradient(top, #6daac9, #283f4a);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6daac9), to(#283f4a));
+    background-image: -webkit-linear-gradient(top, #6daac9, #283f4a);
+    background-image: -o-linear-gradient(top, #6daac9, #283f4a);
+    background-image: linear-gradient(to bottom, #6daac9, #283f4a);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6daac9', endColorstr='#ff283f4a', GradientType=0);
+
+    *background-color: #283f4a;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    *border: 0;
+}
+
+.btn-blue-trust:hover,
+.btn-blue-trust:focus,
+.btn-blue-trust:active,
+.btn-blue-trust.active,
+.btn-blue-trust.disabled,
+.btn-blue-trust[disabled] {
+    color: #ffffff;
+    background-color: #283f4a;
+}
+
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding: inherit 15px inherit;
+}
+
+/*** HOME of TICBOX ***/
+.page-footer {
+    font-size: 10px;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top:30px;
+    margin-bottom:0;
+    width: 100%;
+}
+
+.landing-container {
+    width: 934px;
+    height: 425px;
+    background: transparent;
+    padding: 0;
+    margin: -10px 20px 10px;
+    position: relative;
+    width: auto;
+}
+
+.landing-main {
+    width: 734px;
+    height: 425px;
+    background: transparent url("../images/ticbox/LandingPage_Visual01.png") no-repeat center;
+}
+
+.landing-bar {
+    width: 198px;
+    /*height: 391px;*/
+    margin: 0 0 0 6px;
+}
+
+.landing-bar div {
+    float: right;
+    clear: right;
+    width: inherit;
+    height:118px;
+    /*background: #bad33c;*/
+    text-align: center;
+    color: #ffffff;
+    border-top-right-radius: 20px;
+}
+
+.landing-bar div.center {
+    margin: 2px 0;
+}
+
+.landing-bar div table {
+    height: 100%;
+    width: 100%;
+}
+
+.landing-bar div table tr td {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+.landing-menu {
+    top : 390px;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+}
+
+.landing-menu .nav {
+    margin: 0 20px;
+}
+
+.landing-menu .nav li {
+    margin: 0 25px;
+    color : #bad33c;
+}
+
+.landing-menu .nav li:hover {
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.landing-menu-btn-left {
+    width: 21px;
+    height: 15px;
+    background: transparent url("../images/ticbox/GreenArrow-left.png") no-repeat;
+}
+
+.landing-menu-btn-right {
+    width: 21px;
+    height: 15px;
+    background: transparent url("../images/ticbox/GreenArrow-right.png") no-repeat;
+}
+
+.foot-landing h4, .foot-landing h5 {
+    color: #bad33c;
+}
+
+.two-cols {
+    width:46%;
+    margin-left: 30px;
+    float: left;
+}
+
+.single-col {
+    width:95%;
+    margin-left: 30px;
+    float: left;
+}
+
+/*Override bootstrap*/
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: transparent;
 }

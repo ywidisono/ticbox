@@ -3,6 +3,7 @@ package ticbox
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 import grails.converters.JSON
 import org.apache.shiro.SecurityUtils
+import org.bson.types.ObjectId
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
@@ -97,9 +98,12 @@ class RespondentController {
         def survey = surveyService.getSurveyForRespondent(params.surveyId)
 
         if (survey[Survey.COMPONENTS.LOGO]) {
-            def imageByte
-            imageByte = Base64.decode(survey[Survey.COMPONENTS.LOGO])
-            response.outputStream << imageByte
+            def objectId = survey[Survey.COMPONENTS.LOGO]
+            def userResource = UserResource.findById(objectId)
+            if (userResource) {
+                def imageByte = Base64.decode(userResource[Survey.COMPONENTS.LOGO])
+                response.outputStream << imageByte
+            }
         }
     }
 

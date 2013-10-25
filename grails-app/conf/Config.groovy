@@ -134,6 +134,9 @@ environments {
 
 security.shiro.oauth.linkAccountUrl = "/auth/linkAccount"
 
+// enable remember me
+security.shiro.authc.required = false
+
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
