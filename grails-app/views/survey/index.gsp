@@ -330,7 +330,7 @@
                             constructPieChart(targetCopy, data, rowLabel);
                         });
 
-                        target.remove();
+                        //target.remove();
 
                         break;
 
