@@ -667,21 +667,20 @@
                         answerTemplate = jQuery('#answerPreviewTemplate-starRating').clone().removeAttr('id');
                         var stars = jQuery('.stars', answerTemplate).empty();
                         for(var i = 0; i < parseInt(answerDetails.nofStars); i++){
-                            jQuery('.stars', answerTemplate).append(jQuery('<div class="col star clickable" seq="'+i+'"></div>'));
-                        }
+                            jQuery('.stars', answerTemplate).append(jQuery('<div class="col star clickable" seq="'+i+'"></div>').click(function(){
+                                var seq = parseInt(jQuery(this).attr('seq'));
+                                jQuery('.star', stars).each(function(idx){
+                                    if(idx <= seq){
+                                        jQuery(this).removeClass('basic');
+                                        jQuery(this).addClass('active');
+                                    }else{
+                                        jQuery(this).removeClass('active');
+                                        jQuery(this).addClass('basic');
+                                    }
+                                });
 
-                        jQuery('.star', stars).click(function(){
-                            var seq = parseInt(jQuery(this).attr('seq'));
-                            jQuery('.star', stars).each(function(idx){
-                                if(idx <= seq){
-                                    jQuery(this).removeClass('basic');
-                                    jQuery(this).addClass('active');
-                                }else{
-                                    jQuery(this).addClass('active');
-                                    jQuery(this).addClass('basic');
-                                }
-                            });
-                        });
+                            }));
+                        }
 
                         break;
 

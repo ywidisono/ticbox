@@ -190,8 +190,8 @@
 
                 case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
-                    answerDetails['nofStars'] = jQuery('.stars .star:not(.basic)', container).length;
-                    alert(answerDetails['nofStars']);
+                    answerDetails['value'] = jQuery('.stars .star.active', container).length;
+
                     break;
 
             }
@@ -300,21 +300,20 @@
                         container = constructQuestionItem(answerDetails.type);
                         var stars = jQuery('.stars', container).empty();
                         for(var i = 0; i < parseInt(answerDetails.nofStars); i++){
-                            jQuery('.stars', container).append(jQuery('<div class="col star clickable" seq="'+i+'"></div>'));
-                        }
+                            jQuery('.stars', container).append(jQuery('<div class="col star clickable" seq="'+i+'"></div>').click(function(){
+                                var seq = parseInt(jQuery(this).attr('seq'));
+                                jQuery('.star', stars).each(function(idx){
+                                    if(idx <= seq){
+                                        jQuery(this).removeClass('basic');
+                                        jQuery(this).addClass('active');
+                                    }else{
+                                        jQuery(this).removeClass('active');
+                                        jQuery(this).addClass('basic');
+                                    }
+                                });
 
-                        jQuery('.star', stars).click(function(){
-                            var seq = parseInt(jQuery(this).attr('seq'));
-                            jQuery('.star', stars).each(function(idx){
-                                if(idx <= seq){
-                                    jQuery(this).removeClass('basic');
-                                    jQuery(this).addClass('active');
-                                }else{
-                                    jQuery(this).addClass('active');
-                                    jQuery(this).addClass('basic');
-                                }
-                            });
-                        });
+                            }));
+                        }
 
                         break;
 
