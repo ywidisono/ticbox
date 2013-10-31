@@ -2,9 +2,9 @@
     <head>
         <meta name="layout" content="ticbox"/>
         <title>Welcome</title>
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'slider.css')}" type="text/css">
     </head>
     <body>
-
 
         <div id="teaser-container" class="">
 
@@ -13,11 +13,11 @@
 
                 <!-- Slider Setup -->
 
-                <input checked type=radio name=slider id=slide1 />
-                <input type=radio name=slider id=slide2 />
-                <input type=radio name=slider id=slide3 />
-                <input type=radio name=slider id=slide4 />
-                <input type=radio name=slider id=slide5 />
+                <input checked type=radio name=slider id=slide1 style="display: none;"/>
+                <input type=radio name=slider id=slide2 style="display: none;"/>
+                <input type=radio name=slider id=slide3 style="display: none;"/>
+                <input type=radio name=slider id=slide4 style="display: none;"/>
+                <input type=radio name=slider id=slide5 style="display: none;"/>
 
                 <!-- The Slider -->
 

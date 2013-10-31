@@ -27,7 +27,11 @@ label, #active, img { -moz-user-select:none;-webkit-user-select:none; }
 /* Slider Setup */
 
 input {
-    display: none;
+    /*display: none;*/
+    /*geuis:
+            agar tidak mengganggu style secara keseluruhan,
+            style -display:none- dipindah di element terkait (inline style) look at "views/ticbox.gsp"
+    */
 }
 
 #slide1:checked ~ #slides .inner { margin-left:0; }

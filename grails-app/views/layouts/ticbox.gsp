@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'ticbox.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'app.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'slider.css')}" type="text/css">
 
     <g:layoutHead/>
 

@@ -54,6 +54,7 @@ body{
     cursor: pointer;
 }
 
+/*geuis: this style is used nowhere because it has been replaced in the app.css: .navbar .nav > li > a:hover */
 .header-nav .main-nav li div:hover{
     background: url("../images/ticbox/Tick.png") no-repeat center;
 }

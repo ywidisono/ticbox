@@ -84,7 +84,7 @@
                     <ul class="nav nav-pills pull-right">
                         %{--TODO should be providing different state when there is notification available--}%
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)}</a>
+                            <a class="dropdown-toggle logged-in" data-toggle="dropdown" href="#">Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)}</a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                 <li role="presentation"><g:link controller="auth" action="signOut">Logout</g:link></li>
                                 <li role="presentation" class="divider"></li>

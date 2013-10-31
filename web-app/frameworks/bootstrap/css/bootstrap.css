@@ -215,9 +215,18 @@ a {
   color: #0088cc;
   text-decoration: none;
 }
-a:hover,
-a:focus {
-  color: #005580;
+a.logged-in:hover,
+a.logged-in:focus {
+  color: white !important;
+  text-shadow:
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px white,
+        0 0 70px white,
+        0 0 80px white,
+        0 0 100px white,
+        0 0 150px white; /*geuis*/
   /*text-decoration: underline;*/
   text-decoration: none;
 }
