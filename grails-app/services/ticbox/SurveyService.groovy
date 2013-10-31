@@ -269,6 +269,11 @@ class SurveyService {
 
                                         case Survey.QUESTION_TYPE.STAR_RATING :
 
+                                            if(!summary){
+                                                summary = [:]
+                                            }
+
+                                            summary[value] = summary[value] ? summary[row.key][row.value] + 1 : 1
 
                                             break
 

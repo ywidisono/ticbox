@@ -299,7 +299,7 @@
                             data.push([label, count]);
                         });
 
-                        constructPieChart(target, data);
+                        constructPieChart(target, data, 'Answer Type - Choice');
 
                         break;
 
@@ -309,7 +309,7 @@
                             ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
                             ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
 
-                        constructLineChart(target, line1, 'Dummy result : Free Text');
+                        constructLineChart(target, line1, 'Answer Type - Free Text');
 
                         break;
 
@@ -327,7 +327,7 @@
 
                             jQuery('.chart-container', container).append(targetCopy);
 
-                            constructPieChart(targetCopy, data, rowLabel);
+                            constructPieChart(targetCopy, data, 'Scale Rating (' + rowLabel + ')');
                         });
 
                         target.remove();
@@ -336,12 +336,13 @@
 
                     case '${Survey.QUESTION_TYPE.STAR_RATING}' :
 
-                        var data = [
-                            ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
-                            ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
-                        ];
+                        var data = [];
 
-                        constructPieChart(target, data, 'Dummy result : Star Rating');
+                        jQuery.each(summary, function(label, count){
+                            data.push([label, count]);
+                        });
+
+                        constructPieChart(target, data, 'Answer Type - Star Rating');
 
                         break;
 
