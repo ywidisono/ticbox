@@ -15,7 +15,7 @@ class RespondentController {
     def mailService
 
     def index() {
-        def surveyList = Survey.all
+        def surveyList = Survey.findByStatus(Survey.STATUS.IN_PROGRESS)
         def principal = SecurityUtils.subject.principal
         def respondent = User.findByUsername(principal.toString())
         [surveyList:surveyList, respondent: respondent]
