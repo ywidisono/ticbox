@@ -16,16 +16,12 @@
                 <div style="font-weight: bold; margin-top: 10px;">Already one of us? Please sign in</div>
 
                 <g:if test="${flash.message}">
-                    <div class="message-box" style="margin-top: 10px;">
-                        <div class="module-message">
-                            ${flash.message}
-                        </div>
-                    </div>
-                    %{--
-                    <div class="row-fluid">
-                        <div class="span12 message">${flash.message}</div>
-                    </div>
-                    --}%
+                    <div class="alert alert-success" style="display: block">${flash.message}</div>
+                %{--
+                <div class="row-fluid">
+                    <div class="span12 message">${flash.message}</div>
+                </div>
+                --}%
                 </g:if>
                 <g:form name="signIn" action="signIn" style="margin: 20px 0 0 0;">
                     <input type="hidden" name="targetUri" value="${targetUri}"/>

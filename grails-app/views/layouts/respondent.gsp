@@ -7,6 +7,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="TicBOX"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
@@ -14,35 +15,7 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/jquery-ui-1.10.2/css/smoothness', file: 'jquery-ui-1.10.2.custom.css')}" type="text/css">
-
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap.css')}" type="text/css">
-
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'app.css')}" type="text/css">
-
-    <style type="text/css">
-
-        .line {
-            display: block;
-        }
-
-        #menuNavPanel {
-            /*margin-left: 0;
-            position: fixed;*/
-        }
-
-        #mainContentPanel {
-            /**width: 800px;
-            margin-left: 10px;**/
-            /**margin-left: 230px;**/
-        }
-
-        .center {
-            text-align: center;
-            vertical-align: middle;
-        }
-
-    </style>
-
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap-responsive.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'app.css')}" type="text/css">
 
@@ -170,24 +143,24 @@
                 <div id="respondentNavAccordion" class="accordion module" >
                         <div class="accordion-heading module-header">
                             <a style="padding: 0" class="accordion-toggle" data-toggle="collapse" data-parent="#respondentNavAccordion" href="#respondentNavContainer">
-                                <div class="title">Dashboard</div>
+                                <div class="title">Menu</div>
                             </a>
                         </div>
                         <div id="respondentNavContainer" class="accordion-body collapse in">
                             <div class="accordion-inner" style="padding-left: 12px;">
-                                <div class="line">
+                                <div style="display: block;">
                                     <g:link action="index">Survey List</g:link>
                                 </div>
-                                <div class="line">
+                                <div style="display: block;">
                                     <g:link action="profileForm">Profile</g:link>
                                 </div>
-                                <div class="line">
+                                <div style="display: block;">
                                     <g:link action="inviteFriends">Invite Friends</g:link>
                                 </div>
-                                <div class="line">
+                                <div style="display: block;">
                                     <g:link action="redeemGold">Redeem GOLD Points</g:link>
                                 </div>
-                                <div class="line">
+                                <div style="display: block;">
                                     <g:link action="goldHistory">GOLD Points History</g:link>
                                 </div>
                             </div>
@@ -196,7 +169,7 @@
                 </div>
 
             </div>
-            <div id="main" class="rightPanel mainContentPanel">
+            <div id="main" class="rightPanel">
                 <div class="module">
                     <g:layoutBody/>
                 </div>

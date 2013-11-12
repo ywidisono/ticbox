@@ -49,133 +49,165 @@
             padding: 5px 15px 5px;
         }
 
+        #menuNavPanelContent {
+            width: 100%;
+        }
+
+        .module-content .table tr.top-header th {
+            background-color: rgba(134, 137, 122, 1.0); /* #86897a */
+            font-weight: bold;
+            height: 25px;
+            color: #ffffff;
+        }
+
+        .module-content .table tr.sub-header th {
+            font-weight: bold;
+
+            background-color: lightgrey;
+            background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+
+            background-size: 20px 20px;
+            height: 15px;
+            line-height: 15px;
+
+        }
+
     </style>
 
 </head>
 <body>
 
 <div id="menuNavPanelContent">
+    %{--<div class="module">--}%
+        %{--<div class="line side-panel">--}%
+            %{--<div class="line header">--}%
+                %{--Panel 1--}%
+            %{--</div>--}%
+            %{--<div class="line">--}%
 
-    <div class="line side-panel">
-        <div class="line header">
-            Panel 1
-        </div>
-        <div class="line">
+            %{--</div>--}%
 
-        </div>
+            %{--<hr>--}%
+        %{--</div>--}%
 
-        <hr>
-    </div>
+        %{--<div class="line side-panel">--}%
+            %{--<div class="line header">--}%
+                %{--Panel 2--}%
 
-    <div class="line side-panel">
-        <div class="line header">
-            Panel 2
-        </div>
-        <div class="line">
+            %{--</div>--}%
+            %{--<div class="line">--}%
 
-        </div>
+            %{--</div>--}%
 
-        <hr>
-    </div>
+            %{--<hr>--}%
+        %{--</div>--}%
+    %{--</div>--}%
 
-    <div class="line side-panel">
-
+    <div class="" style="width: 100%">
         <div class="line line-centered">
-
-            <button id="createSurveyModalBtn" href="#createSurveyModal" role="button" data-toggle="modal" class="btn-ticbox" type="button"><g:message code="label.button.create" default="Create"/> Survey</button>
-
+            <button style="border-radius: 8px; width: 100%" id="createSurveyModalBtn" href="#createSurveyModal" role="button" data-toggle="modal" class="btn btn-green-city-large btngreen" type="button"><g:message code="label.button.create" default="Create"/> Survey</button>
         </div>
-
-        <hr>
     </div>
 
 </div>
 
-<div class="line">
 
-    <h3>Your Survey List</h3>
+<div class="module">
 
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th colspan="3">IN PROGRESS</th>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <th>Running Time</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <g:each in="${inProgress}" var="survey">
-                <tr>
-                    <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
-                    <td></td>
-                    <td></td>
-                    <td><a class="displayResultLink" surveyid="${survey.surveyId}" href="javascript:void(0)">Display Result</a></td>
+    <div id="surveyHeader" class="module-header">
+        <div class="title">Your Survey List</div>
+    </div>
+    <div id="surveyList" class="module-content">
+        <div class="line" style="width: 100%">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr class="top-header">
+                    <th colspan="4">DRAFTS</th>
                 </tr>
-            </g:each>
-            <tr>
-                <td colspan="3"></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th colspan="3">DRAFTS</th>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <th>Total Charge</th>
-                <th>Modified</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <g:each in="${drafts}" var="survey">
-                <tr>
-                    <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr class="sub-header">
+                    <th>Name</th>
+                    <th>Total Charge</th>
+                    <th>Modified</th>
+                    <th></th>
                 </tr>
-            </g:each>
-            <tr>
-                <td colspan="4"></td>
-            </tr>
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                <g:if test="${drafts.isEmpty()}">
+                    <tr>
+                        <td colspan="4" style="font-style: italic; font-size: 12px; color: #9f7032;">No survey yet..</td>
+                    </tr>
+                </g:if>
+                <g:each in="${drafts}" var="survey">
+                    <tr>
+                        <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
 
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-        <tr>
-            <th colspan="3">COMPLETED</th>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <th>Total Respondents</th>
-            <th>Stats</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${completes}" var="survey">
-            <tr>
-                <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </g:each>
-        <tr>
-            <td colspan="4"></td>
-        </tr>
-        </tbody>
-    </table>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr class="top-header">
+                        <th colspan="4">IN PROGRESS</th>
+                    </tr>
+                    <tr class="sub-header">
+                        <th>Name</th>
+                        <th>Running Time</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <g:if test="${inProgress.isEmpty()}">
+                        <tr>
+                            <td colspan="4" style="font-style: italic; font-size: 12px; color: #9f7032;">No survey yet..</td>
+                        </tr>
+                    </g:if>
+                    <g:each in="${inProgress}" var="survey">
+                        <tr>
+                            <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
+                            <td></td>
+                            <td></td>
+                            <td><a class="displayResultLink" surveyid="${survey.surveyId}" href="javascript:void(0)">Display Result</a></td>
+                        </tr>
+                    </g:each>
+                </tbody>
+            </table>
 
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr class="top-header">
+                    <th colspan="4">COMPLETED</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>Name</th>
+                    <th>Total Respondents</th>
+                    <th>Stats</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <g:if test="${completes.isEmpty()}">
+                        <tr>
+                            <td colspan="4" style="font-style: italic; font-size: 12px; color: #9f7032;">No survey yet..</td>
+                        </tr>
+                    </g:if>
+                    <g:each in="${completes}" var="survey">
+                        <tr>
+                            <td><a href="${request.contextPath}/survey/editSurvey?surveyId=${survey.surveyId}">${survey.name}</a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </g:each>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </div>
 
 <div id="createSurveyModal" class="modal modal60 hide fade" tabindex="-1" role="dialog" aria-labelledby="createSurveyModalLabel" aria-hidden="true">
@@ -190,8 +222,8 @@
 
     </div>
     <div class="modal-footer">
-        <button class="btn-ticbox" data-dismiss="modal" aria-hidden="true"><g:message code="label.button.close" default="Close"/></button>
-        <button href="${request.contextPath}/survey/createSurvey" id="createSurveyBtn" class="btn-ticbox submit-redirect"><g:message code="label.button.create" default="Create"/></button>
+        <button class="btn btn-green-city-small btn-light-oak" data-dismiss="modal" aria-hidden="true"><g:message code="label.button.close" default="Close"/></button>
+        <button href="${request.contextPath}/survey/createSurvey" id="createSurveyBtn" class="btn btn-green-city-small btngreen submit-redirect"><g:message code="label.button.create" default="Create"/></button>
     </div>
 </div>
 
@@ -256,6 +288,9 @@
                 }, 500);
             });
         });
+
+        jQuery('#surveyorProfileContent').addClass('in');
+        jQuery('#surveyInfoAccordion').hide();
 
     });
 

@@ -5,6 +5,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 import org.bson.types.ObjectId
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
+import org.apache.shiro.SecurityUtils
 
 class SurveyController {
 
@@ -18,12 +19,21 @@ class SurveyController {
             redirect uri: '/'
         }*/
 
+        def surveyorProfile = surveyorService.currentSurveyor
+        def principal = SecurityUtils.subject.principal
+        def surveyor = User.findByUsername(principal.toString())
+
+        Survey survey = surveyService.getCurrentEditedSurvey()
 
         [
             drafts : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.DRAFT),
             inProgress : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.IN_PROGRESS),
-            completes : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.COMPLETED)
+            completes : Survey.findAllBySurveyorAndStatus(surveyorService.currentSurveyor, Survey.STATUS.COMPLETED),
+            surveyorProfile: surveyorProfile,
+            surveyor: surveyor,
+            survey: survey
         ]
+
     }
 
     def createSurvey(){
@@ -78,7 +88,16 @@ class SurveyController {
             redirect action: 'index'
         }
 
-        [survey : survey, profileItems : surveyService.profileItemsForRespondentFilter]
+        def surveyorProfile = surveyorService.currentSurveyor
+        def principal = SecurityUtils.subject.principal
+        def surveyor = User.findByUsername(principal.toString())
+
+        [
+                survey : survey,
+                profileItems : surveyService.profileItemsForRespondentFilter,
+                surveyorProfile: surveyorProfile,
+                surveyor: surveyor
+        ]
     }
 
     def submitRespondentFilter() {
@@ -101,7 +120,15 @@ class SurveyController {
             redirect action: 'index'
         }
 
-        [survey : survey]
+        def surveyorProfile = surveyorService.currentSurveyor
+        def principal = SecurityUtils.subject.principal
+        def surveyor = User.findByUsername(principal.toString())
+
+        [
+                survey : survey,
+                surveyorProfile: surveyorProfile,
+                surveyor: surveyor
+        ]
     }
 
     def submitSurvey(){

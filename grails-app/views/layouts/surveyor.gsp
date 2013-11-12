@@ -15,15 +15,13 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
     <link rel="stylesheet" href="${resource(dir: 'frameworks/jquery-ui-1.10.2/css/smoothness', file: 'jquery-ui-1.10.2.custom.css')}" type="text/css">
-
     <link rel="stylesheet" href="${resource(dir: 'frameworks/bootstrap/css', file: 'bootstrap.css')}" type="text/css">
-
     <link rel="stylesheet" href="${resource(dir: 'frameworks/prettyCheckable', file: 'prettyCheckable.css')}" type="text/css">
-
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'app.css')}" type="text/css">
 
     <style type="text/css">
 
+        /*
         body {
             padding-top: 65px;
             font-family: helveticaneue-light,tahoma,sans-serif;
@@ -31,7 +29,7 @@
             color: #5a5a5a;
             background-color: #f3f3f3;
 
-        }
+        }*/
 
         textarea, input[type=text] {
             background-color: #f5f5f5;
@@ -49,7 +47,7 @@
                 padding-right: 5px;
             }
         }
-
+        /*
         .navbar-inverse .navbar-text, .navbar-inverse .navbar-link {
             color: #ffffff;
             padding-top: 10px;
@@ -92,42 +90,46 @@
             margin: 0 auto!important;
             padding: 0 10px !important;
             background-color: #ffffff;
-        }
+        }*/
 
         #menuNavPanel {
-            width: 300px;
+            /*width: 300px;
             margin-left: 0;
-            border-right: 1px solid #7F9B09;
+            border-right: 1px solid #7F9B09;*/
         }
 
-        #menuNavPanel .side-panel {
-            width: 300px;
+        #menuNavPanel .module .side-panel {
+            width: 100%;
             margin: 15px 0 10px 0;
         }
-
-        #menuNavPanel .side-panel .line {
+        /*
+        #menuNavPanel .module .side-panel .line {
             padding-left: 5px;
         }
-
-        #menuNavPanel .side-panel .header {
-            color: #bad33c;
+        */
+        #menuNavPanel .module .side-panel .header {
+            color: #7F9B09; /*#bad33c;*/
             font-size: x-large;
-            margin-bottom: 10px;
+            /*margin-bottom: 10px;*/
         }
 
-        #menuNavPanel hr{
+        #menuNavPanel .module hr{
+        /*
             height: 5px;
             border: 0;
             margin: 0;
             -webkit-box-shadow: inset 0 6px 5px -5px #a0a0a0;
             -moz-box-shadow: inset 0 6px 5px -5px #a0a0a0;
             box-shadow: inset 0 6px 5px -5px #a0a0a0;
+        */
+            margin: 0;
         }
-
+        /*
         #mainContentPanel {
             width: 700px;
             margin: 15px 0 0 10px;
         }
+        */
 
         .preview-item-even {
             background-color: #ececec;
@@ -154,62 +156,203 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="${request.contextPath}/">
-                <img src="${g.resource(dir: 'images/ticbox', file: 'TicBoxLogo.png')}" width="200" height="100">
-            </a>
-            <div class="nav-collapse collapse">
+<div id="doc">
 
-                <ul class="nav">
-                    <li class="surveyor"><a href="javascript:void(0);">Profile</a></li>
-                    <li class="survey"><a href="${request.contextPath}/survey/index">Survey</a></li>
-                    <li class="details"><a href="javascript:void(0);">Pricing Details</a></li>
-                </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                %{--
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                --}%
+                <a class="brand" href="${request.contextPath}/">
+                    <img src="${g.resource(dir: 'images/ticbox', file: 'TicBoxLogo.png')}" width="200" height="100">
+                </a>
+                <div class="nav-collapse collapse">
 
-                <ul class="nav nav-pills pull-right">
-                    %{--TODO should be providing different state when there is notification available--}%
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)}</a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li role="presentation"><g:link controller="auth" action="signOut">Logout</g:link></li>
-                            <li role="presentation" class="divider"></li>
-                            <g:each in="${ticbox.UserNotification.findAllByUsernameAndIsNoticed(SecurityUtils.getSubject().getPrincipals().oneByType(String.class), false)}" var="notification">
-                                <li role="presentation">
-                                    <g:link controller="userNotification" title="${notification.title}" params="[code: notification.code]">${notification.title}</g:link>
-                                </li>
-                            </g:each>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="nav">
+                        <li class="surveyor"><a href="javascript:void(0);">Profile</a></li>
+                        <li class="survey"><a href="${request.contextPath}/survey/index">Survey</a></li>
+                        <li class="details"><a href="javascript:void(0);">Pricing Details</a></li>
+                    </ul>
 
+                    <ul class="nav nav-pills pull-right">
+                        %{--TODO should be providing different state when there is notification available--}%
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Logged in as ${SecurityUtils.getSubject().getPrincipals().oneByType(String.class)}</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li role="presentation"><g:link controller="auth" action="signOut">Logout</g:link></li>
+                                <li role="presentation" class="divider"></li>
+                                <g:each in="${ticbox.UserNotification.findAllByUsernameAndIsNoticed(SecurityUtils.getSubject().getPrincipals().oneByType(String.class), false)}" var="notification">
+                                    <li role="presentation">
+                                        <g:link controller="userNotification" title="${notification.title}" params="[code: notification.code]">${notification.title}</g:link>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="main-container" class="shadowed-container">
-    <div class="line">
-        <div id="menuNavPanel" class="col">
-            %{--menu navigation panel--}%
+    <div id="page-outer">
+        <div id="main-container" class="wrapper grey">
+        %{--<div id="main-container" class="shadowed-container">--}%
+            %{--<div class="line">--}%
+                <div id="menuNavPanel" class="leftPanel">
+                %{--menu navigation panel--}%
 
+                    %{-- ########### PROFILE ACCORDION ########### --}%
+                    <div id="surveyorProfileAccordion" class="module accordion" style="padding: 0">
+                        <div class="profileSummary accordion-heading">
+                            <div class="accountGroup accordion-toggle" data-toggle="collapse" data-parent="#surveyorProfileAccordion" href="#surveyorProfileContent" style="padding: 12px">
 
-        </div>
-        <div id="mainContentPanel" class="col">
-            <g:layoutBody/>
+                                <div class="artwork">
+                                    <g:if test="${false}">
+                                        <img id="sidebarRespondentPic" class="" src=""/>
+                                    </g:if>
+                                    <g:else>
+                                        <img id="sidebarRespondentPic" class="" src="${g.resource(dir: 'images/ticbox', file: 'anonymous.png')}"/>
+                                    </g:else>
+                                </div>
+
+                                <div class="desc line20">
+                                    <b class="fullName">${surveyor?.username}</b>
+                                    <div style="color: grey; font-size: 12px; text-transform: uppercase">${surveyorProfile?.companyName}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="surveyorProfileContent" class="accordion-body collapse" style="background: #f5f5f5">
+                            <div class="accordion-inner" style="padding: 0 5px !important;">
+                                <div class="row-fluid">
+                                    <div class="span12 stats">
+                                        <div><strong style="color: #7F9B09">Dashboard</strong></div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12 stats" style="padding-bottom: 0; padding-top: 0;">
+                                        <li style="margin-left: 15px;">
+                                            <div style="float: left; margin-right: 10px;"><strong>XX</strong></div>
+                                            <div class="">Drafts</div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12 stats" style="padding-bottom: 0; padding-top: 0;">
+                                        <li style="margin-left: 15px;">
+                                            <div style="float: left; margin-right: 10px;"><strong>XX</strong></div>
+                                            <div style="color: #7F9B09;">In Progress</div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12 stats" style="padding-bottom: 0; padding-top: 0;">
+                                        <li style="margin-left: 15px;">
+                                            <div style="float: left; margin-right: 10px;"><strong>XX</strong></div>
+                                            <div class="trust">Completed</div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid" style="border-top: 1px solid #E5E5E5; padding-left: 5px;">
+                            <div class="span12 stats" style="">
+                                <li style="margin-left: 15px;">
+                                    <div style="float: left; margin-right: 10px;"><strong>XX</strong></div>
+                                    <div class="gold">Credits Available</div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+
+                    %{-- ################# SURVEY INFO ACCORDION ################# --}%
+                    <div id="surveyInfoAccordion" class="accordion module" style="padding: 0">
+
+                        <div class="accordion-heading">
+                            <div class="row-fluid accordion-toggle" data-toggle="collapse" data-parent="#surveyInfoAccordion"
+                                 href="#surveyInfoContainer" style="padding: 0">
+                                <div class="span12 stats">
+                                    <strong style="color: #7F9B09">Survey Info</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="surveyInfoContainer" class="accordion-body collapse" style="background: #f5f5f5">
+                            <div class="accordion-inner" style="padding: 0 12px 0 0">
+                                <ul style="padding: 12px 0 0 12px; color: #808080; font-size: 12px; margin: 0 0 10px 20px;">
+                                    <li style="line-height: 24px !important;">
+                                        <div>
+                                            Name :
+                                            <b style="font-size: 14px; color: black;">${survey?.name}</b>
+                                        </div>
+                                    </li>
+                                    <li style="line-height: 24px !important;">
+                                        <div>
+                                            Num of Respondents :
+                                            <b style="font-size: 14px; color: black;">XX</b>
+                                        </div>
+                                    </li>
+                                    <li style="line-height: 24px !important;">
+                                        <div>
+                                            Itinerary Details :
+                                            <ul style="font-size: 12px">
+                                                <li><b style="font-size: 12px; color: black;">XX x $n = $y</b></li>
+                                                <li><b style="font-size: 12px; color: black;">XX x $n = $y</b></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid" style="border-top: 1px solid #E5E5E5;">
+                            <div class="span12 stats" style="">
+                                <div style="float: left; margin-right: 10px; line-height: 30px"><strong>Total</strong></div>
+                                <div class=""><input type="text" value="$ z" size="15" class="uneditable-input" disabled="true" style="width: auto; background-color: #d4dcb4; margin: 0; border-radius: 20px; font-weight: bold; color: darkgoldenrod"></div>
+                            </div>
+                        </div>
+
+                        %{--<div class="line side-panel">--}%
+                        %{--<div class="line header">--}%
+                        %{--Charge Summary--}%
+                        %{--</div>--}%
+                        %{--<div class="line">--}%
+                        %{--Total : $<span class="total-charge"></span>--}%
+                        %{--</div>--}%
+                        %{--<div class="line">--}%
+                        %{--$<span class="charge-per-respondent"></span> x <span class="total-respondents"></span> Respondents--}%
+                        %{--</div>--}%
+                        %{--<hr>--}%
+                        %{--</div>--}%
+
+                        %{--<div class="line side-panel">--}%
+                        %{--<div class="line header">--}%
+                        %{--Filter Details--}%
+                        %{--</div>--}%
+                        %{--<div class="filter-details-container line">--}%
+
+                        %{--</div>--}%
+                        %{--<hr>--}%
+                        %{--</div>--}%
+                    </div>
+                </div>
+
+                <div id="mainContentPanel" class="rightPanel">
+                    <g:layoutBody/>
+                </div>
+            %{--</div>--}%
+
+            %{--<footer>
+                &copy; TicBOX 2013
+            </footer>--}%
         </div>
     </div>
-
-    %{--<footer>
-        &copy; TicBOX 2013
-    </footer>--}%
-
 </div>
 
 <r:layoutResources />
