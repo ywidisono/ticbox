@@ -81,7 +81,8 @@ article img {
     text-align: center;
     margin: 13% auto 0;
     position: relative;
-    background: none repeat scroll 0 0 rgba(255,255,255,0.5);
+    /*background: none repeat scroll 0 0 rgba(255,255,255,0.5);*/
+    background: none repeat scroll 0 0 rgba(0,0,0,0.1);
     height: 31px;
 }
 

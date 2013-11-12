@@ -27,27 +27,28 @@
 
                         <div class=inner>
                             <article>
-                                <div class=info><h3>Create Survey</h3>Cing, need help untuk content</div>
-                                <img src=http://csscience.com/responsiveslidercss3/MountainOutpostByBjzaba.png />
+                                %{--<div class=info><h3>Create Survey</h3>Cing, need help untuk content</div>--}%
+                                <img src="images/ticbox/collaterals/New_Banner_ticbox_3.png" />
                             </article>
 
                             <article>
-                                <div class=info><h3>Join Respondent</h3>Cing, need help untuk content</div>
-                                <img src=http://csscience.com/responsiveslidercss3/CouldDragonByBjzaba.png />
+                                %{--<div class=info><h3>Join Respondent</h3>Cing, need help untuk content</div>--}%
+                                <img src="images/ticbox/collaterals/New_Banner_ticbox_1.2.png" />
                             </article>
 
                             <article>
-                                <div class=info><h3>Solutions</h3>Cing, need help untuk content</div>
-                                <img src=http://localhost:8080/ticbox/images/ticbox/LandingPage_Visual01.png style="height: 300px; width: auto;"/>
+                                %{--<div class=info><h3>Solutions</h3>Cing, need help untuk content</div>--}%
+                                <img src="images/ticbox/collaterals/New_Banner_ticbox_2.2.png"/>
+                                %{--style="height: 300px; width: auto;"/>--}%
                             </article>
 
                             <article>
-                                <div class=info><h3>Watch Demo</h3>Cing, need help untuk content</a></div>
+                                <div class=info><h3>Watch Demo</h3>..demo here..</div>
                                 <img src=http://csscience.com/responsiveslidercss3/CliffsByBjzaba.png />
                             </article>
 
                             <article>
-                                <div class=info><h3>etc</h3>Cing, need help untuk content</div>
+                                <div class=info><h3>etc</h3>..anything here..</div>
                                 <img src=http://csscience.com/responsiveslidercss3/HillFortByBjzaba.png />
                             </article>
 
@@ -73,8 +74,8 @@
                 <div id=active>
 
                     <label for=slide1>Create Survey</label>
-                    <label for=slide2>Join Respondent</label>
-                    <label for=slide3>Solutions</label>
+                    <label for=slide2>Solutions</label>
+                    <label for=slide3>Join Respondent</label>
                     <label for=slide4>Watch Demo</label>
                     <label for=slide5>etc</label>
 
