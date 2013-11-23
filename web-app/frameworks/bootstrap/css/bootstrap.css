@@ -215,9 +215,9 @@ a {
   color: #0088cc;
   text-decoration: none;
 }
-a.logged-in:hover,
-a.logged-in:focus {
-  color: white !important;
+a:hover,
+a:focus {
+  color: black;
   text-shadow:
         0 0 10px #fff,
         0 0 20px #fff,

@@ -742,3 +742,65 @@ input[type="button"] {
     SURVEYOR
     ######################################################################################################
 */
+input[type=radio] + img{
+    cursor:pointer;
+    border:2px solid lightgrey;
+}
+
+input[type=radio] + img:hover{
+    cursor:pointer;
+    box-shadow: 0 0 5px rgba(172, 201, 24, 1);
+    -webkit-box-shadow: 0 0 5px rgba(172, 201, 24, 1);
+    -moz-box-shadow: 0 0 5px rgba(172, 201, 24, 1);
+}
+
+input[type=radio]:checked + img{
+    border:2px solid #a61111;
+}
+
+.img-radio > input[type=radio]{
+    display:none;
+}
+
+.img-label {
+    font-family: "Avant Garde",Avantgarde,"Century Gothic",CenturyGothic,"AppleGothic",sans-serif;
+    font-weight: bold;
+}
+
+/*
+    ######################################################################################################
+    BOOTSTRAP MODIFICATION
+    ######################################################################################################
+*/
+a.logged-in:hover,
+a.logged-in:focus {
+    color: white !important;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px white,
+        0 0 70px white,
+        0 0 80px white,
+        0 0 100px white,
+        0 0 150px white; /*geuis*/
+    /*text-decoration: underline;*/
+    text-decoration: none;
+}
+
+.alert {
+    padding: 8px 35px 8px 14px;
+
+    /*geuis-edit
+    margin-bottom: 20px;
+    */
+    margin-bottom: 15px;
+    margin-top: 10px;
+
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
