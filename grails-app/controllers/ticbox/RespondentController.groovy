@@ -22,7 +22,6 @@ class RespondentController {
     }
 
     def profileForm() {
-		println "profileform"
         def profileItems = respondentService.getProfileItems()
         def principal = SecurityUtils.subject.principal
         def respondent = User.findByUsername(principal.toString())
@@ -33,8 +32,6 @@ class RespondentController {
 
     def modify = {
         try {
-			log.info params
-			println params
             respondentService.updateRespondentDetail(params)
             flash.message = message(code: "general.create.success.message")
         } catch (Exception e) {
